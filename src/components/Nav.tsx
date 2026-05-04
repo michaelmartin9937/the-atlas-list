@@ -26,16 +26,16 @@ export function Nav() {
         <Link href="/" className="flex items-center">
           <Wordmark size="md" tone="noir" />
         </Link>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-5 sm:gap-8">
           <Link
             href="/about"
-            className="hidden sm:inline text-xs uppercase tracking-widest text-noir hover:text-bronze transition-colors"
+            className="text-xs uppercase tracking-widest text-noir hover:text-bronze transition-colors"
           >
             About
           </Link>
           <Link
             href="/#apply"
-            className="text-xs uppercase tracking-widest text-bone bg-noir px-5 py-3 hover:bg-ink transition-colors"
+            className="text-xs uppercase tracking-widest text-bone bg-noir px-4 sm:px-5 py-2.5 sm:py-3 hover:bg-ink transition-colors"
           >
             Apply
           </Link>
