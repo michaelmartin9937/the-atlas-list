@@ -30,12 +30,17 @@ export function Nav() {
   //   solid (scrolled OR non-hero page) → bone background, noir text/wordmark, noir Apply button
   //   transparent (top of hero page)    → no background, bone wordmark/text, bone Apply button with noir text
   const wordmarkTone = scrolled ? "noir" : "bone";
-  const aboutClass = scrolled
+  const linkClass = scrolled
     ? "text-noir hover:text-bronze"
     : "text-bone hover:text-bronze drop-shadow-sm";
   const applyClass = scrolled
     ? "text-bone bg-noir hover:bg-ink"
     : "text-noir bg-bone hover:bg-bronze hover:text-bone";
+
+  // Show Home link on every page except the home page itself
+  const showHome = pathname !== "/";
+  // Show About link everywhere except the about page itself
+  const showAbout = pathname !== "/about";
 
   return (
     <header
@@ -50,14 +55,24 @@ export function Nav() {
           <Wordmark size="md" tone={wordmarkTone} />
         </Link>
         <div className="flex items-center gap-5 sm:gap-8">
+          {showHome && (
+            <Link
+              href="/"
+              className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
+            >
+              Home
+            </Link>
+          )}
+          {showAbout && (
+            <Link
+              href="/about"
+              className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
+            >
+              About
+            </Link>
+          )}
           <Link
-            href="/about"
-            className={`text-xs uppercase tracking-widest transition-colors duration-300 ${aboutClass}`}
-          >
-            About
-          </Link>
-          <Link
-            href="/#apply"
+            href={pathname === "/" ? "/#apply" : "/#apply"}
             className={`text-xs uppercase tracking-widest px-4 sm:px-5 py-2.5 sm:py-3 transition-colors duration-300 ${applyClass}`}
           >
             Apply
