@@ -17,7 +17,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://the-curated.life"),
+  metadataBase: new URL("https://the-curated-life.vercel.app"),
   title: {
     default: "The Atlas List — Private Gatherings in Scottsdale",
     template: "%s · The Atlas List",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "The Atlas List",
     description:
       "An invitation-only social circle for women in Scottsdale, AZ. Curated gatherings, private rooms, no fees — only the right room.",
-    url: "https://the-curated.life",
+    url: "https://the-curated-life.vercel.app",
     siteName: "The Atlas List",
     images: ["/images/og-image.jpg"],
     type: "website",

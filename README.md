@@ -116,7 +116,7 @@ npx vercel
 
 Set the three environment variables in the Vercel project settings. Push to your repo and Vercel will deploy on every commit.
 
-Custom domain: point `the-curated.life` to Vercel via the dashboard's Domains tab.
+Live at https://the-curated-life.vercel.app. Custom domain can be added via the Vercel dashboard's Domains tab.
 
 ## Design system
 

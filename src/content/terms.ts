@@ -1,7 +1,7 @@
 export const terms = {
   effectiveDate: "May 1, 2026",
   intro:
-    "These Terms of Service govern your use of the-curated.life website (the \"Site\") and your participation in The Atlas List events and SMS program. By submitting an application or using the Site, you agree to these terms.",
+    "These Terms of Service govern your use of the-curated-life.vercel.app website (the \"Site\") and your participation in The Atlas List events and SMS program. By submitting an application or using the Site, you agree to these terms.",
   sections: [
     {
       heading: "Acceptance of terms",
