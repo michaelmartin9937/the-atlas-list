@@ -3,7 +3,7 @@ export const home = {
     eyebrow: "By Invitation Only",
     headline: "The room you've been looking for.",
     subhead:
-      "A private social evening for refined men and women who believe chemistry still happens best in person.",
+      "A private Scottsdale gathering for people who believe chemistry, friendship, and access still happen best in the right room.",
     cta: "Apply for an Invite",
   },
   nextEvent: {
