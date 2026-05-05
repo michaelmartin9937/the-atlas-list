@@ -9,7 +9,7 @@ export function Wordmark({ size = "md", tone = "noir" }: Props) {
   const toneClass = tone === "bone" ? "text-bone" : "text-noir";
   return (
     <span
-      className={`font-serif italic tracking-tight ${sizeClass} ${toneClass}`}
+      className={`font-serif italic tracking-tight transition-colors duration-300 ${sizeClass} ${toneClass}`}
       aria-label="The Atlas List"
     >
       The Atlas List
