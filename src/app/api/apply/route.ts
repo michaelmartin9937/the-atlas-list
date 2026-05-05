@@ -50,12 +50,17 @@ export async function POST(req: Request) {
     );
   }
 
+  const igHandle = data.instagram
+    ? data.instagram.trim().replace(/^@+/, "").toLowerCase() || null
+    : null;
+
   const supabase = createServerSupabaseClient();
   const { error } = await supabase.from("lead_applications").insert({
     first_name: data.firstName,
     last_name: data.lastName,
     phone: phoneE164,
     email: data.email.toLowerCase(),
+    instagram_handle: igHandle,
     vouch_intro: data.vouchIntro,
     sms_consent: data.smsConsent,
     source_page: data.sourcePage ?? null,

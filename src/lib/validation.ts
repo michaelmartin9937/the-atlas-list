@@ -5,6 +5,12 @@ export const applicationSchema = z.object({
   lastName: z.string().trim().min(1, "Required").max(60),
   phone: z.string().trim().min(7, "Enter a valid phone number").max(20),
   email: z.string().trim().email("Enter a valid email").max(120),
+  instagram: z
+    .string()
+    .trim()
+    .max(60, "Keep it under 60 characters")
+    .optional()
+    .or(z.literal("")),
   vouchIntro: z
     .string()
     .trim()

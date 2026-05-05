@@ -2,7 +2,7 @@ import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
 
 export function NextEventCard() {
-  const { eyebrow, date, detail, note } = home.nextEvent;
+  const { eyebrow, date, detail, venueLine, venueDetail, note } = home.nextEvent;
   return (
     <section className="bg-bone py-24 md:py-28 px-6 md:px-10">
       <FadeIn>
@@ -16,7 +16,11 @@ export function NextEventCard() {
           <p className="text-base md:text-lg text-ink mt-3 tracking-wide">
             {detail}
           </p>
-          <p className="text-xs text-taupe mt-6 max-w-md mx-auto">
+          <div className="mt-8 flex flex-col gap-2 text-ink/85 max-w-md mx-auto">
+            <p className="text-base leading-relaxed">{venueLine}</p>
+            <p className="text-sm text-ink/70 leading-relaxed">{venueDetail}</p>
+          </div>
+          <p className="text-xs text-taupe mt-8 max-w-md mx-auto leading-relaxed">
             {note}
           </p>
         </div>

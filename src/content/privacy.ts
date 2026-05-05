@@ -1,12 +1,12 @@
 export const privacy = {
   effectiveDate: "May 1, 2026",
   intro:
-    "The Curated Life (\"we,\" \"us,\" or \"our\") values your privacy. This policy explains what information we collect when you apply for an invitation, how we use it, and the choices you have.",
+    "The Atlas Life (\"we,\" \"us,\" or \"our\") values your privacy. This policy explains what information we collect when you apply for an invitation, how we use it, and the choices you have.",
   sections: [
     {
       heading: "Who we are",
       body: [
-        "The Curated Life is a private, invitation-only social circle hosting curated gatherings in Scottsdale, Arizona. The Curated Life is operated by Devaun and Michael.",
+        "The Atlas Life is a private, invitation-only social circle hosting curated gatherings in Scottsdale, Arizona. The Atlas Life is operated by Devaun and Michael.",
         "Questions about this policy can be directed to info@alpinedryiceblasting.com.",
       ],
     },
@@ -27,7 +27,7 @@ export const privacy = {
     {
       heading: "SMS / text messaging program",
       body: [
-        "By checking the SMS consent box on our application form, you provide express written consent for The Curated Life to send you automated text messages related to event invitations, RSVPs, and member communications.",
+        "By checking the SMS consent box on our application form, you provide express written consent for The Atlas Life to send you automated text messages related to event invitations, RSVPs, and member communications.",
         "Message frequency varies. Typically you can expect 2–6 messages per month around event cycles.",
         "Reply STOP to any message to unsubscribe. Reply HELP for help.",
         "Message and data rates may apply. Carriers are not liable for delayed or undelivered messages.",
@@ -38,7 +38,7 @@ export const privacy = {
     {
       heading: "How we store your information",
       body: [
-        "Application data is stored in a Supabase-hosted Postgres database, encrypted at rest, in a United States region. Access is restricted to The Curated Life founders.",
+        "Application data is stored in a Supabase-hosted Postgres database, encrypted at rest, in a United States region. Access is restricted to The Atlas Life founders.",
       ],
     },
     {
@@ -58,7 +58,7 @@ export const privacy = {
     {
       heading: "Children's privacy",
       body: [
-        "The Curated Life is intended for adults aged 18 and older. We do not knowingly collect information from anyone under 18.",
+        "The Atlas Life is intended for adults aged 18 and older. We do not knowingly collect information from anyone under 18.",
       ],
     },
     {

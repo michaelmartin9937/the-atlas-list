@@ -9,7 +9,7 @@ type Props = {
 };
 
 type FieldErrors = Partial<Record<
-  "firstName" | "lastName" | "phone" | "email" | "vouchIntro" | "smsConsent" | "form",
+  "firstName" | "lastName" | "phone" | "email" | "instagram" | "vouchIntro" | "smsConsent" | "form",
   string
 >>;
 
@@ -19,6 +19,7 @@ export function ApplicationForm({ sourcePage }: Props) {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [instagram, setInstagram] = useState("");
   const [vouchIntro, setVouchIntro] = useState("");
   const [smsConsent, setSmsConsent] = useState(false);
   const [website, setWebsite] = useState(""); // honeypot
@@ -39,6 +40,7 @@ export function ApplicationForm({ sourcePage }: Props) {
           lastName,
           phone,
           email,
+          instagram,
           vouchIntro,
           smsConsent,
           sourcePage,
@@ -116,8 +118,23 @@ export function ApplicationForm({ sourcePage }: Props) {
       </Field>
 
       <Field
-        label="Who in the circle can vouch for you?"
-        helper="If you don't yet know a current member, that's okay — share in two sentences how the women in our circle would benefit from knowing you."
+        label="Instagram handle"
+        helper="Optional, but helpful for invite review."
+        error={errors.instagram}
+      >
+        <input
+          type="text"
+          value={instagram}
+          onChange={(e) => setInstagram(e.target.value)}
+          placeholder="@yourhandle"
+          autoComplete="off"
+          className={inputClass}
+        />
+      </Field>
+
+      <Field
+        label="What makes you a good fit for this room?"
+        helper="If a current member is putting your name forward, name them. If not, tell us in two sentences what you'd bring to the room."
         error={errors.vouchIntro}
       >
         <textarea
@@ -154,7 +171,7 @@ export function ApplicationForm({ sourcePage }: Props) {
         />
         <span className="text-xs text-ink/80 leading-relaxed">
           I agree to receive automated SMS messages about upcoming gatherings, RSVPs, and member
-          announcements from The Curated Life. Message frequency varies (typically 2–6/month).
+          announcements from The Atlas Life. Message frequency varies (typically 2–6/month).
           Message and data rates may apply. Reply STOP to unsubscribe, HELP for help. Consent is
           not a condition of consideration. See our{" "}
           <a href="/privacy" className="underline hover:text-bronze">

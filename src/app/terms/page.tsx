@@ -3,7 +3,7 @@ import { terms } from "@/content/terms";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms governing your use of The Curated Life website and events.",
+  description: "Terms governing your use of The Atlas Life website and events.",
 };
 
 export default function TermsPage() {

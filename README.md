@@ -1,6 +1,6 @@
-# The Curated Life
+# The Atlas Life
 
-Marketing website for The Curated Life — an invitation-only women's social circle hosting curated gatherings in Scottsdale, AZ.
+Marketing website for The Atlas Life — an invitation-only social club hosting curated gatherings in Scottsdale, AZ.
 
 Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, and Supabase.
 
@@ -27,7 +27,9 @@ Set these in `.env.local`:
 ## Supabase setup
 
 1. Create a new project at [supabase.com](https://supabase.com).
-2. Open the SQL editor and run the migration in `supabase/migrations/20260501000000_create_lead_applications.sql`. This creates the `lead_applications` table with RLS enabled.
+2. Open the SQL editor and run both migrations in order:
+   - `supabase/migrations/20260501000000_create_lead_applications.sql` — creates the `lead_applications` table with RLS enabled.
+   - `supabase/migrations/20260504000000_add_instagram_handle.sql` — adds the optional `instagram_handle` column.
 3. The form posts to `/api/apply`, which inserts using the **service role key** server-side. RLS stays locked down — no client ever touches the table directly.
 
 To view incoming applications, open the Supabase Dashboard → Table Editor → `lead_applications`.

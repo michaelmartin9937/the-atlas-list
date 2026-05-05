@@ -19,23 +19,23 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL("https://the-curated.life"),
   title: {
-    default: "The Curated Life — Private Gatherings in Scottsdale",
-    template: "%s · The Curated Life",
+    default: "The Atlas Life — Private Gatherings in Scottsdale",
+    template: "%s · The Atlas Life",
   },
   description:
     "An invitation-only social circle for women in Scottsdale, AZ. Curated gatherings, private rooms, no fees — only the right room.",
   openGraph: {
-    title: "The Curated Life",
+    title: "The Atlas Life",
     description:
       "An invitation-only social circle for women in Scottsdale, AZ. Curated gatherings, private rooms, no fees — only the right room.",
     url: "https://the-curated.life",
-    siteName: "The Curated Life",
+    siteName: "The Atlas Life",
     images: ["/images/og-image.jpg"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Curated Life",
+    title: "The Atlas Life",
     description: "An invitation-only social circle for women in Scottsdale, AZ.",
     images: ["/images/og-image.jpg"],
   },
