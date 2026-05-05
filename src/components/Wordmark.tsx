@@ -10,9 +10,9 @@ export function Wordmark({ size = "md", tone = "noir" }: Props) {
   return (
     <span
       className={`font-serif italic tracking-tight ${sizeClass} ${toneClass}`}
-      aria-label="The Atlas Life"
+      aria-label="The Atlas List"
     >
-      The Atlas Life
+      The Atlas List
     </span>
   );
 }

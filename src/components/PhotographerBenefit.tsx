@@ -10,7 +10,7 @@ export function PhotographerBenefit() {
           <div
             className="aspect-[4/5] bg-cover bg-center bg-taupe/30"
             style={{ backgroundImage: "url(/images/photographer.jpg)" }}
-            aria-label="Member being photographed at an Atlas Life gathering"
+            aria-label="Member being photographed at an Atlas List gathering"
             role="img"
           />
         </FadeIn>

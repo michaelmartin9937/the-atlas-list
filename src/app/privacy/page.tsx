@@ -3,7 +3,7 @@ import { privacy } from "@/content/privacy";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How The Atlas Life collects, uses, and protects your information.",
+  description: "How The Atlas List collects, uses, and protects your information.",
 };
 
 export default function PrivacyPage() {

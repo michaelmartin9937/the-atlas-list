@@ -24,7 +24,7 @@ export function Footer() {
             </Link>
           </div>
           <p className="text-xs text-bone/40">
-            © 2026 The Atlas Life. Scottsdale, AZ.
+            © 2026 The Atlas List. Scottsdale, AZ.
           </p>
         </div>
       </div>

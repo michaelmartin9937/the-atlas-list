@@ -1,6 +1,6 @@
-# The Atlas Life
+# The Atlas List
 
-Marketing website for The Atlas Life — an invitation-only social club hosting curated gatherings in Scottsdale, AZ.
+Marketing website for The Atlas List — an invitation-only social club hosting curated gatherings in Scottsdale, AZ.
 
 Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, and Supabase.
 

@@ -171,7 +171,7 @@ export function ApplicationForm({ sourcePage }: Props) {
         />
         <span className="text-xs text-ink/80 leading-relaxed">
           I agree to receive automated SMS messages about upcoming gatherings, RSVPs, and member
-          announcements from The Atlas Life. Message frequency varies (typically 2–6/month).
+          announcements from The Atlas List. Message frequency varies (typically 2–6/month).
           Message and data rates may apply. Reply STOP to unsubscribe, HELP for help. Consent is
           not a condition of consideration. See our{" "}
           <a href="/privacy" className="underline hover:text-bronze">

@@ -26,7 +26,7 @@ export function Hosts() {
                   className="aspect-[4/5] bg-cover bg-center bg-taupe/30"
                   style={{ backgroundImage: `url(${person.image})` }}
                   role="img"
-                  aria-label={`${person.name}, co-founder of The Atlas Life`}
+                  aria-label={`${person.name}, co-founder of The Atlas List`}
                 />
                 <figcaption className="flex flex-col gap-3 text-center">
                   <h3 className="font-serif text-3xl text-noir">{person.name}</h3>
