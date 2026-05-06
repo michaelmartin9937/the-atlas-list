@@ -21,11 +21,11 @@ export default function HomePage() {
       />
 
       <NextEventCard />
-      <ValuePillars />
+      <EventGallery />
       <WhatToExpect />
+      <ValuePillars />
       <ToneOfRoom />
       <PhotographerBenefit />
-      <EventGallery />
       <WhoBelongs />
 
       <section id="apply" className="bg-bone py-24 md:py-32 px-6 md:px-10">
