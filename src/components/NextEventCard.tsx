@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
 
 export function NextEventCard() {
-  const { eyebrow, date, detail, venueLine, venueDetail, note } = home.nextEvent;
+  const { eyebrow, date, detail, venueLine, venueDetail, note, cta } =
+    home.nextEvent;
   return (
     <section className="bg-bone py-24 md:py-28 px-6 md:px-10">
       <FadeIn>
@@ -23,6 +25,14 @@ export function NextEventCard() {
           <p className="text-xs text-taupe mt-8 max-w-md mx-auto leading-relaxed">
             {note}
           </p>
+          <div className="mt-10">
+            <Link
+              href="#apply"
+              className="inline-block text-xs uppercase tracking-widest text-bone bg-noir px-8 py-4 hover:bg-bronze transition-colors"
+            >
+              {cta}
+            </Link>
+          </div>
         </div>
       </FadeIn>
     </section>

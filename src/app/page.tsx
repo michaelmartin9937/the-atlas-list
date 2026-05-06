@@ -1,9 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { NextEventCard } from "@/components/NextEventCard";
-import { ValuePillars } from "@/components/ValuePillars";
 import { WhatToExpect } from "@/components/WhatToExpect";
 import { ToneOfRoom } from "@/components/ToneOfRoom";
-import { PhotographerBenefit } from "@/components/PhotographerBenefit";
 import { EventGallery } from "@/components/EventGallery";
 import { WhoBelongs } from "@/components/WhoBelongs";
 import { ApplicationForm } from "@/components/ApplicationForm";
@@ -23,9 +21,7 @@ export default function HomePage() {
       <NextEventCard />
       <EventGallery />
       <WhatToExpect />
-      <ValuePillars />
       <ToneOfRoom />
-      <PhotographerBenefit />
       <WhoBelongs />
 
       <section id="apply" className="bg-bone py-24 md:py-32 px-6 md:px-10">

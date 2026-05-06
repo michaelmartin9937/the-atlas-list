@@ -16,21 +16,8 @@ export const home = {
       "Three-hour private lobby experience · Dedicated service · Small bites and beverages",
     note:
       "Exact arrival details are shared with approved guests only. This helps us preserve the privacy, comfort, and quality of the room.",
+    cta: "Apply for an Invite",
   },
-  pillars: [
-    {
-      title: "Close culture. No crowds.",
-      body: "Small, hosted rooms — never crowds. Every gathering is built around the people in it, not a guest list pumped up for optics.",
-    },
-    {
-      title: "No swipe. No pitch. No catch.",
-      body: "This is not a dating app. It is not a networking event. It is a quiet, beautifully run room where natural conversation does the work.",
-    },
-    {
-      title: "A room you'd be proud to be seen in.",
-      body: "The goal is not to throw a party. The goal is to build a room people are proud to be in — and proud to be seen in.",
-    },
-  ],
   whatToExpect: {
     eyebrow: "What the Evening Feels Like",
     headline: "Arrive to a warm, hosted room.",
@@ -55,12 +42,6 @@ export const home = {
       headline: "For men who already know how to hold a room.",
       body: "Come polished. Come present. Come socially aware. This is not a place for hard-selling, hovering, or trying to win the room. The best guests are the ones who help make the evening feel effortless for everyone else.",
     },
-  },
-  photographer: {
-    eyebrow: "Member Perk",
-    headline: "You'll look as good in pictures as you felt in the room.",
-    body:
-      "Every gathering is documented by our private photo and video team. You'll receive professionally edited photos and short-form video — yours to keep, yours to post — at no cost. Most of our members say it's the first time they've actually loved how they look in their own feed.",
   },
   gallery: {
     eyebrow: "Scenes from the Last Gathering",
