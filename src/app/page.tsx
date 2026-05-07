@@ -24,17 +24,17 @@ export default function HomePage() {
       <ToneOfRoom />
       <WhoBelongs />
 
-      <section id="apply" className="bg-bone py-24 md:py-32 px-6 md:px-10">
+      <section id="apply" className="bg-bone py-20 md:py-32 px-6 md:px-10">
         <div className="max-w-2xl mx-auto">
           <FadeIn>
-            <div className="flex flex-col gap-5 mb-12 text-center">
+            <div className="flex flex-col gap-5 mb-10 md:mb-12 text-center">
               <span className="text-xs uppercase tracking-widest text-bronze">
                 Apply
               </span>
               <h2 className="font-serif text-4xl md:text-5xl text-noir leading-tight">
                 {home.closingCta.headline}
               </h2>
-              <p className="text-ink/80 leading-relaxed text-lg">
+              <p className="text-ink/80 leading-relaxed text-base md:text-lg">
                 {home.closingCta.subhead}
               </p>
             </div>

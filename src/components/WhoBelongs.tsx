@@ -4,10 +4,10 @@ import { FadeIn } from "./FadeIn";
 export function WhoBelongs() {
   const { eyebrow, headline, forList, notForList } = home.whoBelongs;
   return (
-    <section className="bg-bone py-24 md:py-32 px-6 md:px-10">
+    <section className="bg-bone py-20 md:py-32 px-6 md:px-10">
       <div className="max-w-5xl mx-auto">
         <FadeIn>
-          <div className="text-center mb-16 md:mb-20 flex flex-col gap-5">
+          <div className="text-center mb-12 md:mb-20 flex flex-col gap-5">
             <span className="text-xs uppercase tracking-widest text-bronze">
               {eyebrow}
             </span>

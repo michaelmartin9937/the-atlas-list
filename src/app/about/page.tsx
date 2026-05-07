@@ -21,7 +21,7 @@ export default function AboutPage() {
         imageUrl="/images/about-hero.jpg"
       />
 
-      <section className="bg-bone py-24 md:py-32 px-6 md:px-10">
+      <section className="bg-bone py-20 md:py-32 px-6 md:px-10">
         <div className="max-w-prose mx-auto">
           <FadeIn>
             <div className="flex flex-col gap-6">
@@ -30,8 +30,8 @@ export default function AboutPage() {
                   key={i}
                   className={
                     i === 0
-                      ? "font-serif text-2xl md:text-3xl leading-snug text-noir"
-                      : "text-ink/85 leading-relaxed text-lg"
+                      ? "font-serif text-xl sm:text-2xl md:text-3xl leading-snug text-noir"
+                      : "text-ink/85 leading-relaxed text-base md:text-lg"
                   }
                 >
                   {p}
@@ -42,15 +42,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-pearl py-24 md:py-32 px-6 md:px-10">
+      <section className="bg-pearl py-20 md:py-32 px-6 md:px-10">
         <div className="max-w-prose mx-auto">
           <FadeIn>
-            <h2 className="font-serif text-4xl md:text-5xl text-noir leading-tight mb-8">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight mb-6 md:mb-8">
               {about.who.headline}
             </h2>
             <div className="flex flex-col gap-5">
               {about.who.body.map((p, i) => (
-                <p key={i} className="text-ink/85 leading-relaxed text-lg">
+                <p key={i} className="text-ink/85 leading-relaxed text-base md:text-lg">
                   {p}
                 </p>
               ))}
@@ -61,27 +61,27 @@ export default function AboutPage() {
 
       <Hosts />
 
-      <section className="bg-noir py-24 md:py-32 px-6 md:px-10">
+      <section className="bg-noir py-20 md:py-32 px-6 md:px-10">
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="font-serif italic text-2xl md:text-4xl text-bone leading-snug">
+            <p className="font-serif italic text-xl sm:text-2xl md:text-4xl text-bone leading-snug">
               {about.vibeQuote}
             </p>
           </FadeIn>
         </div>
       </section>
 
-      <section id="apply" className="bg-bone py-24 md:py-32 px-6 md:px-10">
+      <section id="apply" className="bg-bone py-20 md:py-32 px-6 md:px-10">
         <div className="max-w-2xl mx-auto">
           <FadeIn>
-            <div className="flex flex-col gap-5 mb-12 text-center">
+            <div className="flex flex-col gap-5 mb-10 md:mb-12 text-center">
               <span className="text-xs uppercase tracking-widest text-bronze">
                 Apply
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl text-noir leading-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
                 {about.closingCta.headline}
               </h2>
-              <p className="text-ink/80 leading-relaxed text-lg">
+              <p className="text-ink/80 leading-relaxed text-base md:text-lg">
                 {about.closingCta.subhead}
               </p>
             </div>

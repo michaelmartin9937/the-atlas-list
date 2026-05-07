@@ -6,13 +6,13 @@ export function NextEventCard() {
   const { eyebrow, date, detail, venueLine, venueDetail, note, cta } =
     home.nextEvent;
   return (
-    <section className="bg-bone py-24 md:py-28 px-6 md:px-10">
+    <section className="bg-bone py-20 md:py-28 px-6 md:px-10">
       <FadeIn>
-        <div className="max-w-2xl mx-auto text-center border-t border-b border-bronze/40 py-14 md:py-16">
+        <div className="max-w-2xl mx-auto text-center border-t border-b border-bronze/40 py-12 md:py-16">
           <span className="text-xs uppercase tracking-widest text-bronze">
             {eyebrow}
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl text-noir mt-5 leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir mt-5 leading-tight">
             {date}
           </h2>
           <p className="text-base md:text-lg text-ink mt-3 tracking-wide">
