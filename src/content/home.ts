@@ -8,7 +8,7 @@ export const home = {
   },
   nextEvent: {
     eyebrow: "The Next Gathering",
-    date: "Saturday, May 16, 2026",
+    date: "Thursday, May 28, 2026",
     detail: "Evening · Old Town Scottsdale, AZ",
     venueLine:
       "Hosted inside a reserved private space at a luxury resort in Old Town Scottsdale.",
