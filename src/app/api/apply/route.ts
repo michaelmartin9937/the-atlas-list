@@ -68,8 +68,24 @@ export async function POST(req: Request) {
 
   if (error) {
     console.error("Supabase insert failed", error);
+    // TEMP DIAGNOSTIC — remove after debugging the prod env-var mismatch
+    const debugAllowed = req.headers.get("x-debug-token") === "claude-apply-debug";
     return NextResponse.json(
-      { error: "We couldn't save your application. Please try again." },
+      {
+        error: "We couldn't save your application. Please try again.",
+        ...(debugAllowed
+          ? {
+              _debug: {
+                supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? null,
+                hasServiceKey: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
+                errorCode: error.code ?? null,
+                errorMessage: error.message ?? null,
+                errorDetails: error.details ?? null,
+                errorHint: error.hint ?? null,
+              },
+            }
+          : {}),
+      },
       { status: 500 }
     );
   }
