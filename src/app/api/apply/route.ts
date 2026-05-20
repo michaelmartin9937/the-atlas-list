@@ -55,37 +55,45 @@ export async function POST(req: Request) {
     : null;
 
   const supabase = createServerSupabaseClient();
-  const { error } = await supabase.from("lead_applications").insert({
+
+  const basePayload = {
     first_name: data.firstName,
     last_name: data.lastName,
     phone: phoneE164,
     email: data.email.toLowerCase(),
-    instagram_handle: igHandle,
     vouch_intro: data.vouchIntro,
     sms_consent: data.smsConsent,
     source_page: data.sourcePage ?? null,
+  };
+
+  let { error } = await supabase.from("lead_applications").insert({
+    ...basePayload,
+    instagram_handle: igHandle,
   });
+
+  // Fallback: if the production DB hasn't had the add_instagram_handle migration
+  // applied yet, PostgREST returns PGRST204. Retry without the column and fold
+  // the handle into vouch_intro so the data isn't lost.
+  if (
+    error?.code === "PGRST204" &&
+    error.message?.includes("instagram_handle")
+  ) {
+    console.warn(
+      "lead_applications.instagram_handle column missing; folding handle into vouch_intro. " +
+        "Run: alter table public.lead_applications add column if not exists instagram_handle text;"
+    );
+    const vouchWithHandle = igHandle
+      ? `[Instagram: @${igHandle}]\n\n${basePayload.vouch_intro}`
+      : basePayload.vouch_intro;
+    ({ error } = await supabase
+      .from("lead_applications")
+      .insert({ ...basePayload, vouch_intro: vouchWithHandle }));
+  }
 
   if (error) {
     console.error("Supabase insert failed", error);
-    // TEMP DIAGNOSTIC — remove after debugging the prod env-var mismatch
-    const debugAllowed = req.headers.get("x-debug-token") === "claude-apply-debug";
     return NextResponse.json(
-      {
-        error: "We couldn't save your application. Please try again.",
-        ...(debugAllowed
-          ? {
-              _debug: {
-                supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? null,
-                hasServiceKey: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
-                errorCode: error.code ?? null,
-                errorMessage: error.message ?? null,
-                errorDetails: error.details ?? null,
-                errorHint: error.hint ?? null,
-              },
-            }
-          : {}),
-      },
+      { error: "We couldn't save your application. Please try again." },
       { status: 500 }
     );
   }
