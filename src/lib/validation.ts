@@ -19,7 +19,7 @@ export const applicationSchema = z.object({
   smsConsent: z.literal(true, {
     errorMap: () => ({ message: "SMS consent is required to apply" }),
   }),
-  sourcePage: z.enum(["home", "about"]).optional(),
+  sourcePage: z.enum(["home", "about", "fashion-show"]).optional(),
   // Honeypot — must be empty for a real submission
   website: z.string().max(0).optional(),
 });

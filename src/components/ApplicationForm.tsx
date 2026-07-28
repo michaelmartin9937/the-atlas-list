@@ -5,7 +5,8 @@ import { useState, type FormEvent } from "react";
 import { formatPhoneAsTyping } from "@/lib/phone";
 
 type Props = {
-  sourcePage: "home" | "about";
+  sourcePage: "home" | "about" | "fashion-show";
+  submitLabel?: string;
 };
 
 type FieldErrors = Partial<Record<
@@ -13,7 +14,7 @@ type FieldErrors = Partial<Record<
   string
 >>;
 
-export function ApplicationForm({ sourcePage }: Props) {
+export function ApplicationForm({ sourcePage, submitLabel }: Props) {
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -197,7 +198,7 @@ export function ApplicationForm({ sourcePage }: Props) {
         disabled={submitting}
         className="self-start text-xs uppercase tracking-widest text-bone bg-noir px-10 py-4 hover:bg-bronze transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {submitting ? "Submitting…" : "Apply for an Invite"}
+        {submitting ? "Submitting…" : submitLabel ?? "Apply for an Invite"}
       </button>
     </form>
   );

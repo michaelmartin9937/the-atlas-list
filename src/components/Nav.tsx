@@ -8,7 +8,11 @@ import { Wordmark } from "./Wordmark";
 // Pages whose top section is a full-bleed dark hero image.
 // On these pages, the nav starts transparent and lights up on scroll.
 // On all other pages, the nav stays solid from the start.
-const HERO_PAGES = new Set(["/", "/about"]);
+const HERO_PAGES = new Set(["/", "/about", "/fashion-show"]);
+
+// Pages that render their own #apply section, so the nav Apply button
+// should stay on the current page instead of jumping to /#apply.
+const PAGES_WITH_APPLY = new Set(["/", "/about", "/fashion-show"]);
 
 export function Nav() {
   const pathname = usePathname();
@@ -72,7 +76,7 @@ export function Nav() {
             </Link>
           )}
           <Link
-            href={pathname === "/" ? "/#apply" : "/#apply"}
+            href={PAGES_WITH_APPLY.has(pathname) ? "#apply" : "/#apply"}
             className={`text-xs uppercase tracking-widest px-4 sm:px-5 py-2.5 sm:py-3 transition-colors duration-300 ${applyClass}`}
           >
             Apply
