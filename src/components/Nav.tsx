@@ -45,6 +45,9 @@ export function Nav() {
   const showHome = pathname !== "/";
   // Show About link everywhere except the about page itself
   const showAbout = pathname !== "/about";
+  // Fashion Show link surfaces on the two marketing pages so the Oct 10 event
+  // is discoverable from Home and About without cluttering the utility pages.
+  const showFashionShow = pathname === "/" || pathname === "/about";
 
   return (
     <header
@@ -73,6 +76,14 @@ export function Nav() {
               className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
             >
               About
+            </Link>
+          )}
+          {showFashionShow && (
+            <Link
+              href="/fashion-show"
+              className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
+            >
+              Oct 10
             </Link>
           )}
           <Link
