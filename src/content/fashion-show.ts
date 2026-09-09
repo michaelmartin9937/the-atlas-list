@@ -1,7 +1,7 @@
 export const fashionShow = {
   hero: {
     eyebrow: "October 10, 2026 · Paradise Valley",
-    headline: "One night. One mansion. The biggest fashion moment Scottsdale has ever seen.",
+    headline: "One night. One mansion. The fashion moment Scottsdale has been waiting for.",
     subhead:
       "A private-residence runway show and after-dark takeover, curated by The Atlas List. Featured designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
     cta: "Apply for Ticket Allocation",
