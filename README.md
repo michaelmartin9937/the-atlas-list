@@ -16,21 +16,25 @@ Visit http://localhost:3000.
 
 ## Environment variables
 
-Set these in `.env.local`:
+None are required. The application form's API route writes to Supabase through the project's **anon** key, which is public by design and is only allowed to *insert* into `lead_applications` (an insert-only RLS policy — see below). The URL and key default to the live project in `src/lib/supabase/server.ts`.
 
-| Variable | Where to get it |
+To point the site at a different Supabase project, or to use a service-role key instead, set these in Vercel → Settings → Environment Variables and redeploy:
+
+| Variable | Value |
 |---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase Dashboard → Project Settings → API → Project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase Dashboard → Project Settings → API → `anon` `public` key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase Dashboard → Project Settings → API → `service_role` `secret` key (server-only — never expose to the browser) |
+| `ATLAS_SUPABASE_URL` | Supabase Dashboard → Project Settings → API → Project URL |
+| `ATLAS_SUPABASE_KEY` | The project's `anon` key (needs the insert policy below), or its `service_role` key (bypasses RLS — server-only, never expose to the browser) |
+
+The older `NEXT_PUBLIC_SUPABASE_*` / `SUPABASE_SERVICE_ROLE_KEY` variables are no longer read.
 
 ## Supabase setup
 
 1. Create a new project at [supabase.com](https://supabase.com).
-2. Open the SQL editor and run both migrations in order:
+2. Open the SQL editor and run the migrations in order:
    - `supabase/migrations/20260501000000_create_lead_applications.sql` — creates the `lead_applications` table with RLS enabled.
    - `supabase/migrations/20260504000000_add_instagram_handle.sql` — adds the optional `instagram_handle` column.
-3. The form posts to `/api/apply`, which inserts using the **service role key** server-side. RLS stays locked down — no client ever touches the table directly.
+   - `supabase/migrations/20260909000000_lead_applications_anon_insert_policy.sql` — the insert-only policy for the `anon` role (pins `status = 'pending'`).
+3. The form posts to `/api/apply`, which validates, rate-limits, and inserts server-side. With the anon key, RLS means the key can add applications but never read, change, or delete them.
 
 To view incoming applications, open the Supabase Dashboard → Table Editor → `lead_applications`.
 
