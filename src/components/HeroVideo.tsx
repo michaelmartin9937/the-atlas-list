@@ -23,10 +23,22 @@ export function HeroVideo({ src, className = "" }: Props) {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    el.muted = true;
-    el.play().catch(() => {
-      // Autoplay blocked — the hero photo stays visible underneath.
-    });
+
+    const play = () => {
+      el.muted = true;
+      el.play().catch(() => {
+        // Autoplay blocked — the hero photo stays visible underneath.
+      });
+    };
+    play();
+
+    // Browsers pause muted background video while the tab is hidden and don't
+    // all resume it on their own; kick it again when the page is visible.
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && el.paused) play();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
   }, []);
 
   return (
