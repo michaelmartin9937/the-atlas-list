@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroVideo } from "./HeroVideo";
 
 type Props = {
   eyebrow: string;
@@ -7,6 +8,9 @@ type Props = {
   subhead: string;
   cta?: { label: string; href: string };
   imageUrl?: string;
+  // Optional ambient loop layered over the photo (muted, autoplay, looping).
+  // The photo stays as the instant-load poster and the reduced-motion fallback.
+  videoUrl?: string;
   height?: "tall" | "short";
 };
 
@@ -16,6 +20,7 @@ export function Hero({
   subhead,
   cta,
   imageUrl = "/images/hero-rooftop.jpg",
+  videoUrl,
   height = "tall",
 }: Props) {
   // Mobile heights are intentionally shorter than desktop so the wide landscape
@@ -37,6 +42,12 @@ export function Hero({
         sizes="100vw"
         className="object-cover object-[center_38%] opacity-70"
       />
+      {videoUrl && (
+        <HeroVideo
+          src={videoUrl}
+          className="absolute inset-0 h-full w-full object-cover object-[center_45%]"
+        />
+      )}
       <div
         className="absolute inset-0 bg-gradient-to-b from-noir/40 via-noir/30 to-noir/90"
         aria-hidden

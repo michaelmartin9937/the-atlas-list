@@ -18,6 +18,9 @@ export default function FashionShowPage() {
         headline={fashionShow.hero.headline}
         subhead={fashionShow.hero.subhead}
         cta={{ label: fashionShow.hero.cta, href: "#apply" }}
+        videoSrc="/videos/atlas-house-promo.mp4"
+        posterSrc="/images/atlas-house-promo-poster.jpg"
+        aspect="portrait"
       />
 
       <section className="bg-bone py-20 md:py-32 px-6 md:px-10">

@@ -7,13 +7,16 @@ type Props = {
   cta: { label: string; href: string };
   videoSrc?: string;
   posterSrc?: string;
+  // "video" = 16:9 player stacked under the copy (default).
+  // "portrait" = 9:16 player (phone-shot promo / Reel); sits beside the copy
+  // on desktop, stacks under it on phones.
+  aspect?: "video" | "portrait";
 };
 
 // Landing-page hero built around a Video Sales Letter. When videoSrc is set
-// it renders a native <video> element (playsInline for mobile autoplay-off
-// UX). When it's not set — the current state, since the VSL hasn't been
-// recorded — it renders a themed placeholder card so the layout is finished
-// and the video slot is obvious to reviewers.
+// it renders a native <video> element (playsInline for mobile UX). When it's
+// not set it renders a themed placeholder card so the layout is finished and
+// the video slot is obvious to reviewers.
 export function VslHero({
   eyebrow,
   headline,
@@ -21,47 +24,76 @@ export function VslHero({
   cta,
   videoSrc,
   posterSrc,
+  aspect = "video",
 }: Props) {
+  const portrait = aspect === "portrait";
+
+  const copy = (
+    <div
+      className={`flex flex-col gap-5 md:gap-6 max-w-3xl ${
+        portrait ? "md:col-start-1 md:row-start-1 md:self-end" : ""
+      }`}
+    >
+      <span className="text-xs uppercase tracking-widest text-bronze">
+        {eyebrow}
+      </span>
+      <h1 className="font-serif text-[2.4rem] leading-[1.05] sm:text-5xl md:text-6xl text-bone">
+        {headline}
+      </h1>
+      <p className="text-base sm:text-lg md:text-xl text-bone/80 leading-relaxed">
+        {subhead}
+      </p>
+    </div>
+  );
+
+  const media = (
+    <div
+      className={
+        portrait
+          ? "relative w-full max-w-[400px] mx-auto md:mx-0 aspect-[9/16] bg-black border border-bronze/40 rounded-sm overflow-hidden shadow-2xl md:col-start-2 md:row-start-1 md:row-span-2"
+          : "relative w-full aspect-video bg-black border border-bronze/40 rounded-sm overflow-hidden shadow-2xl"
+      }
+    >
+      {videoSrc ? (
+        <video
+          className="w-full h-full object-cover"
+          controls
+          playsInline
+          preload="metadata"
+          poster={posterSrc}
+        >
+          <source src={videoSrc} type="video/mp4" />
+          Your browser doesn&apos;t support the video tag.
+        </video>
+      ) : (
+        <VslPlaceholder />
+      )}
+    </div>
+  );
+
+  const action = (
+    <div className={portrait ? "md:col-start-1 md:row-start-2 md:self-start" : ""}>
+      <Link
+        href={cta.href}
+        className="inline-block text-xs uppercase tracking-widest text-noir bg-bone px-7 sm:px-8 py-3.5 sm:py-4 hover:bg-bronze hover:text-bone transition-colors"
+      >
+        {cta.label}
+      </Link>
+    </div>
+  );
+
   return (
     <section className="relative bg-noir overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 px-6 md:px-10">
-      <div className="relative max-w-6xl mx-auto flex flex-col gap-10 md:gap-14">
-        <div className="flex flex-col gap-5 md:gap-6 max-w-3xl">
-          <span className="text-xs uppercase tracking-widest text-bronze">
-            {eyebrow}
-          </span>
-          <h1 className="font-serif text-[2.4rem] leading-[1.05] sm:text-5xl md:text-6xl text-bone">
-            {headline}
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-bone/80 leading-relaxed">
-            {subhead}
-          </p>
-        </div>
-
-        <div className="relative w-full aspect-video bg-black border border-bronze/40 rounded-sm overflow-hidden shadow-2xl">
-          {videoSrc ? (
-            <video
-              className="w-full h-full object-cover"
-              controls
-              playsInline
-              preload="metadata"
-              poster={posterSrc}
-            >
-              <source src={videoSrc} type="video/mp4" />
-              Your browser doesn&apos;t support the video tag.
-            </video>
-          ) : (
-            <VslPlaceholder />
-          )}
-        </div>
-
-        <div>
-          <Link
-            href={cta.href}
-            className="inline-block text-xs uppercase tracking-widest text-noir bg-bone px-7 sm:px-8 py-3.5 sm:py-4 hover:bg-bronze hover:text-bone transition-colors"
-          >
-            {cta.label}
-          </Link>
-        </div>
+      <div
+        className={`relative max-w-6xl mx-auto ${
+          portrait
+            ? "grid gap-10 md:gap-x-16 md:gap-y-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
+            : "flex flex-col gap-10 md:gap-14"
+        }`}
+      >
+        {copy}
+        {media}
+        {action}
       </div>
     </section>
   );

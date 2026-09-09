@@ -16,6 +16,7 @@ export default function HomePage() {
         headline={home.hero.headline}
         subhead={home.hero.subhead}
         cta={{ label: home.hero.cta, href: "#apply" }}
+        videoUrl="/videos/hero-loop.mp4"
       />
 
       <NextEventCard />
