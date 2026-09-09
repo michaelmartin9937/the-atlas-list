@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { VslHero } from "@/components/VslHero";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
+import { InstagramLink } from "@/components/InstagramLink";
 import { fashionShow } from "@/content/fashion-show";
 
 export const metadata: Metadata = {
@@ -47,6 +48,8 @@ export default function FashionShowPage() {
         </div>
       </section>
 
+      {/* Designers — equal billing: identical tiles, alphabetical, 3x2 grid so
+          nobody is stranded alone on a row at any breakpoint. */}
       <section className="bg-pearl py-20 md:py-32 px-6 md:px-10">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
@@ -60,24 +63,23 @@ export default function FashionShowPage() {
               <p className="text-ink/80 leading-relaxed text-base md:text-lg">
                 {fashionShow.designers.intro}
               </p>
+              <p className="text-xs uppercase tracking-widest text-taupe">
+                {fashionShow.designers.note}
+              </p>
             </div>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10">
             {fashionShow.designers.list.map((d, i) => (
-              <FadeIn key={d.name} delay={i * 80}>
-                <div className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-2 h-full">
+              <FadeIn key={d.handle} delay={i * 80}>
+                <li className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-4 h-full">
                   <span className="font-serif text-2xl md:text-3xl text-noir leading-tight">
                     {d.name}
                   </span>
-                  {d.note && (
-                    <span className="text-sm text-ink/70 leading-relaxed">
-                      {d.note}
-                    </span>
-                  )}
-                </div>
+                  <InstagramLink handle={d.handle} label={`${d.name} on Instagram`} />
+                </li>
               </FadeIn>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -115,18 +117,67 @@ export default function FashionShowPage() {
               <ul className="flex flex-col gap-3 mt-2">
                 {fashionShow.djs.list.map((dj) => (
                   <li
-                    key={dj.name}
-                    className="border-t border-bronze/40 pt-3 flex flex-col gap-1"
+                    key={dj.handle}
+                    className="border-t border-bronze/40 pt-4 flex flex-col gap-3"
                   >
-                    <span className="font-serif text-xl text-noir">{dj.name}</span>
-                    {dj.note && (
-                      <span className="text-sm text-ink/70">{dj.note}</span>
-                    )}
+                    <div className="flex flex-col gap-1">
+                      <span className="font-serif text-2xl text-noir">{dj.name}</span>
+                      {dj.note && (
+                        <span className="text-sm text-ink/70">{dj.note}</span>
+                      )}
+                    </div>
+                    <InstagramLink handle={dj.handle} label={`${dj.name} on Instagram`} />
                   </li>
                 ))}
               </ul>
             </div>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* Production team credits, with a slot ready for hair & makeup. */}
+      <section className="bg-pearl py-20 md:py-32 px-6 md:px-10">
+        <div className="max-w-5xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12 md:mb-16 flex flex-col gap-4 max-w-2xl mx-auto">
+              <span className="text-xs uppercase tracking-widest text-bronze">
+                {fashionShow.team.eyebrow}
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
+                {fashionShow.team.headline}
+              </h2>
+              <p className="text-ink/80 leading-relaxed text-base md:text-lg">
+                {fashionShow.team.intro}
+              </p>
+            </div>
+          </FadeIn>
+          <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10">
+            {fashionShow.team.people.map((p, i) => (
+              <FadeIn key={p.handle} delay={i * 80}>
+                <li className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-4 h-full">
+                  <div className="flex flex-col gap-1.5">
+                    <span className="font-serif text-2xl md:text-3xl text-noir leading-tight">
+                      {p.name}
+                    </span>
+                    <span className="text-xs uppercase tracking-widest text-taupe">
+                      {p.title}
+                    </span>
+                  </div>
+                  <InstagramLink handle={p.handle} label={`${p.name} on Instagram`} />
+                </li>
+              </FadeIn>
+            ))}
+            <FadeIn delay={fashionShow.team.people.length * 80}>
+              <li className="border-t border-taupe/40 pt-5 md:pt-6 flex flex-col gap-1.5 h-full">
+                <span className="font-serif text-2xl md:text-3xl text-noir leading-tight">
+                  {fashionShow.team.hairMakeup.title}
+                </span>
+                <span className="font-serif italic text-lg text-taupe">
+                  {fashionShow.team.hairMakeup.tbd}
+                </span>
+              </li>
+            </FadeIn>
+          </ul>
         </div>
       </section>
 

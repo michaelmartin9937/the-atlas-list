@@ -19,13 +19,16 @@ export const fashionShow = {
     eyebrow: "Featured Designers",
     headline: "The runway.",
     intro:
-      "Five designers, one runway, one night. Each brings a distinct point of view — the through-line is craft, taste, and clothes you'd actually want to be photographed in.",
+      "Six designers, one runway, one night. Each brings a distinct point of view — the through-line is craft, taste, and clothes you'd actually want to be photographed in.",
+    // Equal billing: identical tiles, alphabetical order, and we say so.
+    note: "Listed alphabetically.",
     list: [
-      { name: "Almer", note: "" },
-      { name: "Svetik", note: "" },
-      { name: "Isaac Newton", note: "" },
-      { name: "Valeria Felares", note: "" },
-      { name: "Rollog", note: "" },
+      { name: "Alexandra", handle: "oneofakindaura" },
+      { name: "Almer", handle: "designerkidalmer" },
+      { name: "Bella Elisse", handle: "bella.elisse" },
+      { name: "Isaac Newton", handle: "isaacnewtoncollection" },
+      { name: "Koan Asaky", handle: "koanasaky" },
+      { name: "Stephanie Murillo Agandar", handle: "machechena_" },
     ],
   },
   models: {
@@ -36,14 +39,25 @@ export const fashionShow = {
     tbd: "Roster reveal — coming soon.",
   },
   djs: {
-    eyebrow: "On the Decks",
+    eyebrow: "Featured DJ",
     headline: "The sound.",
     intro:
-      "The music runs from cocktail hour through the after-party. First name confirmed, more coming.",
-    list: [
-      { name: "DJ Anthoz", note: "Headlining." },
-      { name: "More TBA", note: "Additional DJs to be announced." },
+      "DJ Anthoz of SoundMoverz carries the night — cocktail hour through the after-party.",
+    list: [{ name: "DJ Anthoz", note: "with SoundMoverz", handle: "soundmoverz" }],
+  },
+  team: {
+    eyebrow: "Production",
+    headline: "The team behind the night.",
+    intro:
+      "The people doing the unglamorous work that makes the glamorous part look effortless.",
+    people: [
+      { name: "Diana Ferar", title: "Executive Producer", handle: "dianaferar" },
+      { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus" },
     ],
+    hairMakeup: {
+      title: "Hair & Makeup",
+      tbd: "Artists to be announced.",
+    },
   },
   location: {
     eyebrow: "The Venue",
@@ -65,7 +79,7 @@ export const fashionShow = {
       {
         title: "Fashion Show",
         time: "Time TBA",
-        body: "Five designers, one runway. Full production, live music, seated audience. This is the main event.",
+        body: "Six designers, one runway. Full production, live music, seated audience. This is the main event.",
       },
       {
         title: "Mansion Party",
