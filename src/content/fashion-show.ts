@@ -35,7 +35,7 @@ export const fashionShow = {
     eyebrow: "Featured Models",
     headline: "The lineup.",
     intro:
-      "The full cast will be announced closer to the event. Every model on our runway is signed, professional, and hand-picked to fit the point of view of the designers she's walking for.",
+      "The full cast will be announced closer to the event. Every model on our runway is professional and hand-picked to fit the point of view of the designers she's walking for.",
     tbd: "Roster reveal — coming soon.",
   },
   djs: {
