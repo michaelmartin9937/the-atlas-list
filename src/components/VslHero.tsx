@@ -3,6 +3,8 @@ import Link from "next/link";
 type Props = {
   eyebrow: string;
   headline: string;
+  // Optional sub-headline directly under the H1 (e.g. a sponsor credit).
+  tagline?: string;
   subhead: string;
   cta: { label: string; href: string };
   videoSrc?: string;
@@ -22,6 +24,7 @@ const THEME = {
     section: "bg-noir",
     glow: "",
     eyebrow: "text-bronze",
+    tagline: "text-bronze",
     frame: "border-bronze/40",
     cta: "text-noir bg-bone hover:bg-bronze hover:text-bone",
   },
@@ -29,6 +32,7 @@ const THEME = {
     section: "bg-velvet",
     glow: "bg-[radial-gradient(ellipse_at_top_left,rgba(164,62,120,0.28),transparent_60%)]",
     eyebrow: "text-champagne",
+    tagline: "text-champagne",
     frame: "border-burgundy/50",
     cta: "text-velvet bg-champagne hover:bg-burgundy hover:text-bone",
   },
@@ -41,6 +45,7 @@ const THEME = {
 export function VslHero({
   eyebrow,
   headline,
+  tagline,
   subhead,
   cta,
   videoSrc,
@@ -60,9 +65,16 @@ export function VslHero({
       <span className={`text-xs uppercase tracking-widest ${t.eyebrow}`}>
         {eyebrow}
       </span>
-      <h1 className="font-serif text-[2.4rem] leading-[1.05] sm:text-5xl md:text-6xl text-bone">
-        {headline}
-      </h1>
+      <div className="flex flex-col gap-2 md:gap-3">
+        <h1 className="font-serif text-[2.4rem] leading-[1.05] sm:text-5xl md:text-6xl text-bone">
+          {headline}
+        </h1>
+        {tagline && (
+          <p className={`font-serif italic text-xl sm:text-2xl md:text-3xl leading-tight ${t.tagline}`}>
+            {tagline}
+          </p>
+        )}
+      </div>
       <p className="text-base sm:text-lg md:text-xl text-bone/80 leading-relaxed">
         {subhead}
       </p>

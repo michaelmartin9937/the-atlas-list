@@ -2,6 +2,7 @@ export const desertAfterDark = {
   hero: {
     eyebrow: "October 10, 2026 · Paradise Valley",
     headline: "Desert After Dark",
+    tagline: "powered by Thundr",
     subhead:
       "One night. One mansion. The fashion moment Scottsdale has been waiting for — a private-residence runway show and after-dark takeover, curated by The Atlas List. Featured designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
     cta: "Apply for Ticket Allocation",

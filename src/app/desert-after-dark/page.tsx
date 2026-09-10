@@ -7,8 +7,11 @@ import { Avatar } from "@/components/Avatar";
 import { desertAfterDark } from "@/content/desert-after-dark";
 
 const shareTitle = "Desert After Dark · October 10";
+// The sponsor credit goes on the share card (og/twitter title, description,
+// image alt) but stays out of the browser-tab title.
+const shareOgTitle = "Desert After Dark powered by Thundr · October 10";
 const shareDescription =
-  "The Atlas List presents Desert After Dark — a private-residence fashion show and mansion party in Paradise Valley, October 10, 2026. Featured designers, hand-picked models, top-shelf DJs — allocated by application.";
+  "The Atlas List presents Desert After Dark, powered by Thundr — a private-residence fashion show and mansion party in Paradise Valley, October 10, 2026. Featured designers, hand-picked models, top-shelf DJs — allocated by application.";
 
 // Dedicated share card: the root layout's openGraph block is otherwise
 // inherited wholesale, which made links to this page preview as the home
@@ -18,7 +21,7 @@ export const metadata: Metadata = {
   description: shareDescription,
   alternates: { canonical: "/desert-after-dark" },
   openGraph: {
-    title: `${shareTitle} · The Atlas List`,
+    title: `${shareOgTitle} · The Atlas List`,
     description: shareDescription,
     url: "/desert-after-dark",
     siteName: "The Atlas List",
@@ -28,13 +31,13 @@ export const metadata: Metadata = {
         url: "/images/og-desert-after-dark.jpg",
         width: 1200,
         height: 630,
-        alt: "Desert After Dark — The Atlas List fashion show + mansion party, October 10, 2026, Paradise Valley",
+        alt: "Desert After Dark powered by Thundr — The Atlas List fashion show + mansion party, October 10, 2026, Paradise Valley",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${shareTitle} · The Atlas List`,
+    title: `${shareOgTitle} · The Atlas List`,
     description: shareDescription,
     images: ["/images/og-desert-after-dark.jpg"],
   },
@@ -60,6 +63,7 @@ export default function DesertAfterDarkPage() {
       <VslHero
         eyebrow={desertAfterDark.hero.eyebrow}
         headline={desertAfterDark.hero.headline}
+        tagline={desertAfterDark.hero.tagline}
         subhead={desertAfterDark.hero.subhead}
         cta={{ label: desertAfterDark.hero.cta, href: "#apply" }}
         videoSrc="/videos/atlas-house-promo.mp4"
