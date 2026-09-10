@@ -26,6 +26,22 @@ All three end in the same place today: Supabase Dashboard → **the-curated-life
 
 The project is on Supabase's free tier, which pauses after about a week without API traffic — that took the form down once. `GET /api/keepalive` runs daily via Vercel Cron (`vercel.json`) to keep it awake. Set `CRON_SECRET` in Vercel if you want that endpoint restricted to Vercel's scheduler.
 
+## Email notifications
+
+Every saved application emails the team via [Resend](https://resend.com) — subject `New application — <name> (<page>)`, all fields, **Reply-To set to the applicant**, and a link to the row in Supabase. It's sent *after* the response is returned (`after()`), so a Resend outage can never slow or fail a submission: the row is always saved first, and email problems only appear in the Vercel function logs. A repeat submission from the same address within an hour saves the row but doesn't send a second email.
+
+One-time setup:
+
+1. Create a Resend account and an API key.
+2. Vercel → Settings → Environment Variables → add `RESEND_API_KEY` (Production) → redeploy. `GET /api/keepalive` reports `"emailConfigured": true` once it's live.
+3. Verify the sending domain: Resend → Domains → add `theatlaslist.club` and create the DNS records it shows (DKIM + SPF). Until the domain is verified Resend only sends from `onboarding@resend.dev`, and only *to* the address that owns the Resend account — so if the account is `info@theatlaslist.club`, setting `NOTIFY_FROM=onboarding@resend.dev` works with no DNS changes at all.
+
+| Variable | Default |
+|---|---|
+| `RESEND_API_KEY` | — (nothing is sent without it) |
+| `NOTIFY_TO` | `info@theatlaslist.club` |
+| `NOTIFY_FROM` | `The Atlas List <applications@theatlaslist.club>` |
+
 ## Supabase setup
 
 1. Create a new project at [supabase.com](https://supabase.com).

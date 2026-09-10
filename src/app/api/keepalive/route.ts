@@ -24,5 +24,11 @@ export async function GET(req: Request) {
     console.error("keepalive query failed", error);
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
-  return NextResponse.json({ ok: true, at: new Date().toISOString() });
+  return NextResponse.json({
+    ok: true,
+    at: new Date().toISOString(),
+    // Lets us confirm the Resend key landed in Vercel without exposing it.
+    emailConfigured: Boolean(process.env.RESEND_API_KEY),
+    notifyTo: process.env.NOTIFY_TO || "info@theatlaslist.club",
+  });
 }

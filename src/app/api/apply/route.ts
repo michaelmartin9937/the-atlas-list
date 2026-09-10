@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { applicationSchema } from "@/lib/validation";
 import { normalizePhoneE164 } from "@/lib/phone";
 import { checkRateLimit, getClientKey } from "@/lib/rateLimit";
+import { notifyNewApplication } from "@/lib/notify";
 
 export const runtime = "nodejs";
 
@@ -53,6 +54,7 @@ export async function POST(req: Request) {
   const igHandle = data.instagram
     ? data.instagram.trim().replace(/^@+/, "").toLowerCase() || null
     : null;
+  const email = data.email.toLowerCase();
 
   const supabase = createServerSupabaseClient();
 
@@ -60,7 +62,7 @@ export async function POST(req: Request) {
     first_name: data.firstName,
     last_name: data.lastName,
     phone: phoneE164,
-    email: data.email.toLowerCase(),
+    email,
     vouch_intro: data.vouchIntro,
     sms_consent: data.smsConsent,
     source_page: data.sourcePage ?? null,
@@ -71,8 +73,8 @@ export async function POST(req: Request) {
     instagram_handle: igHandle,
   });
 
-  // Fallback: if the production DB hasn't had the add_instagram_handle migration
-  // applied yet, PostgREST returns PGRST204. Retry without the column and fold
+  // Fallback: if the target DB hasn't had the add_instagram_handle migration
+  // applied, PostgREST returns PGRST204. Retry without the column and fold
   // the handle into vouch_intro so the data isn't lost.
   if (
     error?.code === "PGRST204" &&
@@ -97,6 +99,26 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
+
+  // The row is saved; notify the team after the response goes out so email
+  // can never slow down or fail a submission. Problems land in the logs.
+  after(async () => {
+    try {
+      const result = await notifyNewApplication({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: phoneE164,
+        email,
+        instagram: igHandle,
+        vouchIntro: data.vouchIntro,
+        smsConsent: data.smsConsent,
+        sourcePage: data.sourcePage ?? "unknown",
+      });
+      if (!result.sent) console.warn("Application notification skipped:", result.reason);
+    } catch (err) {
+      console.error("Application notification failed", err);
+    }
+  });
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }
