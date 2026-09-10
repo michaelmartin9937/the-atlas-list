@@ -159,13 +159,16 @@ export default function FashionShowPage() {
             {fashionShow.team.people.map((p, i) => (
               <FadeIn key={p.handle} delay={i * 80}>
                 <li className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-4 h-full">
-                  <div className="flex flex-col gap-1.5">
-                    <span className="font-serif text-2xl md:text-3xl text-noir leading-tight">
-                      {p.name}
-                    </span>
-                    <span className="text-xs uppercase tracking-widest text-taupe">
-                      {p.title}
-                    </span>
+                  <div className="flex items-center gap-4">
+                    <Avatar name={p.name} image={p.image} />
+                    <div className="flex flex-col gap-1.5">
+                      <span className="font-serif text-2xl text-noir leading-tight">
+                        {p.name}
+                      </span>
+                      <span className="text-xs uppercase tracking-widest text-taupe">
+                        {p.title}
+                      </span>
+                    </div>
                   </div>
                   <InstagramLink handle={p.handle} label={`${p.name} on Instagram`} />
                 </li>

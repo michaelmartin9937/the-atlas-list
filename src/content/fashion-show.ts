@@ -51,9 +51,10 @@ export const fashionShow = {
     headline: "The team behind the night.",
     intro:
       "The people doing the unglamorous work that makes the glamorous part look effortless.",
+    // image = current Instagram profile picture.
     people: [
-      { name: "Diana Ferar", title: "Executive Producer", handle: "dianaferar" },
-      { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus" },
+      { name: "Diana Ferar", title: "Executive Producer", handle: "dianaferar", image: "/images/team/dianaferar.jpg" },
+      { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
     ],
     hairMakeup: {
       title: "Hair & Makeup",
