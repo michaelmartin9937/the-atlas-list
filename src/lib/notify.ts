@@ -14,6 +14,7 @@ export type ApplicationNotification = {
 const TO = process.env.NOTIFY_TO || "info@theatlaslist.club";
 const FROM =
   process.env.NOTIFY_FROM || "The Atlas List <applications@theatlaslist.club>";
+const FALLBACK_FROM = "The Atlas List <onboarding@resend.dev>";
 const TABLE_URL =
   "https://supabase.com/dashboard/project/vnnhcjvkhcwrenlglfnw/editor/17547?schema=public";
 const SEND_TIMEOUT_MS = 8_000;
@@ -107,25 +108,40 @@ export async function notifyNewApplication(
   ].join("\n");
 
   const resend = new Resend(apiKey);
-  const timeout = new Promise<never>((_, reject) =>
-    setTimeout(
-      () => reject(new Error(`Resend did not respond within ${SEND_TIMEOUT_MS}ms`)),
-      SEND_TIMEOUT_MS
-    )
-  );
-  const { error } = await Promise.race([
-    resend.emails.send({
-      from: FROM,
-      to: TO,
-      replyTo: a.email,
-      subject: `New application — ${name} (${page})`,
-      html,
-      text,
-    }),
-    timeout,
-  ]);
+  const message = {
+    to: TO,
+    replyTo: a.email,
+    subject: `New application — ${name} (${page})`,
+    html,
+    text,
+  };
+  const sendFrom = async (from: string) => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(
+        () => reject(new Error(`Resend did not respond within ${SEND_TIMEOUT_MS}ms`)),
+        SEND_TIMEOUT_MS
+      );
+    });
+    try {
+      return await Promise.race([resend.emails.send({ from, ...message }), timeout]);
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
+  let { data, error } = await sendFrom(FROM);
+  // Until theatlaslist.club is verified in Resend, the branded sender is
+  // rejected. Fall back to Resend's shared onboarding sender so the
+  // notification still arrives — Resend delivers it only to the address that
+  // owns the Resend account, which is the team inbox.
+  if (error && /not verified/i.test(error.message) && FROM !== FALLBACK_FROM) {
+    console.warn(`Resend: ${error.message} — retrying from ${FALLBACK_FROM}`);
+    ({ data, error } = await sendFrom(FALLBACK_FROM));
+  }
   if (error) throw new Error(`Resend: ${error.message}`);
 
+  console.log("Application notification sent", { id: data?.id, to: TO });
   recentlyNotified.set(dedupeKey, now);
   return { sent: true };
 }
