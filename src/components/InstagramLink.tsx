@@ -7,7 +7,7 @@ type Props = {
 
 const TONE = {
   light: "text-noir/85 border-noir/25 hover:border-bronze hover:text-bronze",
-  dark: "text-bone/85 border-bone/30 hover:border-champagne hover:text-champagne",
+  dark: "text-bone/85 border-burgundy/50 hover:border-burgundy hover:text-champagne",
 };
 
 // Small outline button that opens an Instagram profile in a new tab. Handle

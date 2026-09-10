@@ -51,7 +51,7 @@ export function Nav() {
       ? "text-noir hover:text-bronze"
       : "text-bone hover:text-bronze drop-shadow-sm";
   const applyClass = velvet
-    ? "text-velvet bg-champagne hover:bg-rosegold"
+    ? "text-velvet bg-champagne hover:bg-burgundy hover:text-bone"
     : scrolled
       ? "text-bone bg-noir hover:bg-ink"
       : "text-noir bg-bone hover:bg-bronze hover:text-bone";

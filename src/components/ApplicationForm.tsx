@@ -48,10 +48,10 @@ const TONES: Record<Tone, ToneClasses> = {
     label: "text-rosewood",
     helper: "text-bone/55",
     error: "text-red-400",
-    checkbox: "accent-champagne",
+    checkbox: "accent-burgundy",
     consent: "text-bone/70",
     link: "hover:text-champagne",
-    submit: "text-velvet bg-champagne hover:bg-rosegold",
+    submit: "text-velvet bg-champagne hover:bg-burgundy hover:text-bone",
   },
 };
 

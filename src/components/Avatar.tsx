@@ -9,7 +9,7 @@ type Props = {
 
 const TONE = {
   light: { ring: "ring-bronze/40", disc: "bg-bone text-noir" },
-  dark: { ring: "ring-champagne/50", disc: "bg-velvet-deep text-champagne" },
+  dark: { ring: "ring-burgundy/60", disc: "bg-velvet-deep text-champagne" },
 };
 
 // Circular portrait used beside a person's name in credit tiles. Falls back to

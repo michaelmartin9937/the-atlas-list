@@ -12,22 +12,25 @@ type Props = {
   // on desktop, stacks under it on phones.
   aspect?: "video" | "portrait";
   // "noir" = site default (bronze accents, bone CTA).
-  // "velvet" = Desert After Dark's Velvet Sunset treatment (champagne accents).
+  // "velvet" = Desert After Dark's Velvet Sunset treatment (champagne
+  // accents, burgundy highlights, a soft burgundy glow behind the copy).
   theme?: "noir" | "velvet";
 };
 
 const THEME = {
   noir: {
     section: "bg-noir",
+    glow: "",
     eyebrow: "text-bronze",
     frame: "border-bronze/40",
     cta: "text-noir bg-bone hover:bg-bronze hover:text-bone",
   },
   velvet: {
     section: "bg-velvet",
+    glow: "bg-[radial-gradient(ellipse_at_top_left,rgba(164,62,120,0.28),transparent_60%)]",
     eyebrow: "text-champagne",
-    frame: "border-champagne/40",
-    cta: "text-velvet bg-champagne hover:bg-rosegold",
+    frame: "border-burgundy/50",
+    cta: "text-velvet bg-champagne hover:bg-burgundy hover:text-bone",
   },
 };
 
@@ -104,6 +107,9 @@ export function VslHero({
 
   return (
     <section className={`relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 px-6 md:px-10 ${t.section}`}>
+      {t.glow && (
+        <div className={`absolute inset-0 pointer-events-none ${t.glow}`} aria-hidden />
+      )}
       <div
         className={`relative max-w-6xl mx-auto ${
           portrait

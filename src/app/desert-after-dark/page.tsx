@@ -41,12 +41,14 @@ export const metadata: Metadata = {
 };
 
 // "Velvet Sunset" — the event's own palette (velvet black base, champagne as
-// the accent, burgundy / terracotta / rose gold as highlights, rosewood for
-// muted text). Only this page uses it; the rest of the site stays bone/bronze.
+// the accent, burgundy as the highlight, rosewood for muted text). Only this
+// page uses it; the rest of the site stays bone/bronze.
 const eyebrow = "text-xs uppercase tracking-widest text-champagne";
 const h2 = "font-serif text-3xl sm:text-4xl md:text-5xl text-bone leading-tight";
 const body = "text-bone/80 leading-relaxed text-base md:text-lg";
-const rule = "border-t border-champagne/30";
+const rule = "border-t border-burgundy/40";
+const glow =
+  "absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_bottom_right,rgba(164,62,120,0.22),transparent_60%)]";
 
 // The night is one arc — golden hour into full velvet dark — so the four
 // acts walk through the palette in that order.
@@ -73,7 +75,7 @@ export default function DesertAfterDarkPage() {
           </FadeIn>
           <FadeIn delay={80}>
             <h2 className={h2}>{desertAfterDark.pitch.headline}</h2>
-            <div className="mt-6 h-[3px] w-24 bg-champagne" aria-hidden />
+            <div className="mt-6 h-[3px] w-28 bg-gradient-to-r from-champagne to-burgundy" aria-hidden />
           </FadeIn>
           <FadeIn delay={140}>
             <div className="flex flex-col gap-5 mt-2">
@@ -251,8 +253,9 @@ export default function DesertAfterDarkPage() {
         </div>
       </section>
 
-      <section id="apply" className="bg-velvet-deep py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-2xl mx-auto">
+      <section id="apply" className="relative overflow-hidden bg-velvet-deep py-20 md:py-32 px-6 md:px-10">
+        <div className={glow} aria-hidden />
+        <div className="relative max-w-2xl mx-auto">
           <FadeIn>
             <div className="flex flex-col gap-5 mb-10 md:mb-12 text-center">
               <span className={eyebrow}>{desertAfterDark.apply.eyebrow}</span>
