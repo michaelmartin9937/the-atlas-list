@@ -19,7 +19,10 @@ export const applicationSchema = z.object({
   smsConsent: z.literal(true, {
     errorMap: () => ({ message: "SMS consent is required to apply" }),
   }),
-  sourcePage: z.enum(["home", "about", "fashion-show"]).optional(),
+  // "fashion-show" is the old address of the Desert After Dark page; still
+  // accepted so a tab opened before the rename can submit. The API stores it
+  // as "desert-after-dark".
+  sourcePage: z.enum(["home", "about", "desert-after-dark", "fashion-show"]).optional(),
   // Honeypot — must be empty for a real submission
   website: z.string().max(0).optional(),
 });

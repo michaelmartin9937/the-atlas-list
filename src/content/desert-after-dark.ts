@@ -1,4 +1,4 @@
-export const fashionShow = {
+export const desertAfterDark = {
   hero: {
     eyebrow: "October 10, 2026 · Paradise Valley",
     headline: "Desert After Dark",

@@ -4,7 +4,7 @@ import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
 import { InstagramLink } from "@/components/InstagramLink";
 import { Avatar } from "@/components/Avatar";
-import { fashionShow } from "@/content/fashion-show";
+import { desertAfterDark } from "@/content/desert-after-dark";
 
 const shareTitle = "Desert After Dark · October 10";
 const shareDescription =
@@ -16,16 +16,16 @@ const shareDescription =
 export const metadata: Metadata = {
   title: shareTitle,
   description: shareDescription,
-  alternates: { canonical: "/fashion-show" },
+  alternates: { canonical: "/desert-after-dark" },
   openGraph: {
     title: `${shareTitle} · The Atlas List`,
     description: shareDescription,
-    url: "/fashion-show",
+    url: "/desert-after-dark",
     siteName: "The Atlas List",
     type: "website",
     images: [
       {
-        url: "/images/og-fashion-show.jpg",
+        url: "/images/og-desert-after-dark.jpg",
         width: 1200,
         height: 630,
         alt: "Desert After Dark — The Atlas List fashion show + mansion party, October 10, 2026, Paradise Valley",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${shareTitle} · The Atlas List`,
     description: shareDescription,
-    images: ["/images/og-fashion-show.jpg"],
+    images: ["/images/og-desert-after-dark.jpg"],
   },
 };
 
@@ -44,10 +44,10 @@ export default function FashionShowPage() {
   return (
     <>
       <VslHero
-        eyebrow={fashionShow.hero.eyebrow}
-        headline={fashionShow.hero.headline}
-        subhead={fashionShow.hero.subhead}
-        cta={{ label: fashionShow.hero.cta, href: "#apply" }}
+        eyebrow={desertAfterDark.hero.eyebrow}
+        headline={desertAfterDark.hero.headline}
+        subhead={desertAfterDark.hero.subhead}
+        cta={{ label: desertAfterDark.hero.cta, href: "#apply" }}
         videoSrc="/videos/atlas-house-promo.mp4"
         posterSrc="/images/atlas-house-promo-poster.jpg"
         aspect="portrait"
@@ -57,17 +57,17 @@ export default function FashionShowPage() {
         <div className="max-w-3xl mx-auto flex flex-col gap-6 md:gap-8">
           <FadeIn>
             <span className="text-xs uppercase tracking-widest text-bronze">
-              {fashionShow.pitch.eyebrow}
+              {desertAfterDark.pitch.eyebrow}
             </span>
           </FadeIn>
           <FadeIn delay={80}>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
-              {fashionShow.pitch.headline}
+              {desertAfterDark.pitch.headline}
             </h2>
           </FadeIn>
           <FadeIn delay={140}>
             <div className="flex flex-col gap-5 mt-2">
-              {fashionShow.pitch.body.map((p, i) => (
+              {desertAfterDark.pitch.body.map((p, i) => (
                 <p key={i} className="text-ink/85 leading-relaxed text-base md:text-lg">
                   {p}
                 </p>
@@ -84,21 +84,21 @@ export default function FashionShowPage() {
           <FadeIn>
             <div className="text-center mb-12 md:mb-16 flex flex-col gap-4 max-w-2xl mx-auto">
               <span className="text-xs uppercase tracking-widest text-bronze">
-                {fashionShow.designers.eyebrow}
+                {desertAfterDark.designers.eyebrow}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
-                {fashionShow.designers.headline}
+                {desertAfterDark.designers.headline}
               </h2>
               <p className="text-ink/80 leading-relaxed text-base md:text-lg">
-                {fashionShow.designers.intro}
+                {desertAfterDark.designers.intro}
               </p>
               <p className="text-xs uppercase tracking-widest text-taupe">
-                {fashionShow.designers.note}
+                {desertAfterDark.designers.note}
               </p>
             </div>
           </FadeIn>
           <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10">
-            {fashionShow.designers.list.map((d, i) => (
+            {desertAfterDark.designers.list.map((d, i) => (
               <FadeIn key={d.handle} delay={i * 80}>
                 <li className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-4 h-full">
                   <div className="flex items-center gap-4">
@@ -120,17 +120,17 @@ export default function FashionShowPage() {
           <FadeIn>
             <div className="flex flex-col gap-5">
               <span className="text-xs uppercase tracking-widest text-bronze">
-                {fashionShow.models.eyebrow}
+                {desertAfterDark.models.eyebrow}
               </span>
               <h2 className="font-serif text-3xl md:text-4xl text-noir leading-tight">
-                {fashionShow.models.headline}
+                {desertAfterDark.models.headline}
               </h2>
               <p className="text-ink/80 leading-relaxed">
-                {fashionShow.models.intro}
+                {desertAfterDark.models.intro}
               </p>
               <div className="border-t border-bronze/40 pt-5 mt-2">
                 <p className="font-serif italic text-lg text-taupe">
-                  {fashionShow.models.tbd}
+                  {desertAfterDark.models.tbd}
                 </p>
               </div>
             </div>
@@ -138,16 +138,16 @@ export default function FashionShowPage() {
           <FadeIn delay={120}>
             <div className="flex flex-col gap-5">
               <span className="text-xs uppercase tracking-widest text-bronze">
-                {fashionShow.djs.eyebrow}
+                {desertAfterDark.djs.eyebrow}
               </span>
               <h2 className="font-serif text-3xl md:text-4xl text-noir leading-tight">
-                {fashionShow.djs.headline}
+                {desertAfterDark.djs.headline}
               </h2>
               <p className="text-ink/80 leading-relaxed">
-                {fashionShow.djs.intro}
+                {desertAfterDark.djs.intro}
               </p>
               <ul className="flex flex-col gap-3 mt-2">
-                {fashionShow.djs.list.map((dj) => (
+                {desertAfterDark.djs.list.map((dj) => (
                   <li
                     key={dj.handle}
                     className="border-t border-bronze/40 pt-4 flex flex-col gap-3"
@@ -173,18 +173,18 @@ export default function FashionShowPage() {
           <FadeIn>
             <div className="text-center mb-12 md:mb-16 flex flex-col gap-4 max-w-2xl mx-auto">
               <span className="text-xs uppercase tracking-widest text-bronze">
-                {fashionShow.team.eyebrow}
+                {desertAfterDark.team.eyebrow}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
-                {fashionShow.team.headline}
+                {desertAfterDark.team.headline}
               </h2>
               <p className="text-ink/80 leading-relaxed text-base md:text-lg">
-                {fashionShow.team.intro}
+                {desertAfterDark.team.intro}
               </p>
             </div>
           </FadeIn>
           <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10">
-            {fashionShow.team.people.map((p, i) => (
+            {desertAfterDark.team.people.map((p, i) => (
               <FadeIn key={p.handle} delay={i * 80}>
                 <li className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-4 h-full">
                   <div className="flex items-center gap-4">
@@ -202,13 +202,13 @@ export default function FashionShowPage() {
                 </li>
               </FadeIn>
             ))}
-            <FadeIn delay={fashionShow.team.people.length * 80}>
+            <FadeIn delay={desertAfterDark.team.people.length * 80}>
               <li className="border-t border-taupe/40 pt-5 md:pt-6 flex flex-col gap-1.5 h-full">
                 <span className="font-serif text-2xl md:text-3xl text-noir leading-tight">
-                  {fashionShow.team.hairMakeup.title}
+                  {desertAfterDark.team.hairMakeup.title}
                 </span>
                 <span className="font-serif italic text-lg text-taupe">
-                  {fashionShow.team.hairMakeup.tbd}
+                  {desertAfterDark.team.hairMakeup.tbd}
                 </span>
               </li>
             </FadeIn>
@@ -220,17 +220,17 @@ export default function FashionShowPage() {
         <div className="max-w-3xl mx-auto text-center flex flex-col gap-5 md:gap-6">
           <FadeIn>
             <span className="text-xs uppercase tracking-widest text-bronze">
-              {fashionShow.location.eyebrow}
+              {desertAfterDark.location.eyebrow}
             </span>
           </FadeIn>
           <FadeIn delay={80}>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-bone leading-tight">
-              {fashionShow.location.headline}
+              {desertAfterDark.location.headline}
             </h2>
           </FadeIn>
           <FadeIn delay={140}>
             <p className="text-bone/75 leading-relaxed text-base md:text-lg">
-              {fashionShow.location.body}
+              {desertAfterDark.location.body}
             </p>
           </FadeIn>
         </div>
@@ -241,18 +241,18 @@ export default function FashionShowPage() {
           <FadeIn>
             <div className="text-center mb-12 md:mb-16 flex flex-col gap-4 max-w-2xl mx-auto">
               <span className="text-xs uppercase tracking-widest text-bronze">
-                {fashionShow.timeline.eyebrow}
+                {desertAfterDark.timeline.eyebrow}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
-                {fashionShow.timeline.headline}
+                {desertAfterDark.timeline.headline}
               </h2>
               <p className="text-ink/80 leading-relaxed text-base md:text-lg">
-                {fashionShow.timeline.intro}
+                {desertAfterDark.timeline.intro}
               </p>
             </div>
           </FadeIn>
           <ol className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {fashionShow.timeline.acts.map((act, i) => (
+            {desertAfterDark.timeline.acts.map((act, i) => (
               <FadeIn key={act.title} delay={i * 100}>
                 <li className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-3 h-full">
                   <div className="flex items-baseline gap-3">
@@ -279,19 +279,19 @@ export default function FashionShowPage() {
           <FadeIn>
             <div className="flex flex-col gap-5 mb-10 md:mb-12 text-center">
               <span className="text-xs uppercase tracking-widest text-bronze">
-                {fashionShow.apply.eyebrow}
+                {desertAfterDark.apply.eyebrow}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
-                {fashionShow.apply.headline}
+                {desertAfterDark.apply.headline}
               </h2>
               <p className="text-ink/80 leading-relaxed text-base md:text-lg">
-                {fashionShow.apply.subhead}
+                {desertAfterDark.apply.subhead}
               </p>
             </div>
           </FadeIn>
           <FadeIn delay={150}>
             <ApplicationForm
-              sourcePage="fashion-show"
+              sourcePage="desert-after-dark"
               submitLabel="Request Ticket Allocation"
             />
           </FadeIn>

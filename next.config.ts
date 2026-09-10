@@ -7,10 +7,9 @@ const config: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   async redirects() {
     return [
-      // Event-name alias for the October 10 landing page. The canonical
-      // route stays /fashion-show so existing links and the share card's
-      // printed URL keep working.
-      { source: "/desert-after-dark", destination: "/fashion-show", permanent: true },
+      // The October 10 event page moved from /fashion-show to
+      // /desert-after-dark (its name). Keep the old address working.
+      { source: "/fashion-show", destination: "/desert-after-dark", permanent: true },
     ];
   },
 };

@@ -58,6 +58,11 @@ export async function POST(req: Request) {
 
   const supabase = createServerSupabaseClient();
 
+  // The Oct 10 page moved from /fashion-show to /desert-after-dark; a tab
+  // opened before the rename still posts the old value. Store the current one.
+  const sourcePage =
+    data.sourcePage === "fashion-show" ? "desert-after-dark" : (data.sourcePage ?? null);
+
   const basePayload = {
     first_name: data.firstName,
     last_name: data.lastName,
@@ -65,7 +70,7 @@ export async function POST(req: Request) {
     email,
     vouch_intro: data.vouchIntro,
     sms_consent: data.smsConsent,
-    source_page: data.sourcePage ?? null,
+    source_page: sourcePage,
   };
 
   let { error } = await supabase.from("lead_applications").insert({

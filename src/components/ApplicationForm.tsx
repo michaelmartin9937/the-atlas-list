@@ -5,7 +5,7 @@ import { useState, type FormEvent } from "react";
 import { formatPhoneAsTyping } from "@/lib/phone";
 
 type Props = {
-  sourcePage: "home" | "about" | "fashion-show";
+  sourcePage: "home" | "about" | "desert-after-dark";
   submitLabel?: string;
 };
 

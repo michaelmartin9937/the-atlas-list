@@ -23,7 +23,8 @@ const DEDUPE_WINDOW_MS = 60 * 60 * 1000;
 const PAGE_LABEL: Record<string, string> = {
   home: "Home page",
   about: "About page",
-  "fashion-show": "Desert After Dark (Oct 10)",
+  "desert-after-dark": "Desert After Dark (Oct 10)",
+  "fashion-show": "Desert After Dark (Oct 10)", // legacy address of the same page
 };
 
 // Best-effort duplicate suppression, per server instance: a double-submit from

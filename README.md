@@ -86,6 +86,7 @@ src/
 │   ├── layout.tsx          # root layout: fonts, nav, footer, metadata
 │   ├── page.tsx            # /
 │   ├── about/page.tsx      # /about
+│   ├── desert-after-dark/page.tsx  # /desert-after-dark — the Oct 10 event (/fashion-show redirects here)
 │   ├── privacy/page.tsx    # /privacy
 │   ├── terms/page.tsx      # /terms
 │   ├── thank-you/page.tsx  # /thank-you (post-submit)
