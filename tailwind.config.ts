@@ -11,6 +11,15 @@ const config: Config = {
         taupe: "#A89684",
         bronze: "#A8884F",
         ink: "#2A2522",
+        // "Velvet Sunset" — the Desert After Dark event palette (sampled from
+        // the brand deck). Used only on /desert-after-dark.
+        velvet: "#0A0A0A",
+        "velvet-deep": "#110C10", // velvet with a plum cast, for alternating sections
+        burgundy: "#A43E78",
+        rosewood: "#A39380",
+        terracotta: "#D48155",
+        rosegold: "#E28062",
+        champagne: "#D79C50",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

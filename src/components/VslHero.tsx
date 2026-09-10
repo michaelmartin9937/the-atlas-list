@@ -11,6 +11,24 @@ type Props = {
   // "portrait" = 9:16 player (phone-shot promo / Reel); sits beside the copy
   // on desktop, stacks under it on phones.
   aspect?: "video" | "portrait";
+  // "noir" = site default (bronze accents, bone CTA).
+  // "velvet" = Desert After Dark's Velvet Sunset treatment (champagne accents).
+  theme?: "noir" | "velvet";
+};
+
+const THEME = {
+  noir: {
+    section: "bg-noir",
+    eyebrow: "text-bronze",
+    frame: "border-bronze/40",
+    cta: "text-noir bg-bone hover:bg-bronze hover:text-bone",
+  },
+  velvet: {
+    section: "bg-velvet",
+    eyebrow: "text-champagne",
+    frame: "border-champagne/40",
+    cta: "text-velvet bg-champagne hover:bg-rosegold",
+  },
 };
 
 // Landing-page hero built around a Video Sales Letter. When videoSrc is set
@@ -25,8 +43,10 @@ export function VslHero({
   videoSrc,
   posterSrc,
   aspect = "video",
+  theme = "noir",
 }: Props) {
   const portrait = aspect === "portrait";
+  const t = THEME[theme];
 
   const copy = (
     <div
@@ -34,7 +54,7 @@ export function VslHero({
         portrait ? "md:col-start-1 md:row-start-1 md:self-end" : ""
       }`}
     >
-      <span className="text-xs uppercase tracking-widest text-bronze">
+      <span className={`text-xs uppercase tracking-widest ${t.eyebrow}`}>
         {eyebrow}
       </span>
       <h1 className="font-serif text-[2.4rem] leading-[1.05] sm:text-5xl md:text-6xl text-bone">
@@ -50,8 +70,8 @@ export function VslHero({
     <div
       className={
         portrait
-          ? "relative w-full max-w-[400px] mx-auto md:mx-0 aspect-[9/16] bg-black border border-bronze/40 rounded-sm overflow-hidden shadow-2xl md:col-start-2 md:row-start-1 md:row-span-2"
-          : "relative w-full aspect-video bg-black border border-bronze/40 rounded-sm overflow-hidden shadow-2xl"
+          ? `relative w-full max-w-[400px] mx-auto md:mx-0 aspect-[9/16] bg-black border rounded-sm overflow-hidden shadow-2xl md:col-start-2 md:row-start-1 md:row-span-2 ${t.frame}`
+          : `relative w-full aspect-video bg-black border rounded-sm overflow-hidden shadow-2xl ${t.frame}`
       }
     >
       {videoSrc ? (
@@ -75,7 +95,7 @@ export function VslHero({
     <div className={portrait ? "md:col-start-1 md:row-start-2 md:self-start" : ""}>
       <Link
         href={cta.href}
-        className="inline-block text-xs uppercase tracking-widest text-noir bg-bone px-7 sm:px-8 py-3.5 sm:py-4 hover:bg-bronze hover:text-bone transition-colors"
+        className={`inline-block text-xs uppercase tracking-widest px-7 sm:px-8 py-3.5 sm:py-4 transition-colors ${t.cta}`}
       >
         {cta.label}
       </Link>
@@ -83,7 +103,7 @@ export function VslHero({
   );
 
   return (
-    <section className="relative bg-noir overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 px-6 md:px-10">
+    <section className={`relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 px-6 md:px-10 ${t.section}`}>
       <div
         className={`relative max-w-6xl mx-auto ${
           portrait

@@ -30,16 +30,31 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [hasHero]);
 
-  // Two visual states:
+  // Desert After Dark uses its own "Velvet Sunset" palette; the nav stays
+  // dark on that page so scrolling doesn't drop a cream bar onto a velvet page.
+  const velvet = pathname === "/desert-after-dark";
+
+  // Visual states:
   //   solid (scrolled OR non-hero page) → bone background, noir text, noir Apply button
-  //   transparent (top of hero page)    → no background, bone text, bone Apply button with noir text
-  // The logo badge carries its own cream disc + bronze ring, so it reads in both states.
-  const linkClass = scrolled
-    ? "text-noir hover:text-bronze"
-    : "text-bone hover:text-bronze drop-shadow-sm";
-  const applyClass = scrolled
-    ? "text-bone bg-noir hover:bg-ink"
-    : "text-noir bg-bone hover:bg-bronze hover:text-bone";
+  //     (velvet page: velvet background, bone text, champagne Apply button)
+  //   transparent (top of hero page)    → no background, bone text, bone Apply button
+  //     (velvet page: champagne Apply button)
+  // The logo badge carries its own cream disc + bronze ring, so it reads in all states.
+  const headerClass = scrolled
+    ? velvet
+      ? "bg-velvet/95 backdrop-blur-sm border-b border-champagne/20"
+      : "bg-bone/95 backdrop-blur-sm border-b border-taupe/20"
+    : "bg-transparent";
+  const linkClass = velvet
+    ? "text-bone hover:text-champagne"
+    : scrolled
+      ? "text-noir hover:text-bronze"
+      : "text-bone hover:text-bronze drop-shadow-sm";
+  const applyClass = velvet
+    ? "text-velvet bg-champagne hover:bg-rosegold"
+    : scrolled
+      ? "text-bone bg-noir hover:bg-ink"
+      : "text-noir bg-bone hover:bg-bronze hover:text-bone";
 
   // Show Home link on every page except the home page itself
   const showHome = pathname !== "/";
@@ -52,11 +67,7 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-bone/95 backdrop-blur-sm border-b border-taupe/20"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerClass}`}
     >
       <nav className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center">

@@ -1,18 +1,25 @@
 type Props = {
   handle: string; // without the leading @
   label?: string; // accessible name, e.g. "Almer on Instagram"
+  // "light" (default) for bone/pearl sections; "dark" for velvet-black ones.
+  tone?: "light" | "dark";
+};
+
+const TONE = {
+  light: "text-noir/85 border-noir/25 hover:border-bronze hover:text-bronze",
+  dark: "text-bone/85 border-bone/30 hover:border-champagne hover:text-champagne",
 };
 
 // Small outline button that opens an Instagram profile in a new tab. Handle
 // text is kept in its natural case — uppercase handles read wrong.
-export function InstagramLink({ handle, label }: Props) {
+export function InstagramLink({ handle, label, tone = "light" }: Props) {
   return (
     <a
       href={`https://www.instagram.com/${handle}/`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label ?? `@${handle} on Instagram`}
-      className="inline-flex items-center gap-2 self-start text-sm text-noir/85 border border-noir/25 px-3.5 py-2 hover:border-bronze hover:text-bronze transition-colors"
+      className={`inline-flex items-center gap-2 self-start text-sm border px-3.5 py-2 transition-colors ${TONE[tone]}`}
     >
       <InstagramIcon className="w-4 h-4 flex-shrink-0" />
       <span>@{handle}</span>
