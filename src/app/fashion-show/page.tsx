@@ -3,6 +3,7 @@ import { VslHero } from "@/components/VslHero";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
 import { InstagramLink } from "@/components/InstagramLink";
+import { Avatar } from "@/components/Avatar";
 import { fashionShow } from "@/content/fashion-show";
 
 export const metadata: Metadata = {
@@ -72,9 +73,12 @@ export default function FashionShowPage() {
             {fashionShow.designers.list.map((d, i) => (
               <FadeIn key={d.handle} delay={i * 80}>
                 <li className="border-t border-bronze/40 pt-5 md:pt-6 flex flex-col gap-4 h-full">
-                  <span className="font-serif text-2xl md:text-3xl text-noir leading-tight">
-                    {d.name}
-                  </span>
+                  <div className="flex items-center gap-4">
+                    <Avatar name={d.name} image={d.image} />
+                    <span className="font-serif text-2xl text-noir leading-tight">
+                      {d.name}
+                    </span>
+                  </div>
                   <InstagramLink handle={d.handle} label={`${d.name} on Instagram`} />
                 </li>
               </FadeIn>

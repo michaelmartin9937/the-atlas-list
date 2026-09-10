@@ -22,13 +22,14 @@ export const fashionShow = {
       "Six designers, one runway, one night. Each brings a distinct point of view — the through-line is craft, taste, and clothes you'd actually want to be photographed in.",
     // Equal billing: identical tiles, alphabetical order, and we say so.
     note: "Listed alphabetically.",
+    // image = the designer's current Instagram profile picture.
     list: [
-      { name: "Alexandra", handle: "oneofakindaura" },
-      { name: "Almer", handle: "designerkidalmer" },
-      { name: "Bella Elisse", handle: "bella.elisse" },
-      { name: "Isaac Newton", handle: "isaacnewtoncollection" },
-      { name: "Koan Asaky", handle: "koanasaky" },
-      { name: "Stephanie Murillo Agandar", handle: "machechena_" },
+      { name: "Alexandra", handle: "oneofakindaura", image: "/images/designers/oneofakindaura.jpg" },
+      { name: "Almer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
+      { name: "Bella Elisse", handle: "bella.elisse", image: "/images/designers/bella-elisse.jpg" },
+      { name: "Isaac Newton", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
+      { name: "Koan Asaky", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
+      { name: "Stephanie Murillo Agandar", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
     ],
   },
   models: {
