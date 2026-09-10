@@ -16,16 +16,15 @@ Visit http://localhost:3000.
 
 ## Environment variables
 
-None are required. The application form's API route writes to Supabase through the project's **anon** key, which is public by design and is only allowed to *insert* into `lead_applications` (an insert-only RLS policy — see below). The URL and key default to the live project in `src/lib/supabase/server.ts`.
+None are required. The database target is resolved in `src/lib/supabase/server.ts`, in this order:
 
-To point the site at a different Supabase project, or to use a service-role key instead, set these in Vercel → Settings → Environment Variables and redeploy:
+1. `ATLAS_SUPABASE_URL` + `ATLAS_SUPABASE_KEY` — explicit override (any key).
+2. `NEXT_PUBLIC_SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` — the pair the Vercel ↔ Supabase integration injects for the **the-curated-life** project (`vnnhcjvkhcwrenlglfnw`). Service role bypasses RLS. Used only when both are present.
+3. Built-in default — the same project through its **anon** key, which is public by design and limited by RLS to *inserting* pending applications (see the policy migration below). This is what lets the form work with no deploy-time secrets.
 
-| Variable | Value |
-|---|---|
-| `ATLAS_SUPABASE_URL` | Supabase Dashboard → Project Settings → API → Project URL |
-| `ATLAS_SUPABASE_KEY` | The project's `anon` key (needs the insert policy below), or its `service_role` key (bypasses RLS — server-only, never expose to the browser) |
+All three end in the same place today: Supabase Dashboard → **the-curated-life** → Table Editor → `lead_applications`.
 
-The older `NEXT_PUBLIC_SUPABASE_*` / `SUPABASE_SERVICE_ROLE_KEY` variables are no longer read.
+The project is on Supabase's free tier, which pauses after about a week without API traffic — that took the form down once. `GET /api/keepalive` runs daily via Vercel Cron (`vercel.json`) to keep it awake. Set `CRON_SECRET` in Vercel if you want that endpoint restricted to Vercel's scheduler.
 
 ## Supabase setup
 

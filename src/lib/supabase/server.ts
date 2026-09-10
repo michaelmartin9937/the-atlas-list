@@ -1,25 +1,35 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Production database target.
+// Database target, resolved in this order:
 //
-// Writes go through the project's anon key on purpose: `lead_applications`
-// has RLS enabled with a single insert-only policy (see
-// supabase/migrations/20260909000000_lead_applications_anon_insert_policy.sql),
-// so this key can create applications but can never read, update, or delete
-// them. The anon key is public by design — it ships in every Supabase client
-// bundle — which is what lets the form work without a secret in the deploy
-// environment.
+//   1. ATLAS_SUPABASE_URL + ATLAS_SUPABASE_KEY — explicit override (any key).
+//   2. NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY — the pair the
+//      Vercel ↔ Supabase integration injects for the "the-curated-life"
+//      project (vnnhcjvkhcwrenlglfnw). Service role bypasses RLS. Used only
+//      when both are present.
+//   3. Built-in default — the same project through its anon key, which is
+//      public by design and limited by RLS to inserting pending applications
+//      (supabase/migrations/20260909000000_lead_applications_anon_insert_policy.sql).
+//      This is what lets the form work with no deploy-time secrets at all.
 //
-// To move to a different project, or to use a service-role key instead, set
-// ATLAS_SUPABASE_URL / ATLAS_SUPABASE_KEY in Vercel (Settings → Environment
-// Variables) and redeploy; they override the defaults below.
-const DEFAULT_SUPABASE_URL = "https://nvglelxsjohkmkemztxt.supabase.co";
+// The project is on Supabase's free tier, which pauses after about a week
+// without API traffic — that took the form down on 2026-09-09.
+// /api/keepalive (scheduled in vercel.json) keeps it awake.
+const DEFAULT_SUPABASE_URL = "https://vnnhcjvkhcwrenlglfnw.supabase.co";
 const DEFAULT_SUPABASE_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52Z2xlbHhzam9oa21rZW16dHh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMxNDE4ODAsImV4cCI6MjAyODcxNzg4MH0.IeuR9Kmo3ZsJoKPbs0zamZatCRikCg-uXKtZlRZBQ5Q";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZubmhjanZraGN3cmVubGdsZm53Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NjA5NzQsImV4cCI6MjA5MzQzNjk3NH0.YUmNGF3ccT_8pqHNJnkgPWmgMZwv3aNyWI4y6P88Mgk";
 
 export function createServerSupabaseClient() {
-  const url = process.env.ATLAS_SUPABASE_URL || DEFAULT_SUPABASE_URL;
-  const key = process.env.ATLAS_SUPABASE_KEY || DEFAULT_SUPABASE_KEY;
+  const env = process.env;
+  let url = DEFAULT_SUPABASE_URL;
+  let key = DEFAULT_SUPABASE_KEY;
+  if (env.ATLAS_SUPABASE_URL && env.ATLAS_SUPABASE_KEY) {
+    url = env.ATLAS_SUPABASE_URL;
+    key = env.ATLAS_SUPABASE_KEY;
+  } else if (env.NEXT_PUBLIC_SUPABASE_URL && env.SUPABASE_SERVICE_ROLE_KEY) {
+    url = env.NEXT_PUBLIC_SUPABASE_URL;
+    key = env.SUPABASE_SERVICE_ROLE_KEY;
+  }
   return createClient(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
