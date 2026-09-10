@@ -6,10 +6,38 @@ import { InstagramLink } from "@/components/InstagramLink";
 import { Avatar } from "@/components/Avatar";
 import { fashionShow } from "@/content/fashion-show";
 
+const shareTitle = "October 10 · Fashion Show + Mansion Party";
+const shareDescription =
+  "A private-residence runway show and after-dark takeover in Paradise Valley. Featured designers, hand-picked models, top-shelf DJs — allocated by application.";
+
+// Dedicated share card: the root layout's openGraph block is otherwise
+// inherited wholesale, which made links to this page preview as the home
+// page. Relative URLs resolve against metadataBase (www.theatlaslist.club).
 export const metadata: Metadata = {
-  title: "October 10 · Fashion Show + Mansion Party",
-  description:
-    "A private-residence runway show and after-dark takeover in Paradise Valley. Featured designers, hand-picked models, top-shelf DJs — allocated by application.",
+  title: shareTitle,
+  description: shareDescription,
+  alternates: { canonical: "/fashion-show" },
+  openGraph: {
+    title: `${shareTitle} · The Atlas List`,
+    description: shareDescription,
+    url: "/fashion-show",
+    siteName: "The Atlas List",
+    type: "website",
+    images: [
+      {
+        url: "/images/og-fashion-show.jpg",
+        width: 1200,
+        height: 630,
+        alt: "The Atlas List — Fashion Show + Mansion Party, October 10, 2026, Paradise Valley",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${shareTitle} · The Atlas List`,
+    description: shareDescription,
+    images: ["/images/og-fashion-show.jpg"],
+  },
 };
 
 export default function FashionShowPage() {
