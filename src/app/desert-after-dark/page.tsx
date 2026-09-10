@@ -146,10 +146,13 @@ export default function DesertAfterDarkPage() {
               <p className="text-bone/80 leading-relaxed">{desertAfterDark.djs.intro}</p>
               <ul className="flex flex-col gap-3 mt-2">
                 {desertAfterDark.djs.list.map((dj) => (
-                  <li key={dj.handle} className={`${rule} pt-4 flex flex-col gap-3`}>
-                    <div className="flex flex-col gap-1">
-                      <span className="font-serif text-2xl text-bone">{dj.name}</span>
-                      {dj.note && <span className="text-sm text-bone/65">{dj.note}</span>}
+                  <li key={dj.handle} className={`${rule} pt-5 flex flex-col gap-4`}>
+                    <div className="flex items-center gap-4">
+                      <Avatar name={dj.name} image={dj.image} tone="dark" />
+                      <div className="flex flex-col gap-1">
+                        <span className="font-serif text-2xl text-bone leading-tight">{dj.name}</span>
+                        {dj.note && <span className="text-sm text-bone/65">{dj.note}</span>}
+                      </div>
                     </div>
                     <InstagramLink handle={dj.handle} label={`${dj.name} on Instagram`} tone="dark" />
                   </li>

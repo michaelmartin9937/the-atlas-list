@@ -44,7 +44,10 @@ export const desertAfterDark = {
     headline: "The sound.",
     intro:
       "DJ Anthoz of SoundMoverz carries the night — cocktail hour through the after-party.",
-    list: [{ name: "DJ Anthoz", note: "with SoundMoverz", handle: "soundmoverz" }],
+    // image = current Instagram profile picture.
+    list: [
+      { name: "DJ Anthoz", note: "with SoundMoverz", handle: "soundmoverz", image: "/images/djs/soundmoverz.jpg" },
+    ],
   },
   team: {
     eyebrow: "Production",
