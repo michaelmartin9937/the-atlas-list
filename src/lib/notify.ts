@@ -23,7 +23,7 @@ const DEDUPE_WINDOW_MS = 60 * 60 * 1000;
 const PAGE_LABEL: Record<string, string> = {
   home: "Home page",
   about: "About page",
-  "fashion-show": "Oct 10 Fashion Show",
+  "fashion-show": "Desert After Dark (Oct 10)",
 };
 
 // Best-effort duplicate suppression, per server instance: a double-submit from

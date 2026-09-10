@@ -45,8 +45,9 @@ export function Nav() {
   const showHome = pathname !== "/";
   // Show About link everywhere except the about page itself
   const showAbout = pathname !== "/about";
-  // Fashion Show link surfaces on the two marketing pages so the Oct 10 event
-  // is discoverable from Home and About without cluttering the utility pages.
+  // Desert After Dark (Oct 10) link surfaces on the two marketing pages so the
+  // event is discoverable from Home and About without cluttering the utility
+  // pages. Full name on sm+, the short date on phones where width is tight.
   const showFashionShow = pathname === "/" || pathname === "/about";
 
   return (
@@ -83,7 +84,8 @@ export function Nav() {
               href="/fashion-show"
               className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
             >
-              Oct 10
+              <span className="sm:hidden">Oct 10</span>
+              <span className="hidden sm:inline">Desert After Dark</span>
             </Link>
           )}
           <Link

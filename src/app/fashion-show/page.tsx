@@ -6,9 +6,9 @@ import { InstagramLink } from "@/components/InstagramLink";
 import { Avatar } from "@/components/Avatar";
 import { fashionShow } from "@/content/fashion-show";
 
-const shareTitle = "October 10 · Fashion Show + Mansion Party";
+const shareTitle = "Desert After Dark · October 10";
 const shareDescription =
-  "A private-residence runway show and after-dark takeover in Paradise Valley. Featured designers, hand-picked models, top-shelf DJs — allocated by application.";
+  "The Atlas List presents Desert After Dark — a private-residence fashion show and mansion party in Paradise Valley, October 10, 2026. Featured designers, hand-picked models, top-shelf DJs — allocated by application.";
 
 // Dedicated share card: the root layout's openGraph block is otherwise
 // inherited wholesale, which made links to this page preview as the home
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         url: "/images/og-fashion-show.jpg",
         width: 1200,
         height: 630,
-        alt: "The Atlas List — Fashion Show + Mansion Party, October 10, 2026, Paradise Valley",
+        alt: "Desert After Dark — The Atlas List fashion show + mansion party, October 10, 2026, Paradise Valley",
       },
     ],
   },

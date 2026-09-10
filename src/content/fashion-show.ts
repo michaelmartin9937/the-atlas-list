@@ -1,16 +1,16 @@
 export const fashionShow = {
   hero: {
     eyebrow: "October 10, 2026 · Paradise Valley",
-    headline: "One night. One mansion. The fashion moment Scottsdale has been waiting for.",
+    headline: "Desert After Dark",
     subhead:
-      "A private-residence runway show and after-dark takeover, curated by The Atlas List. Featured designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
+      "One night. One mansion. The fashion moment Scottsdale has been waiting for — a private-residence runway show and after-dark takeover, curated by The Atlas List. Featured designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
     cta: "Apply for Ticket Allocation",
   },
   pitch: {
     eyebrow: "The Event",
     headline: "Not a nightclub. Not a pop-up. A once-a-year cultural moment.",
     body: [
-      "October 10th, inside a private Paradise Valley estate, The Atlas List is producing what will be — hands down — the number-one fashion show and mansion party the greater Scottsdale area has ever hosted.",
+      "October 10th, inside a private Paradise Valley estate, The Atlas List presents Desert After Dark — what will be, hands down, the number-one fashion show and mansion party the greater Scottsdale area has ever hosted.",
       "A full production runway show inside a residence you can't walk into any other night of the year. The designers you'd fly to Los Angeles or Miami to see. The DJs you'd wait in line an hour for. And the guest list is intentionally short, intentionally beautiful, and closed to anyone who has to ask twice.",
       "If you're in the room, it's because someone decided you belong there.",
     ],
@@ -99,6 +99,6 @@ export const fashionShow = {
     eyebrow: "Apply",
     headline: "Request your ticket allocation.",
     subhead:
-      "Tickets are allocated by application, not by open sale. Tell us about you below. If you're approved, we'll follow up with tier options (General, VIP), pricing, and RSVP instructions.",
+      "Tickets to Desert After Dark are allocated by application, not by open sale. Tell us about you below. If you're approved, we'll follow up with tier options (General, VIP), pricing, and RSVP instructions.",
   },
 } as const;
