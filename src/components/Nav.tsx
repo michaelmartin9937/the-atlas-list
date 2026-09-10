@@ -45,9 +45,9 @@ export function Nav() {
   const showHome = pathname !== "/";
   // Show About link everywhere except the about page itself
   const showAbout = pathname !== "/about";
-  // Desert After Dark (Oct 10) link surfaces on the two marketing pages so the
-  // event is discoverable from Home and About without cluttering the utility
-  // pages. Full name on sm+, the short date on phones where width is tight.
+  // Desert After Dark link surfaces on the two marketing pages so the event
+  // is discoverable from Home and About without cluttering the utility pages.
+  // Phones get tighter spacing and a two-line lockup so the full name fits.
   const showFashionShow = pathname === "/" || pathname === "/about";
 
   return (
@@ -58,11 +58,11 @@ export function Nav() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+      <nav className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Wordmark size="md" />
         </Link>
-        <div className="flex items-center gap-5 sm:gap-8">
+        <div className="flex items-center gap-3 sm:gap-8">
           {showHome && (
             <Link
               href="/"
@@ -82,9 +82,15 @@ export function Nav() {
           {showFashionShow && (
             <Link
               href="/fashion-show"
-              className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
+              className={`text-xs uppercase tracking-widest leading-tight transition-colors duration-300 ${linkClass}`}
             >
-              <span className="sm:hidden">Oct 10</span>
+              {/* Phones: stacked two-line lockup so the full name fits beside
+                  About + Apply; single line from sm up. */}
+              <span className="sm:hidden">
+                Desert
+                <br />
+                After Dark
+              </span>
               <span className="hidden sm:inline">Desert After Dark</span>
             </Link>
           )}
