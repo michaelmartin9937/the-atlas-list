@@ -2,99 +2,51 @@ import Image from "next/image";
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
 
-type Tile = {
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  desktopClass: string;
-};
-
-const tiles: Tile[] = [
-  {
-    src: "/images/event-1.jpg",
-    width: 800,
-    height: 1600,
-    alt: "Stylish guest at the rooftop gathering",
-    desktopClass: "row-span-2",
-  },
-  {
-    src: "/images/event-2.jpg",
-    width: 1200,
-    height: 1200,
-    alt: "Group conversation at golden hour",
-    desktopClass: "",
-  },
-  {
-    src: "/images/event-3.jpg",
-    width: 1200,
-    height: 1200,
-    alt: "Editorial portrait, evening lighting",
-    desktopClass: "",
-  },
-  {
-    src: "/images/event-4.jpg",
-    width: 2000,
-    height: 1000,
-    alt: "Indoor lounge gathering",
-    desktopClass: "col-span-2",
-  },
+// Three equal photos in a row, then the label / quote / location
+// (Figma: Scenes from the Last Gathering — 384×320 tiles on a 1200 grid).
+const photos = [
+  { src: "/images/event-2.jpg", alt: "Two guests in conversation with the skyline behind" },
+  { src: "/images/event-3.jpg", alt: "Guests greeting each other" },
+  { src: "/images/event-4.jpg", alt: "The lounge at golden hour" },
 ];
 
 export function EventGallery() {
-  const { eyebrow, intro, caption, location } = home.gallery;
+  const { eyebrow, intro, label, caption, location } = home.gallery;
   return (
-    <section className="bg-pearl py-20 md:py-32 px-6 md:px-10">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-pearl py-14 md:py-16 px-6 md:px-10">
+      <div className="max-w-[1200px] mx-auto">
         <FadeIn>
-          <div className="text-center mb-10 md:mb-16 max-w-2xl mx-auto flex flex-col gap-5">
-            <span className="text-xs uppercase tracking-widest text-bronze">
+          <div className="text-center max-w-[820px] mx-auto">
+            <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
               {eyebrow}
             </span>
-            <p className="text-ink/85 leading-relaxed text-base md:text-lg">
-              {intro}
-            </p>
+            <p className="mt-3 text-base leading-[1.5] text-ink/85">{intro}</p>
           </div>
         </FadeIn>
         <FadeIn delay={100}>
-          {/* Mobile: stacked single column, each image at its native aspect — nothing cropped. */}
-          <div className="flex flex-col gap-3 md:hidden">
-            {tiles.map((tile) => (
-              <Image
-                key={tile.src}
-                src={tile.src}
-                width={tile.width}
-                height={tile.height}
-                alt={tile.alt}
-                sizes="100vw"
-                className="w-full h-auto bg-taupe/20"
-              />
-            ))}
-          </div>
-
-          {/* Tablet+: editorial magazine grid. */}
-          <div className="hidden md:grid grid-cols-3 grid-rows-2 gap-4 h-[600px]">
-            {tiles.map((tile) => (
-              <div
-                key={tile.src}
-                className={`relative overflow-hidden bg-taupe/30 ${tile.desktopClass}`}
-              >
+          <ul className="mt-9 grid gap-4 sm:grid-cols-3 md:gap-6">
+            {photos.map((p) => (
+              <li key={p.src} className="relative aspect-[6/5] overflow-hidden bg-sand/40">
                 <Image
-                  src={tile.src}
-                  alt={tile.alt}
+                  src={p.src}
+                  alt={p.alt}
                   fill
-                  sizes="(min-width: 1280px) 33vw, 40vw"
+                  sizes="(min-width: 768px) 384px, 100vw"
                   className="object-cover object-[center_35%]"
                 />
-              </div>
+              </li>
             ))}
-          </div>
-
-          <div className="text-center mt-10 max-w-2xl mx-auto flex flex-col gap-3">
-            <p className="font-serif italic text-xl md:text-2xl text-noir leading-snug">
+          </ul>
+        </FadeIn>
+        <FadeIn delay={160}>
+          <div className="mt-6 text-center">
+            <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+              {label}
+            </span>
+            <p className="mt-6 max-w-[900px] mx-auto font-serif italic text-xl sm:text-2xl md:text-[30px] leading-[1.35] text-noir">
               &ldquo;{caption}&rdquo;
             </p>
-            <p className="text-xs uppercase tracking-widest text-taupe">
+            <p className="mt-6 text-xs font-medium uppercase tracking-[0.08em] text-ink/60">
               {location}
             </p>
           </div>

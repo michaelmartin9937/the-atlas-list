@@ -1,38 +1,30 @@
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
 
+// Dark band, two columns each opened by a short rule (Figma: The Tone of the Room).
 export function ToneOfRoom() {
   const { eyebrow, forWomen, forMen } = home.toneOfRoom;
+  const cols = [forWomen, forMen];
   return (
-    <section className="bg-noir py-20 md:py-32 px-6 md:px-10">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-noir py-16 md:py-20 px-6 md:px-10">
+      <div className="max-w-[1200px] mx-auto">
         <FadeIn>
-          <div className="text-center mb-12 md:mb-20">
-            <span className="text-xs uppercase tracking-widest text-bronze">
-              {eyebrow}
-            </span>
-          </div>
+          <span className="block text-center text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+            {eyebrow}
+          </span>
         </FadeIn>
-
-        <div className="grid md:grid-cols-2 gap-10 md:gap-20 max-w-5xl mx-auto">
-          <FadeIn>
-            <div className="flex flex-col gap-5">
-              <div className="h-px bg-bronze/40 w-12" aria-hidden />
-              <h3 className="font-serif text-2xl md:text-3xl text-bone leading-tight">
-                {forWomen.headline}
-              </h3>
-              <p className="text-bone/75 leading-relaxed">{forWomen.body}</p>
-            </div>
-          </FadeIn>
-          <FadeIn delay={120}>
-            <div className="flex flex-col gap-5">
-              <div className="h-px bg-bronze/40 w-12" aria-hidden />
-              <h3 className="font-serif text-2xl md:text-3xl text-bone leading-tight">
-                {forMen.headline}
-              </h3>
-              <p className="text-bone/75 leading-relaxed">{forMen.body}</p>
-            </div>
-          </FadeIn>
+        <div className="mt-12 md:mt-[54px] grid gap-12 md:grid-cols-2 md:gap-[160px]">
+          {cols.map((c, i) => (
+            <FadeIn key={c.headline} delay={i * 120}>
+              <div className="flex flex-col gap-5">
+                <div className="h-px w-12 bg-sand/60" aria-hidden />
+                <h3 className="font-serif text-2xl sm:text-3xl md:text-[34px] leading-[1.18] text-bone">
+                  {c.headline}
+                </h3>
+                <p className="text-base leading-[1.6] text-bone/75">{c.body}</p>
+              </div>
+            </FadeIn>
+          ))}
         </div>
       </div>
     </section>

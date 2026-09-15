@@ -9,13 +9,21 @@ type Tone = "light" | "dark";
 type Props = {
   sourcePage: "home" | "about" | "desert-after-dark";
   submitLabel?: string;
-  // "light" (default) sits on the site's bone/pearl sections; "dark" is the
+  // "light" (default) sits on the site's pearl sections; "dark" is the
   // Desert After Dark "Velvet Sunset" treatment on velvet-black sections.
   tone?: Tone;
 };
 
 type FieldErrors = Partial<Record<
-  "firstName" | "lastName" | "phone" | "email" | "instagram" | "vouchIntro" | "smsConsent" | "form",
+  | "firstName"
+  | "lastName"
+  | "phone"
+  | "email"
+  | "instagram"
+  | "heardAbout"
+  | "vouchIntro"
+  | "smsConsent"
+  | "form",
   string
 >>;
 
@@ -26,21 +34,25 @@ type ToneClasses = {
   error: string;
   checkbox: string;
   consent: string;
+  fine: string;
   link: string;
   submit: string;
 };
 
+// Figma spec: 12/13px tracked uppercase labels, 1px hairline fields, 50px
+// dark button; the dark tone swaps to the event palette.
 const TONES: Record<Tone, ToneClasses> = {
   light: {
     input:
-      "w-full bg-transparent border-0 border-b border-taupe/50 px-0 py-3 text-noir font-sans text-base focus:outline-none focus:border-bronze placeholder:text-taupe/60",
-    label: "text-taupe",
+      "w-full bg-transparent border-0 border-b border-sand px-0 py-3 text-noir font-sans text-base focus:outline-none focus:border-ember placeholder:text-ink/40",
+    label: "text-ink/70",
     helper: "text-ink/60",
     error: "text-red-700",
     checkbox: "accent-noir",
-    consent: "text-ink/80",
-    link: "hover:text-bronze",
-    submit: "text-bone bg-noir hover:bg-bronze",
+    consent: "text-ink/85",
+    fine: "text-ink/55",
+    link: "hover:text-ember",
+    submit: "text-bone bg-noir hover:bg-ember",
   },
   dark: {
     input:
@@ -49,7 +61,8 @@ const TONES: Record<Tone, ToneClasses> = {
     helper: "text-bone/55",
     error: "text-red-400",
     checkbox: "accent-burgundy",
-    consent: "text-bone/70",
+    consent: "text-bone/80",
+    fine: "text-bone/55",
     link: "hover:text-champagne",
     submit: "text-velvet bg-champagne hover:bg-burgundy hover:text-bone",
   },
@@ -63,6 +76,7 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [instagram, setInstagram] = useState("");
+  const [heardAbout, setHeardAbout] = useState("");
   const [vouchIntro, setVouchIntro] = useState("");
   const [smsConsent, setSmsConsent] = useState(false);
   const [website, setWebsite] = useState(""); // honeypot
@@ -84,6 +98,7 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
           phone,
           email,
           instagram,
+          heardAbout,
           vouchIntro,
           smsConsent,
           sourcePage,
@@ -113,8 +128,8 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-6" noValidate>
-      <div className="grid sm:grid-cols-2 gap-6">
+    <form onSubmit={onSubmit} className="flex flex-col gap-8" noValidate>
+      <div className="grid sm:grid-cols-2 gap-8 sm:gap-10">
         <Field label="First name" error={errors.firstName} tone={t}>
           <input
             type="text"
@@ -177,6 +192,22 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
       </Field>
 
       <Field
+        label="How did you hear about us?"
+        helper="So we know who to thank — a friend, Instagram, an event."
+        error={errors.heardAbout}
+        tone={t}
+      >
+        <input
+          type="text"
+          value={heardAbout}
+          onChange={(e) => setHeardAbout(e.target.value)}
+          maxLength={200}
+          autoComplete="off"
+          className={t.input}
+        />
+      </Field>
+
+      <Field
         label="What makes you a good fit for this room?"
         helper="If a current member is putting your name forward, name them. If not, tell us in two sentences what you'd bring to the room."
         error={errors.vouchIntro}
@@ -186,9 +217,9 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
           value={vouchIntro}
           onChange={(e) => setVouchIntro(e.target.value)}
           required
-          rows={5}
+          rows={4}
           maxLength={800}
-          className={`${t.input} resize-none`}
+          className={`${t.input} resize-none border border-sand/80 px-4 py-3 mt-2 min-h-[90px]`}
         />
       </Field>
 
@@ -206,19 +237,24 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
         </label>
       </div>
 
-      <label className="flex gap-3 items-start cursor-pointer">
-        <input
-          type="checkbox"
-          checked={smsConsent}
-          onChange={(e) => setSmsConsent(e.target.checked)}
-          required
-          className={`mt-1 h-4 w-4 flex-shrink-0 ${t.checkbox}`}
-        />
-        <span className={`text-xs leading-relaxed ${t.consent}`}>
-          I agree to receive automated SMS messages about upcoming gatherings, RSVPs, and member
-          announcements from The Atlas List. Message frequency varies (typically 2–6/month).
-          Message and data rates may apply. Reply STOP to unsubscribe, HELP for help. Consent is
-          not a condition of consideration. See our{" "}
+      <div className="flex flex-col gap-2">
+        <label className="flex gap-3 items-start cursor-pointer">
+          <input
+            type="checkbox"
+            checked={smsConsent}
+            onChange={(e) => setSmsConsent(e.target.checked)}
+            required
+            className={`mt-[3px] h-[14px] w-[14px] flex-shrink-0 ${t.checkbox}`}
+          />
+          <span className={`text-sm leading-[1.45] ${t.consent}`}>
+            Yes, text me about gatherings, RSVPs, and Atlas List news — a few times a month, never more.
+          </span>
+        </label>
+        {/* Carrier/TCPA disclosures stay attached to the consent. */}
+        <p className={`pl-[26px] text-xs leading-relaxed ${t.fine}`}>
+          Automated SMS from The Atlas List; message frequency varies (typically 2–6/month). Message and
+          data rates may apply. Reply STOP to unsubscribe, HELP for help. Consent is not a condition of
+          consideration. See our{" "}
           <a href="/privacy" className={`underline ${t.link}`}>
             Privacy Policy
           </a>{" "}
@@ -227,20 +263,16 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
             Terms
           </a>
           .
-        </span>
-      </label>
-      {errors.smsConsent && (
-        <p className={`text-xs -mt-2 ${t.error}`}>{errors.smsConsent}</p>
-      )}
+        </p>
+        {errors.smsConsent && <p className={`pl-[26px] text-xs ${t.error}`}>{errors.smsConsent}</p>}
+      </div>
 
-      {errors.form && (
-        <p className={`text-sm ${t.error}`}>{errors.form}</p>
-      )}
+      {errors.form && <p className={`text-sm ${t.error}`}>{errors.form}</p>}
 
       <button
         type="submit"
         disabled={submitting}
-        className={`self-start text-xs uppercase tracking-widest px-10 py-4 transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${t.submit}`}
+        className={`self-start inline-flex items-center justify-center h-[50px] px-10 text-xs font-medium uppercase tracking-[0.06em] transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${t.submit}`}
       >
         {submitting ? "Submitting…" : submitLabel ?? "Apply for an Invite"}
       </button>
@@ -262,11 +294,11 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="flex flex-col gap-2">
-      <span className={`text-xs uppercase tracking-widest ${tone.label}`}>{label}</span>
+    <label className="flex flex-col gap-1">
+      <span className={`text-[11px] font-medium uppercase tracking-[0.08em] ${tone.label}`}>{label}</span>
       {children}
-      {helper && <span className={`text-xs leading-relaxed ${tone.helper}`}>{helper}</span>}
-      {error && <span className={`text-xs ${tone.error}`}>{error}</span>}
+      {helper && <span className={`mt-2 text-xs leading-relaxed ${tone.helper}`}>{helper}</span>}
+      {error && <span className={`mt-1 text-xs ${tone.error}`}>{error}</span>}
     </label>
   );
 }

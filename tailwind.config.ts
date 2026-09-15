@@ -5,12 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        noir: "#0E0E0E",
-        bone: "#F2EBE0",
-        pearl: "#FAF7F2",
+        // Base palette — values from the Figma "Atlas List — Site" redesign.
+        noir: "#0E0C0A", // dark surfaces, primary buttons
+        bone: "#F2EBDB", // cream: text on dark, light button fill
+        pearl: "#F8F6F1", // page background
+        ink: "#241F17", // body text on light
+        ember: "#BD5A21", // eyebrows / accent
+        sand: "#D0BF9E", // hairline rules
         taupe: "#A89684",
         bronze: "#A8884F",
-        ink: "#2A2522",
         // "Velvet Sunset" — the Desert After Dark event palette (sampled from
         // the brand deck). Used only on /desert-after-dark.
         velvet: "#0A0A0A",
@@ -23,7 +26,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        serif: ["var(--font-fraunces)", "Georgia", "serif"],
+        serif: ["var(--font-playfair)", "Georgia", "serif"],
       },
       letterSpacing: {
         widest: "0.2em",

@@ -7,6 +7,7 @@ export type ApplicationNotification = {
   email: string;
   instagram: string | null; // handle without the @
   vouchIntro: string;
+  heardAbout: string | null;
   smsConsent: boolean;
   sourcePage: string;
 };
@@ -69,6 +70,7 @@ export async function notifyNewApplication(
     ["Phone", esc(a.phone)],
     ["Instagram", igLink],
     ["Applied from", esc(page)],
+    ["Heard about us", a.heardAbout ? esc(a.heardAbout) : "—"],
     ["SMS consent", a.smsConsent ? "Yes" : "No"],
   ];
 

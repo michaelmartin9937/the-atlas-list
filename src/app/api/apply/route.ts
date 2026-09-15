@@ -71,6 +71,7 @@ export async function POST(req: Request) {
     vouch_intro: data.vouchIntro,
     sms_consent: data.smsConsent,
     source_page: sourcePage,
+    referral_source: data.heardAbout?.trim() || null,
   };
 
   let { error } = await supabase.from("lead_applications").insert({
@@ -116,6 +117,7 @@ export async function POST(req: Request) {
         email,
         instagram: igHandle,
         vouchIntro: data.vouchIntro,
+        heardAbout: data.heardAbout?.trim() || null,
         smsConsent: data.smsConsent,
         sourcePage: data.sourcePage ?? "unknown",
       });

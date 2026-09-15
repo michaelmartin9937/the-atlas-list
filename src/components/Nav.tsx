@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Wordmark } from "./Wordmark";
 
-// Pages whose top section is a full-bleed dark hero image.
+// Pages whose top section is a full-bleed dark hero.
 // On these pages, the nav starts transparent and lights up on scroll.
 // On all other pages, the nav stays solid from the start.
 const HERO_PAGES = new Set(["/", "/about", "/desert-after-dark"]);
@@ -13,6 +13,8 @@ const HERO_PAGES = new Set(["/", "/about", "/desert-after-dark"]);
 // Pages that render their own #apply section, so the nav Apply button
 // should stay on the current page instead of jumping to /#apply.
 const PAGES_WITH_APPLY = new Set(["/", "/about", "/desert-after-dark"]);
+
+const INSTAGRAM_URL = "https://www.instagram.com/theatlaslist/";
 
 export function Nav() {
   const pathname = usePathname();
@@ -31,72 +33,56 @@ export function Nav() {
   }, [hasHero]);
 
   // Desert After Dark uses its own "Velvet Sunset" palette; the nav stays
-  // dark on that page so scrolling doesn't drop a cream bar onto a velvet page.
+  // dark on that page so scrolling doesn't drop a light bar onto a velvet page.
   const velvet = pathname === "/desert-after-dark";
 
-  // Visual states:
-  //   solid (scrolled OR non-hero page) → bone background, noir text, noir Apply button
-  //     (velvet page: velvet background, bone text, champagne Apply button)
-  //   transparent (top of hero page)    → no background, bone text, bone Apply button
-  //     (velvet page: champagne Apply button)
-  // The logo badge carries its own cream disc + bronze ring, so it reads in all states.
+  // Visual states (Figma: 104px bar, hairline rule beneath when solid):
+  //   solid (scrolled OR non-hero page) → pearl background, ink text, noir Apply
+  //     (velvet page: velvet background, cream text, champagne Apply)
+  //   transparent (top of hero page)    → no background, cream text, pearl Apply
+  //     (velvet page: champagne Apply)
   const headerClass = scrolled
     ? velvet
       ? "bg-velvet/95 backdrop-blur-sm border-b border-champagne/20"
-      : "bg-bone/95 backdrop-blur-sm border-b border-taupe/20"
+      : "bg-pearl/95 backdrop-blur-sm border-b border-sand"
     : "bg-transparent";
   const linkClass = velvet
     ? "text-bone hover:text-champagne"
     : scrolled
-      ? "text-noir hover:text-bronze"
-      : "text-bone hover:text-bronze drop-shadow-sm";
+      ? "text-ink hover:text-ember"
+      : "text-bone hover:text-ember drop-shadow-sm";
   const applyClass = velvet
     ? "text-velvet bg-champagne hover:bg-burgundy hover:text-bone"
     : scrolled
-      ? "text-bone bg-noir hover:bg-ink"
-      : "text-noir bg-bone hover:bg-bronze hover:text-bone";
+      ? "text-bone bg-noir hover:bg-ember"
+      : "text-noir bg-pearl hover:bg-ember hover:text-bone";
 
-  // Show Home link on every page except the home page itself
   const showHome = pathname !== "/";
-  // Show About link everywhere except the about page itself
   const showAbout = pathname !== "/about";
-  // Desert After Dark link surfaces on the two marketing pages so the event
-  // is discoverable from Home and About without cluttering the utility pages.
-  // Phones get tighter spacing and a two-line lockup so the full name fits.
-  const showFashionShow = pathname === "/" || pathname === "/about";
+  // Full name on sm+; phones get tighter spacing and a two-line lockup.
+  const showEvent = pathname === "/" || pathname === "/about";
+
+  const link = `text-xs font-medium uppercase tracking-[0.06em] transition-colors duration-300 ${linkClass}`;
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerClass}`}
-    >
-      <nav className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerClass}`}>
+      <nav className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-10 h-20 md:h-[104px] flex items-center justify-between">
+        <Link href="/" className="flex items-center" aria-label="The Atlas List — home">
           <Wordmark size="md" />
         </Link>
-        <div className="flex items-center gap-3 sm:gap-8">
+        <div className="flex items-center gap-3 sm:gap-8 md:gap-[38px]">
           {showHome && (
-            <Link
-              href="/"
-              className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
-            >
+            <Link href="/" className={link}>
               Home
             </Link>
           )}
           {showAbout && (
-            <Link
-              href="/about"
-              className={`text-xs uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
-            >
+            <Link href="/about" className={link}>
               About
             </Link>
           )}
-          {showFashionShow && (
-            <Link
-              href="/desert-after-dark"
-              className={`text-xs uppercase tracking-widest leading-tight transition-colors duration-300 ${linkClass}`}
-            >
-              {/* Phones: stacked two-line lockup so the full name fits beside
-                  About + Apply; single line from sm up. */}
+          {showEvent && (
+            <Link href="/desert-after-dark" className={`${link} leading-tight`}>
               <span className="sm:hidden">
                 Desert
                 <br />
@@ -107,10 +93,32 @@ export function Nav() {
           )}
           <Link
             href={PAGES_WITH_APPLY.has(pathname) ? "#apply" : "/#apply"}
-            className={`text-xs uppercase tracking-widest px-4 sm:px-5 py-2.5 sm:py-3 transition-colors duration-300 ${applyClass}`}
+            className={`text-xs font-medium uppercase tracking-[0.06em] px-4 sm:px-5 h-11 inline-flex items-center transition-colors duration-300 ${applyClass}`}
           >
             Apply
           </Link>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="The Atlas List on Instagram"
+            className={`hidden md:inline-flex ${linkClass}`}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-6 h-6"
+              aria-hidden
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
         </div>
       </nav>
     </header>

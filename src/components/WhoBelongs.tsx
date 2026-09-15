@@ -1,51 +1,37 @@
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
 
+// Two rule-topped lists (Figma: Who Belongs Here).
 export function WhoBelongs() {
   const { eyebrow, headline, forList, notForList } = home.whoBelongs;
   return (
-    <section className="bg-bone py-20 md:py-32 px-6 md:px-10">
-      <div className="max-w-5xl mx-auto">
+    <section className="bg-pearl py-14 md:py-16 px-6 md:px-10">
+      <div className="max-w-[1200px] mx-auto">
         <FadeIn>
-          <div className="text-center mb-12 md:mb-20 flex flex-col gap-5">
-            <span className="text-xs uppercase tracking-widest text-bronze">
-              {eyebrow}
-            </span>
-            <h2 className="font-serif text-4xl md:text-5xl text-noir leading-tight">
-              {headline}
-            </h2>
-          </div>
+          <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+            {eyebrow}
+          </span>
+          <h2 className="mt-3 font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.1] text-noir">
+            {headline}
+          </h2>
         </FadeIn>
-
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-          <FadeIn>
-            <div className="border-t border-bronze/40 pt-8 flex flex-col gap-5">
-              <h3 className="font-serif text-xl text-noir uppercase tracking-wide">
-                {forList.title}
-              </h3>
-              <ul className="flex flex-col gap-3">
-                {forList.items.map((item) => (
-                  <li key={item} className="text-ink/85 leading-relaxed">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeIn>
-          <FadeIn delay={120}>
-            <div className="border-t border-taupe/40 pt-8 flex flex-col gap-5">
-              <h3 className="font-serif text-xl text-taupe uppercase tracking-wide">
-                {notForList.title}
-              </h3>
-              <ul className="flex flex-col gap-3">
-                {notForList.items.map((item) => (
-                  <li key={item} className="text-ink/60 leading-relaxed line-through decoration-taupe/30">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeIn>
+        <div className="mt-10 md:mt-12 grid gap-10 md:grid-cols-2 md:gap-[160px]">
+          {[forList, notForList].map((list, i) => (
+            <FadeIn key={list.title} delay={i * 120}>
+              <div className="border-t border-sand pt-6">
+                <h3 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-noir">
+                  {list.title}
+                </h3>
+                <ul className="mt-5 flex flex-col gap-5">
+                  {list.items.map((item) => (
+                    <li key={item} className="text-base leading-[1.4] text-ink/85">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+          ))}
         </div>
       </div>
     </section>

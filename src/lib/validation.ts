@@ -11,6 +11,12 @@ export const applicationSchema = z.object({
     .max(60, "Keep it under 60 characters")
     .optional()
     .or(z.literal("")),
+  heardAbout: z
+    .string()
+    .trim()
+    .max(200, "Keep it under 200 characters")
+    .optional()
+    .or(z.literal("")),
   vouchIntro: z
     .string()
     .trim()

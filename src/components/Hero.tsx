@@ -14,6 +14,8 @@ type Props = {
   height?: "tall" | "short";
 };
 
+// Full-bleed dark hero: eyebrow / headline / subhead / light CTA, left-aligned
+// on the 1200 column (Figma: Hero — 640px tall on desktop, copy from y=220).
 export function Hero({
   eyebrow,
   headline,
@@ -24,16 +26,13 @@ export function Hero({
   height = "tall",
 }: Props) {
   // Mobile heights are intentionally shorter than desktop so the wide landscape
-  // hero photo isn't forced to upscale into a tall portrait viewport, which is
-  // what was clipping subjects on phones.
+  // hero photo isn't forced to upscale into a tall portrait viewport.
   const heightClass =
     height === "tall"
-      ? "min-h-[68vh] sm:min-h-[88vh]"
+      ? "min-h-[68vh] sm:min-h-[80vh] md:min-h-[640px] md:h-[calc(100vh-104px)] md:max-h-[820px]"
       : "min-h-[52vh] sm:min-h-[60vh]";
   return (
-    <section
-      className={`relative ${heightClass} flex items-end overflow-hidden bg-noir`}
-    >
+    <section className={`relative ${heightClass} flex items-end overflow-hidden bg-noir`}>
       <Image
         src={imageUrl}
         alt=""
@@ -49,25 +48,25 @@ export function Hero({
         />
       )}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-noir/40 via-noir/30 to-noir/90"
+        className="absolute inset-0 bg-gradient-to-b from-noir/45 via-noir/35 to-noir/90"
         aria-hidden
       />
-      <div className="relative max-w-6xl mx-auto px-6 md:px-10 pb-16 md:pb-28 pt-28 md:pt-32 w-full">
-        <div className="max-w-2xl flex flex-col gap-5 md:gap-6">
-          <span className="text-xs uppercase tracking-widest text-bronze">
+      <div className="relative max-w-[1200px] mx-auto px-6 md:px-10 pb-16 md:pb-20 pt-28 md:pt-32 w-full">
+        <div className="max-w-[700px] flex flex-col">
+          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
             {eyebrow}
           </span>
-          <h1 className="font-serif text-[2.6rem] leading-[1.05] sm:text-5xl md:text-7xl text-bone">
+          <h1 className="mt-4 md:mt-5 font-serif text-[2.6rem] sm:text-5xl md:text-[56px] leading-[1.08] text-bone">
             {headline}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-bone/85 max-w-xl leading-relaxed">
+          <p className="mt-6 max-w-[560px] text-base md:text-lg leading-[1.5] text-bone/80">
             {subhead}
           </p>
           {cta && (
-            <div className="mt-3 md:mt-4">
+            <div className="mt-8 md:mt-10">
               <Link
                 href={cta.href}
-                className="inline-block text-xs uppercase tracking-widest text-noir bg-bone px-7 sm:px-8 py-3.5 sm:py-4 hover:bg-bronze hover:text-bone transition-colors"
+                className="inline-flex items-center justify-center h-12 px-8 bg-pearl text-noir text-xs font-medium uppercase tracking-[0.06em] hover:bg-ember hover:text-bone transition-colors"
               >
                 {cta.label}
               </Link>

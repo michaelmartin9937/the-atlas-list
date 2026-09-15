@@ -6,17 +6,32 @@ export const home = {
       "A private Scottsdale gathering for people who believe chemistry, friendship, and access still happen best in the right room.",
     cta: "Apply for an Invite",
   },
-  nextEvent: {
-    eyebrow: "The Next Gathering",
-    date: "Thursday, May 28, 2026",
-    detail: "Evening · Old Town Scottsdale, AZ",
-    venueLine:
-      "Hosted inside a reserved private space at a luxury resort in Old Town Scottsdale.",
-    venueDetail:
-      "Three-hour private lobby experience · Dedicated service · Small bites and beverages",
-    note:
-      "Exact arrival details are shared with approved guests only. This helps us preserve the privacy, comfort, and quality of the room.",
-    cta: "Apply for an Invite",
+  howWeGather: {
+    eyebrow: "How We Gather",
+    headline: "Three ways in.",
+    ways: [
+      {
+        label: "Weekly",
+        body: "Small and intimate. A handful of people, one room, real conversation.",
+      },
+      {
+        label: "Monthly",
+        body: "A hosted dinner, about 60–70 of us. Bigger room, same warmth.",
+      },
+      {
+        label: "Yearly",
+        body: "The flagship. One night, all-out. This year, that's Desert After Dark.",
+      },
+    ],
+    note: "Weekly and monthly return after Desert After Dark — for now, this is the one.",
+  },
+  rightNow: {
+    eyebrow: "Right Now",
+    headline: "Desert After Dark",
+    date: "October 10, 2026 · Paradise Valley, AZ",
+    body: "Our yearly flagship — a private-residence takeover with a runway, live entertainment, and a night built for the senses. This is the one thing on the calendar until it's done.",
+    cta: "Apply for Ticket Allocation",
+    href: "/desert-after-dark",
   },
   whatToExpect: {
     eyebrow: "What the Evening Feels Like",
@@ -26,20 +41,22 @@ export const home = {
     bullets: [
       "Three-hour private social gathering",
       "Hosted introductions throughout the night",
-      "Balanced guest list — never lopsided",
+      "Balanced guest list — specially curated",
       "Small bites and beverages available",
-      "Dress code: elevated resort evening",
+      "Dress code: elevated, comfortable",
       "Limited capacity by design",
     ],
+    caveat:
+      "This describes our monthly dinners. Desert After Dark runs longer, with a larger guest list — see the Desert After Dark page for that night's details.",
   },
   toneOfRoom: {
     eyebrow: "The Tone of the Room",
     forWomen: {
-      headline: "Curated with women's comfort in mind.",
-      body: "This is not a mixer built around pressure, pickup lines, or aggressive networking. The room is hosted, the guest list is reviewed, and the tone is intentionally warm, respectful, and socially aware.",
+      headline: "Curated with comfort in mind.",
+      body: "This is not a mixer built around pressure or aggressive networking. The room is hosted, the guest list is reviewed, and the tone is intentionally warm, respectful, and socially aware.",
     },
     forMen: {
-      headline: "For men who already know how to hold a room.",
+      headline: "For people who already know how to hold a room.",
       body: "Come polished. Come present. Come socially aware. This is not a place for hard-selling, hovering, or trying to win the room. The best guests are the ones who help make the evening feel effortless for everyone else.",
     },
   },
@@ -47,6 +64,7 @@ export const home = {
     eyebrow: "Scenes from the Last Gathering",
     intro:
       "Our last gathering brought together a small, polished room of Scottsdale locals for an evening of conversation, connection, and effortless introductions.",
+    label: "From a Recent Monthly Gathering",
     caption:
       "The goal is not to create a party. The goal is to create a room people are proud to be seen in.",
     location: "Rooftop · Scottsdale, AZ · April 2026",
@@ -73,9 +91,21 @@ export const home = {
       ],
     },
   },
+  moreFromTheRoom: {
+    eyebrow: "As the Night Unfolds",
+    headline: "More from the room.",
+    images: [
+      { src: "/images/event-1.jpg", alt: "Guest at the rooftop gathering" },
+      { src: "/images/event-2.jpg", alt: "Two guests in conversation" },
+      { src: "/images/event-3.jpg", alt: "Guests greeting each other" },
+      { src: "/images/event-4.jpg", alt: "The lounge at golden hour" },
+      { src: "/images/photographer.jpg", alt: "The photo team at work" },
+    ],
+  },
   closingCta: {
+    eyebrow: "Apply",
     headline: "Think you belong here?",
     subhead:
-      "If you've read this far, there's probably a reason. Tell us about you below. Approved guests will receive full event details, contribution amount, dress code, and RSVP instructions.",
+      "We're currently accepting applications for Desert After Dark, our yearly flagship on October 10. Tell us about you below.",
   },
 } as const;
