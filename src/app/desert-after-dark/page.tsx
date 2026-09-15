@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { VslHero } from "@/components/VslHero";
+import Link from "next/link";
+import { EventHero } from "@/components/EventHero";
+import { NightCarousel } from "@/components/NightCarousel";
+import { PersonTile } from "@/components/PersonTile";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
-import { InstagramLink } from "@/components/InstagramLink";
-import { Avatar } from "@/components/Avatar";
 import { desertAfterDark } from "@/content/desert-after-dark";
 
 const shareTitle = "Desert After Dark · October 10";
@@ -43,216 +44,106 @@ export const metadata: Metadata = {
   },
 };
 
-// "Velvet Sunset" — the event's own palette (velvet black base, champagne as
-// the accent, burgundy as the highlight, rosewood for muted text). Only this
-// page uses it; the rest of the site stays bone/bronze.
-const eyebrow = "text-xs uppercase tracking-widest text-champagne";
-const h2 = "font-serif text-3xl sm:text-4xl md:text-5xl text-bone leading-tight";
-const body = "text-bone/80 leading-relaxed text-base md:text-lg";
-const rule = "border-t border-burgundy/40";
-const glow =
-  "absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_bottom_right,rgba(164,62,120,0.22),transparent_60%)]";
+// Figma: "Desert After Dark — Full Page". Velvet-black page, champagne
+// eyebrows, Playfair headlines, 140px section rhythm.
+const eyebrow = "text-[13px] font-semibold uppercase tracking-[0.08em] text-champagne";
+const h2Center = "mt-5 font-serif text-4xl md:text-[56px] leading-[1.08] text-bone";
+const intro = "mt-5 text-base md:text-[17px] leading-[1.5] text-velvet-text";
 
 // The night is one arc — golden hour into full velvet dark — so the four
 // acts walk through the palette in that order.
 const ACT_COLORS = ["text-champagne", "text-rosegold", "text-terracotta", "text-burgundy"];
 
 export default function DesertAfterDarkPage() {
+  const d = desertAfterDark;
   return (
     <>
-      <VslHero
-        eyebrow={desertAfterDark.hero.eyebrow}
-        headline={desertAfterDark.hero.headline}
-        tagline={desertAfterDark.hero.tagline}
-        subhead={desertAfterDark.hero.subhead}
-        cta={{ label: desertAfterDark.hero.cta, href: "#apply" }}
+      <EventHero
+        eyebrow={d.hero.eyebrow}
+        headline={d.hero.headline}
+        tagline={d.hero.tagline}
+        subhead={d.hero.subhead}
+        cta={{ label: d.hero.cta, href: "#apply" }}
         videoSrc="/videos/atlas-house-promo.mp4"
         posterSrc="/images/atlas-house-promo-poster.jpg"
-        aspect="portrait"
-        theme="velvet"
       />
 
-      <section className="bg-velvet-deep py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-3xl mx-auto flex flex-col gap-6 md:gap-8">
-          <FadeIn>
-            <span className={eyebrow}>{desertAfterDark.pitch.eyebrow}</span>
-          </FadeIn>
-          <FadeIn delay={80}>
-            <h2 className={h2}>{desertAfterDark.pitch.headline}</h2>
-            <div className="mt-6 h-[3px] w-28 bg-gradient-to-r from-champagne to-burgundy" aria-hidden />
-          </FadeIn>
-          <FadeIn delay={140}>
-            <div className="flex flex-col gap-5 mt-2">
-              {desertAfterDark.pitch.body.map((p, i) => (
-                <p key={i} className={body}>
-                  {p}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <NightCarousel
+        eyebrow={d.night.eyebrow}
+        headline={d.night.headline}
+        intro={d.night.intro}
+        cards={d.night.cards}
+      />
 
-      {/* Designers — equal billing: identical tiles, alphabetical, 3x2 grid so
-          nobody is stranded alone on a row at any breakpoint. */}
-      <section className="bg-velvet py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-5xl mx-auto">
+      {/* Designers — equal billing: identical tiles, alphabetical, 3×2 grid. */}
+      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[120px]">
+        <div className="max-w-[1280px] mx-auto">
           <FadeIn>
-            <div className="text-center mb-12 md:mb-16 flex flex-col gap-4 max-w-2xl mx-auto">
-              <span className={eyebrow}>{desertAfterDark.designers.eyebrow}</span>
-              <h2 className={h2}>{desertAfterDark.designers.headline}</h2>
-              <p className={body}>{desertAfterDark.designers.intro}</p>
-              <p className="text-xs uppercase tracking-widest text-rosewood">
-                {desertAfterDark.designers.note}
+            <div className="text-center flex flex-col items-center max-w-[760px] mx-auto">
+              <span className={eyebrow}>{d.designers.eyebrow}</span>
+              <h2 className={h2Center}>{d.designers.headline}</h2>
+              <p className={intro}>{d.designers.intro}</p>
+              <p className="mt-4 text-[13px] uppercase tracking-[0.12em] text-[#8A857E]">
+                {d.designers.note}
               </p>
             </div>
           </FadeIn>
-          <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10">
-            {desertAfterDark.designers.list.map((d, i) => (
-              <FadeIn key={d.handle} delay={i * 80}>
-                <li className={`${rule} pt-5 md:pt-6 flex flex-col gap-4 h-full`}>
-                  <div className="flex items-center gap-4">
-                    <Avatar name={d.name} image={d.image} tone="dark" />
-                    <span className="font-serif text-2xl text-bone leading-tight">
-                      {d.name}
-                    </span>
-                  </div>
-                  <InstagramLink handle={d.handle} label={`${d.name} on Instagram`} tone="dark" />
-                </li>
-              </FadeIn>
+          <ul className="mt-14 md:mt-[72px] grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
+            {d.designers.list.map((p) => (
+              <PersonTile key={p.handle} name={p.name} handle={p.handle} image={p.image} />
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="bg-velvet-deep py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-14 md:gap-20">
-          <FadeIn>
-            <div className="flex flex-col gap-5">
-              <span className={eyebrow}>{desertAfterDark.models.eyebrow}</span>
-              <h2 className="font-serif text-3xl md:text-4xl text-bone leading-tight">
-                {desertAfterDark.models.headline}
-              </h2>
-              <p className="text-bone/80 leading-relaxed">{desertAfterDark.models.intro}</p>
-              <div className={`${rule} pt-5 mt-2`}>
-                <p className="font-serif italic text-lg text-rosewood">
-                  {desertAfterDark.models.tbd}
-                </p>
-              </div>
-            </div>
-          </FadeIn>
-          <FadeIn delay={120}>
-            <div className="flex flex-col gap-5">
-              <span className={eyebrow}>{desertAfterDark.djs.eyebrow}</span>
-              <h2 className="font-serif text-3xl md:text-4xl text-bone leading-tight">
-                {desertAfterDark.djs.headline}
-              </h2>
-              <p className="text-bone/80 leading-relaxed">{desertAfterDark.djs.intro}</p>
-              <ul className="flex flex-col gap-3 mt-2">
-                {desertAfterDark.djs.list.map((dj) => (
-                  <li key={dj.handle} className={`${rule} pt-5 flex flex-col gap-4`}>
-                    <div className="flex items-center gap-4">
-                      <Avatar name={dj.name} image={dj.image} tone="dark" />
-                      <div className="flex flex-col gap-1">
-                        <span className="font-serif text-2xl text-bone leading-tight">{dj.name}</span>
-                        {dj.note && <span className="text-sm text-bone/65">{dj.note}</span>}
-                      </div>
-                    </div>
-                    <InstagramLink handle={dj.handle} label={`${dj.name} on Instagram`} tone="dark" />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* Production team credits, with a slot ready for hair & makeup. */}
-      <section className="bg-velvet py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-5xl mx-auto">
-          <FadeIn>
-            <div className="text-center mb-12 md:mb-16 flex flex-col gap-4 max-w-2xl mx-auto">
-              <span className={eyebrow}>{desertAfterDark.team.eyebrow}</span>
-              <h2 className={h2}>{desertAfterDark.team.headline}</h2>
-              <p className={body}>{desertAfterDark.team.intro}</p>
-            </div>
-          </FadeIn>
-          <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10">
-            {desertAfterDark.team.people.map((p, i) => (
-              <FadeIn key={p.handle} delay={i * 80}>
-                <li className={`${rule} pt-5 md:pt-6 flex flex-col gap-4 h-full`}>
-                  <div className="flex items-center gap-4">
-                    <Avatar name={p.name} image={p.image} tone="dark" />
-                    <div className="flex flex-col gap-1.5">
-                      <span className="font-serif text-2xl text-bone leading-tight">
-                        {p.name}
-                      </span>
-                      <span className="text-xs uppercase tracking-widest text-rosewood">
-                        {p.title}
-                      </span>
-                    </div>
-                  </div>
-                  <InstagramLink handle={p.handle} label={`${p.name} on Instagram`} tone="dark" />
-                </li>
-              </FadeIn>
-            ))}
-            <FadeIn delay={desertAfterDark.team.people.length * 80}>
-              <li className="border-t border-rosewood/40 pt-5 md:pt-6 flex flex-col gap-1.5 h-full">
-                <span className="font-serif text-2xl md:text-3xl text-bone leading-tight">
-                  {desertAfterDark.team.hairMakeup.title}
-                </span>
-                <span className="font-serif italic text-lg text-rosewood">
-                  {desertAfterDark.team.hairMakeup.tbd}
-                </span>
-              </li>
-            </FadeIn>
-          </ul>
-        </div>
-      </section>
-
-      {/* The one saturated moment on the page: the burgundy of the palette,
-          fading back down into velvet. */}
-      <section className="bg-gradient-to-br from-burgundy via-burgundy/80 to-velvet-deep py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-3xl mx-auto text-center flex flex-col gap-5 md:gap-6">
-          <FadeIn>
-            <span className={eyebrow}>{desertAfterDark.location.eyebrow}</span>
-          </FadeIn>
-          <FadeIn delay={80}>
-            <h2 className={h2}>{desertAfterDark.location.headline}</h2>
-          </FadeIn>
-          <FadeIn delay={140}>
-            <p className="text-bone/85 leading-relaxed text-base md:text-lg">
-              {desertAfterDark.location.body}
+      {/* The one saturated moment on the page: a burgundy glow behind the venue. */}
+      <section className="relative overflow-hidden bg-velvet px-6 md:px-10 py-24 md:py-[140px]">
+        <div
+          className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_45%_60%_at_50%_50%,rgba(164,62,120,0.22),transparent_70%)]"
+          aria-hidden
+        />
+        <div className="relative max-w-[780px] mx-auto text-center flex flex-col items-center">
+          <FadeIn className="flex flex-col items-center">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-burgundy/60">
+              {d.venue.eyebrow}
+            </span>
+            <h2 className="mt-6 font-serif text-3xl sm:text-4xl md:text-[48px] leading-[1.12] text-bone">
+              {d.venue.headline}
+            </h2>
+            <p className="mt-6 text-base md:text-[17px] leading-[1.5] text-[#D8D2C8]">
+              {d.venue.body}
             </p>
           </FadeIn>
         </div>
       </section>
 
-      <section className="bg-velvet py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-5xl mx-auto">
+      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[120px]">
+        <div className="max-w-[1280px] mx-auto">
           <FadeIn>
-            <div className="text-center mb-12 md:mb-16 flex flex-col gap-4 max-w-2xl mx-auto">
-              <span className={eyebrow}>{desertAfterDark.timeline.eyebrow}</span>
-              <h2 className={h2}>{desertAfterDark.timeline.headline}</h2>
-              <p className={body}>{desertAfterDark.timeline.intro}</p>
+            <div className="text-center flex flex-col items-center">
+              <span className={eyebrow}>{d.timeline.eyebrow}</span>
+              <h2 className={h2Center}>{d.timeline.headline}</h2>
+              <p className={intro}>{d.timeline.intro}</p>
             </div>
           </FadeIn>
-          <ol className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {desertAfterDark.timeline.acts.map((act, i) => (
+          <ol className="mt-12 md:mt-[72px] grid md:grid-cols-2 gap-x-[60px] gap-y-10">
+            {d.timeline.acts.map((act, i) => (
               <FadeIn key={act.title} delay={i * 100}>
-                <li className={`${rule} pt-5 md:pt-6 flex flex-col gap-3 h-full`}>
+                <li className="border-t border-velvet-line pt-8 md:pt-10 flex flex-col h-full">
                   <div className="flex items-baseline gap-3">
-                    <span className={`font-serif text-xl ${ACT_COLORS[i % ACT_COLORS.length]}`}>
-                      0{i + 1}
+                    <span className={`font-serif text-xl md:text-2xl ${ACT_COLORS[i % ACT_COLORS.length]}`}>
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="font-serif text-2xl md:text-3xl text-bone leading-tight">
+                    <h3 className="font-serif text-2xl md:text-[28px] leading-tight text-bone">
                       {act.title}
                     </h3>
                   </div>
-                  <span className="text-xs uppercase tracking-widest text-rosewood">
+                  <span className="mt-3 text-[13px] tracking-[0.1em] text-velvet-text">
                     {act.time}
                   </span>
-                  <p className="text-bone/80 leading-relaxed">{act.body}</p>
+                  <p className="mt-4 max-w-[470px] text-base leading-[1.5] text-velvet-text">
+                    {act.body}
+                  </p>
                 </li>
               </FadeIn>
             ))}
@@ -260,17 +151,105 @@ export default function DesertAfterDarkPage() {
         </div>
       </section>
 
-      <section id="apply" className="relative overflow-hidden bg-velvet-deep py-20 md:py-32 px-6 md:px-10">
-        <div className={glow} aria-hidden />
-        <div className="relative max-w-2xl mx-auto">
+      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[120px]">
+        <div className="max-w-[1280px] mx-auto">
           <FadeIn>
-            <div className="flex flex-col gap-5 mb-10 md:mb-12 text-center">
-              <span className={eyebrow}>{desertAfterDark.apply.eyebrow}</span>
-              <h2 className={h2}>{desertAfterDark.apply.headline}</h2>
-              <p className={body}>{desertAfterDark.apply.subhead}</p>
+            <span className={eyebrow}>{d.dressCode.eyebrow}</span>
+            <h2 className="mt-6 font-serif text-4xl md:text-[48px] leading-[1.1] text-bone">
+              {d.dressCode.headline}
+            </h2>
+            <div className="mt-8 h-[3px] w-60 bg-gradient-to-r from-champagne via-rosegold to-burgundy" aria-hidden />
+            <p className="mt-8 max-w-[1000px] text-base md:text-[17px] leading-[1.5] text-[#D8D2C8]">
+              {d.dressCode.body}
+            </p>
+          </FadeIn>
+          <ul className="mt-12 md:mt-16 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-11 gap-x-3 gap-y-8 md:gap-x-2">
+            {d.dressCode.palette.map((swatch, i) => (
+              <li key={swatch.name} className="flex flex-col items-center gap-3 text-center">
+                <span className="text-[13px] font-semibold leading-tight text-bone">{swatch.name}</span>
+                <span
+                  className={`block w-full h-9 ${swatch.hex === "#0A0A0A" ? "border border-[#3A3633]" : ""}`}
+                  style={{
+                    background: swatch.hex,
+                    // The swatches sit like fabric samples — each one a
+                    // slightly different tilt.
+                    clipPath:
+                      i % 2 === 0
+                        ? "polygon(0 0, 100% 10%, 100% 100%, 0 90%)"
+                        : "polygon(0 10%, 100% 0, 100% 90%, 0 100%)",
+                  }}
+                  aria-hidden
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[140px]">
+        <div className="max-w-[1280px] mx-auto">
+          <FadeIn>
+            <div className="text-center flex flex-col items-center max-w-[760px] mx-auto">
+              <span className={eyebrow}>{d.team.eyebrow}</span>
+              <h2 className={h2Center}>{d.team.headline}</h2>
+              <p className={intro}>{d.team.intro}</p>
             </div>
           </FadeIn>
-          <FadeIn delay={150}>
+          <ul className="mt-14 md:mt-[72px] grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
+            {d.team.people.map((p) => (
+              <PersonTile
+                key={p.handle}
+                name={p.name}
+                handle={p.handle}
+                image={"image" in p ? p.image : undefined}
+                title={"title" in p ? p.title : undefined}
+                note={"note" in p ? p.note : undefined}
+                link={"link" in p ? p.link : true}
+              />
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Partnership CTA — the one light band on the page. */}
+      <section className="bg-pearl px-6 md:px-10 py-14 md:py-[80px]">
+        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div>
+            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-champagne">
+              {d.partnership.eyebrow}
+            </span>
+            <h2 className="mt-3 font-serif text-3xl md:text-[36px] leading-[1.15] text-noir">
+              {d.partnership.headline}
+            </h2>
+            <p className="mt-3 text-base md:text-[17px] leading-[1.5] text-ink/70">
+              {d.partnership.subhead}
+            </p>
+          </div>
+          <Link
+            href={d.partnership.href}
+            className="inline-flex self-start md:self-auto items-center justify-center h-[50px] px-8 bg-noir text-bone text-xs font-medium uppercase tracking-[0.06em] hover:bg-ember transition-colors"
+          >
+            {d.partnership.cta}
+          </Link>
+        </div>
+      </section>
+
+      <section id="apply" className="relative overflow-hidden bg-velvet px-6 md:px-10 pt-20 md:pt-[120px] pb-20 md:pb-[140px]">
+        <div
+          className="absolute inset-x-0 top-0 h-[520px] pointer-events-none bg-[radial-gradient(ellipse_35%_50%_at_50%_10%,rgba(164,62,120,0.22),transparent_70%)]"
+          aria-hidden
+        />
+        <div className="relative max-w-[760px] mx-auto">
+          <FadeIn>
+            <div className="text-center flex flex-col items-center">
+              <span className={eyebrow}>{d.apply.eyebrow}</span>
+              <h2 className="mt-5 font-serif text-3xl sm:text-4xl md:text-[48px] leading-[1.1] text-bone">
+                {d.apply.headline}
+              </h2>
+              <p className={intro}>{d.apply.subhead}</p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={150} className="mt-12 md:mt-14">
             <ApplicationForm
               sourcePage="desert-after-dark"
               submitLabel="Request Ticket Allocation"

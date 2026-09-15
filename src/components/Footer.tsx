@@ -4,6 +4,7 @@ import { Wordmark } from "./Wordmark";
 const links = [
   { href: "/about", label: "About" },
   { href: "/desert-after-dark", label: "Desert After Dark" },
+  { href: "/partner", label: "Partner" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
 ];
@@ -12,7 +13,7 @@ const links = [
 export function Footer() {
   return (
     <footer className="bg-pearl border-t border-sand px-6 md:px-10 py-9 md:py-10">
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-8 md:gap-7">
+      <div className="max-w-[1280px] mx-auto flex flex-col gap-8 md:gap-7">
         <div className="flex items-center gap-5">
           <Wordmark size="sm" />
           <p className="text-sm text-ink/80">

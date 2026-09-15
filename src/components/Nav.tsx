@@ -5,10 +5,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Wordmark } from "./Wordmark";
 
-// Pages whose top section is a full-bleed dark hero.
-// On these pages, the nav starts transparent and lights up on scroll.
-// On all other pages, the nav stays solid from the start.
-const HERO_PAGES = new Set(["/", "/about", "/desert-after-dark"]);
+// Figma: a solid pearl 104px bar with a sand hairline, the same on every
+// page — Home / About / Desert After Dark / Partner, an Apply button, and the
+// Instagram mark.
+const LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/desert-after-dark", label: "Desert After Dark" },
+  { href: "/partner", label: "Partner" },
+];
 
 // Pages that render their own #apply section, so the nav Apply button
 // should stay on the current page instead of jumping to /#apply.
@@ -18,82 +23,37 @@ const INSTAGRAM_URL = "https://www.instagram.com/theatlaslist/";
 
 export function Nav() {
   const pathname = usePathname();
-  const hasHero = HERO_PAGES.has(pathname);
-  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (!hasHero) {
-      setScrolled(true);
-      return;
-    }
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [hasHero]);
+  // Close the phone menu on navigation.
+  useEffect(() => setOpen(false), [pathname]);
 
-  // Desert After Dark uses its own "Velvet Sunset" palette; the nav stays
-  // dark on that page so scrolling doesn't drop a light bar onto a velvet page.
-  const velvet = pathname === "/desert-after-dark";
-
-  // Visual states (Figma: 104px bar, hairline rule beneath when solid):
-  //   solid (scrolled OR non-hero page) → pearl background, ink text, noir Apply
-  //     (velvet page: velvet background, cream text, champagne Apply)
-  //   transparent (top of hero page)    → no background, cream text, pearl Apply
-  //     (velvet page: champagne Apply)
-  const headerClass = scrolled
-    ? velvet
-      ? "bg-velvet/95 backdrop-blur-sm border-b border-champagne/20"
-      : "bg-pearl/95 backdrop-blur-sm border-b border-sand"
-    : "bg-transparent";
-  const linkClass = velvet
-    ? "text-bone hover:text-champagne"
-    : scrolled
-      ? "text-ink hover:text-ember"
-      : "text-bone hover:text-ember drop-shadow-sm";
-  const applyClass = velvet
-    ? "text-velvet bg-champagne hover:bg-burgundy hover:text-bone"
-    : scrolled
-      ? "text-bone bg-noir hover:bg-ember"
-      : "text-noir bg-pearl hover:bg-ember hover:text-bone";
-
-  const showHome = pathname !== "/";
-  const showAbout = pathname !== "/about";
-  // Full name on sm+; phones get tighter spacing and a two-line lockup.
-  const showEvent = pathname === "/" || pathname === "/about";
-
-  const link = `text-xs font-medium uppercase tracking-[0.06em] transition-colors duration-300 ${linkClass}`;
+  const link =
+    "text-xs font-medium uppercase tracking-[0.06em] text-ink hover:text-ember transition-colors";
+  const applyHref = PAGES_WITH_APPLY.has(pathname) ? "#apply" : "/#apply";
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerClass}`}>
-      <nav className="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-10 h-20 md:h-[104px] flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-pearl border-b border-sand">
+      <nav className="max-w-[1280px] mx-auto px-5 sm:px-6 md:px-10 h-20 md:h-[104px] flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="The Atlas List — home">
           <Wordmark size="md" />
         </Link>
-        <div className="flex items-center gap-3 sm:gap-8 md:gap-[38px]">
-          {showHome && (
-            <Link href="/" className={link}>
-              Home
+
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-[38px]">
+          {LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              aria-current={pathname === l.href ? "page" : undefined}
+              className={link}
+            >
+              {l.label}
             </Link>
-          )}
-          {showAbout && (
-            <Link href="/about" className={link}>
-              About
-            </Link>
-          )}
-          {showEvent && (
-            <Link href="/desert-after-dark" className={`${link} leading-tight`}>
-              <span className="sm:hidden">
-                Desert
-                <br />
-                After Dark
-              </span>
-              <span className="hidden sm:inline">Desert After Dark</span>
-            </Link>
-          )}
+          ))}
           <Link
-            href={PAGES_WITH_APPLY.has(pathname) ? "#apply" : "/#apply"}
-            className={`text-xs font-medium uppercase tracking-[0.06em] px-4 sm:px-5 h-11 inline-flex items-center transition-colors duration-300 ${applyClass}`}
+            href={applyHref}
+            className="text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-ember px-6 h-11 inline-flex items-center transition-colors"
           >
             Apply
           </Link>
@@ -102,25 +62,88 @@ export function Nav() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="The Atlas List on Instagram"
-            className={`hidden md:inline-flex ${linkClass}`}
+            className="inline-flex text-ink hover:text-ember transition-colors"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-6 h-6"
-              aria-hidden
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
-            </svg>
+            <InstagramIcon />
           </a>
         </div>
+
+        {/* Phone: Apply stays visible, the rest folds into a menu. */}
+        <div className="flex md:hidden items-center gap-3">
+          <Link
+            href={applyHref}
+            className="text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir px-4 h-10 inline-flex items-center"
+          >
+            Apply
+          </Link>
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="site-menu"
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-10 w-10 items-center justify-center text-ink"
+          >
+            <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden>
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
+            </svg>
+          </button>
+        </div>
       </nav>
+
+      <div
+        id="site-menu"
+        hidden={!open}
+        className="md:hidden border-t border-sand bg-pearl"
+      >
+        <ul className="px-5 py-3 flex flex-col">
+          {LINKS.map((l) => (
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                aria-current={pathname === l.href ? "page" : undefined}
+                className={`${link} block py-3`}
+              >
+                {l.label}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${link} flex items-center gap-3 py-3`}
+            >
+              <InstagramIcon className="w-5 h-5" />
+              Instagram
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
+  );
+}
+
+function InstagramIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
   );
 }

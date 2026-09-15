@@ -6,7 +6,7 @@ export function HowWeGather() {
   const { eyebrow, headline, ways, note } = home.howWeGather;
   return (
     <section className="bg-pearl py-14 md:py-16 px-6 md:px-10">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1280px] mx-auto">
         <FadeIn>
           <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
             {eyebrow}

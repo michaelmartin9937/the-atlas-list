@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/Hero";
+import { PageHero } from "@/components/PageHero";
+import { HostCards } from "@/components/HostCards";
+import { PhotoGrid } from "@/components/PhotoGrid";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
-import { Hosts } from "@/components/Hosts";
 import { about } from "@/content/about";
 
 export const metadata: Metadata = {
@@ -10,87 +11,70 @@ export const metadata: Metadata = {
   description: about.hero.subhead,
 };
 
+// Figma: "Atlas List — About (New)" — hero, founders, the standard, a quote
+// band, the application form, a photo grid.
 export default function AboutPage() {
   return (
     <>
-      <Hero
+      <PageHero
         eyebrow={about.hero.eyebrow}
         headline={about.hero.headline}
         subhead={about.hero.subhead}
-        height="short"
-        imageUrl="/images/about-hero.jpg"
       />
 
-      <section className="bg-bone py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-prose mx-auto">
-          <FadeIn>
-            <div className="flex flex-col gap-6">
-              {about.origin.map((p, i) => (
-                <p
-                  key={i}
-                  className={
-                    i === 0
-                      ? "font-serif text-xl sm:text-2xl md:text-3xl leading-snug text-noir"
-                      : "text-ink/85 leading-relaxed text-base md:text-lg"
-                  }
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <HostCards />
 
-      <section className="bg-pearl py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-prose mx-auto">
-          <FadeIn>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight mb-6 md:mb-8">
-              {about.who.headline}
+      <section className="bg-pearl px-6 md:px-10 py-20 md:py-[120px]">
+        <div className="max-w-[1280px] mx-auto text-center flex flex-col items-center">
+          <FadeIn className="w-full flex flex-col items-center">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+              {about.standard.eyebrow}
+            </span>
+            <h2 className="mt-6 max-w-[980px] font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.18] text-noir">
+              {about.standard.headline}
             </h2>
-            <div className="flex flex-col gap-5">
-              {about.who.body.map((p, i) => (
-                <p key={i} className="text-ink/85 leading-relaxed text-base md:text-lg">
-                  {p}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      <Hosts />
-
-      <section className="bg-noir py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <FadeIn>
-            <p className="font-serif italic text-xl sm:text-2xl md:text-4xl text-bone leading-snug">
-              {about.vibeQuote}
+            <p className="mt-7 max-w-[660px] text-base md:text-[17px] leading-[1.5] text-ink/70">
+              {about.standard.body}
+            </p>
+            <p className="mt-12 md:mt-14 font-serif italic text-lg md:text-xl text-taupe">
+              {about.standard.note}
             </p>
           </FadeIn>
         </div>
       </section>
 
-      <section id="apply" className="bg-bone py-20 md:py-32 px-6 md:px-10">
-        <div className="max-w-2xl mx-auto">
+      <section className="bg-noir px-6 md:px-10 py-24 md:py-[160px]">
+        <div className="max-w-[860px] mx-auto text-center">
           <FadeIn>
-            <div className="flex flex-col gap-5 mb-10 md:mb-12 text-center">
-              <span className="text-xs uppercase tracking-widest text-bronze">
-                Apply
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-noir leading-tight">
-                {about.closingCta.headline}
-              </h2>
-              <p className="text-ink/80 leading-relaxed text-base md:text-lg">
-                {about.closingCta.subhead}
-              </p>
-            </div>
-          </FadeIn>
-          <FadeIn delay={150}>
-            <ApplicationForm sourcePage="about" />
+            <p className="font-serif italic text-2xl sm:text-3xl md:text-[40px] leading-[1.25] text-bone">
+              {about.quote}
+            </p>
           </FadeIn>
         </div>
       </section>
+
+      <section id="apply" className="bg-pearl px-6 md:px-10 pt-20 md:pt-[112px] pb-20 md:pb-[96px]">
+        <div className="max-w-[700px] mx-auto">
+          <FadeIn>
+            <div className="text-center flex flex-col items-center">
+              <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+                {about.apply.eyebrow}
+              </span>
+              <h2 className="mt-5 font-serif text-4xl md:text-[44px] leading-[1.1] text-noir">
+                {about.apply.headline}
+              </h2>
+              <p className="mt-5 text-base md:text-[17px] leading-[1.5] text-ink/70">
+                {about.apply.subhead}
+              </p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={150} className="mt-12 md:mt-14">
+            <ApplicationForm sourcePage="about" submitLabel="Request Ticket Allocation" />
+          </FadeIn>
+        </div>
+      </section>
+
+      <PhotoGrid photos={about.gallery} />
     </>
   );
 }

@@ -1,103 +1,146 @@
+// Copy for /desert-after-dark — mirrors the Figma frame
+// "Desert After Dark — Full Page".
 export const desertAfterDark = {
   hero: {
     eyebrow: "October 10, 2026 · Paradise Valley",
     headline: "Desert After Dark",
     tagline: "powered by Thundr",
     subhead:
-      "One night. One mansion. The fashion moment Scottsdale has been waiting for — a private-residence runway show and after-dark takeover, curated by The Atlas List. Featured designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
+      "One night. One mansion. Paradise Valley's after-dark takeover, curated by The Atlas List — a private-residence runway, live entertainment, elevated bars and bites, and a night built for the senses. Designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
     cta: "Apply for Ticket Allocation",
   },
-  pitch: {
-    eyebrow: "The Event",
-    headline: "Not a nightclub. Not a pop-up. A once-a-year cultural moment.",
-    body: [
-      "October 10th, inside a private Paradise Valley estate, The Atlas List presents Desert After Dark — what will be, hands down, the number-one fashion show and mansion party the greater Scottsdale area has ever hosted.",
-      "A full production runway show inside a residence you can't walk into any other night of the year. The designers you'd fly to Los Angeles or Miami to see. The DJs you'd wait in line an hour for. And the guest list is intentionally short, intentionally beautiful, and closed to anyone who has to ask twice.",
-      "If you're in the room, it's because someone decided you belong there.",
+  night: {
+    eyebrow: "What's in Store",
+    headline: "How the Night Unfolds.",
+    intro: "Swipe through everything the evening holds, before you decide where to start.",
+    // image: null renders the Figma placeholder slot until a photo is chosen.
+    cards: [
+      {
+        title: "The Runway",
+        body: "Six designers you won't see sharing a stage anywhere else. One night, then it's gone.",
+        image: "/images/atlas-house-promo-poster.jpg",
+        alt: "A model in a black velvet gown beside the pool at dusk",
+      },
+      {
+        title: "The Music",
+        body: "Anthoz headlines — Hotsauce, St Bernard, and Aaron Michael trade off behind the decks till last call.",
+        image: null,
+        alt: "",
+      },
+      {
+        title: "The Bar",
+        body: "Two full bars for however you're drinking tonight, and one built for the nights you're not.",
+        image: null,
+        alt: "",
+      },
+      {
+        title: "The Element",
+        body: "Fire, performed close enough to feel it. Who's behind it is still being decided — the heat isn't.",
+        image: null,
+        alt: "",
+      },
+      {
+        title: "The Table",
+        body: "Private chefs. Plates that keep arriving. Nothing to step away from the conversation for.",
+        image: null,
+        alt: "",
+      },
+      {
+        title: "The Art",
+        body: "A curated row of Scottsdale's finest — galleries, jewelers, ateliers — dropped into the middle of the party.",
+        image: null,
+        alt: "",
+      },
     ],
   },
   designers: {
     eyebrow: "Featured Designers",
-    headline: "The runway.",
+    headline: "One Runway. Six Designers.",
     intro:
-      "Six designers, one runway, one night. Each brings a distinct point of view — the through-line is craft, taste, and clothes you'd actually want to be photographed in.",
-    // Equal billing: identical tiles, alphabetical order, and we say so.
+      "Six designers, each with their own point of view — one night to see all six on the same runway.",
     note: "Listed alphabetically.",
     // image = the designer's current Instagram profile picture.
     list: [
       { name: "Alexandra", handle: "oneofakindaura", image: "/images/designers/oneofakindaura.jpg" },
-      { name: "Almer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
+      { name: "Al'mer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
       { name: "Bella Elisse", handle: "bella.elisse", image: "/images/designers/bella-elisse.jpg" },
       { name: "Isaac Newton", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
       { name: "Koan Asaky", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
       { name: "Stephanie Murillo Agandar", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
     ],
   },
-  models: {
-    eyebrow: "Featured Models",
-    headline: "The lineup.",
-    intro:
-      "The full cast will be announced closer to the event. Every model on our runway is professional and hand-picked to fit the point of view of the designers she's walking for.",
-    tbd: "Roster reveal — coming soon.",
+  venue: {
+    eyebrow: "The Venue",
+    headline: "A Private Residence in Paradise Valley.",
+    body: "This is not a hotel ballroom, not a club, not a public venue. It's a private estate — the kind of place you don't see on the way to work. The exact address is released only to ticketed guests, 72 hours before the door opens. This is how we keep the room the room.",
   },
-  djs: {
-    eyebrow: "Featured DJ",
-    headline: "The sound.",
-    intro:
-      "AnthoZ of SoundMoverz carries the night — cocktail hour through the after-party.",
-    // image = current Instagram profile picture.
-    list: [
-      { name: "AnthoZ", note: "with SoundMoverz", handle: "soundmoverz", image: "/images/djs/soundmoverz.jpg" },
+  timeline: {
+    eyebrow: "The Evening",
+    headline: "Four Acts.",
+    intro: "Four moments, one night. The full lineup drops two weeks out.",
+    acts: [
+      {
+        title: "VIP Pre-Party",
+        time: "3:00pm - 5:00pm",
+        body: "Arrive early, sip first — a smaller room, first look at the designers, and space to breathe before the night fills up.",
+      },
+      {
+        title: "Fashion Show",
+        time: "6:30pm - 7:15pm",
+        body: "Six designers, one runway. Full production, live music, seated audience. This is the main event.",
+      },
+      {
+        title: "Mansion Party",
+        time: "7:15pm - 10:00pm",
+        body: "The full estate opens up. DJs take over, the bar is open, and the room becomes what a mansion in Paradise Valley on the right night is supposed to feel like.",
+      },
+      {
+        title: "After Party",
+        time: "10:00pm - 11:30pm",
+        body: "For the guests still standing. Location is released the night of, to the guests we want at it.",
+      },
+    ],
+  },
+  dressCode: {
+    eyebrow: "Dress Code",
+    headline: "Desert Sunset",
+    body: "Elevated, not stiff. Evening gowns and sharp suits — no tux required. Think desert sunset: warm tones, elevated black, a touch of gold. Skip anything cold or silver — we're going for golden-hour glamour, not a uniform.",
+    // Swatch colours sampled from the Figma frame.
+    palette: [
+      { name: "Dune Blush", hex: "#C97D8A" },
+      { name: "Ember Glow", hex: "#F07A5A" },
+      { name: "Canyon Clay", hex: "#E07D4A" },
+      { name: "Golden Hour", hex: "#E09A3E" },
+      { name: "Mirage Bloom", hex: "#B2327A" },
+      { name: "Dusk Orchid", hex: "#6E2D5C" },
+      { name: "Twilight Haze", hex: "#7B4DB1" },
+      { name: "Sand Mesa", hex: "#A6937D" },
+      { name: "Moonlit Sand", hex: "#CBC5AA" },
+      { name: "Midnight Heat", hex: "#0A0A0A" },
+      { name: "Sundown Gold", hex: "linear-gradient(90deg,#8A6320 0%,#E5B24A 45%,#C7A13F 70%,#8A6320 100%)" },
     ],
   },
   team: {
     eyebrow: "Production",
     headline: "The team behind the night.",
-    intro:
-      "The people doing the unglamorous work that makes the glamorous part look effortless.",
-    // image = current Instagram profile picture.
+    intro: "The people doing the unglamorous work that makes the glamorous part look effortless.",
+    // image = current Instagram profile picture. `link: false` marks a
+    // placeholder handle that shouldn't open Instagram yet.
     people: [
       { name: "Diana Ferar", title: "Executive Producer", handle: "dianaferar", image: "/images/team/dianaferar.jpg" },
       { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
+      { name: "Devaun", title: "Co-Founder & Photographer", handle: "devaunlennox", image: "/images/host-devaun.jpg" },
+      { name: "Michael", title: "Co-Founder", handle: "whoismikemartin", image: "/images/host-michael.jpg" },
+      { name: "Hair & Makeup", note: "Artists to be announced.", handle: "hairstylist/MUA", link: false },
+      { name: "Intertainment Media", title: "Lighting Production", note: "Malcom, with assistant TBA.", handle: "mediaco.", link: false },
     ],
-    hairMakeup: {
-      title: "Hair & Makeup",
-      tbd: "Artists to be announced.",
-    },
   },
-  location: {
-    eyebrow: "The Venue",
-    headline: "A private residence in Paradise Valley.",
-    body:
-      "This is not a hotel ballroom, not a club, not a public venue. It's a private estate — the kind of place you don't see on the way to work. The exact address is released only to ticketed guests, 72 hours before the door opens. This is how we keep the room the room.",
-  },
-  timeline: {
-    eyebrow: "The Evening",
-    headline: "Four acts.",
-    intro:
-      "Timing for each act finalizes closer to the event. Ticketed guests receive the full run of show two weeks out.",
-    acts: [
-      {
-        title: "VIP Pre-Party",
-        time: "Time TBA",
-        body: "An early-arrival cocktail hour for VIP ticket holders — smaller room, first-look at the designers, a chance to meet the room before the room fills.",
-      },
-      {
-        title: "Fashion Show",
-        time: "Time TBA",
-        body: "Six designers, one runway. Full production, live music, seated audience. This is the main event.",
-      },
-      {
-        title: "Mansion Party",
-        time: "Time TBA",
-        body: "The full estate opens up. DJs take over, the bar is full, and the room becomes what a mansion in Paradise Valley on the right night is supposed to feel like.",
-      },
-      {
-        title: "After Party",
-        time: "Time & Location TBA",
-        body: "For the guests still standing. Location is released the night of, to the guests we want at it.",
-      },
-    ],
+  partnership: {
+    eyebrow: "Partnership",
+    headline: "A few partnerships remain.",
+    subhead: "Own a category. Not a logo placement.",
+    cta: "See Partnerships",
+    href: "/partner",
   },
   apply: {
     eyebrow: "Apply",

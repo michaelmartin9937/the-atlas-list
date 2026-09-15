@@ -7,7 +7,7 @@ export function ToneOfRoom() {
   const cols = [forWomen, forMen];
   return (
     <section className="bg-noir py-16 md:py-20 px-6 md:px-10">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1280px] mx-auto">
         <FadeIn>
           <span className="block text-center text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
             {eyebrow}

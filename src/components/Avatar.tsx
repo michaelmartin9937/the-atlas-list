@@ -5,33 +5,27 @@ type Props = {
   image?: string;
   // "light" (default) for bone/pearl sections; "dark" for velvet-black ones.
   tone?: "light" | "dark";
+  size?: "sm" | "md";
 };
 
 const TONE = {
-  light: { ring: "ring-bronze/40", disc: "bg-bone text-noir" },
-  dark: { ring: "ring-burgundy/60", disc: "bg-velvet-deep text-champagne" },
+  light: { disc: "bg-sand/40 text-noir" },
+  dark: { disc: "bg-[#2A2927] text-velvet-text" },
 };
 
-// Circular portrait used beside a person's name in credit tiles. Falls back to
-// initials on a disc when there's no image, so every tile keeps the same
-// silhouette regardless of source.
-export function Avatar({ name, image, tone = "light" }: Props) {
+const SIZE = {
+  sm: "h-16 w-16",
+  md: "h-[70px] w-[70px]",
+};
+
+// Circular portrait used beside a person's name in credit tiles. Falls back
+// to a plain disc when there's no image (Figma shows an empty disc for
+// unannounced people), so every tile keeps the same silhouette.
+export function Avatar({ name, image, tone = "light", size = "md" }: Props) {
   const t = TONE[tone];
-  const frame = `h-16 w-16 md:h-20 md:w-20 flex-shrink-0 rounded-full ring-1 overflow-hidden ${t.ring}`;
+  const frame = `${SIZE[size]} flex-shrink-0 rounded-full overflow-hidden`;
   if (!image) {
-    const initials = name
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((w) => w[0]?.toUpperCase() ?? "")
-      .join("");
-    return (
-      <div
-        className={`${frame} ${t.disc} flex items-center justify-center font-serif text-xl`}
-        aria-hidden
-      >
-        {initials}
-      </div>
-    );
+    return <div className={`${frame} ${t.disc}`} aria-hidden title={name} />;
   }
   return (
     <Image

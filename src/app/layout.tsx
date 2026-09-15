@@ -49,7 +49,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body>
         <Nav />
-        <main>{children}</main>
+        {/* The nav is a fixed, solid 80/104px bar on every page (Figma), so
+            pages start below it rather than underneath it. */}
+        <main className="pt-20 md:pt-[104px]">{children}</main>
         <Footer />
       </body>
     </html>

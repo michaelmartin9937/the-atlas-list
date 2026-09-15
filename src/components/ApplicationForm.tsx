@@ -56,15 +56,15 @@ const TONES: Record<Tone, ToneClasses> = {
   },
   dark: {
     input:
-      "w-full bg-transparent border-0 border-b border-bone/25 px-0 py-3 text-bone font-sans text-base focus:outline-none focus:border-champagne placeholder:text-bone/35",
-    label: "text-rosewood",
-    helper: "text-bone/55",
+      "w-full bg-transparent border-0 border-b border-velvet-line px-0 py-3 text-bone font-sans text-base focus:outline-none focus:border-champagne placeholder:text-velvet-text/60",
+    label: "text-[#D8D2C8]",
+    helper: "text-velvet-text/80",
     error: "text-red-400",
-    checkbox: "accent-burgundy",
-    consent: "text-bone/80",
-    fine: "text-bone/55",
+    checkbox: "accent-champagne",
+    consent: "text-[#D8D2C8]",
+    fine: "text-velvet-text/80",
     link: "hover:text-champagne",
-    submit: "text-velvet bg-champagne hover:bg-burgundy hover:text-bone",
+    submit: "text-noir bg-champagne hover:bg-bone",
   },
 };
 
@@ -219,7 +219,7 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
           required
           rows={4}
           maxLength={800}
-          className={`${t.input} resize-none border border-sand/80 px-4 py-3 mt-2 min-h-[90px]`}
+          className={`${t.input} resize-none border ${tone === "dark" ? "border-velvet-line" : "border-sand/80"} px-4 py-3 mt-2 min-h-[90px]`}
         />
       </Field>
 

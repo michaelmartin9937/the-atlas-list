@@ -51,7 +51,7 @@ export function Hero({
         className="absolute inset-0 bg-gradient-to-b from-noir/45 via-noir/35 to-noir/90"
         aria-hidden
       />
-      <div className="relative max-w-[1200px] mx-auto px-6 md:px-10 pb-16 md:pb-20 pt-28 md:pt-32 w-full">
+      <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pb-16 md:pb-20 pt-16 md:pt-24 w-full">
         <div className="max-w-[700px] flex flex-col">
           <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
             {eyebrow}

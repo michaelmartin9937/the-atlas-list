@@ -41,7 +41,7 @@ export function MoreFromTheRoom() {
 
   return (
     <section className="bg-pearl py-14 md:py-16 px-6 md:px-10 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto relative">
+      <div className="max-w-[1280px] mx-auto relative">
         <FadeIn>
           <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
             {eyebrow}

@@ -8,7 +8,7 @@ export function RightNow() {
   const { eyebrow, headline, date, body, cta, href } = home.rightNow;
   return (
     <section className="bg-pearl px-6 md:px-10">
-      <div className="max-w-[1200px] mx-auto border-t border-b border-sand py-14 md:py-[60px] text-center">
+      <div className="max-w-[1280px] mx-auto border-t border-b border-sand py-14 md:py-[60px] text-center">
         <FadeIn>
           <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
             {eyebrow}
