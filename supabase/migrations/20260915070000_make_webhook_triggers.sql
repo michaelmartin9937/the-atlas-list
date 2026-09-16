@@ -47,7 +47,10 @@ begin
     'table', TG_TABLE_NAME,
     'schema', TG_TABLE_SCHEMA,
     'record', to_jsonb(new),
-    'old_record', null
+    'old_record', null,
+    -- Make's custom-webhook bundle exposes body fields directly, so the
+    -- shared secret rides in the body as well as the header.
+    'secret', coalesce(secret, '')
   );
 
   perform net.http_post(

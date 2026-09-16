@@ -56,7 +56,7 @@ Identical to Supabase's built-in Database Webhooks:
 
 `partner_inquiries` records carry `id, company_name, contact_name, email, category, budget_range, message, status, created_at`.
 
-Headers: `Content-Type: application/json`, `x-atlas-webhook-secret: <make_webhook_secret>`. Make should reject requests whose secret doesn't match.
+The same secret is sent as a top-level `"secret"` body field and as the `x-atlas-webhook-secret` header. The Make scenarios filter on `{{1.secret}}` (body) because Make's webhook bundle exposes body fields directly; requests without the right secret stop at the filter.
 
 ## 2. Airtable schema changes (before building Make)
 
