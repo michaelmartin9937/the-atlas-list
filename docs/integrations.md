@@ -81,7 +81,14 @@ Then freeze the schema.
 
 ## 3. Make — Scenario 1: Applications → Airtable
 
-Trigger: **Custom Webhook** (name it `Atlas — lead_applications`). Copy its URL into `make_webhook_url_lead_applications` (section 1). Run once with a test submission so Make learns the structure.
+Make organization 9005837 (us2), team "My Team" 2966135. Created via the Make API on 2026-09-15:
+
+| Scenario | Scenario ID | Webhook (hook ID) | Supabase config key |
+|---|---|---|---|
+| Atlas — lead_applications | 6292264 | 2819799 | `make_webhook_url_lead_applications` (set) |
+| Atlas — partner_inquiries | 6292265 | 2819800 | `make_webhook_url_partner_inquiries` (set) |
+
+Both scenarios start with the webhook (request headers enabled) → a **Set variables** module whose filter checks `x-atlas-webhook-secret` against `make_webhook_secret`, exposing `submission_id`, `email_norm`, `source_label`, `app_type`, `event_name`, `submitted_at` (partner: `submission_id`, `email_norm`, `company`, `submitted_at`). The Airtable modules below hang off that module.
 
 Modules, in order:
 
