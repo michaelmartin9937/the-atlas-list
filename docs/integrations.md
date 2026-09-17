@@ -103,7 +103,7 @@ Two Make quirks worth knowing: the Airtable search module always emits exactly o
 
 The partner scenario nests a second router for Organizations (exists → reuse, missing → create) and dedupes Partnership Leads by searching `Internal Notes` for "Supabase id: <id>" until a `Website Submission ID` field exists on that table.
 
-Still to map once the Airtable fields exist (needs Creator access or Devaun): `SMS Consent`, `SMS Consent Timestamp`, `Email Marketing Consent` on Contacts; `Website Source Page`, `Website Submitted At` on Event Applications; `Website Submission ID`, `Budget Range`, `Website Submitted At` on Partnership Leads. Until then the source page is written into `WordPress Form Name` ("Application form · Desert After Dark") and the submission time, SMS consent and Supabase id into `Submission Raw Data`; budget and message go into the lead's `Internal Notes`.
+Airtable schema changes applied 2026-09-16 (the site is Next.js, not WordPress — the WordPress-named fields were renamed): Contacts gained `SMS Consent`, `SMS Consent Timestamp`, `Email Marketing Consent` and `WordPress Source ID` → `Website Contact Source ID`; Event Applications gained `Website Source Page`, `Website Submitted At` and `WordPress Form Name` → `Website Form / Source`; Partnership Leads gained `Website Submission ID`, `Budget Range`, `Website Submitted At`. All are mapped in Make. `Email Marketing Consent` is never set by the website.
 
 The original module-by-module plan follows for reference.
 
