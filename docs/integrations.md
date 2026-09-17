@@ -88,7 +88,24 @@ Make organization 9005837 (us2), team "My Team" 2966135. Created via the Make AP
 | Atlas — lead_applications | 6292264 | 2819799 | `make_webhook_url_lead_applications` (set) |
 | Atlas — partner_inquiries | 6292265 | 2819800 | `make_webhook_url_partner_inquiries` (set) |
 
-Both scenarios start with the webhook (request headers enabled) → a **Set variables** module whose filter checks `x-atlas-webhook-secret` against `make_webhook_secret`, exposing `submission_id`, `email_norm`, `source_label`, `app_type`, `event_name`, `submitted_at` (partner: `submission_id`, `email_norm`, `company`, `submitted_at`). The Airtable modules below hang off that module.
+Airtable connection in Make: "Atlas Airtable (Claude token)" (id 11125406, personal-access-token type, base `applNZYG1lwtH3Lnc`). Both scenarios run **sequentially** (one execution at a time) so the search-then-create dedupe can't race when webhooks arrive together.
+
+**Built and verified 2026-09-16** (end to end: create path, update path, replay). Both scenarios are:
+
+`Webhook` → `Set variables` (filter: body `secret` = `make_webhook_secret`) → `Airtable: Search Records` on Contacts by `LOWER({Email})` → **Router**:
+
+- *Contact exists* (`3.id` exists) → `Update a Record` (only non-empty website values overwrite; uses `ignore` for blanks)
+- *New contact* (`3.id` missing) → `Create a Record` with Referral Source = Website, Atlas Relationship = Applicant (Partner on the partner scenario), Contact Status = Active
+
+then on each route: `Search Records` on Event Applications by `{Website Submission ID}` → `Create a Record` filtered on "not found". Field mappings use Airtable **field IDs** (`useColumnId`), so renaming fields in Airtable will not break them.
+
+Two Make quirks worth knowing: the Airtable search module always emits exactly one bundle (with an empty `id` when nothing matched), so filters test `id` exists / doesn't exist and no aggregator is needed; and the webhook's request headers are not reliably available to filters, which is why the secret travels in the body.
+
+The partner scenario nests a second router for Organizations (exists → reuse, missing → create) and dedupes Partnership Leads by searching `Internal Notes` for "Supabase id: <id>" until a `Website Submission ID` field exists on that table.
+
+Still to map once the Airtable fields exist (needs Creator access or Devaun): `SMS Consent`, `SMS Consent Timestamp`, `Email Marketing Consent` on Contacts; `Website Source Page`, `Website Submitted At` on Event Applications; `Website Submission ID`, `Budget Range`, `Website Submitted At` on Partnership Leads. Until then the source page is written into `WordPress Form Name` ("Application form · Desert After Dark") and the submission time, SMS consent and Supabase id into `Submission Raw Data`; budget and message go into the lead's `Internal Notes`.
+
+The original module-by-module plan follows for reference.
 
 Modules, in order:
 
