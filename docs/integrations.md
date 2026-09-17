@@ -163,7 +163,9 @@ Contact fields synced on every run: `name`, `last_name`, `phone`, `instagram`, `
 
 Verified end to end on 2026-09-17 with a test contact: New → Applicants; Approved → Approved Guests + both DAD groups; Confirmed guest → DAD Confirmed with `invitation_status = confirmed`; Qualified lead → Partners & Sponsors.
 
-**Status:** all three are built, tested and switched **off**, because the Make free plan allows only two active scenarios and both slots are taken by the website webhooks. Upgrading Make to Core lifts the limit; then activate them in Make (Scenarios → toggle) or via the API. Two Make gotchas discovered while building: the Airtable "Watch Records" trigger returned 422 with every parameter combination tried, so the scenarios use a scheduled Search instead; and inside a raw HTTP body Make treats any literal `}}` as an expression closer and does not unescape `\"` inside expressions, so nested JSON is written with `} }` and group logic lives in filtered modules rather than in the body.
+**Status:** Make was upgraded to Core on 2026-09-17 and all three are **active**, polling every 30 minutes with a 40-minute look-back (each empty poll costs one Make operation; at 15 minutes the three scenarios alone would have used most of Core's 10,000 operations a month). A status change in Airtable therefore reaches MailerLite within about 30 minutes.
+
+Sender domain `theatlaslist.club` was authenticated in MailerLite on 2026-09-17 (verification TXT, DKIM CNAME `litesrv._domainkey`, SPF include merged into GoDaddy's managed SPF, existing DMARC kept). Two Make gotchas discovered while building: the Airtable "Watch Records" trigger returned 422 with every parameter combination tried, so the scenarios use a scheduled Search instead; and inside a raw HTTP body Make treats any literal `}}` as an expression closer and does not unescape `\"` inside expressions, so nested JSON is written with `} }` and group logic lives in filtered modules rather than in the body.
 
 Still to do outside Make: verify the sending domain `theatlaslist.club` in MailerLite (DNS records) so `info@theatlaslist.club` can send, and enable the four automations.
 
