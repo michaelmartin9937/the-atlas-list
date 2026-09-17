@@ -147,6 +147,26 @@ Trigger: Custom Webhook `Atlas — partner_inquiries`; URL into `make_webhook_ur
 3. Search `Partnership Leads` by `{Website Submission ID} = record.id`; stop if found.
 4. Create `Partnership Lead`: link Contact + Organization, `Category`, `Budget Range`, `Internal/Inquiry Notes` = `message`, `Inquiry Date` = `created_at`, `Lead Source` = `Website`, `Pipeline Stage` = `New Inquiry`, `Website Submission ID` = `record.id`.
 
+## 4b. Airtable → MailerLite (built 2026-09-17, waiting on the Make plan)
+
+MailerLite account 2639575 (Devaun's). Groups, custom fields and four automations ("01 — Atlas Approved Guest", "02 — Desert After Dark Approved", "03 — Desert After Dark Confirmed", "04 — Partner Inquiry / Qualified Partner") already exist there; the automations are **disabled** until Devaun enables them.
+
+Three Make scenarios poll Airtable every 15 minutes for rows whose `Last Modified` (new field on each table) is within the last 25 minutes, then upsert the linked Contact into MailerLite by email (`POST /api/subscribers`, which is an upsert) and add groups with `POST /api/subscribers/{id}/groups/{group}`:
+
+| Scenario | ID | Watches | Sets | Adds groups |
+|---|---|---|---|---|
+| Atlas — Airtable Event Applications → MailerLite | 6303722 | Event Applications | `application_status`, `source_page`, `current_event` + contact fields | always **Atlas — Applicants**; if Approved **Atlas — Approved Guests**; if Approved and Desert After Dark **Event — Desert After Dark 2026** + **… Approved** |
+| Atlas — Airtable Guest Operations → MailerLite | 6303723 | Guest Operations | `invitation_status`, `access_level`, `current_event`, `last_event_attended` (when Checked In) | if Confirmed and Desert After Dark **Event — Desert After Dark 2026** + **… Confirmed** |
+| Atlas — Airtable Partnership Leads → MailerLite | 6303724 | Partnership Leads | contact fields | if Pipeline Stage is Qualified or later **Atlas — Partners & Sponsors** |
+
+Contact fields synced on every run: `name`, `last_name`, `phone`, `instagram`, `atlas_relationship`, `airtable_contact_id`, `sms_consent` (yes/no), `email_marketing_consent` (yes/no). Select values are lowercased with underscores (`approved_guest`, `invite_sent`, `general_admission`) to match Devaun's segment values. Groups are only ever added, never removed (per the MVP scope).
+
+Verified end to end on 2026-09-17 with a test contact: New → Applicants; Approved → Approved Guests + both DAD groups; Confirmed guest → DAD Confirmed with `invitation_status = confirmed`; Qualified lead → Partners & Sponsors.
+
+**Status:** all three are built, tested and switched **off**, because the Make free plan allows only two active scenarios and both slots are taken by the website webhooks. Upgrading Make to Core lifts the limit; then activate them in Make (Scenarios → toggle) or via the API. Two Make gotchas discovered while building: the Airtable "Watch Records" trigger returned 422 with every parameter combination tried, so the scenarios use a scheduled Search instead; and inside a raw HTTP body Make treats any literal `}}` as an expression closer and does not unescape `\"` inside expressions, so nested JSON is written with `} }` and group logic lives in filtered modules rather than in the body.
+
+Still to do outside Make: verify the sending domain `theatlaslist.club` in MailerLite (DNS records) so `info@theatlaslist.club` can send, and enable the four automations.
+
 ## 5. Out of scope for the MVP
 
 No MailerLite, approval emails, guest-operations records, SMS, or ticketing in these scenarios. MailerLite is driven by Airtable status changes in a later scenario, gated on `Email Marketing Consent`.
