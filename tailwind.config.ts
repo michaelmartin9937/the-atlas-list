@@ -11,7 +11,8 @@ const config: Config = {
         bone: "#F2EBDB", // cream: text on dark, light button fill
         pearl: "#F8F6F1", // page background
         ink: "#241F17", // body text on light
-        ember: "#BD5A21", // eyebrows / accent
+        ember: "#BD5A21", // legal-page tabs, hover accent
+        gold: "#C59C55", // eyebrows, footer headings, gold buttons (Diana's Sep 2026 revision)
         sand: "#D0BF9E", // hairline rules
         taupe: "#A89684",
         bronze: "#A8884F",

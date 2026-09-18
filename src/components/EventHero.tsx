@@ -10,9 +10,10 @@ type Props = {
   posterSrc: string;
 };
 
-// Figma (Desert After Dark hero): copy on the left, a 520×640 media slot on
-// the right, a faint burgundy glow behind the copy. The promo video sits in
-// the slot; it stacks under the copy on phones.
+// Figma (Desert After Dark hero, Sep 2026): copy on the left, a 520×640
+// photo on the right, a faint burgundy glow behind the copy. The promo video
+// keeps living in that slot with the Figma photo as its poster, so the page
+// looks like the design until someone presses play. Stacks on phones.
 export function EventHero({ eyebrow, headline, tagline, subhead, cta, videoSrc, posterSrc }: Props) {
   return (
     <section className="relative overflow-hidden bg-velvet">
@@ -22,13 +23,13 @@ export function EventHero({ eyebrow, headline, tagline, subhead, cta, videoSrc, 
       />
       <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pt-16 md:pt-[100px] pb-20 md:pb-[120px] grid gap-12 md:gap-x-16 md:grid-cols-[minmax(0,1fr)_520px] md:items-center">
         <div className="max-w-[616px]">
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-sunset">
+          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
             {eyebrow}
           </span>
           <h1 className="mt-6 md:mt-8 font-serif text-[3rem] sm:text-6xl md:text-[72px] leading-[1.02] text-bone">
             {headline}
           </h1>
-          <p className="mt-5 md:mt-6 font-serif italic text-2xl md:text-[28px] leading-tight text-rosegold">
+          <p className="mt-5 md:mt-6 font-serif italic text-2xl md:text-[28px] leading-tight text-gold">
             {tagline}
           </p>
           <p className="mt-6 text-base md:text-[17px] leading-[1.5] text-velvet-text">
@@ -37,7 +38,7 @@ export function EventHero({ eyebrow, headline, tagline, subhead, cta, videoSrc, 
           <div className="mt-8">
             <Link
               href={cta.href}
-              className="inline-flex items-center justify-center h-12 px-7 bg-champagne text-noir text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-bone transition-colors"
+              className="inline-flex items-center justify-center h-12 px-7 bg-gold text-noir text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-bone transition-colors"
             >
               {cta.label}
             </Link>

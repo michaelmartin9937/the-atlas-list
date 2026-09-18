@@ -1,5 +1,5 @@
 // Copy for /desert-after-dark — mirrors the Figma frame
-// "Desert After Dark — Full Page".
+// "Desert After Dark — Full Page" (Diana's September 2026 revision).
 export const desertAfterDark = {
   hero: {
     eyebrow: "October 10, 2026 · Paradise Valley",
@@ -11,21 +11,21 @@ export const desertAfterDark = {
   },
   night: {
     eyebrow: "What's in Store",
-    headline: "How the Night Unfolds.",
+    headline: "How the Night Unfolds",
     intro: "Swipe through everything the evening holds, before you decide where to start.",
     // image: null renders the Figma placeholder slot until a photo is chosen.
     cards: [
       {
         title: "The Runway",
         body: "Six designers you won't see sharing a stage anywhere else. One night, then it's gone.",
-        image: "/images/atlas-house-promo-poster.jpg",
+        image: "/images/dad/card-runway.jpg",
         alt: "A model in a black velvet gown beside the pool at dusk",
       },
       {
         title: "The Music",
         body: "Anthoz headlines — Hotsauce, St Bernard, and Aaron Michael trade off behind the decks till last call.",
-        image: null,
-        alt: "",
+        image: "/images/dad/card-music.jpg",
+        alt: "AnthoZ behind the decks",
       },
       {
         title: "The Bar",
@@ -55,28 +55,29 @@ export const desertAfterDark = {
   },
   designers: {
     eyebrow: "Featured Designers",
-    headline: "One Runway. Six Designers.",
+    headline: "One Runway — Six Designers",
     intro:
       "Six designers, each with their own point of view — one night to see all six on the same runway.",
     note: "Listed alphabetically.",
-    // image = the designer's current Instagram profile picture.
+    // image = the designer's Instagram profile picture (from the earlier roster
+    // where the person is unchanged).
     list: [
-      { name: "Alexandra", handle: "oneofakindaura", image: "/images/designers/oneofakindaura.jpg" },
-      { name: "Al'mer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
-      { name: "Bella Elisse", handle: "bella.elisse", image: "/images/designers/bella-elisse.jpg" },
-      { name: "Isaac Newton", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
-      { name: "Koan Asaky", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
-      { name: "Stephanie Murillo Agandar", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
+      { name: "Alexandra Bobo", label: "Adiara Designs", handle: "adiaradesigns", image: "/images/designers/oneofakindaura.jpg" },
+      { name: "Al'mer", label: "Designer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
+      { name: "Bella Elise", label: "Designer", handle: "elisestudiosco", image: "/images/designers/bella-elisse.jpg" },
+      { name: "Isaac Newton", label: "Isaac Newton Collection", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
+      { name: "Koan Asaky", label: "Designer", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
+      { name: "Stephanie Azucena", label: "Machehchena", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
     ],
   },
   venue: {
     eyebrow: "The Venue",
-    headline: "A Private Residence in Paradise Valley.",
+    headline: "A Private Residence in Paradise Valley",
     body: "This is not a hotel ballroom, not a club, not a public venue. It's a private estate — the kind of place you don't see on the way to work. The exact address is released only to ticketed guests, 72 hours before the door opens. This is how we keep the room the room.",
   },
   timeline: {
     eyebrow: "The Evening",
-    headline: "Four Acts.",
+    headline: "Four Acts",
     intro: "Four moments, one night. The full lineup drops two weeks out.",
     acts: [
       {
@@ -109,8 +110,8 @@ export const desertAfterDark = {
     palette: [
       { name: "Dune Blush", hex: "#C97D8A" },
       { name: "Ember Glow", hex: "#F07A5A" },
-      { name: "Canyon Clay", hex: "#E07D4A" },
-      { name: "Golden Hour", hex: "#E09A3E" },
+      { name: "Canyon Clay", hex: "#C59C55" },
+      { name: "Golden Hour", hex: "#C9A25A" },
       { name: "Mirage Bloom", hex: "#B2327A" },
       { name: "Dusk Orchid", hex: "#6E2D5C" },
       { name: "Twilight Haze", hex: "#7B4DB1" },
@@ -120,31 +121,41 @@ export const desertAfterDark = {
       { name: "Sundown Gold", hex: "linear-gradient(90deg,#8A6320 0%,#E5B24A 45%,#C7A13F 70%,#8A6320 100%)" },
     ],
   },
+  store: {
+    eyebrow: "Whats in Store",
+    images: [
+      { src: "/images/dad/store-1.jpg", alt: "Guests arriving at the estate" },
+      { src: "/images/dad/store-2.jpg", alt: "A guest in lavender on the terrace" },
+      { src: "/images/dad/store-3.jpg", alt: "A fire performer" },
+      { src: "/images/dad/store-4.jpg", alt: "Guests taking a photo together" },
+      { src: "/images/dad/store-5.jpg", alt: "A guest in white with the mountain behind" },
+    ],
+  },
   team: {
     eyebrow: "Production",
-    headline: "The team behind the night.",
+    headline: "The team behind the night",
     intro: "The people doing the unglamorous work that makes the glamorous part look effortless.",
     // image = current Instagram profile picture. `link: false` marks a
     // placeholder handle that shouldn't open Instagram yet.
     people: [
-      { name: "Diana Ferar", title: "Executive Producer", handle: "dianaferar", image: "/images/team/dianaferar.jpg" },
-      { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
       { name: "Devaun", title: "Co-Founder & Photographer", handle: "devaunlennox", image: "/images/host-devaun.jpg" },
       { name: "Michael", title: "Co-Founder", handle: "whoismikemartin", image: "/images/host-michael.jpg" },
-      { name: "Hair & Makeup", note: "Artists to be announced.", handle: "hairstylist/MUA", link: false },
-      { name: "Intertainment Media", title: "Lighting Production", note: "Malcom, with assistant TBA.", handle: "mediaco.", link: false },
+      { name: "Diana Ferar", title: "Executive Producer", note: "Dee Creator 360", handle: "dianaferar", image: "/images/team/dianaferar.jpg" },
+      { name: "Johnathan Eden", title: "Transport & Front of House", note: "Opulis", handle: "hairstylist/MUA", link: false },
+      { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
+      { name: "Malcom Marzett", title: "Media Director", note: "Intertainment Media", handle: "mediaco.", image: "/images/team/malcom.jpg", link: false },
     ],
   },
   partnership: {
     eyebrow: "Partnership",
-    headline: "A few partnerships remain.",
+    headline: "A few partnerships remain",
     subhead: "Own a category. Not a logo placement.",
     cta: "See Partnerships",
     href: "/partner",
   },
   apply: {
     eyebrow: "Apply",
-    headline: "Request your ticket allocation.",
+    headline: "Request your ticket allocation",
     subhead:
       "Tickets to Desert After Dark are allocated by application, not by open sale. Tell us about you below. If you're approved, we'll follow up with tier options (General, VIP), pricing, and RSVP instructions.",
   },

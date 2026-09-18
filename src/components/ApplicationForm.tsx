@@ -12,6 +12,9 @@ type Props = {
   // "light" (default) sits on the site's pearl sections; "dark" is the
   // Desert After Dark "Velvet Sunset" treatment on velvet-black sections.
   tone?: Tone;
+  // The home page form omits the Instagram field (Figma, Sep 2026); About and
+  // Desert After Dark keep it. The field is optional server-side either way.
+  showInstagram?: boolean;
 };
 
 type FieldErrors = Partial<Record<
@@ -52,7 +55,7 @@ const TONES: Record<Tone, ToneClasses> = {
     consent: "text-ink/85",
     fine: "text-ink/55",
     link: "hover:text-ember",
-    submit: "text-bone bg-noir hover:bg-ember",
+    submit: "text-bone bg-noir hover:bg-gold hover:text-noir",
   },
   dark: {
     input:
@@ -64,11 +67,11 @@ const TONES: Record<Tone, ToneClasses> = {
     consent: "text-[#D8D2C8]",
     fine: "text-velvet-text/80",
     link: "hover:text-champagne",
-    submit: "text-noir bg-champagne hover:bg-bone",
+    submit: "text-noir bg-gold hover:bg-bone",
   },
 };
 
-export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Props) {
+export function ApplicationForm({ sourcePage, submitLabel, tone = "light", showInstagram = true }: Props) {
   const t = TONES[tone];
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
@@ -175,21 +178,23 @@ export function ApplicationForm({ sourcePage, submitLabel, tone = "light" }: Pro
         />
       </Field>
 
-      <Field
-        label="Instagram handle"
-        helper="Optional, but helpful for invite review."
-        error={errors.instagram}
-        tone={t}
-      >
-        <input
-          type="text"
-          value={instagram}
-          onChange={(e) => setInstagram(e.target.value)}
-          placeholder="@yourhandle"
-          autoComplete="off"
-          className={t.input}
-        />
-      </Field>
+      {showInstagram && (
+        <Field
+          label="Instagram handle"
+          helper="Optional, but helpful for invite review."
+          error={errors.instagram}
+          tone={t}
+        >
+          <input
+            type="text"
+            value={instagram}
+            onChange={(e) => setInstagram(e.target.value)}
+            placeholder="@yourhandle"
+            autoComplete="off"
+            className={t.input}
+          />
+        </Field>
+      )}
 
       <Field
         label="How did you hear about us?"

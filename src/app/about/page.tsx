@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   description: about.hero.subhead,
 };
 
-// Figma: "Atlas List — About (New)" — hero, founders, the standard, a quote
-// band, the application form, a photo grid.
+// Figma: "Sections" (About, Sep 2026) — hero, founders, the quote on a dark
+// silk background, the standard, the application form, a photo grid.
 export default function AboutPage() {
   return (
     <>
@@ -24,10 +24,23 @@ export default function AboutPage() {
 
       <HostCards />
 
+      <section
+        className="relative overflow-hidden bg-noir bg-cover bg-center px-6 md:px-10 py-24 md:py-[160px]"
+        style={{ backgroundImage: "url(/images/about/quote-bg.jpg)" }}
+      >
+        <div className="relative max-w-[860px] mx-auto text-center">
+          <FadeIn>
+            <p className="font-serif italic text-2xl sm:text-3xl md:text-[40px] leading-[1.25] text-bone">
+              {about.quote}
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
       <section className="bg-pearl px-6 md:px-10 py-20 md:py-[120px]">
         <div className="max-w-[1280px] mx-auto text-center flex flex-col items-center">
           <FadeIn className="w-full flex flex-col items-center">
-            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
               {about.standard.eyebrow}
             </span>
             <h2 className="mt-6 max-w-[980px] font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.18] text-noir">
@@ -43,21 +56,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-noir px-6 md:px-10 py-24 md:py-[160px]">
-        <div className="max-w-[860px] mx-auto text-center">
-          <FadeIn>
-            <p className="font-serif italic text-2xl sm:text-3xl md:text-[40px] leading-[1.25] text-bone">
-              {about.quote}
-            </p>
-          </FadeIn>
-        </div>
-      </section>
-
-      <section id="apply" className="bg-pearl px-6 md:px-10 pt-20 md:pt-[112px] pb-20 md:pb-[96px]">
+      <section id="apply" className="bg-pearl px-6 md:px-10 pt-4 md:pt-6 pb-20 md:pb-[96px]">
         <div className="max-w-[700px] mx-auto">
           <FadeIn>
             <div className="text-center flex flex-col items-center">
-              <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+              <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
                 {about.apply.eyebrow}
               </span>
               <h2 className="mt-5 font-serif text-4xl md:text-[44px] leading-[1.1] text-noir">

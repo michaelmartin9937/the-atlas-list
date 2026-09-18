@@ -6,7 +6,7 @@ type Props = {
   handle: string;
   image?: string;
   title?: string; // small tracked role label
-  note?: string; // italic serif line, e.g. "Artists to be announced."
+  note?: string; // italic serif line, e.g. "Dee Creator 360"
   link?: boolean; // false for placeholder handles
 };
 

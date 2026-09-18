@@ -1,14 +1,14 @@
-// Copy for /partner — mirrors the Figma frame "Sponsorship — Atlas List".
+// Copy for /partner — mirrors the Figma frame "Sponsorship — Atlas List" (Sep 2026).
 export const partner = {
   hero: {
     eyebrow: "Partnership",
-    headline: "The night is already funded. A few partnerships remain.",
+    headline: "The night is already funded — a few partnerships remain",
     subhead:
       "The talent, venue, fashion, and hospitality are already being assembled. We're opening a small number of category partnerships to brands that actually fit the room.",
   },
   why: {
     eyebrow: "Why Partner",
-    headline: "Own the experience. Not a logo.",
+    headline: "Own the experience — not a logo",
     points: [
       {
         title: "Full bar, all night",
@@ -30,7 +30,7 @@ export const partner = {
   },
   audience: {
     eyebrow: "The Audience",
-    headline: "The room you're partnering with.",
+    headline: "The room you're partnering with",
     body: "Founders, executives, creatives, doctors, and attorneys — accomplished, well-traveled, and deliberate about where they spend an evening. The guest list is reviewed and curated, never sold.",
     stats: [
       { value: "Invite", label: "Only" },
@@ -40,7 +40,7 @@ export const partner = {
   },
   tiers: {
     eyebrow: "Available Partnerships",
-    headline: "Not packages. Ownership.",
+    headline: "Not packages — ownership",
     intro:
       "A small number of category partnerships, each one fully owned by a single brand — no logo walls, no competing voices in the same space.",
     note: "Title Partner — Thundr · Closed",
@@ -57,6 +57,7 @@ export const partner = {
           "Ownership of your category's activation",
           "Story coverage + inclusion in event photography",
           "Up to 4 hosted guests",
+          "VIP access",
         ],
       },
       {
@@ -70,6 +71,7 @@ export const partner = {
           "Website partner placement",
           "Event photography + story coverage",
           "2 hosted guests",
+          "VIP access",
         ],
       },
       {
@@ -82,13 +84,14 @@ export const partner = {
           "Partner placement on the event page",
           "Social recognition",
           "1 hosted guest",
+          "VIP access",
         ],
       },
     ],
   },
   categories: {
     eyebrow: "What We're Looking For",
-    headline: "The categories we're prioritizing.",
+    headline: "The categories we're prioritizing",
     list: [
       "Spirits",
       "Champagne & Wine",
@@ -98,9 +101,29 @@ export const partner = {
       "Cigar or Wellness",
     ],
   },
+  sponsors: {
+    eyebrow: "Our Sponsors",
+    headline: "The Names Behind The Night",
+    intro: "Apply today to see how your brand can be sponsored at Desert After Dark too.",
+    list: [
+      { name: "thundr", image: "/images/sponsors/thundr.jpg" },
+      { name: "Opulence", image: "/images/sponsors/opulence.jpg" },
+      { name: "Your Logo Here", image: null },
+    ],
+  },
   inquiries: {
     eyebrow: "Partnership Inquiries",
-    headline: "Let's build the room.",
+    headline: "Let's build the room",
     subhead: "Tell us about your brand and which category fits.",
+  },
+  store: {
+    eyebrow: "Whats in Store",
+    images: [
+      { src: "/images/dad/store-1.jpg", alt: "Guests arriving at the estate" },
+      { src: "/images/dad/store-2.jpg", alt: "A guest in lavender on the terrace" },
+      { src: "/images/dad/store-3.jpg", alt: "A fire performer" },
+      { src: "/images/dad/store-4.jpg", alt: "Guests taking a photo together" },
+      { src: "/images/dad/store-5.jpg", alt: "A guest in white with the mountain behind" },
+    ],
   },
 } as const;

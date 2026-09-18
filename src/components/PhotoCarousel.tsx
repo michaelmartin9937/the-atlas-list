@@ -2,15 +2,22 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
 
-// Horizontal photo carousel with arrows + dot indicator
-// (Figma: As the Night Unfolds — More from the room). Native scroll-snap does
-// the work; the arrows and dots just drive/reflect scroll position, so it
-// stays swipeable on touch and keyboard-scrollable.
-export function MoreFromTheRoom() {
-  const { eyebrow, headline, images } = home.moreFromTheRoom;
+type Photo = { src: string; alt: string };
+
+type Props = {
+  eyebrow: string;
+  headline?: string;
+  images: readonly Photo[];
+  // "light" = pearl section (home); "dark" = velvet section (event / partner).
+  tone?: "light" | "dark";
+};
+
+// Horizontal photo carousel: 224×210 tiles, round arrows outside the column,
+// dot indicator beneath (Figma: "More from the room", "Whats in store").
+// Native scroll-snap does the moving so it stays swipeable on touch.
+export function PhotoCarousel({ eyebrow, headline, images, tone = "light" }: Props) {
   const track = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
 
@@ -36,22 +43,34 @@ export function MoreFromTheRoom() {
   const step = (dir: -1 | 1) =>
     scrollTo(Math.min(images.length - 1, Math.max(0, active + dir)));
 
-  const arrow =
-    "hidden lg:flex absolute top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border border-sand bg-pearl text-noir hover:border-ember hover:text-ember transition-colors disabled:opacity-30 disabled:hover:border-sand disabled:hover:text-noir";
+  const dark = tone === "dark";
+  const arrow = `hidden lg:flex absolute top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full border transition-colors disabled:opacity-30 ${
+    dark
+      ? "border-[#F07A5A] text-[#F07A5A] hover:border-gold hover:text-gold disabled:hover:border-[#F07A5A] disabled:hover:text-[#F07A5A]"
+      : "border-gold text-gold bg-pearl hover:border-noir hover:text-noir disabled:hover:border-gold disabled:hover:text-gold"
+  }`;
 
   return (
-    <section className="bg-pearl py-14 md:py-16 px-6 md:px-10 overflow-hidden">
+    <section
+      className={`${dark ? "bg-velvet" : "bg-pearl"} py-14 md:py-16 px-6 md:px-10 overflow-hidden`}
+    >
       <div className="max-w-[1280px] mx-auto relative">
         <FadeIn>
-          <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+          <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
             {eyebrow}
           </span>
-          <h2 className="mt-3 font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.1] text-noir">
-            {headline}
-          </h2>
+          {headline && (
+            <h2
+              className={`mt-3 font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.1] ${
+                dark ? "text-bone" : "text-noir"
+              }`}
+            >
+              {headline}
+            </h2>
+          )}
         </FadeIn>
 
-        <div className="relative mt-8 md:mt-10">
+        <div className={`relative ${headline ? "mt-8 md:mt-10" : "mt-8"}`}>
           <button
             type="button"
             aria-label="Previous photos"
@@ -68,14 +87,16 @@ export function MoreFromTheRoom() {
             {images.map((img, i) => (
               <li
                 key={img.src}
-                className="relative snap-start shrink-0 w-[224px] aspect-[224/210] overflow-hidden bg-sand/40"
+                className={`relative snap-start shrink-0 w-[68vw] max-w-[224px] aspect-[224/210] overflow-hidden rounded-sm ${
+                  dark ? "bg-velvet-card" : "bg-sand/40"
+                }`}
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
                   fill
                   sizes="224px"
-                  className="object-cover object-[center_35%]"
+                  className="object-cover"
                   priority={i < 2}
                 />
               </li>
@@ -101,8 +122,12 @@ export function MoreFromTheRoom() {
               aria-selected={i === active}
               aria-label={`Photo ${i + 1}`}
               onClick={() => scrollTo(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === active ? "w-5 bg-ember" : "w-2 bg-sand hover:bg-ember/60"
+              className={`h-[6px] rounded-full transition-all ${
+                i === active
+                  ? "w-5 bg-gold"
+                  : dark
+                    ? "w-[6px] bg-[#4A4640] hover:bg-gold/60"
+                    : "w-[6px] bg-sand hover:bg-gold/60"
               }`}
             />
           ))}

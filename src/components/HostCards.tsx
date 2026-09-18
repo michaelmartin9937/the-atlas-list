@@ -11,7 +11,7 @@ export function HostCards() {
       <div className="max-w-[1280px] mx-auto">
         <FadeIn>
           <div className="text-center flex flex-col items-center">
-            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
               {eyebrow}
             </span>
             <h2 className="mt-5 font-serif text-4xl md:text-[52px] leading-[1.1] text-noir">

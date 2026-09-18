@@ -19,9 +19,9 @@ type Props = {
 };
 
 // The night is one arc — golden hour into full velvet dark — so the card
-// numbers walk through the palette in that order (Figma: 01 champagne …).
+// numbers walk through the palette in that order (Figma: 01 gold …).
 const NUMBER_COLORS = [
-  "text-champagne",
+  "text-gold",
   "text-rosegold",
   "text-terracotta",
   "text-burgundy",
@@ -29,9 +29,10 @@ const NUMBER_COLORS = [
   "text-burgundy",
 ];
 
-// Figma: "What's in Store — How the Night Unfolds." A 1050px card carousel
-// with round prev/next controls in the header and a dot indicator beneath.
-// Native scroll-snap does the moving so it stays swipeable on touch.
+// Figma (Sep 2026): "What's in Store — How the Night Unfolds". Two cards per
+// view at 576px, round prev/next controls in the header, dots beneath. The
+// card next in line carries the plum border, as in the design. Native
+// scroll-snap does the moving so it stays swipeable on touch.
 export function NightCarousel({ eyebrow, headline, intro, cards }: Props) {
   const track = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
@@ -67,7 +68,7 @@ export function NightCarousel({ eyebrow, headline, intro, cards }: Props) {
         <FadeIn>
           <div className="flex items-end justify-between gap-6">
             <div>
-              <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-champagne">
+              <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
                 {eyebrow}
               </span>
               <h2 className="mt-4 font-serif text-4xl md:text-[56px] leading-[1.08] text-bone">
@@ -83,7 +84,7 @@ export function NightCarousel({ eyebrow, headline, intro, cards }: Props) {
                 aria-label="Previous"
                 onClick={() => step(-1)}
                 disabled={atStart}
-                className="h-12 w-12 rounded-full border border-velvet-line text-bone flex items-center justify-center transition-colors hover:border-champagne hover:text-champagne disabled:opacity-40 disabled:hover:border-velvet-line disabled:hover:text-bone"
+                className="h-12 w-12 rounded-full border border-velvet-line text-bone flex items-center justify-center transition-colors hover:border-gold hover:text-gold disabled:opacity-40 disabled:hover:border-velvet-line disabled:hover:text-bone"
               >
                 <Arrow dir="left" />
               </button>
@@ -92,7 +93,7 @@ export function NightCarousel({ eyebrow, headline, intro, cards }: Props) {
                 aria-label="Next"
                 onClick={() => step(1)}
                 disabled={atEnd}
-                className="h-12 w-12 rounded-full bg-champagne text-noir flex items-center justify-center transition-colors hover:bg-bone disabled:opacity-40 disabled:hover:bg-champagne"
+                className="h-12 w-12 rounded-full bg-gold text-noir flex items-center justify-center transition-colors hover:bg-bone disabled:opacity-40 disabled:hover:bg-gold"
               >
                 <Arrow dir="right" />
               </button>
@@ -107,17 +108,19 @@ export function NightCarousel({ eyebrow, headline, intro, cards }: Props) {
           {cards.map((card, i) => (
             <li
               key={card.title}
-              className="snap-start shrink-0 w-[86vw] md:w-[1050px] rounded-xl border border-plum bg-velvet-card p-5 md:p-8 flex flex-col"
+              className={`snap-start shrink-0 w-[86vw] md:w-[576px] rounded-xl border bg-velvet-card p-5 md:p-8 flex flex-col transition-colors ${
+                i === active + 1 ? "border-plum" : "border-velvet-line/60"
+              }`}
             >
-              <div className="relative aspect-[986/394] overflow-hidden rounded-sm bg-[#DCDCDC]">
+              <div className="relative aspect-[512/394] overflow-hidden rounded-sm bg-[#DCDCDC]">
                 {card.image && (
                   <Image
                     src={card.image}
                     alt={card.alt}
                     fill
-                    sizes="(min-width: 768px) 986px, 86vw"
+                    sizes="(min-width: 768px) 512px, 86vw"
                     className="object-cover"
-                    priority={i === 0}
+                    priority={i < 2}
                   />
                 )}
               </div>
@@ -144,7 +147,7 @@ export function NightCarousel({ eyebrow, headline, intro, cards }: Props) {
               aria-label={`Card ${i + 1}: ${card.title}`}
               onClick={() => scrollTo(i)}
               className={`h-[6px] rounded-full transition-all ${
-                i === active ? "w-7 bg-[#C7A869]" : "w-[6px] bg-[#4A4640] hover:bg-champagne/60"
+                i === active ? "w-7 bg-gold" : "w-[6px] bg-[#4A4640] hover:bg-gold/60"
               }`}
             />
           ))}

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { EventHero } from "@/components/EventHero";
 import { NightCarousel } from "@/components/NightCarousel";
 import { PersonTile } from "@/components/PersonTile";
+import { PhotoCarousel } from "@/components/PhotoCarousel";
+import { PartnershipBand } from "@/components/PartnershipBand";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
 import { desertAfterDark } from "@/content/desert-after-dark";
@@ -44,15 +45,15 @@ export const metadata: Metadata = {
   },
 };
 
-// Figma: "Desert After Dark — Full Page". Velvet-black page, champagne
+// Figma: "Desert After Dark — Full Page" (Sep 2026). Velvet-black page, gold
 // eyebrows, Playfair headlines, 140px section rhythm.
-const eyebrow = "text-[13px] font-semibold uppercase tracking-[0.08em] text-champagne";
+const eyebrow = "text-[13px] font-semibold uppercase tracking-[0.08em] text-gold";
 const h2Center = "mt-5 font-serif text-4xl md:text-[56px] leading-[1.08] text-bone";
 const intro = "mt-5 text-base md:text-[17px] leading-[1.5] text-velvet-text";
 
 // The night is one arc — golden hour into full velvet dark — so the four
 // acts walk through the palette in that order.
-const ACT_COLORS = ["text-champagne", "text-rosegold", "text-terracotta", "text-burgundy"];
+const ACT_COLORS = ["text-gold", "text-rosegold", "text-terracotta", "text-burgundy"];
 
 export default function DesertAfterDarkPage() {
   const d = desertAfterDark;
@@ -65,7 +66,7 @@ export default function DesertAfterDarkPage() {
         subhead={d.hero.subhead}
         cta={{ label: d.hero.cta, href: "#apply" }}
         videoSrc="/videos/atlas-house-promo.mp4"
-        posterSrc="/images/atlas-house-promo-poster.jpg"
+        posterSrc="/images/dad/hero-fire.jpg"
       />
 
       <NightCarousel
@@ -90,7 +91,7 @@ export default function DesertAfterDarkPage() {
           </FadeIn>
           <ul className="mt-14 md:mt-[72px] grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
             {d.designers.list.map((p) => (
-              <PersonTile key={p.handle} name={p.name} handle={p.handle} image={p.image} />
+              <PersonTile key={p.handle} name={p.name} handle={p.handle} image={p.image} title={p.label} />
             ))}
           </ul>
         </div>
@@ -158,26 +159,18 @@ export default function DesertAfterDarkPage() {
             <h2 className="mt-6 font-serif text-4xl md:text-[48px] leading-[1.1] text-bone">
               {d.dressCode.headline}
             </h2>
-            <div className="mt-8 h-[3px] w-60 bg-gradient-to-r from-champagne via-rosegold to-burgundy" aria-hidden />
+            <div className="mt-8 h-[3px] w-60 bg-gradient-to-r from-gold via-rosegold to-burgundy" aria-hidden />
             <p className="mt-8 max-w-[1000px] text-base md:text-[17px] leading-[1.5] text-[#D8D2C8]">
               {d.dressCode.body}
             </p>
           </FadeIn>
           <ul className="mt-12 md:mt-16 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-11 gap-x-3 gap-y-8 md:gap-x-2">
-            {d.dressCode.palette.map((swatch, i) => (
-              <li key={swatch.name} className="flex flex-col items-center gap-3 text-center">
+            {d.dressCode.palette.map((swatch) => (
+              <li key={swatch.name} className="flex flex-col items-center gap-4 text-center">
                 <span className="text-[13px] font-semibold leading-tight text-bone">{swatch.name}</span>
                 <span
-                  className={`block w-full h-9 ${swatch.hex === "#0A0A0A" ? "border border-[#3A3633]" : ""}`}
-                  style={{
-                    background: swatch.hex,
-                    // The swatches sit like fabric samples — each one a
-                    // slightly different tilt.
-                    clipPath:
-                      i % 2 === 0
-                        ? "polygon(0 0, 100% 10%, 100% 100%, 0 90%)"
-                        : "polygon(0 10%, 100% 0, 100% 90%, 0 100%)",
-                  }}
+                  className={`block w-full h-11 ${swatch.hex === "#0A0A0A" ? "border border-[#3A3633]" : ""}`}
+                  style={{ background: swatch.hex }}
                   aria-hidden
                 />
               </li>
@@ -185,6 +178,8 @@ export default function DesertAfterDarkPage() {
           </ul>
         </div>
       </section>
+
+      <PhotoCarousel eyebrow={d.store.eyebrow} images={d.store.images} tone="dark" />
 
       <section className="bg-velvet px-6 md:px-10 py-20 md:py-[140px]">
         <div className="max-w-[1280px] mx-auto">
@@ -211,28 +206,7 @@ export default function DesertAfterDarkPage() {
         </div>
       </section>
 
-      {/* Partnership CTA — the one light band on the page. */}
-      <section className="bg-pearl px-6 md:px-10 py-14 md:py-[80px]">
-        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div>
-            <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-champagne">
-              {d.partnership.eyebrow}
-            </span>
-            <h2 className="mt-3 font-serif text-3xl md:text-[36px] leading-[1.15] text-noir">
-              {d.partnership.headline}
-            </h2>
-            <p className="mt-3 text-base md:text-[17px] leading-[1.5] text-ink/70">
-              {d.partnership.subhead}
-            </p>
-          </div>
-          <Link
-            href={d.partnership.href}
-            className="inline-flex self-start md:self-auto items-center justify-center h-[50px] px-8 bg-noir text-bone text-xs font-medium uppercase tracking-[0.06em] hover:bg-ember transition-colors"
-          >
-            {d.partnership.cta}
-          </Link>
-        </div>
-      </section>
+      <PartnershipBand {...d.partnership} tone="light" />
 
       <section id="apply" className="relative overflow-hidden bg-velvet px-6 md:px-10 pt-20 md:pt-[120px] pb-20 md:pb-[140px]">
         <div

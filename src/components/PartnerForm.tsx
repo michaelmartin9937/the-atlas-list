@@ -49,7 +49,7 @@ export function PartnerForm() {
   if (sent) {
     return (
       <div className="text-center flex flex-col items-center gap-4 py-10" role="status">
-        <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+        <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
           Inquiry received
         </span>
         <p className="font-serif text-2xl md:text-3xl text-noir">Thank you — we&apos;ll be in touch.</p>
@@ -101,7 +101,7 @@ export function PartnerForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="self-start inline-flex items-center justify-center h-[50px] px-[60px] text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-ember transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="self-start inline-flex items-center justify-center h-[50px] px-[60px] text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-gold hover:text-noir transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {submitting ? "Sending…" : "Submit Inquiry"}
       </button>

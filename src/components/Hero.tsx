@@ -53,20 +53,20 @@ export function Hero({
       />
       <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pb-16 md:pb-20 pt-16 md:pt-24 w-full">
         <div className="max-w-[700px] flex flex-col">
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">
+          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
             {eyebrow}
           </span>
-          <h1 className="mt-4 md:mt-5 font-serif text-[2.6rem] sm:text-5xl md:text-[56px] leading-[1.08] text-bone">
+          <h1 className="mt-5 md:mt-7 font-serif text-[2.6rem] sm:text-5xl md:text-[64px] leading-[1.1] text-bone md:max-w-[760px]">
             {headline}
           </h1>
-          <p className="mt-6 max-w-[560px] text-base md:text-lg leading-[1.5] text-bone/80">
+          <p className="mt-4 max-w-[500px] text-base md:text-[17px] leading-[1.5] text-bone/80">
             {subhead}
           </p>
           {cta && (
             <div className="mt-8 md:mt-10">
               <Link
                 href={cta.href}
-                className="inline-flex items-center justify-center h-12 px-8 bg-pearl text-noir text-xs font-medium uppercase tracking-[0.06em] hover:bg-ember hover:text-bone transition-colors"
+                className="inline-flex items-center justify-center h-12 px-8 bg-pearl text-noir text-xs font-medium uppercase tracking-[0.06em] hover:bg-gold transition-colors"
               >
                 {cta.label}
               </Link>

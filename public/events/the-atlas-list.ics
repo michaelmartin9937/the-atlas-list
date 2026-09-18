@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Atlas List//Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:The Atlas List
+X-WR-TIMEZONE:America/Phoenix
+BEGIN:VEVENT
+UID:desert-after-dark-2026@theatlaslist.club
+DTSTAMP:20260917T000000Z
+DTSTART;TZID=America/Phoenix:20261010T150000
+DTEND;TZID=America/Phoenix:20261010T233000
+SUMMARY:Desert After Dark — The Atlas List
+DESCRIPTION:A private-residence runway show and mansion party in Paradise Valley\, AZ. VIP pre-party 3:00pm\, fashion show 6:30pm\, mansion party 7:15pm\, after party 10:00pm. Tickets are allocated by application at https://www.theatlaslist.club/desert-after-dark — the exact address is released to ticketed guests 72 hours before doors.
+LOCATION:Private residence\, Paradise Valley\, AZ
+URL:https://www.theatlaslist.club/desert-after-dark
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

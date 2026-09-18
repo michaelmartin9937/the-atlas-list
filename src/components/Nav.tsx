@@ -53,7 +53,7 @@ export function Nav() {
           ))}
           <Link
             href={applyHref}
-            className="text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-ember px-6 h-11 inline-flex items-center transition-colors"
+            className="text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-gold hover:text-noir px-6 h-11 inline-flex items-center transition-colors"
           >
             Apply
           </Link>
