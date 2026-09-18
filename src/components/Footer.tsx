@@ -16,7 +16,8 @@ const legal = [
 ];
 const INSTAGRAM = "https://www.instagram.com/theatlaslist/";
 const TIKTOK = "https://www.tiktok.com/@theatlaslist";
-const EMAIL = "hello@theatlaslist.club";
+// Figma shows hello@, but info@ is the mailbox the team actually reads.
+const EMAIL = "info@theatlaslist.club";
 
 // Pages whose footer sits on the dark event palette.
 const DARK_PAGES = new Set(["/desert-after-dark", "/partner"]);
