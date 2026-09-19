@@ -4,6 +4,7 @@ import { applicationSchema, normalizeUrl, parseInstagramHandle } from "@/lib/val
 import { normalizePhoneE164 } from "@/lib/phone";
 import { checkRateLimit, getClientKey } from "@/lib/rateLimit";
 import { notifyNewApplication } from "@/lib/notify";
+import { readReferralCookie } from "@/lib/referral";
 
 export const runtime = "nodejs";
 
@@ -102,6 +103,9 @@ export async function POST(req: Request) {
     utm_medium: blank(attr.utmMedium),
     utm_campaign: blank(attr.utmCampaign),
     utm_content: blank(attr.utmContent),
+    // Set by /r/<handle> (Brand Ambassador links); read server-side from the
+    // httpOnly cookie, so the form can't be made to claim someone's credit.
+    referral_code: readReferralCookie(req.headers.get("cookie")),
   };
 
   let { error } = await supabase.from("lead_applications").insert({
@@ -176,6 +180,7 @@ export async function POST(req: Request) {
         drewYou: extendedPayload.drew_you,
         aboutYou: extendedPayload.about_you,
         hopingFor: extendedPayload.hoping_for,
+        referralCode: extendedPayload.referral_code,
         utm: [extendedPayload.utm_source, extendedPayload.utm_medium, extendedPayload.utm_campaign, extendedPayload.utm_content]
           .filter(Boolean)
           .join(" / ") || null,

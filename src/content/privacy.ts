@@ -1,5 +1,5 @@
 export const privacy = {
-  effectiveDate: "May 1, 2026",
+  effectiveDate: "September 19, 2026",
   intro:
     "The Atlas List (\"we,\" \"us,\" or \"our\") values your privacy. This policy explains what information we collect when you apply for an invitation, how we use it, and the choices you have.",
   sections: [
@@ -44,7 +44,9 @@ export const privacy = {
     {
       heading: "Cookies and tracking",
       body: [
-        "This website does not use marketing cookies or third-party analytics. The only data we collect about you is what you submit through the application form.",
+        "This website does not use advertising cookies or third-party analytics, and nothing about your visit is shared with ad networks.",
+        "If you arrive through a personal invitation link from one of our Brand Ambassadors, we set one first-party cookie that remembers, for up to 30 days, whose link you used. It is read only if you submit an application, so we can credit the person who introduced you.",
+        "When you submit an application we also record how you found us: the first page you visited, the outside website that sent you (if any), and any campaign tags in the link you followed. This is kept in your browser tab until you apply and is never sent to us unless you do.",
       ],
     },
     {

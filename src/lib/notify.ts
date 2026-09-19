@@ -20,6 +20,7 @@ export type ApplicationNotification = {
   aboutYou?: string | null;
   hopingFor?: string | null;
   utm?: string | null;
+  referralCode?: string | null; // Brand Ambassador link, if any
 };
 
 const TO = process.env.NOTIFY_TO || "info@theatlaslist.club";
@@ -96,6 +97,7 @@ export async function notifyNewApplication(
       a.attendedBefore ? `Yes${a.attendedEvent ? " — " + esc(a.attendedEvent) : ""}` : "No",
     ]);
   if (a.utm) rows.push(["Campaign", esc(a.utm)]);
+  if (a.referralCode) rows.push(["Ambassador link", `@${esc(a.referralCode)}`]);
 
   const longAnswers: [string, string | null | undefined][] = [
     ["What drew them to the event", a.drewYou],

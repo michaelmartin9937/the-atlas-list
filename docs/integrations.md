@@ -196,6 +196,18 @@ Approval stays human: nothing scores or decides automatically. Verified end to e
 
 Not built (from the same brief, deliberately left for later): private Stripe payment links and payment-status fields, per-reviewer Airtable views, and a site-level duplicate-email check (anon cannot read the table; Contacts are already deduped by email in Make).
 
+## 4d. Brand Ambassador links (2026-09-19)
+
+`https://www.theatlaslist.club/r/<instagram-handle>` → sets the httpOnly first-party cookie `atlas_ref` (30 days, **first click wins**) and redirects to `/desert-after-dark` (fixed destination, never taken from the URL). `/api/apply` reads the cookie server-side and stores it in `lead_applications.referral_code` (migration `20260919170000_referral_code.sql`; format-checked `^[a-z0-9._]{1,30}$`). Any well-formed handle works with no deploy; the code is recorded even when nobody is registered under it. Kept separate from the `utm_*` columns so paid campaigns and ambassadors never mix.
+
+Airtable: Contacts gained `Ambassador` (checkbox), `Referral Code` (text) and the reverse link `Referred Applications`; Event Applications gained `Referral Code` (text, always filled when a code was present) and `Referred By (Ambassador)` (link → Contacts). In Make scenario 6292264, modules 11 and 12 ("Find ambassador by referral code") sit before the application search on each route and search Contacts with `AND({Referral Code} != "", LOWER({Referral Code}) = lower(record.referral_code))` — the non-empty guard matters, otherwise a blank code would match every contact with a blank code. The create-application modules (7, 10) set the link when a match is found.
+
+Register ambassadors with `AIRTABLE_PAT=… python3 scripts/add-ambassadors.py handle1 handle2 …` (idempotent; marks the existing Contact with that Instagram handle or creates one). First 33 registered 2026-09-19. A Contact created this way has no email, so if that person later applies through the site Make will create a second Contact for them (dedupe is by email) — merge by hand if it matters.
+
+Manual in Airtable (the API cannot create these): two Count fields on Contacts over `Referred Applications` — `Referred — Applicants` (no condition) and `Referred — Approved` (condition: Application Status is Approved) — and optionally a grid view filtered to `Ambassador` is checked, sorted by `Referred — Approved`.
+
+Verified end to end 2026-09-19: link → cookie → application → Supabase `referral_code` → Make → application linked to the ambassador Contact; an application with no cookie linked to nobody; a second ambassador's link did not overwrite the first. Test records deleted.
+
 ## 5. Out of scope for the MVP
 
 No MailerLite, approval emails, guest-operations records, SMS, or ticketing in these scenarios. MailerLite is driven by Airtable status changes in a later scenario, gated on `Email Marketing Consent`.
