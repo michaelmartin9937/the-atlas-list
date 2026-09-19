@@ -5,6 +5,10 @@ Usage:
     AIRTABLE_PAT=pat... python3 scripts/add-ambassadors.py handle1 handle2 ...
     AIRTABLE_PAT=pat... python3 scripts/add-ambassadors.py --file handles.txt [--note "Runway model"]
 
+A file holds one person per line: `handle` or `handle=Full Name`. The name is
+only used when a new Contact has to be created; existing names are never
+overwritten.
+
 For each Instagram handle: finds the Contact whose Instagram Handle matches
 (or creates one), ticks "Ambassador" and sets "Referral Code" to the lowercase
 handle. Idempotent — safe to re-run. Prints each person's link.
@@ -38,16 +42,22 @@ def norm(h):
 
 
 def main():
-    args, note, handles = sys.argv[1:], None, []
+    args, note, entries = sys.argv[1:], None, []
     while args:
         a = args.pop(0)
         if a == "--file":
-            handles += open(args.pop(0)).read().split()
+            for line in open(args.pop(0)).read().splitlines():
+                entries += [line] if "=" in line else line.split()
         elif a == "--note":
             note = args.pop(0)
         else:
-            handles.append(a)
-    handles = list(dict.fromkeys(norm(h) for h in handles if norm(h)))
+            entries.append(a)
+    names = {}
+    for e in entries:
+        h, _, name = e.partition("=")
+        if norm(h):
+            names.setdefault(norm(h), name.strip())
+    handles = list(names)
     bad = [h for h in handles if not CODE.match(h)]
     if bad:
         sys.exit(f"Not valid Instagram handles: {bad}")
@@ -82,15 +92,20 @@ def main():
             who = r["fields"].get("Full Name") or "(no name)"
             extra = f"  [{len(matches)} contacts share this handle; used {r['id']}]" if len(matches) > 1 else ""
         else:
+            first, _, last = names[h].partition(" ")
+            if first:
+                fields["First Name"] = first
+            if last:
+                fields["Last Name"] = last.strip()
             fields.update({
                 "Instagram Handle": h,
                 "Instagram URL": f"https://www.instagram.com/{h}/",
                 "Contact Status": "Active",
                 "Internal Notes": "Added as a Brand Ambassador" + (f" ({note})" if note else "")
-                                  + ". Name and email to be filled in.",
+                                  + (". Email to be filled in." if names[h] else ". Name and email to be filled in."),
             })
             api("POST", "", {"fields": fields})
-            status, who, extra = "created contact", "(new)", ""
+            status, who, extra = "created contact", names[h] or "(new)", ""
         print(f"{SITE}{h:<28} {status:<26} {who}{extra}")
 
 
