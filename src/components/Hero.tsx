@@ -47,8 +47,18 @@ export function Hero({
           className="absolute inset-0 h-full w-full object-cover object-[center_45%]"
         />
       )}
+      {/* Scrims, above both the photo and the video. The video gets the same
+          30% dim the photo has from its own opacity; then top-to-bottom for the
+          nav edge and the copy block, and left-to-right behind the copy column
+          so busy frames (and the reel's floating @theatlaslist watermark) never
+          compete with the headline or the button. */}
+      {videoUrl && <div className="absolute inset-0 bg-noir/30" aria-hidden />}
       <div
         className="absolute inset-0 bg-gradient-to-b from-noir/45 via-noir/35 to-noir/90"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-y-0 left-0 w-full md:w-[70%] bg-gradient-to-r from-noir/75 via-noir/40 to-transparent"
         aria-hidden
       />
       <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pb-16 md:pb-20 pt-16 md:pt-24 w-full">
@@ -59,7 +69,7 @@ export function Hero({
           <h1 className="mt-5 md:mt-7 font-serif text-[2.6rem] sm:text-5xl md:text-[64px] leading-[1.1] text-bone md:max-w-[760px]">
             {headline}
           </h1>
-          <p className="mt-4 max-w-[500px] text-base md:text-[17px] leading-[1.5] text-bone/80">
+          <p className="mt-4 max-w-[500px] text-base md:text-[17px] leading-[1.5] text-bone/90">
             {subhead}
           </p>
           {cta && (

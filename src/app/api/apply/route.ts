@@ -1,6 +1,6 @@
 import { NextResponse, after } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { applicationSchema } from "@/lib/validation";
+import { applicationSchema, normalizeUrl, parseInstagramHandle } from "@/lib/validation";
 import { normalizePhoneE164 } from "@/lib/phone";
 import { checkRateLimit, getClientKey } from "@/lib/rateLimit";
 import { notifyNewApplication } from "@/lib/notify";
@@ -51,9 +51,11 @@ export async function POST(req: Request) {
     );
   }
 
-  const igHandle = data.instagram
-    ? data.instagram.trim().replace(/^@+/, "").toLowerCase() || null
-    : null;
+  // The short form has always stored whatever was typed (minus the @); keep
+  // that as the fallback so an unusual handle is never silently dropped.
+  const igHandle =
+    parseInstagramHandle(data.instagram) ??
+    (data.instagram ? data.instagram.trim().replace(/^@+/, "").toLowerCase() || null : null);
   const email = data.email.toLowerCase();
 
   const supabase = createServerSupabaseClient();
@@ -74,10 +76,56 @@ export async function POST(req: Request) {
     referral_source: data.heardAbout?.trim() || null,
   };
 
+  // Extended Desert After Dark application + silent attribution. Every one of
+  // these columns is nullable, so the short form simply leaves them empty.
+  const blank = (v: string | undefined | null) => v?.trim() || null;
+  const attr = data.attribution ?? {};
+  const extended = data.formVersion === 2;
+  const extendedPayload = {
+    form_version: extended ? 2 : 1,
+    // A clickable profile is one tap away for whoever reviews in Airtable.
+    instagram_url: parseInstagramHandle(data.instagram)
+      ? `https://www.instagram.com/${parseInstagramHandle(data.instagram)}/`
+      : null,
+    city: blank(data.city),
+    linkedin_url: normalizeUrl(data.linkedin),
+    referred_by: blank(data.referredBy),
+    attended_before: extended ? data.attendedBefore === "yes" : null,
+    attended_event: data.attendedBefore === "yes" ? blank(data.attendedEvent) : null,
+    drew_you: blank(data.drewYou),
+    about_you: blank(data.aboutYou),
+    hoping_for: blank(data.hopingFor),
+    agreement_accepted: extended ? data.agreement === true : null,
+    landing_page: blank(attr.landingPage),
+    referrer: blank(attr.referrer),
+    utm_source: blank(attr.utmSource),
+    utm_medium: blank(attr.utmMedium),
+    utm_campaign: blank(attr.utmCampaign),
+    utm_content: blank(attr.utmContent),
+  };
+
   let { error } = await supabase.from("lead_applications").insert({
     ...basePayload,
+    ...extendedPayload,
     instagram_handle: igHandle,
   });
+
+  // Safety net: if the extended columns are ever missing (migration
+  // 20260918200000 not applied to this database), PostgREST answers PGRST204.
+  // Save the application anyway, with the extra answers folded into the one
+  // free-text column every version of the table has, rather than lose it.
+  if (error?.code === "PGRST204" && !error.message?.includes("instagram_handle")) {
+    console.warn("lead_applications is missing extended columns; folding answers into vouch_intro.", error.message);
+    const folded = Object.entries(extendedPayload)
+      .filter(([, v]) => v !== null && v !== "")
+      .map(([k, v]) => `[${k}: ${String(v)}]`)
+      .join("\n");
+    ({ error } = await supabase.from("lead_applications").insert({
+      ...basePayload,
+      vouch_intro: `${basePayload.vouch_intro}\n\n${folded}`.slice(0, 6000),
+      instagram_handle: igHandle,
+    }));
+  }
 
   // Fallback: if the target DB hasn't had the add_instagram_handle migration
   // applied, PostgREST returns PGRST204. Retry without the column and fold
@@ -120,6 +168,17 @@ export async function POST(req: Request) {
         heardAbout: data.heardAbout?.trim() || null,
         smsConsent: data.smsConsent,
         sourcePage: data.sourcePage ?? "unknown",
+        city: extendedPayload.city,
+        linkedinUrl: extendedPayload.linkedin_url,
+        referredBy: extendedPayload.referred_by,
+        attendedBefore: extendedPayload.attended_before,
+        attendedEvent: extendedPayload.attended_event,
+        drewYou: extendedPayload.drew_you,
+        aboutYou: extendedPayload.about_you,
+        hopingFor: extendedPayload.hoping_for,
+        utm: [extendedPayload.utm_source, extendedPayload.utm_medium, extendedPayload.utm_campaign, extendedPayload.utm_content]
+          .filter(Boolean)
+          .join(" / ") || null,
       });
       if (!result.sent) console.warn("Application notification skipped:", result.reason);
     } catch (err) {

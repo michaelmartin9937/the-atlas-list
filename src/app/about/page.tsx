@@ -26,11 +26,13 @@ export default function AboutPage() {
 
       <section
         className="relative overflow-hidden bg-noir bg-cover bg-center px-6 md:px-10 py-24 md:py-[160px]"
-        style={{ backgroundImage: "url(/images/about/quote-bg.jpg)" }}
+        style={{ backgroundImage: "url(/images/about/quote-bg-clean.jpg)" }}
       >
-        <div className="relative max-w-[860px] mx-auto text-center">
+        {/* Figma lays a 60% black wash over the photo; the photo has no text. */}
+        <div className="absolute inset-0 bg-black/60" aria-hidden />
+        <div className="relative max-w-[1000px] mx-auto text-center">
           <FadeIn>
-            <p className="font-serif italic text-2xl sm:text-3xl md:text-[40px] leading-[1.25] text-bone">
+            <p className="font-serif italic text-2xl sm:text-3xl md:text-[38px] leading-[1.45] text-bone">
               {about.quote}
             </p>
           </FadeIn>

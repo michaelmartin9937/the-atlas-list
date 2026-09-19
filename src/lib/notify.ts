@@ -10,6 +10,16 @@ export type ApplicationNotification = {
   heardAbout: string | null;
   smsConsent: boolean;
   sourcePage: string;
+  // Extended Desert After Dark application — all absent on the short form.
+  city?: string | null;
+  linkedinUrl?: string | null;
+  referredBy?: string | null;
+  attendedBefore?: boolean | null;
+  attendedEvent?: string | null;
+  drewYou?: string | null;
+  aboutYou?: string | null;
+  hopingFor?: string | null;
+  utm?: string | null;
 };
 
 const TO = process.env.NOTIFY_TO || "info@theatlaslist.club";
@@ -73,6 +83,34 @@ export async function notifyNewApplication(
     ["Heard about us", a.heardAbout ? esc(a.heardAbout) : "—"],
     ["SMS consent", a.smsConsent ? "Yes" : "No"],
   ];
+  if (a.city) rows.splice(4, 0, ["City", esc(a.city)]);
+  if (a.linkedinUrl)
+    rows.splice(4, 0, [
+      "LinkedIn / site",
+      `<a href="${esc(a.linkedinUrl)}" style="color:#A8884F">${esc(a.linkedinUrl)}</a>`,
+    ]);
+  if (a.referredBy) rows.push(["Referred by", esc(a.referredBy)]);
+  if (a.attendedBefore != null)
+    rows.push([
+      "Attended before",
+      a.attendedBefore ? `Yes${a.attendedEvent ? " — " + esc(a.attendedEvent) : ""}` : "No",
+    ]);
+  if (a.utm) rows.push(["Campaign", esc(a.utm)]);
+
+  const longAnswers: [string, string | null | undefined][] = [
+    ["What drew them to the event", a.drewYou],
+    ["About them", a.aboutYou],
+    ["What they're hoping for", a.hopingFor],
+  ];
+  const longHtml = longAnswers
+    .filter(([, v]) => v)
+    .map(
+      ([k, v]) => `
+  <p style="font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A89684;margin:28px 0 8px">${k}</p>
+  <blockquote style="margin:0;padding:12px 16px;border-left:2px solid #A8884F;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;white-space:pre-wrap">${esc(v as string)}</blockquote>`
+    )
+    .join("");
+  const longText = longAnswers.filter(([, v]) => v).flatMap(([k, v]) => ["", `${k}:`, v as string]);
 
   const html = `
 <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#F2EBE0;color:#0E0E0E">
@@ -87,7 +125,7 @@ export async function notifyNewApplication(
       .join("")}
   </table>
   <p style="font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A89684;margin:28px 0 8px">Why they're a good fit</p>
-  <blockquote style="margin:0;padding:12px 16px;border-left:2px solid #A8884F;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;white-space:pre-wrap">${esc(a.vouchIntro)}</blockquote>
+  <blockquote style="margin:0;padding:12px 16px;border-left:2px solid #A8884F;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;white-space:pre-wrap">${esc(a.vouchIntro)}</blockquote>${longHtml}
   <p style="margin:32px 0 0;font-family:Helvetica,Arial,sans-serif;font-size:13px">
     <a href="${TABLE_URL}" style="display:inline-block;background:#0E0E0E;color:#F2EBE0;text-decoration:none;padding:12px 20px;letter-spacing:.15em;text-transform:uppercase;font-size:11px">Open in Supabase</a>
   </p>
@@ -106,6 +144,7 @@ export async function notifyNewApplication(
     "",
     "Why they're a good fit:",
     a.vouchIntro,
+    ...longText,
     "",
     `Open in Supabase: ${TABLE_URL}`,
   ].join("\n");

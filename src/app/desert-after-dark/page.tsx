@@ -51,6 +51,18 @@ const eyebrow = "text-[13px] font-semibold uppercase tracking-[0.08em] text-gold
 const h2Center = "mt-5 font-serif text-4xl md:text-[56px] leading-[1.08] text-bone";
 const intro = "mt-5 text-base md:text-[17px] leading-[1.5] text-velvet-text";
 
+// The content file is `as const`, so optional keys only exist on the entries
+// that set them; this is the shape every team entry is read as.
+type TeamPerson = {
+  name: string;
+  handle: string;
+  title?: string;
+  note?: string;
+  image?: string;
+  link?: boolean;
+  logo?: boolean;
+};
+
 // The night is one arc — golden hour into full velvet dark — so the four
 // acts walk through the palette in that order.
 const ACT_COLORS = ["text-gold", "text-rosegold", "text-terracotta", "text-burgundy"];
@@ -191,15 +203,16 @@ export default function DesertAfterDarkPage() {
             </div>
           </FadeIn>
           <ul className="mt-14 md:mt-[72px] grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
-            {d.team.people.map((p) => (
+            {(d.team.people as readonly TeamPerson[]).map((p) => (
               <PersonTile
                 key={p.handle}
                 name={p.name}
                 handle={p.handle}
-                image={"image" in p ? p.image : undefined}
-                title={"title" in p ? p.title : undefined}
-                note={"note" in p ? p.note : undefined}
-                link={"link" in p ? p.link : true}
+                image={p.image}
+                title={p.title}
+                note={p.note}
+                link={p.link ?? true}
+                logo={p.logo ?? false}
               />
             ))}
           </ul>
@@ -228,6 +241,7 @@ export default function DesertAfterDarkPage() {
               sourcePage="desert-after-dark"
               submitLabel="Request Ticket Allocation"
               tone="dark"
+              variant="extended"
             />
           </FadeIn>
         </div>

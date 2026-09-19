@@ -171,6 +171,31 @@ Sender domain `theatlaslist.club` was authenticated in MailerLite on 2026-09-17 
 
 Still to do outside Make: verify the sending domain `theatlaslist.club` in MailerLite (DNS records) so `info@theatlaslist.club` can send, and enable the four automations.
 
+## 4c. Extended Desert After Dark application (2026-09-18)
+
+The Desert After Dark form became a 2–3 minute curation form (three groups: About You / Your Connection / The Room). Home and About keep the short form. The client sends `formVersion: 2` with the extended answers; `/api/apply` only enforces the new required fields for version 2, so a tab opened before the change can still submit the short form.
+
+Supabase migration `20260918200000_extended_application_fields.sql` adds nullable columns to `lead_applications`: `city`, `linkedin_url`, `instagram_url`, `referred_by`, `attended_before`, `attended_event`, `drew_you`, `about_you`, `hoping_for`, `agreement_accepted`, `landing_page`, `referrer`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `form_version`, plus a length check constraint. RLS is unchanged (anon INSERT-only, `status = 'pending'`). If the columns are ever missing the API folds the answers into `vouch_intro` rather than lose the application.
+
+Attribution is captured silently by `src/components/AttributionCapture.tsx` on the first page view of a tab (sessionStorage, path only, external referrer only, `utm_source|medium|campaign|content`) and sent with every application, short or extended. Tag ad links like `?utm_source=instagram&utm_medium=paid_social&utm_campaign=desert_after_dark&utm_content=mansion_reel_01`.
+
+Airtable fields added (mapped by field ID in Make scenario 6292264, modules 5/8 for Contacts and 7/10 for Event Applications):
+
+| Table | Field | From |
+|---|---|---|
+| Contacts | `City` (existing), `LinkedIn / Website` (new, url) | `city`, `linkedin_url` |
+| Event Applications | `How They Heard` | `referral_source` |
+| Event Applications | `Who They Know / Referral Context` (existing) | `referred_by`, else `referral_source` |
+| Event Applications | `Attended Atlas Before`, `Previous Atlas Event` | `attended_before`, `attended_event` |
+| Event Applications | `What Drew Them to the Event`, `About Them`, `Hoping to Get From the Evening` | `drew_you`, `about_you`, `hoping_for` |
+| Event Applications | `Agreement Accepted` | `agreement_accepted` |
+| Event Applications | `Landing Page`, `Referrer URL`, `UTM Source`, `UTM Medium`, `UTM Campaign`, `UTM Content` | attribution columns |
+| Event Applications | `Score — Referral / Trust`, `— Presentation`, `— Intent`, `— Social Fit`, `— Room Contribution` (1–5 ratings) | internal review only; never set by the website |
+
+Approval stays human: nothing scores or decides automatically. Verified end to end on 2026-09-18 with an `@example.com` submission (Supabase row → Make → Contact + Event Application with every new field populated); test records deleted afterwards.
+
+Not built (from the same brief, deliberately left for later): private Stripe payment links and payment-status fields, per-reviewer Airtable views, and a site-level duplicate-email check (anon cannot read the table; Contacts are already deduped by email in Make).
+
 ## 5. Out of scope for the MVP
 
 No MailerLite, approval emails, guest-operations records, SMS, or ticketing in these scenarios. MailerLite is driven by Airtable status changes in a later scenario, gated on `Email Marketing Consent`.

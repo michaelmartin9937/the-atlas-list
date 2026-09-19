@@ -11,7 +11,7 @@ export const about = {
     people: [
       {
         name: "Devaun",
-        image: "/images/host-devaun.jpg",
+        image: "/images/host-devaun-2026.jpg",
         bio: "Devaun picked up a camera before he ever picked up a guest list — a decade behind the lens for fashion brands and the faces who front them. He started The Atlas List because the best nights he shot were never on the call sheet — they were what happened after, with people who actually liked being around each other.",
       },
       {

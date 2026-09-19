@@ -13,7 +13,6 @@ export const desertAfterDark = {
     eyebrow: "What's in Store",
     headline: "How the Night Unfolds",
     intro: "Swipe through everything the evening holds, before you decide where to start.",
-    // image: null renders the Figma placeholder slot until a photo is chosen.
     cards: [
       {
         title: "The Runway",
@@ -30,26 +29,26 @@ export const desertAfterDark = {
       {
         title: "The Bar",
         body: "Two full bars for however you're drinking tonight, and one built for the nights you're not.",
-        image: null,
-        alt: "",
+        image: "/images/dad/card-bar.jpg",
+        alt: "A bartender garnishing a pink cocktail with mint and a flower",
       },
       {
         title: "The Element",
         body: "Fire, performed close enough to feel it. Who's behind it is still being decided — the heat isn't.",
-        image: null,
-        alt: "",
+        image: "/images/dad/card-element.jpg",
+        alt: "A fire performer in white on the estate terrace at dusk",
       },
       {
         title: "The Table",
         body: "Private chefs. Plates that keep arriving. Nothing to step away from the conversation for.",
-        image: null,
-        alt: "",
+        image: "/images/dad/card-table.jpg",
+        alt: "A charcuterie board on a marble counter",
       },
       {
         title: "The Art",
         body: "A curated row of Scottsdale's finest — galleries, jewelers, ateliers — dropped into the middle of the party.",
-        image: null,
-        alt: "",
+        image: "/images/dad/card-art.jpg",
+        alt: "Classic Porsches lined up on a lawn beside framed prints",
       },
     ],
   },
@@ -135,15 +134,16 @@ export const desertAfterDark = {
     eyebrow: "Production",
     headline: "The team behind the night",
     intro: "The people doing the unglamorous work that makes the glamorous part look effortless.",
-    // image = current Instagram profile picture. `link: false` marks a
-    // placeholder handle that shouldn't open Instagram yet.
+    // `link: false` would mark a placeholder handle that shouldn't open
+    // Instagram yet; `logo: true` marks a brand mark instead of a portrait.
     people: [
-      { name: "Devaun", title: "Co-Founder & Photographer", handle: "devaunlennox", image: "/images/host-devaun.jpg" },
+      { name: "Devaun", title: "Co-Founder & Photographer", handle: "devaunlennox", image: "/images/team/devaun.jpg" },
       { name: "Michael", title: "Co-Founder", handle: "whoismikemartin", image: "/images/host-michael.jpg" },
       { name: "Diana Ferar", title: "Executive Producer", note: "Dee Creator 360", handle: "dianaferar", image: "/images/team/dianaferar.jpg" },
-      { name: "Johnathan Eden", title: "Transport & Front of House", note: "Opulis", handle: "hairstylist/MUA", link: false },
+      // Johnathan's tile carries the OPUL3NCE mark rather than a portrait.
+      { name: "Johnathan Eden", title: "Transport & Front of House", note: "OPUL3NCE", handle: "opul3nce.io", image: "/images/team/johnathan-eden.jpg", logo: true },
       { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
-      { name: "Malcom Marzett", title: "Media Director", note: "Intertainment Media", handle: "mediaco.", image: "/images/team/malcom.jpg", link: false },
+      { name: "Malcom Marzett", title: "Media Director", note: "Intertainment Media", handle: "mjmmzt", image: "/images/team/malcom.jpg" },
     ],
   },
   partnership: {
@@ -157,6 +157,6 @@ export const desertAfterDark = {
     eyebrow: "Apply",
     headline: "Request your ticket allocation",
     subhead:
-      "Tickets to Desert After Dark are allocated by application, not by open sale. Tell us about you below. If you're approved, we'll follow up with tier options (General, VIP), pricing, and RSVP instructions.",
+      "Tickets to Desert After Dark are allocated by application, not by open sale. Tell us about you below — it takes about three minutes. If you're approved, we'll follow up with tier options (General, VIP), pricing, and RSVP instructions.",
   },
 } as const;

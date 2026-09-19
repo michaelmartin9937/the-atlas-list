@@ -21,20 +21,28 @@ export default function PartnerPage() {
     <>
       <section className="relative overflow-hidden bg-umber">
         <Image
-          src="/images/partner/hero-estate.jpg"
+          src="/images/partner/hero-estate-clean.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[center_40%]"
         />
-        <div className="absolute inset-0 bg-[#12191F]/45" aria-hidden />
-        <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pt-24 md:pt-[220px] pb-16 md:pb-[64px] min-h-[460px] md:min-h-[560px] flex flex-col justify-end">
+        {/* Readability: an even plum-black wash over the whole photo, then a
+            heavier scrim rising from the bottom where the copy sits, so the
+            sunset stays visible up top and the text never fights the pool
+            lights. The photo itself carries no text. */}
+        <div className="absolute inset-0 bg-[#0A0312]/30" aria-hidden />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-[#0A0312]/90 via-[#0A0312]/55 via-50% to-transparent"
+          aria-hidden
+        />
+        <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pt-24 md:pt-[220px] pb-16 md:pb-[64px] min-h-[460px] md:min-h-[560px] flex flex-col justify-end [text-shadow:0_1px_18px_rgba(0,0,0,0.55)]">
           <span className={eyebrow}>{p.hero.eyebrow}</span>
           <h1 className="mt-6 md:mt-7 max-w-[1200px] font-serif text-[2.6rem] sm:text-5xl md:text-[72px] leading-[1.06] text-bone">
             {p.hero.headline}
           </h1>
-          <p className="mt-6 max-w-[1180px] text-base md:text-[19px] leading-[1.5] text-bone/85">
+          <p className="mt-6 max-w-[1180px] text-base md:text-[19px] leading-[1.5] text-bone">
             {p.hero.subhead}
           </p>
         </div>

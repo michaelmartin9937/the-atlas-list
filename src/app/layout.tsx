@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { AttributionCapture } from "@/components/AttributionCapture";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body>
+        <AttributionCapture />
         <Nav />
         {/* The nav is a fixed, solid 80/104px bar on every page (Figma), so
             pages start below it rather than underneath it. */}

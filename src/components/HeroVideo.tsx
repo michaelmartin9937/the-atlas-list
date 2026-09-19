@@ -14,7 +14,9 @@ type Props = {
 // so we set muted imperatively before calling play(). And we fade the video in
 // only once frames are actually advancing, so the underlying hero photo (the
 // LCP image) shows instantly and there's no hard cut when the first frame
-// arrives.
+// arrives. Once playing the video is fully opaque: at partial opacity the
+// photo underneath showed through it as a second, ghosted image. Dimming for
+// legibility is the Hero's job (its scrims sit above both layers).
 export function HeroVideo({ src, className = "" }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -61,7 +63,7 @@ export function HeroVideo({ src, className = "" }: Props) {
     <video
       ref={ref}
       className={`${className} transition-opacity duration-1000 ${
-        playing ? "opacity-70" : "opacity-0"
+        playing ? "opacity-100" : "opacity-0"
       } motion-reduce:hidden`}
       autoPlay
       muted

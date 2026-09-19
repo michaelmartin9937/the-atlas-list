@@ -6,6 +6,9 @@ type Props = {
   // "light" (default) for bone/pearl sections; "dark" for velvet-black ones.
   tone?: "light" | "dark";
   size?: "sm" | "md";
+  // A brand mark rather than a face: say so to screen readers, and ring it so
+  // a black logo doesn't dissolve into the velvet-black page.
+  logo?: boolean;
 };
 
 const TONE = {
@@ -21,7 +24,7 @@ const SIZE = {
 // Circular portrait used beside a person's name in credit tiles. Falls back
 // to a plain disc when there's no image (Figma shows an empty disc for
 // unannounced people), so every tile keeps the same silhouette.
-export function Avatar({ name, image, tone = "light", size = "md" }: Props) {
+export function Avatar({ name, image, tone = "light", size = "md", logo = false }: Props) {
   const t = TONE[tone];
   const frame = `${SIZE[size]} flex-shrink-0 rounded-full overflow-hidden`;
   if (!image) {
@@ -30,10 +33,10 @@ export function Avatar({ name, image, tone = "light", size = "md" }: Props) {
   return (
     <Image
       src={image}
-      alt=""
+      alt={logo ? `${name} — company logo` : ""}
       width={150}
       height={150}
-      className={`${frame} object-cover`}
+      className={`${frame} object-cover ${logo ? "ring-1 ring-gold/40" : ""}`}
     />
   );
 }
