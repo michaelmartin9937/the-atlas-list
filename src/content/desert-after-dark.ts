@@ -34,7 +34,7 @@ export const desertAfterDark = {
       },
       {
         title: "The Element",
-        body: "Fire, performed close enough to feel it. Who's behind it is still being decided — the heat isn't.",
+        body: "Fire, performed close enough to feel it. Performances directed by Sundara Entertainment.",
         image: "/images/dad/card-element.jpg",
         alt: "A fire performer in white on the estate terrace at dusk",
       },
