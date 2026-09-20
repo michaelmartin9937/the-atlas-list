@@ -14,11 +14,34 @@ export function generateStaticParams() {
   return ambassadors.map((a) => ({ handle: a.handle }));
 }
 
-export const metadata: Metadata = {
-  title: "Your Ambassador Kit · Desert After Dark",
-  description: "Your personal link, the video, and step-by-step posting instructions.",
-  robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
-};
+// Per-person metadata so the link preview (iMessage, Instagram DMs, WhatsApp)
+// carries their name. The card image comes from ./opengraph-image.tsx.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ handle: string }>;
+}): Promise<Metadata> {
+  const { handle: raw } = await params;
+  const handle = decodeURIComponent(raw).toLowerCase();
+  const person = ambassadors.find((a) => a.handle === handle);
+  const who = person?.name || `@${handle}`;
+  const title = `${who} · Brand Ambassador`;
+  const description =
+    "The Atlas List · Desert After Dark, October 10. Your personal link, the video, and step-by-step posting instructions.";
+  return {
+    title,
+    description,
+    robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+    openGraph: {
+      title: `${title} · The Atlas List`,
+      description,
+      url: `/ambassador/${handle}`,
+      siteName: "The Atlas List",
+      type: "website",
+    },
+    twitter: { card: "summary_large_image", title: `${title} · The Atlas List`, description },
+  };
+}
 
 const eyebrow = "text-[12px] font-semibold uppercase tracking-[0.1em] text-gold";
 
