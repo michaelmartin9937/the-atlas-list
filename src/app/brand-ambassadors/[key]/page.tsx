@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { AmbassadorMessages } from "@/components/AmbassadorMessages";
 import { ambassadors } from "@/content/ambassadors";
+import { AMBASSADOR_TEAM_KEY as ACCESS_KEY } from "@/lib/ambassador-access";
 import { AMBASSADOR_VIDEO_URL, buildAmbassadorMessage, ambassadorLink } from "@/content/ambassador-kit";
 
 // Private team tool: every ambassador's ready-to-send message with a copy
 // button. It is reachable only with the exact link — the key below is part of
 // the address, any other key is a 404, there is no /brand-ambassadors index,
 // it is not in the nav or footer, and search engines are told to stay away.
-// Rotate the key by changing it here and redeploying.
-const ACCESS_KEY = "3cshh4dgzq";
+// The key lives in src/lib/ambassador-access.ts.
 
 export const dynamicParams = false; // anything but the key → 404
 export function generateStaticParams() {
@@ -29,5 +29,5 @@ export default function BrandAmbassadorsPage() {
     link: ambassadorLink(a.handle),
     message: buildAmbassadorMessage(a.first, a.handle),
   }));
-  return <AmbassadorMessages people={people} videoUrl={AMBASSADOR_VIDEO_URL} />;
+  return <AmbassadorMessages people={people} videoUrl={AMBASSADOR_VIDEO_URL} linksHref={`/brand-ambassadors/${ACCESS_KEY}/links`} />;
 }

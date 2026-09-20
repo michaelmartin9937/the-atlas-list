@@ -56,6 +56,35 @@ GOOD TO KNOW
 Questions? Text me. Thank you, this makes a real difference for us.
 — Mike`;
 
+export const AMBASSADOR_KIT_BASE = "https://www.theatlaslist.club/ambassador/";
+
+// Each ambassador's own page: their link, the video and the posting steps.
+export function ambassadorKitUrl(handle: string): string {
+  return AMBASSADOR_KIT_BASE + handle;
+}
+
+// The short DM Mike sends to hand someone their page.
+export function buildKitDm(first: string, handle: string): string {
+  return `Hey ${first || "there"}! Here's your personal Desert After Dark ambassador page. Your link, the video, and step-by-step posting instructions are all in one place:\n\n${ambassadorKitUrl(handle)}`;
+}
+
+// Copy-and-paste text used on the ambassador's page.
+export const kitCopy = {
+  stickerText: "APPLY FOR AN INVITE",
+  callToAction: "Tap the link, hit Apply, and fill out the short application. It takes three minutes.",
+  talkingPoints: [
+    "What it is: “A private fashion show and mansion party in Paradise Valley on October 10.”",
+    "Why they should listen to you: “I'll be there, and it's invite-only.”",
+    "What to do: “Tap the link on this story and apply. It takes about three minutes.”",
+  ],
+  reminderText: "Invite-only. Spots are limited. Apply through my link.",
+  disclosure: "Atlas List ambassador",
+  caption:
+    "Desert After Dark. October 10. A private fashion show and mansion party in Paradise Valley, curated by @theatlaslist.\n\nInvite-only, and every application is reviewed. Link in my bio to apply. It takes three minutes.\n\nAtlas List ambassador\n\n#DesertAfterDark #TheAtlasList #ParadiseValley #Scottsdale",
+  dmReply: (link: string) =>
+    `Here's my link to apply for Desert After Dark on October 10. It takes about three minutes, and every application is reviewed:\n\n${link}`,
+} as const;
+
 export function ambassadorLink(handle: string): string {
   return AMBASSADOR_LINK_BASE + handle;
 }

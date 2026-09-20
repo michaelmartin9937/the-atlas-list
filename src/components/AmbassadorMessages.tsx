@@ -1,41 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { copyText } from "@/lib/copy";
 
 type Person = { handle: string; name: string; link: string; message: string };
-type Props = { people: Person[]; videoUrl: string };
+type Props = { people: Person[]; videoUrl: string; linksHref: string };
 
 const SENT_KEY = "atlas.ambassadorSent.v1";
 
-async function copyText(text: string): Promise<boolean> {
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return true;
-    }
-  } catch {
-    // fall through to the legacy path
-  }
-  const ta = document.createElement("textarea");
-  ta.value = text;
-  ta.setAttribute("readonly", "");
-  ta.style.position = "fixed";
-  ta.style.opacity = "0";
-  document.body.appendChild(ta);
-  ta.select();
-  let ok = false;
-  try {
-    ok = document.execCommand("copy");
-  } catch {
-    ok = false;
-  }
-  document.body.removeChild(ta);
-  return ok;
-}
-
 // One card per ambassador: copy the whole message (or just the link) in one
 // click, and tick "Sent" to keep track. Sent ticks live in this browser only.
-export function AmbassadorMessages({ people, videoUrl }: Props) {
+export function AmbassadorMessages({ people, videoUrl, linksHref }: Props) {
   const [query, setQuery] = useState("");
   const [hideSent, setHideSent] = useState(false);
   const [sent, setSent] = useState<Record<string, true>>({});
@@ -105,6 +81,13 @@ export function AmbassadorMessages({ people, videoUrl }: Props) {
           <a href={videoUrl} className="underline decoration-gold underline-offset-4 hover:text-gold">
             Download the video
           </a>
+          .
+        </p>
+        <p className="mt-3 text-sm text-ink/70">
+          Prefer to send each person their own page instead of the long message?{" "}
+          <Link href={linksHref} className="underline decoration-gold underline-offset-4 hover:text-gold">
+            Open the page-links list
+          </Link>
           .
         </p>
 
