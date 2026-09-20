@@ -65,7 +65,7 @@ export const desertAfterDark = {
       { name: "Al'mer", label: "Designer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
       { name: "Bella Elise", label: "Designer", handle: "elisestudiosco", image: "/images/designers/bella-elisse.jpg" },
       { name: "Isaac Newton", label: "Isaac Newton Collection", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
-      { name: "Koan Asaky", label: "Designer", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
+      { name: "Koanasaky", label: "Designer", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
       { name: "Stephanie Azucena", label: "Machehchena", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
     ],
   },
@@ -143,7 +143,7 @@ export const desertAfterDark = {
       // Johnathan's tile carries the OPUL3NCE mark rather than a portrait.
       { name: "Johnathan Eden", title: "Transport & Front of House", note: "OPUL3NCE", handle: "opul3nce.io", image: "/images/team/johnathan-eden.jpg", logo: true },
       { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
-      { name: "Malcom Marzett", title: "Media Director", note: "Intertainment Media", handle: "mjmmzt", image: "/images/team/malcom.jpg" },
+      { name: "Malcolm Marzett", title: "Media Director", note: "Intertainment Media", handle: "mjmmzt", image: "/images/team/malcom.jpg" },
     ],
   },
   partnership: {

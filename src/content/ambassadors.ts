@@ -5,6 +5,11 @@ export type Ambassador = { handle: string; first: string; name: string };
 
 export const ambassadors: readonly Ambassador[] = [
   {
+    "handle": "designerkidalmer",
+    "first": "Al'mer",
+    "name": "Al'mer"
+  },
+  {
     "handle": "oneofakindaura",
     "first": "Alexandra",
     "name": "Alexandra"
@@ -18,11 +23,6 @@ export const ambassadors: readonly Ambassador[] = [
     "handle": "aliciamorris.official",
     "first": "Alicia",
     "name": "Alicia Morris"
-  },
-  {
-    "handle": "designerkidalmer",
-    "first": "Almer",
-    "name": "Almer"
   },
   {
     "handle": "ariana.lisett",
@@ -197,7 +197,7 @@ export const ambassadors: readonly Ambassador[] = [
   {
     "handle": "koanasaky",
     "first": "Koanasaky",
-    "name": "koanasaky"
+    "name": "Koanasaky"
   },
   {
     "handle": "koreyrussell_",
