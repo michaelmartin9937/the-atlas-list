@@ -5,9 +5,24 @@ export type Ambassador = { handle: string; first: string; name: string };
 
 export const ambassadors: readonly Ambassador[] = [
   {
+    "handle": "oneofakindaura",
+    "first": "Alexandra",
+    "name": "Alexandra"
+  },
+  {
+    "handle": "aliciaampz",
+    "first": "Alicia",
+    "name": "Alicia"
+  },
+  {
     "handle": "aliciamorris.official",
     "first": "Alicia",
     "name": "Alicia Morris"
+  },
+  {
+    "handle": "designerkidalmer",
+    "first": "Almer",
+    "name": "Almer"
   },
   {
     "handle": "ariana.lisett",
@@ -30,6 +45,11 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Asharie Montgomery"
   },
   {
+    "handle": "bella.elise",
+    "first": "Bella",
+    "name": "Bella"
+  },
+  {
     "handle": "bianca.m.k_",
     "first": "Bianca",
     "name": "Bianca Matamoros Koonce"
@@ -45,9 +65,19 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Brian Coleman"
   },
   {
+    "handle": "sexy_secret_angel",
+    "first": "Brianna",
+    "name": "Brianna Rangel"
+  },
+  {
     "handle": "brylee_suttonn",
     "first": "Brylee",
     "name": "Brylee Sutton"
+  },
+  {
+    "handle": "callangoldeneye",
+    "first": "Callan",
+    "name": "Callan Goldeneye"
   },
   {
     "handle": "oneeyedmodel",
@@ -70,6 +100,16 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Dallas Anselmo"
   },
   {
+    "handle": "daniellefoxox",
+    "first": "Danielle",
+    "name": "Danielle Fox"
+  },
+  {
+    "handle": "danielle.leoni_",
+    "first": "Danielle",
+    "name": "Danielle Leoni"
+  },
+  {
     "handle": "daniellesully_",
     "first": "Danielle",
     "name": "Danielle Sullivan"
@@ -78,6 +118,11 @@ export const ambassadors: readonly Ambassador[] = [
     "handle": "devaunlennox",
     "first": "Devaun",
     "name": "Devaun Lennox"
+  },
+  {
+    "handle": "dianaferar",
+    "first": "Diana",
+    "name": "Diana Ferar"
   },
   {
     "handle": "lil.fal",
@@ -95,6 +140,21 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Gia DePratti"
   },
   {
+    "handle": "gifti_asha",
+    "first": "Gifti",
+    "name": "Gifti Asha"
+  },
+  {
+    "handle": "isaacnewtoncollection",
+    "first": "Isaac",
+    "name": "Isaac"
+  },
+  {
+    "handle": "jaciel_realestatepro",
+    "first": "Jaciel",
+    "name": "Jaciel Velazquez"
+  },
+  {
     "handle": "_gynnej",
     "first": "Jenny",
     "name": "Jenny"
@@ -103,6 +163,11 @@ export const ambassadors: readonly Ambassador[] = [
     "handle": "r3volutionarymus3",
     "first": "Jessica",
     "name": "Jessica Webber"
+  },
+  {
+    "handle": "johnathan_3den",
+    "first": "Johnathen",
+    "name": "Johnathen Eden"
   },
   {
     "handle": "jonah.super.connector",
@@ -130,6 +195,11 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Keeli Vick-Batton"
   },
   {
+    "handle": "koanasaky",
+    "first": "Koanasaky",
+    "name": "koanasaky"
+  },
+  {
     "handle": "koreyrussell_",
     "first": "Korey",
     "name": "Korey Russell"
@@ -140,6 +210,11 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Laisia Lashall"
   },
   {
+    "handle": "love.lex333",
+    "first": "Lexi",
+    "name": "Lexi"
+  },
+  {
     "handle": "lexus.cast",
     "first": "Lexus",
     "name": "Lexus Castano"
@@ -148,6 +223,11 @@ export const ambassadors: readonly Ambassador[] = [
     "handle": "mackkluvuu",
     "first": "MacKenzie",
     "name": "MacKenzie Greene"
+  },
+  {
+    "handle": "mjmmzt",
+    "first": "Malcolm",
+    "name": "Malcolm Marzett"
   },
   {
     "handle": "maryydwyer",
@@ -165,9 +245,24 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Maximilliano Payan"
   },
   {
+    "handle": "whoismikemartin",
+    "first": "Michael",
+    "name": "Michael Martin"
+  },
+  {
     "handle": "monica.v328",
     "first": "Monica",
     "name": "Monica Verdugo"
+  },
+  {
+    "handle": "morganxperalta",
+    "first": "Morgan",
+    "name": "Morgan Peralta"
+  },
+  {
+    "handle": "mos_kimun",
+    "first": "Mosi",
+    "name": "Mosi"
   },
   {
     "handle": "nxsfarrakhan",
@@ -195,6 +290,11 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Rylea Herpst"
   },
   {
+    "handle": "sagebaldwin",
+    "first": "Sage",
+    "name": "Sage Baldwin"
+  },
+  {
     "handle": "saifkingofficiall",
     "first": "Saif",
     "name": "Saif"
@@ -203,6 +303,21 @@ export const ambassadors: readonly Ambassador[] = [
     "handle": "sam.thammahong",
     "first": "Sam",
     "name": "Sam Thammahong"
+  },
+  {
+    "handle": "simonemacherie",
+    "first": "Simone",
+    "name": "Simone Macherie"
+  },
+  {
+    "handle": "machechena_",
+    "first": "Stephanie",
+    "name": "Stephanie Murillo Agandar"
+  },
+  {
+    "handle": "isw_tv",
+    "first": "Stephen",
+    "name": "Stephen Wideman"
   },
   {
     "handle": "i.am.summero",
@@ -220,128 +335,13 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Tamlyn White"
   },
   {
+    "handle": "sheissvenus",
+    "first": "Yadira",
+    "name": "Yadira Flores"
+  },
+  {
     "handle": "yslinn___",
     "first": "Yu",
     "name": "Yu Syuan Lin"
-  },
-  {
-    "handle": "aliciaampz",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "bella.elise",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "callangoldeneye",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "danielle.leoni_",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "daniellefoxox",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "designerkidalmer",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "dianaferar",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "gifti_asha",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "isaacnewtoncollection",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "isw_tv",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "jaciel_realestatepro",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "johnathan_3den",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "koanasaky",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "love.lex333",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "machechena_",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "mjmmzt",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "morganxperalta",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "mos_kimun",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "oneofakindaura",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "sagebaldwin",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "sexy_secret_angel",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "sheissvenus",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "simonemacherie",
-    "first": "",
-    "name": ""
-  },
-  {
-    "handle": "whoismikemartin",
-    "first": "",
-    "name": ""
   }
 ];
