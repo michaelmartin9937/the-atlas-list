@@ -72,7 +72,7 @@ export function AmbassadorLinks({ people, messagesHref }: Props) {
           Private · Team only
         </span>
         <h1 className="mt-4 font-serif text-4xl md:text-[52px] leading-[1.1] text-noir">
-          Ambassador Page Links
+          Brand Ambassador Master List
         </h1>
         <p className="mt-5 max-w-[700px] text-base leading-[1.5] text-ink/75">
           Every ambassador has a personal page with their link, the video, and the posting steps.

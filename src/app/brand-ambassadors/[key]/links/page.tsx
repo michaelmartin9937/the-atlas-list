@@ -10,10 +10,24 @@ export function generateStaticParams() {
   return [{ key: AMBASSADOR_TEAM_KEY }];
 }
 
+const TITLE = "Brand Ambassador Master List";
+const DESCRIPTION =
+  "Private team page · The Atlas List. Every Desert After Dark ambassador's personal page link, ready to copy and send.";
+
 export const metadata: Metadata = {
-  title: "Ambassador Page Links",
-  description: "Private team page.",
+  title: TITLE,
+  description: DESCRIPTION,
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+  // Its own card (./opengraph-image.tsx) and title, so a pasted link shows
+  // what it opens instead of the generic site preview.
+  openGraph: {
+    title: `${TITLE} · The Atlas List`,
+    description: DESCRIPTION,
+    url: `/brand-ambassadors/${AMBASSADOR_TEAM_KEY}/links`,
+    siteName: "The Atlas List",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image", title: `${TITLE} · The Atlas List`, description: DESCRIPTION },
 };
 
 export default function AmbassadorLinksPage() {

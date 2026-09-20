@@ -86,7 +86,7 @@ export function AmbassadorMessages({ people, videoUrl, linksHref }: Props) {
         <p className="mt-3 text-sm text-ink/70">
           Prefer to send each person their own page instead of the long message?{" "}
           <Link href={linksHref} className="underline decoration-gold underline-offset-4 hover:text-gold">
-            Open the page-links list
+            Open the Brand Ambassador Master List
           </Link>
           .
         </p>
