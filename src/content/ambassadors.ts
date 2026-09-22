@@ -262,7 +262,7 @@ export const ambassadors: readonly Ambassador[] = [
   {
     "handle": "mos_kimun",
     "first": "Mosi",
-    "name": "Mosi"
+    "name": "Mosi Kimun"
   },
   {
     "handle": "nxsfarrakhan",
