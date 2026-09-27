@@ -44,6 +44,9 @@ export const home = {
       { src: "/images/home/gathering-1.jpg", alt: "Guests talking at the bar during a monthly gathering" },
       { src: "/images/home/gathering-2.jpg", alt: "Two guests in evening dresses" },
       { src: "/images/home/gathering-3.jpg", alt: "A guest in a lavender dress on the terrace" },
+      { src: "/images/home/gathering-4.jpg", alt: "Two guests laughing by the window" },
+      { src: "/images/home/gathering-5.jpg", alt: "Guests gathered around the dinner table" },
+      { src: "/images/home/gathering-6.jpg", alt: "A group of guests in white outside the house at night" },
     ],
     caption:
       "The goal is not to create a party. The goal is to create a room people are proud to be seen in.",
@@ -109,6 +112,11 @@ export const home = {
       { src: "/images/home/room-3.jpg", alt: "A group of guests outside the house" },
       { src: "/images/home/room-4.jpg", alt: "A guest seated on the staircase in emerald satin" },
       { src: "/images/home/room-5.jpg", alt: "A guest in white beside ceramic vases" },
+      { src: "/images/home/room-6.jpg", alt: "A guest in lavender with the mountain behind" },
+      { src: "/images/home/room-7.jpg", alt: "A guest in a white gown seated by the vases" },
+      { src: "/images/home/room-8.jpg", alt: "A guest in a black dress against the tiled wall" },
+      { src: "/images/home/room-9.jpg", alt: "A guest in a dinner jacket stepping out of a red car" },
+      { src: "/images/home/room-10.jpg", alt: "A guest in a printed jacket beside a red sports car" },
     ],
   },
   partnership: {

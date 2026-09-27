@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Countdown } from "./Countdown";
 
 type Props = {
   eyebrow: string;
@@ -6,6 +7,8 @@ type Props = {
   tagline: string;
   subhead: string;
   cta: { label: string; href: string };
+  // Optional "early bird pricing ends in" box under the button.
+  countdown?: { label: string; deadline: string };
   videoSrc: string;
   posterSrc: string;
 };
@@ -14,7 +17,7 @@ type Props = {
 // photo on the right, a faint burgundy glow behind the copy. The promo video
 // keeps living in that slot with the Figma photo as its poster, so the page
 // looks like the design until someone presses play. Stacks on phones.
-export function EventHero({ eyebrow, headline, tagline, subhead, cta, videoSrc, posterSrc }: Props) {
+export function EventHero({ eyebrow, headline, tagline, subhead, cta, countdown, videoSrc, posterSrc }: Props) {
   return (
     <section className="relative overflow-hidden bg-velvet">
       <div
@@ -38,10 +41,11 @@ export function EventHero({ eyebrow, headline, tagline, subhead, cta, videoSrc, 
           <div className="mt-8">
             <Link
               href={cta.href}
-              className="inline-flex items-center justify-center h-12 px-7 bg-gold text-noir text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-bone transition-colors"
+              className="inline-flex w-full sm:w-auto items-center justify-center h-12 px-7 bg-gold text-noir text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-bone transition-colors"
             >
               {cta.label}
             </Link>
+            {countdown && <Countdown label={countdown.label} deadline={countdown.deadline} />}
           </div>
         </div>
 

@@ -76,7 +76,7 @@ export function Hero({
             <div className="mt-8 md:mt-10">
               <Link
                 href={cta.href}
-                className="inline-flex items-center justify-center h-12 px-8 bg-pearl text-noir text-xs font-medium uppercase tracking-[0.06em] hover:bg-gold transition-colors"
+                className="inline-flex w-full sm:w-auto items-center justify-center h-12 px-8 bg-pearl text-noir text-xs font-medium uppercase tracking-[0.06em] hover:bg-gold transition-colors"
               >
                 {cta.label}
               </Link>

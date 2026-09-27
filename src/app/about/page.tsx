@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { HostCards } from "@/components/HostCards";
-import { PhotoGrid } from "@/components/PhotoGrid";
+import { PhotoCarousel } from "@/components/PhotoCarousel";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
 import { about } from "@/content/about";
@@ -79,7 +79,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <PhotoGrid photos={about.gallery} />
+      {/* Figma (Sep 26): the 4×2 grid became a single 4-up row with dots. */}
+      <PhotoCarousel eyebrow="" images={about.gallery} tile="md" arrows={false} />
     </>
   );
 }

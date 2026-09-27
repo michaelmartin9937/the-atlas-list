@@ -6,28 +6,60 @@ import { FadeIn } from "./FadeIn";
 
 type Photo = { src: string; alt: string };
 
+type Tile = "sm" | "md" | "lg";
+
 type Props = {
   eyebrow: string;
   headline?: string;
+  intro?: string;
   images: readonly Photo[];
-  // "light" = pearl section (home); "dark" = velvet section (event / partner).
+  // "light" = pearl section (home / about); "dark" = velvet section (event / partner).
   tone?: "light" | "dark";
+  // Tile size from the Figma frames — all three fill the 1200px column exactly:
+  //   sm  224×210, 5 per view, 20px gap  ("More from the room", "Whats in store")
+  //   md  270×250, 4 per view, 40px gap  (About gallery)
+  //   lg  384×320, 3 per view, 24px gap  ("Scenes from the last gathering")
+  tile?: Tile;
+  // Centre the eyebrow / headline / intro (the home gallery) instead of left.
+  center?: boolean;
+  // Small tracked caption under the dots.
+  caption?: string;
+  // Hide the round prev/next buttons (the Figma gallery variants have none).
+  arrows?: boolean;
 };
 
-// Horizontal photo carousel: 224×210 tiles, round arrows outside the column,
-// dot indicator beneath (Figma: "More from the room", "Whats in store").
-// Native scroll-snap does the moving so it stays swipeable on touch.
-export function PhotoCarousel({ eyebrow, headline, images, tone = "light" }: Props) {
+const TILES: Record<Tile, { li: string; ul: string; sizes: string; peek: string }> = {
+  sm: { li: "max-w-[224px] aspect-[224/210]", ul: "gap-5", sizes: "224px", peek: "w-[68vw]" },
+  md: { li: "max-w-[270px] aspect-[270/250]", ul: "gap-4 md:gap-10", sizes: "270px", peek: "w-[68vw]" },
+  lg: { li: "max-w-[384px] aspect-[6/5]", ul: "gap-4 md:gap-6", sizes: "(min-width: 768px) 384px, 78vw", peek: "w-[78vw]" },
+};
+
+// Horizontal photo carousel with round arrows outside the column and a dot
+// indicator beneath (Figma, Sep 2026: every photo strip on the site is one of
+// these now). Native scroll-snap does the moving so it stays swipeable on
+// touch; the dots track whichever tile is at the left edge.
+export function PhotoCarousel({
+  eyebrow,
+  headline,
+  intro,
+  images,
+  tone = "light",
+  tile = "sm",
+  center = false,
+  caption,
+  arrows = true,
+}: Props) {
   const track = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
+  const t = TILES[tile];
 
   useEffect(() => {
     const el = track.current;
     if (!el) return;
     const onScroll = () => {
       const tiles = [...el.children] as HTMLElement[];
-      const left = el.scrollLeft + el.clientWidth / 2;
-      const idx = tiles.findIndex((t) => t.offsetLeft + t.offsetWidth > left);
+      const left = el.scrollLeft + 8;
+      const idx = tiles.findIndex((x) => x.offsetLeft + x.offsetWidth > left);
       setActive(Math.max(0, idx === -1 ? tiles.length - 1 : idx));
     };
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -36,9 +68,9 @@ export function PhotoCarousel({ eyebrow, headline, images, tone = "light" }: Pro
 
   const scrollTo = (idx: number) => {
     const el = track.current;
-    const tile = el?.children[idx] as HTMLElement | undefined;
-    if (!el || !tile) return;
-    el.scrollTo({ left: tile.offsetLeft, behavior: "smooth" });
+    const target = el?.children[idx] as HTMLElement | undefined;
+    if (!el || !target) return;
+    el.scrollTo({ left: target.offsetLeft, behavior: "smooth" });
   };
   const step = (dir: -1 | 1) =>
     scrollTo(Math.min(images.length - 1, Math.max(0, active + dir)));
@@ -55,39 +87,50 @@ export function PhotoCarousel({ eyebrow, headline, images, tone = "light" }: Pro
       className={`${dark ? "bg-velvet" : "bg-pearl"} py-14 md:py-16 px-6 md:px-10 overflow-hidden`}
     >
       <div className="max-w-[1280px] mx-auto relative">
+        {(eyebrow || headline || intro) && (
         <FadeIn>
-          <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
-            {eyebrow}
-          </span>
-          {headline && (
-            <h2
-              className={`mt-3 font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.1] ${
-                dark ? "text-bone" : "text-noir"
-              }`}
-            >
-              {headline}
-            </h2>
-          )}
+          <div className={center ? "text-center max-w-[820px] mx-auto" : ""}>
+            <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
+              {eyebrow}
+            </span>
+            {headline && (
+              <h2
+                className={`mt-3 font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.1] ${
+                  dark ? "text-bone" : "text-noir"
+                }`}
+              >
+                {headline}
+              </h2>
+            )}
+            {intro && (
+              <p className={`mt-4 text-base md:text-[17px] leading-[1.5] ${dark ? "text-velvet-text" : "text-ink/75"}`}>
+                {intro}
+              </p>
+            )}
+          </div>
         </FadeIn>
+        )}
 
-        <div className={`relative ${headline ? "mt-8 md:mt-10" : "mt-8"}`}>
-          <button
-            type="button"
-            aria-label="Previous photos"
-            onClick={() => step(-1)}
-            disabled={active === 0}
-            className={`${arrow} left-2 min-[1360px]:-left-[70px]`}
-          >
-            <Chevron dir="left" />
-          </button>
+        <div className={`relative ${headline || intro ? "mt-8 md:mt-10" : eyebrow ? "mt-8" : ""}`}>
+          {arrows && (
+            <button
+              type="button"
+              aria-label="Previous photos"
+              onClick={() => step(-1)}
+              disabled={active === 0}
+              className={`${arrow} left-2 min-[1360px]:-left-[70px]`}
+            >
+              <Chevron dir="left" />
+            </button>
+          )}
           <ul
             ref={track}
-            className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-6 px-6 md:mx-0 md:px-0"
+            className={`flex ${t.ul} overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-6 px-6 md:mx-0 md:px-0`}
           >
             {images.map((img, i) => (
               <li
                 key={img.src}
-                className={`relative snap-start shrink-0 w-[68vw] max-w-[224px] aspect-[224/210] overflow-hidden rounded-sm ${
+                className={`relative snap-start shrink-0 ${t.peek} ${t.li} overflow-hidden rounded-sm ${
                   dark ? "bg-velvet-card" : "bg-sand/40"
                 }`}
               >
@@ -95,22 +138,24 @@ export function PhotoCarousel({ eyebrow, headline, images, tone = "light" }: Pro
                   src={img.src}
                   alt={img.alt}
                   fill
-                  sizes="224px"
+                  sizes={t.sizes}
                   className="object-cover"
                   priority={i < 2}
                 />
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            aria-label="Next photos"
-            onClick={() => step(1)}
-            disabled={active === images.length - 1}
-            className={`${arrow} right-2 min-[1360px]:-right-[70px]`}
-          >
-            <Chevron dir="right" />
-          </button>
+          {arrows && (
+            <button
+              type="button"
+              aria-label="Next photos"
+              onClick={() => step(1)}
+              disabled={active === images.length - 1}
+              className={`${arrow} right-2 min-[1360px]:-right-[70px]`}
+            >
+              <Chevron dir="right" />
+            </button>
+          )}
         </div>
 
         <div className="mt-6 flex items-center justify-center gap-3" role="tablist" aria-label="Photo position">
@@ -132,6 +177,12 @@ export function PhotoCarousel({ eyebrow, headline, images, tone = "light" }: Pro
             />
           ))}
         </div>
+
+        {caption && (
+          <p className={`mt-6 text-center text-[13px] uppercase tracking-[0.08em] ${dark ? "text-velvet-text" : "text-ink/60"}`}>
+            {caption}
+          </p>
+        )}
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { EventHero } from "@/components/EventHero";
 import { NightCarousel } from "@/components/NightCarousel";
 import { PersonTile } from "@/components/PersonTile";
 import { PhotoCarousel } from "@/components/PhotoCarousel";
+import { Moodboards } from "@/components/Moodboards";
 import { PartnershipBand } from "@/components/PartnershipBand";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
@@ -77,6 +78,7 @@ export default function DesertAfterDarkPage() {
         tagline={d.hero.tagline}
         subhead={d.hero.subhead}
         cta={{ label: d.hero.cta, href: "#apply" }}
+        countdown={d.hero.earlyBird}
         videoSrc="/videos/atlas-house-promo.mp4"
         posterSrc="/images/dad/hero-fire.jpg"
       />
@@ -139,7 +141,7 @@ export default function DesertAfterDarkPage() {
               <p className={intro}>{d.timeline.intro}</p>
             </div>
           </FadeIn>
-          <ol className="mt-12 md:mt-[72px] grid md:grid-cols-2 gap-x-[60px] gap-y-10">
+          <ol className="mt-12 md:mt-[72px] grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
             {d.timeline.acts.map((act, i) => (
               <FadeIn key={act.title} delay={i * 100}>
                 <li className="border-t border-velvet-line pt-8 md:pt-10 flex flex-col h-full">
@@ -147,14 +149,14 @@ export default function DesertAfterDarkPage() {
                     <span className={`font-serif text-xl md:text-2xl ${ACT_COLORS[i % ACT_COLORS.length]}`}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="font-serif text-2xl md:text-[28px] leading-tight text-bone">
+                    <h3 className="font-serif text-2xl md:text-[26px] leading-tight text-bone">
                       {act.title}
                     </h3>
                   </div>
                   <span className="mt-3 text-[13px] tracking-[0.1em] text-velvet-text">
                     {act.time}
                   </span>
-                  <p className="mt-4 max-w-[470px] text-base leading-[1.5] text-velvet-text">
+                  <p className="mt-4 text-[15px] leading-[1.5] text-velvet-text">
                     {act.body}
                   </p>
                 </li>
@@ -165,29 +167,21 @@ export default function DesertAfterDarkPage() {
       </section>
 
       <section className="bg-velvet px-6 md:px-10 py-20 md:py-[120px]">
-        <div className="max-w-[1280px] mx-auto">
+        <div className="max-w-[1280px] mx-auto grid gap-12 md:grid-cols-[minmax(0,1fr)_333px] md:gap-x-20 md:items-center">
           <FadeIn>
             <span className={eyebrow}>{d.dressCode.eyebrow}</span>
             <h2 className="mt-6 font-serif text-4xl md:text-[48px] leading-[1.1] text-bone">
               {d.dressCode.headline}
             </h2>
             <div className="mt-8 h-[3px] w-60 bg-gradient-to-r from-gold via-rosegold to-burgundy" aria-hidden />
-            <p className="mt-8 max-w-[1000px] text-base md:text-[17px] leading-[1.5] text-[#D8D2C8]">
+            <p className="mt-8 max-w-[560px] text-base md:text-[17px] leading-[1.5] text-[#D8D2C8]">
               {d.dressCode.body}
             </p>
           </FadeIn>
-          <ul className="mt-12 md:mt-16 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-11 gap-x-3 gap-y-8 md:gap-x-2">
-            {d.dressCode.palette.map((swatch) => (
-              <li key={swatch.name} className="flex flex-col items-center gap-4 text-center">
-                <span className="text-[13px] font-semibold leading-tight text-bone">{swatch.name}</span>
-                <span
-                  className={`block w-full h-11 ${swatch.hex === "#0A0A0A" ? "border border-[#3A3633]" : ""}`}
-                  style={{ background: swatch.hex }}
-                  aria-hidden
-                />
-              </li>
-            ))}
-          </ul>
+          {/* Diana's styling boards (Figma, Sep 26) replaced the swatch row. */}
+          <FadeIn delay={120}>
+            <Moodboards images={d.dressCode.moodboards} />
+          </FadeIn>
         </div>
       </section>
 

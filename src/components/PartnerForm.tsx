@@ -101,7 +101,7 @@ export function PartnerForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="self-start inline-flex items-center justify-center h-[50px] px-[60px] text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-gold hover:text-noir transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="self-stretch sm:self-start inline-flex items-center justify-center h-[50px] px-[60px] text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-gold hover:text-noir transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {submitting ? "Sending…" : "Submit Inquiry"}
       </button>

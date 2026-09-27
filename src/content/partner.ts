@@ -108,7 +108,11 @@ export const partner = {
     list: [
       { name: "thundr", image: "/images/sponsors/thundr.jpg" },
       { name: "Opulence", image: "/images/sponsors/opulence.jpg" },
-      { name: "Your Logo Here", image: null },
+      // The Atlas List tile is the badge logo on a black card (rendered in
+      // the page, not a photo). The last tile is Diana's "your logo here"
+      // placeholder graphic.
+      { name: "The Atlas List", image: "/images/logo.svg", badge: true },
+      { name: "Your Logo Here", image: "/images/sponsors/your-logo-here.jpg" },
     ],
   },
   inquiries: {

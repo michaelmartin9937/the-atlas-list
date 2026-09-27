@@ -25,7 +25,7 @@ export function RightNow() {
           <div className="mt-10">
             <Link
               href={href}
-              className="inline-flex items-center justify-center h-[50px] px-11 bg-noir text-bone text-xs font-medium uppercase tracking-[0.06em] hover:bg-gold hover:text-noir transition-colors"
+              className="inline-flex w-full sm:w-auto items-center justify-center h-[50px] px-11 bg-noir text-bone text-xs font-medium uppercase tracking-[0.06em] hover:bg-gold hover:text-noir transition-colors"
             >
               {cta}
             </Link>

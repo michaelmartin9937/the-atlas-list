@@ -30,7 +30,7 @@ export function PartnershipBand({ eyebrow, headline, subhead, cta, href, tone = 
         </div>
         <Link
           href={href}
-          className={`inline-flex self-start md:self-auto items-center justify-center h-[52px] px-8 text-xs font-medium uppercase tracking-[0.06em] transition-colors ${
+          className={`inline-flex w-full md:w-auto self-start md:self-auto items-center justify-center h-[52px] px-8 text-xs font-medium uppercase tracking-[0.06em] transition-colors ${
             dark ? "bg-gold text-noir hover:bg-bone" : "bg-noir text-bone hover:bg-gold hover:text-noir"
           }`}
         >

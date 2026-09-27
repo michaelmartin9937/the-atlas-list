@@ -8,6 +8,12 @@ export const desertAfterDark = {
     subhead:
       "One night. One mansion. Paradise Valley's after-dark takeover, curated by The Atlas List — a private-residence runway, live entertainment, elevated bars and bites, and a night built for the senses. Designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
     cta: "Apply for Ticket Allocation",
+    // Countdown box under the button (Figma, Sep 26). The box disappears on
+    // its own once the deadline passes. Local time is Phoenix (no DST).
+    earlyBird: {
+      label: "Early bird pricing ends in",
+      deadline: "2026-10-03T23:59:59-07:00",
+    },
   },
   night: {
     eyebrow: "What's in Store",
@@ -16,15 +22,15 @@ export const desertAfterDark = {
     cards: [
       {
         title: "The Runway",
-        body: "Six designers you won't see sharing a stage anywhere else. One night, then it's gone.",
-        image: "/images/dad/card-runway.jpg",
-        alt: "A model in a black velvet gown beside the pool at dusk",
+        body: "Four designers you won't see sharing a stage anywhere else. One night, then it's gone.",
+        image: "/images/dad/card-runway-2.jpg",
+        alt: "Models walking a runway in front of a seated audience",
       },
       {
         title: "The Music",
-        body: "Anthoz headlines — Hotsauce, St Bernard, and Aaron Michael trade off behind the decks till last call.",
-        image: "/images/dad/card-music.jpg",
-        alt: "AnthoZ behind the decks",
+        body: "ON-1, St Bernard, and Aaron Michael trade off behind the decks till last call.",
+        image: "/images/dad/card-music-2.jpg",
+        alt: "A DJ's hands on the turntable",
       },
       {
         title: "The Bar",
@@ -54,18 +60,16 @@ export const desertAfterDark = {
   },
   designers: {
     eyebrow: "Featured Designers",
-    headline: "One Runway — Six Designers",
+    headline: "One Runway — Four Designers",
     intro:
-      "Six designers, each with their own point of view — one night to see all six on the same runway.",
+      "Four designers, each with their own point of view — one night to see all four on the same runway.",
     note: "Listed alphabetically.",
     // image = the designer's Instagram profile picture (from the earlier roster
     // where the person is unchanged).
     list: [
       { name: "Alexandra Bobo", label: "Adiara Designs", handle: "adiaradesigns", image: "/images/designers/oneofakindaura.jpg" },
-      { name: "Al'mer", label: "Designer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
       { name: "Bella Elise", label: "Designer", handle: "elisestudiosco", image: "/images/designers/bella-elisse.jpg" },
       { name: "Isaac Newton", label: "Isaac Newton Collection", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
-      { name: "Koanasaky", label: "Designer", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
       { name: "Stephanie Azucena", label: "Machehchena", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
     ],
   },
@@ -80,23 +84,23 @@ export const desertAfterDark = {
     intro: "Four moments, one night. The full lineup drops two weeks out.",
     acts: [
       {
-        title: "VIP Pre-Party",
-        time: "3:00pm - 5:00pm",
-        body: "Arrive early, sip first — a smaller room, first look at the designers, and space to breathe before the night fills up.",
+        title: "Party",
+        time: "5:30pm - 7:00pm",
+        body: "Doors open. Cocktails on the terrace while the estate fills in before the show begins.",
       },
       {
         title: "Fashion Show",
-        time: "6:30pm - 7:15pm",
-        body: "Six designers, one runway. Full production, live music, seated audience. This is the main event.",
+        time: "7:00pm - 8:00pm",
+        body: "Four designers, one runway. Full production, live music, seated audience. This is the main event.",
       },
       {
         title: "Mansion Party",
-        time: "7:15pm - 10:00pm",
+        time: "8:00pm - 10:00pm",
         body: "The full estate opens up. DJs take over, the bar is open, and the room becomes what a mansion in Paradise Valley on the right night is supposed to feel like.",
       },
       {
         title: "After Party",
-        time: "10:00pm - 11:30pm",
+        time: "10:00pm - 12:00am",
         body: "For the guests still standing. Location is released the night of, to the guests we want at it.",
       },
     ],
@@ -105,7 +109,14 @@ export const desertAfterDark = {
     eyebrow: "Dress Code",
     headline: "Desert Sunset",
     body: "Elevated, not stiff. Evening gowns and sharp suits — no tux required. Think desert sunset: warm tones, elevated black, a touch of gold. Skip anything cold or silver — we're going for golden-hour glamour, not a uniform.",
-    // Swatch colours sampled from the Figma frame.
+    // Diana's styling boards (Figma, Sep 26) replace the swatch row. Source
+    // PNGs came from the Figma layers "Women's Styling 01–03".
+    moodboards: [
+      { src: "/images/dad/moodboard-1.jpg", alt: "Desert After Dark dress-code board: rich sunset tones, elevated black, and warm metallic details" },
+      { src: "/images/dad/moodboard-2.jpg", alt: "Women's dress code for Desert After Dark" },
+      { src: "/images/dad/moodboard-3.jpg", alt: "Desert After Dark dress code: what works and what to avoid" },
+    ],
+    // Swatch colours sampled from the earlier Figma frame (no longer shown).
     palette: [
       { name: "Dune Blush", hex: "#C97D8A" },
       { name: "Ember Glow", hex: "#F07A5A" },
@@ -128,6 +139,11 @@ export const desertAfterDark = {
       { src: "/images/dad/store-3.jpg", alt: "A fire performer" },
       { src: "/images/dad/store-4.jpg", alt: "Guests taking a photo together" },
       { src: "/images/dad/store-5.jpg", alt: "A guest in white with the mountain behind" },
+      { src: "/images/dad/store-6.jpg", alt: "Guests taking a selfie together" },
+      { src: "/images/dad/store-7.jpg", alt: "Guests in evening dresses talking by the window" },
+      { src: "/images/dad/store-8.jpg", alt: "The production crew filming on the terrace at night" },
+      { src: "/images/dad/store-9.jpg", alt: "A fire performer at sunset with the mountain behind" },
+      { src: "/images/dad/store-10.jpg", alt: "Guests on the pool terrace in the afternoon" },
     ],
   },
   team: {
@@ -143,7 +159,7 @@ export const desertAfterDark = {
       // Johnathan's tile carries the OPUL3NCE mark rather than a portrait.
       { name: "Johnathan Eden", title: "Transport & Front of House", note: "OPUL3NCE", handle: "opul3nce.io", image: "/images/team/johnathan-eden.jpg", logo: true },
       { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
-      { name: "Malcolm Marzett", title: "Media Director", note: "Intertainment Media", handle: "mjmmzt", image: "/images/team/malcom.jpg" },
+      { name: "Malcolm Marzett", title: "Media Director", note: "MZT 1990 INC", handle: "mjmmzt", image: "/images/team/malcom.jpg" },
     ],
   },
   partnership: {
@@ -157,6 +173,6 @@ export const desertAfterDark = {
     eyebrow: "Apply",
     headline: "Request your ticket allocation",
     subhead:
-      "Tickets to Desert After Dark are allocated by application, not by open sale. Tell us about you below — it takes about three minutes. If you're approved, we'll follow up with tier options (General, VIP), pricing, and RSVP instructions.",
+      "Tickets to Desert After Dark are allocated by application, not by open sale. Tell us about you below — it takes about three minutes. If you're approved, we'll follow up with pricing and RSVP instructions.",
   },
 } as const;

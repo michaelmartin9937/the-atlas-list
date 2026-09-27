@@ -179,14 +179,15 @@ export default function PartnerPage() {
             </h2>
             <p className="mt-5 text-base md:text-[17px] leading-[1.5] text-bone/70">{p.sponsors.intro}</p>
           </FadeIn>
-          <ul className="mt-12 md:mt-14 flex flex-wrap justify-center gap-x-20 gap-y-10">
+          <ul className="mt-12 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-x-6 md:gap-x-10 gap-y-10 max-w-[1000px] mx-auto">
             {p.sponsors.list.map((s) => (
               <li key={s.name} className="flex flex-col items-center gap-4">
-                <div className="h-32 w-[208px] flex items-center justify-center">
-                  {s.image ? (
-                    <Image src={s.image} alt={s.name} width={208} height={128} className="max-h-32 w-auto object-contain" />
+                <div className="h-32 w-full max-w-[208px] flex items-center justify-center bg-[#141414] overflow-hidden">
+                  {"badge" in s && s.badge ? (
+                    // The Atlas List's own tile: the badge logo on the dark card.
+                    <Image src={s.image} alt={s.name} width={112} height={112} unoptimized className="h-28 w-28" />
                   ) : (
-                    <div className="h-32 w-[208px]" aria-hidden />
+                    <Image src={s.image} alt={s.name} width={208} height={128} className="h-32 w-full object-cover" />
                   )}
                 </div>
                 <span className="text-[15px] text-bone/70">{s.name}</span>

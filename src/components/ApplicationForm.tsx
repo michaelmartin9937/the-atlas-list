@@ -523,7 +523,7 @@ export function ApplicationForm({
         <button
           type="submit"
           disabled={submitting}
-          className={`self-start inline-flex items-center justify-center h-[50px] px-10 text-xs font-medium uppercase tracking-[0.06em] transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${t.submit}`}
+          className={`self-stretch sm:self-start inline-flex items-center justify-center h-[50px] px-10 text-xs font-medium uppercase tracking-[0.06em] transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${t.submit}`}
         >
           {submitting ? "Submitting…" : submitLabel ?? "Apply for an Invite"}
         </button>
