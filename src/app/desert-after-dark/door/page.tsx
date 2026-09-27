@@ -4,10 +4,24 @@ import { DoorForm } from "@/components/DoorForm";
 // Day-of page for guests paying in person at Desert After Dark. Reached by
 // the link or a QR code at the door only: it is not in the nav or footer,
 // and search engines are told to leave it alone.
+const TITLE = "Paying at the Door";
+const DESCRIPTION =
+  "Desert After Dark, October 10 · The Atlas List. Add your details to be checked in, then see the host to pay.";
+
 export const metadata: Metadata = {
-  title: "Pay at the Door · Desert After Dark",
-  description: "Add your details to be checked in at the door.",
+  title: `${TITLE} · Desert After Dark`,
+  description: DESCRIPTION,
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+  // Its own card (./opengraph-image.tsx) and title, so a texted link shows
+  // what it opens instead of the generic event preview.
+  openGraph: {
+    title: `${TITLE} · Desert After Dark · The Atlas List`,
+    description: DESCRIPTION,
+    url: "/desert-after-dark/door",
+    siteName: "The Atlas List",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image", title: `${TITLE} · Desert After Dark · The Atlas List`, description: DESCRIPTION },
 };
 
 export default function DoorPage() {
