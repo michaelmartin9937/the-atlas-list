@@ -63,16 +63,19 @@ export async function POST(req: Request) {
 
   // The Oct 10 page moved from /fashion-show to /desert-after-dark; a tab
   // opened before the rename still posts the old value. Store the current one.
+  const door = data.sourcePage === "desert-after-dark-door";
   const sourcePage =
-    data.sourcePage === "fashion-show" ? "desert-after-dark" : (data.sourcePage ?? null);
+    data.sourcePage === "fashion-show" || door ? "desert-after-dark" : (data.sourcePage ?? null);
 
   const basePayload = {
     first_name: data.firstName,
     last_name: data.lastName,
     phone: phoneE164,
     email,
-    vouch_intro: data.vouchIntro,
-    sms_consent: data.smsConsent,
+    // The door form has no free-text answer; say where the row came from so
+    // reviewers (and Airtable) can tell it apart from a web application.
+    vouch_intro: door ? "Day-of applicant — paying in person at the door." : data.vouchIntro ?? "",
+    sms_consent: data.smsConsent === true,
     source_page: sourcePage,
     referral_source: data.heardAbout?.trim() || null,
   };
@@ -83,7 +86,7 @@ export async function POST(req: Request) {
   const attr = data.attribution ?? {};
   const extended = data.formVersion === 2;
   const extendedPayload = {
-    form_version: extended ? 2 : 1,
+    form_version: door ? 3 : extended ? 2 : 1,
     // A clickable profile is one tap away for whoever reviews in Airtable.
     instagram_url: parseInstagramHandle(data.instagram)
       ? `https://www.instagram.com/${parseInstagramHandle(data.instagram)}/`
@@ -168,9 +171,9 @@ export async function POST(req: Request) {
         phone: phoneE164,
         email,
         instagram: igHandle,
-        vouchIntro: data.vouchIntro,
+        vouchIntro: basePayload.vouch_intro,
         heardAbout: data.heardAbout?.trim() || null,
-        smsConsent: data.smsConsent,
+        smsConsent: data.smsConsent === true,
         sourcePage: data.sourcePage ?? "unknown",
         city: extendedPayload.city,
         linkedinUrl: extendedPayload.linkedin_url,

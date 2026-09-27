@@ -37,6 +37,7 @@ const PAGE_LABEL: Record<string, string> = {
   about: "About page",
   "desert-after-dark": "Desert After Dark (Oct 10)",
   "fashion-show": "Desert After Dark (Oct 10)", // legacy address of the same page
+  "desert-after-dark-door": "Desert After Dark — at the door, paying in person",
 };
 
 // Best-effort duplicate suppression, per server instance: a double-submit from

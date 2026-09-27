@@ -31,25 +31,24 @@ export const applicationSchema = z
     // A handle, or a pasted profile URL — the API reduces either to the handle.
     instagram: optionalText(120),
     heardAbout: optionalText(200),
-    vouchIntro: z
-      .string()
-      .trim()
-      .min(10, "Tell us a little more")
-      .max(800, "Keep it under 800 characters"),
-    smsConsent: z.literal(true, {
-      errorMap: () => ({ message: "SMS consent is required to apply" }),
-    }),
+    // Required on every form except the door form (see superRefine).
+    vouchIntro: optionalText(800),
+    smsConsent: z.boolean().optional(),
     // "fashion-show" is the old address of the Desert After Dark page; still
     // accepted so a tab opened before the rename can submit. The API stores it
-    // as "desert-after-dark".
-    sourcePage: z.enum(["home", "about", "desert-after-dark", "fashion-show"]).optional(),
+    // as "desert-after-dark". "desert-after-dark-door" is the day-of, pay in
+    // person form — four fields only — stored as "desert-after-dark" too.
+    sourcePage: z
+      .enum(["home", "about", "desert-after-dark", "fashion-show", "desert-after-dark-door"])
+      .optional(),
     // Honeypot — must be empty for a real submission
     website: z.string().max(0).optional(),
 
     // 2 = the extended Desert After Dark application. Absent / 1 = the short
     // form (Home, About, and any Desert After Dark tab opened before the
     // extended form shipped), where none of the fields below are required.
-    formVersion: z.union([z.literal(1), z.literal(2)]).optional(),
+    // 3 = the door form.
+    formVersion: z.union([z.literal(1), z.literal(2), z.literal(3)]).optional(),
     city: optionalText(120),
     linkedin: optionalText(300),
     referredBy: optionalText(200),
@@ -62,10 +61,15 @@ export const applicationSchema = z
     attribution: attributionSchema,
   })
   .superRefine((v, ctx) => {
-    if (v.formVersion !== 2) return;
     const need = (key: keyof typeof v, ok: boolean, message: string) => {
       if (!ok) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message });
     };
+    const door = v.sourcePage === "desert-after-dark-door";
+    if (!door) {
+      need("vouchIntro", (v.vouchIntro ?? "").length >= 10, "Tell us a little more");
+      need("smsConsent", v.smsConsent === true, "SMS consent is required to apply");
+    }
+    if (v.formVersion !== 2) return;
     need("instagram", !!parseInstagramHandle(v.instagram), "Required — it's how we review applications");
     need("city", !!v.city, "Required");
     need("heardAbout", !!v.heardAbout, "Choose one");

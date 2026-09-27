@@ -208,6 +208,10 @@ Manual in Airtable (the API cannot create these): two Count fields on Contacts o
 
 Verified end to end 2026-09-19: link → cookie → application → Supabase `referral_code` → Make → application linked to the ambassador Contact; an application with no cookie linked to nobody; a second ambassador's link did not overwrite the first. Test records deleted.
 
+## 4e. Door form (2026-09-26)
+
+`/desert-after-dark/door` is the day-of page for guests paying in person: first name, last name, mobile, email, one button, an inline "you're on the list" confirmation and an "add another guest" reset. Not in the nav or footer; noindex. It posts to the same `/api/apply` route with `sourcePage: "desert-after-dark-door"` and `formVersion: 3`. The API stores `source_page = desert-after-dark`, `form_version = 3`, `sms_consent = false` and `vouch_intro = "Day-of applicant — paying in person at the door."`; the free-text answer and SMS consent are only required on the other forms. Make scenario 6292264 maps `Website Form / Source` to "Door form (pay in person)" when `form_version = 3` (otherwise "Application form"), so door rows are easy to filter in Airtable. Everything downstream (Contact dedupe, Event Ticket Request, MailerLite sync) is unchanged. Verified end to end 2026-09-26; test rows deleted.
+
 ## 5. Out of scope for the MVP
 
 No MailerLite, approval emails, guest-operations records, SMS, or ticketing in these scenarios. MailerLite is driven by Airtable status changes in a later scenario, gated on `Email Marketing Consent`.
