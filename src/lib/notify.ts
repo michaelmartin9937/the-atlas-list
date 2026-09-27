@@ -21,6 +21,7 @@ export type ApplicationNotification = {
   hopingFor?: string | null;
   utm?: string | null;
   referralCode?: string | null; // Brand Ambassador link, if any
+  gender?: string | null; // door form only
 };
 
 const TO = process.env.NOTIFY_TO || "info@theatlaslist.club";
@@ -99,6 +100,7 @@ export async function notifyNewApplication(
     ]);
   if (a.utm) rows.push(["Campaign", esc(a.utm)]);
   if (a.referralCode) rows.push(["Ambassador link", `@${esc(a.referralCode)}`]);
+  if (a.gender) rows.push(["Gender", esc(a.gender[0].toUpperCase() + a.gender.slice(1))]);
 
   const longAnswers: [string, string | null | undefined][] = [
     ["What drew them to the event", a.drewYou],

@@ -4,7 +4,7 @@ import { DoorForm } from "@/components/DoorForm";
 // Day-of page for guests paying in person at Desert After Dark. Reached by
 // the link or a QR code at the door only: it is not in the nav or footer,
 // and search engines are told to leave it alone.
-const TITLE = "Paying at the Door";
+const TITLE = "Pay at Door";
 const DESCRIPTION =
   "Desert After Dark, October 10 · The Atlas List. Add your details to be checked in, then see the host to pay.";
 
@@ -36,10 +36,10 @@ export default function DoorPage() {
           Desert After Dark · October 10
         </span>
         <h1 className="mt-4 font-serif text-[40px] md:text-[52px] leading-[1.05] text-bone">
-          Paying at the door
+          Pay at Door
         </h1>
         <p className="mt-4 text-[17px] leading-[1.5] text-velvet-text">
-          Four quick details and you&rsquo;re on the list. Then see the host to pay and come in.
+          A few quick details and you&rsquo;re on the list. Then see the host to pay and come in.
         </p>
         <div className="mt-10">
           <DoorForm />

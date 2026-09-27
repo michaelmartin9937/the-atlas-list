@@ -3,8 +3,15 @@
 import { useState, type FormEvent } from "react";
 import { formatPhoneAsTyping } from "@/lib/phone";
 import { readAttribution } from "@/lib/attribution";
+import { HEARD_ABOUT_OPTIONS } from "@/lib/application-options";
 
-type Errors = Partial<Record<"firstName" | "lastName" | "phone" | "email" | "form", string>>;
+type Errors = Partial<Record<"firstName" | "lastName" | "phone" | "email" | "instagram" | "heardAbout" | "gender" | "form", string>>;
+type Gender = "" | "woman" | "man" | "non-binary";
+const GENDERS: { value: Gender; label: string }[] = [
+  { value: "woman", label: "Woman" },
+  { value: "man", label: "Man" },
+  { value: "non-binary", label: "Non-binary" },
+];
 
 const input =
   "w-full bg-transparent border-0 border-b border-velvet-line px-0 py-3 text-bone font-sans text-[17px] focus:outline-none focus:border-gold placeholder:text-velvet-text/50";
@@ -19,6 +26,9 @@ export function DoorForm() {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [heardAbout, setHeardAbout] = useState("");
+  const [gender, setGender] = useState<Gender>("");
   const [website, setWebsite] = useState(""); // honeypot
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -37,6 +47,9 @@ export function DoorForm() {
           lastName,
           phone,
           email,
+          instagram,
+          heardAbout,
+          gender,
           sourcePage: "desert-after-dark-door",
           formVersion: 3,
           website,
@@ -61,6 +74,9 @@ export function DoorForm() {
     setLastName("");
     setPhone("");
     setEmail("");
+    setInstagram("");
+    setHeardAbout("");
+    setGender("");
     setDone(null);
   };
 
@@ -99,6 +115,48 @@ export function DoorForm() {
       <Field label="Email address" error={errors.email}>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" inputMode="email" autoCapitalize="none" className={input} />
       </Field>
+      <Field label="Instagram handle" error={errors.instagram}>
+        <input type="text" value={instagram} onChange={(e) => setInstagram(e.target.value)} placeholder="@yourhandle" autoComplete="off" autoCapitalize="none" className={input} />
+      </Field>
+      <Field label="How did you hear about The Atlas List?" error={errors.heardAbout}>
+        <select
+          value={heardAbout}
+          onChange={(e) => setHeardAbout(e.target.value)}
+          required
+          className={`${input} appearance-none cursor-pointer [&>option]:text-noir [&>option]:bg-white ${heardAbout ? "" : "text-velvet-text/50"}`}
+        >
+          <option value="" disabled>
+            Choose one
+          </option>
+          {HEARD_ABOUT_OPTIONS.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+      </Field>
+      <fieldset className="flex flex-col gap-3">
+        <legend className={label}>Gender</legend>
+        <div className="mt-3 grid grid-cols-3 gap-2" role="radiogroup">
+          {GENDERS.map((g) => (
+            <button
+              key={g.value}
+              type="button"
+              role="radio"
+              aria-checked={gender === g.value}
+              onClick={() => setGender(g.value)}
+              className={`h-12 border text-[13px] font-medium uppercase tracking-[0.06em] transition-colors ${
+                gender === g.value
+                  ? "border-gold bg-gold text-noir"
+                  : "border-velvet-line text-bone hover:border-gold"
+              }`}
+            >
+              {g.label}
+            </button>
+          ))}
+        </div>
+        {errors.gender && <span className="text-xs text-red-400">{errors.gender}</span>}
+      </fieldset>
 
       {/* Honeypot — hidden from real users, bots will fill it */}
       <div className="absolute left-[-9999px]" aria-hidden>

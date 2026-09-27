@@ -87,6 +87,7 @@ export async function POST(req: Request) {
   const extended = data.formVersion === 2;
   const extendedPayload = {
     form_version: door ? 3 : extended ? 2 : 1,
+    gender: data.gender || null,
     // A clickable profile is one tap away for whoever reviews in Airtable.
     instagram_url: parseInstagramHandle(data.instagram)
       ? `https://www.instagram.com/${parseInstagramHandle(data.instagram)}/`
@@ -184,6 +185,7 @@ export async function POST(req: Request) {
         aboutYou: extendedPayload.about_you,
         hopingFor: extendedPayload.hoping_for,
         referralCode: extendedPayload.referral_code,
+        gender: extendedPayload.gender,
         utm: [extendedPayload.utm_source, extendedPayload.utm_medium, extendedPayload.utm_campaign, extendedPayload.utm_content]
           .filter(Boolean)
           .join(" / ") || null,

@@ -58,6 +58,8 @@ export const applicationSchema = z
     aboutYou: optionalText(1200),
     hopingFor: optionalText(800),
     agreement: z.boolean().optional(),
+    // Door form only.
+    gender: z.enum(["woman", "man", "non-binary"]).optional().or(z.literal("")),
     attribution: attributionSchema,
   })
   .superRefine((v, ctx) => {
@@ -68,6 +70,9 @@ export const applicationSchema = z
     if (!door) {
       need("vouchIntro", (v.vouchIntro ?? "").length >= 10, "Tell us a little more");
       need("smsConsent", v.smsConsent === true, "SMS consent is required to apply");
+    } else {
+      need("heardAbout", !!v.heardAbout, "Choose one");
+      need("gender", !!v.gender, "Choose one");
     }
     if (v.formVersion !== 2) return;
     need("instagram", !!parseInstagramHandle(v.instagram), "Required — it's how we review applications");
