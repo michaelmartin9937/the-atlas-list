@@ -74,7 +74,8 @@ export default function AboutPage() {
             </div>
           </FadeIn>
           <FadeIn delay={150} className="mt-12 md:mt-14">
-            <ApplicationForm sourcePage="about" submitLabel="Request Ticket Allocation" />
+            {/* Same extended application as the Desert After Dark page (Sep 28). */}
+            <ApplicationForm sourcePage="about" submitLabel="Request Ticket Allocation" variant="extended" />
           </FadeIn>
         </div>
       </section>
