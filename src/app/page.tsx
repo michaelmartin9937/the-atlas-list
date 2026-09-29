@@ -52,7 +52,8 @@ export default function HomePage() {
           <FadeIn delay={150}>
             <div className="mt-10 md:mt-12">
               {/* Figma drops the Instagram field on the home form only. */}
-              <ApplicationForm sourcePage="home" submitLabel="Request Ticket Allocation" showInstagram={false} />
+              {/* Same extended application as the Desert After Dark page (Sep 28). */}
+              <ApplicationForm sourcePage="home" submitLabel="Request Ticket Allocation" variant="extended" />
             </div>
           </FadeIn>
         </div>
