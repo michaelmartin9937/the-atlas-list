@@ -8,12 +8,6 @@ export const desertAfterDark = {
     subhead:
       "One night. One mansion. Paradise Valley's after-dark takeover, curated by The Atlas List — a private-residence runway, live entertainment, elevated bars and bites, and a night built for the senses. Designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
     cta: "Apply for Ticket Allocation",
-    // Countdown box under the button (Figma, Sep 26). The box disappears on
-    // its own once the deadline passes. Local time is Phoenix (no DST).
-    earlyBird: {
-      label: "Early bird pricing ends in",
-      deadline: "2026-10-03T23:59:59-07:00",
-    },
   },
   night: {
     eyebrow: "What's in Store",

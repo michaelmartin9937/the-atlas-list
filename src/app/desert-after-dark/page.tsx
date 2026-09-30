@@ -78,7 +78,6 @@ export default function DesertAfterDarkPage() {
         tagline={d.hero.tagline}
         subhead={d.hero.subhead}
         cta={{ label: d.hero.cta, href: "#apply" }}
-        countdown={d.hero.earlyBird}
         videoSrc="/videos/atlas-house-promo.mp4"
         posterSrc="/images/dad/hero-fire.jpg"
       />
