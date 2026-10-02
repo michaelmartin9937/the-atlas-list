@@ -140,7 +140,7 @@ export default async function TicketsPage() {
           </div>
           <FadeIn delay={120} className="flex flex-col gap-6">
             <div className="relative aspect-[3/2] overflow-hidden rounded bg-velvet-card">
-              <Image src="/images/tickets/women.jpg" alt="Guests in evening dresses at the estate" fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
+              <Image src="/images/tickets/preselected-group.jpg" alt="Devaun surrounded by nine guests in evening dresses" fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded bg-velvet-card">
               <Image src="/images/tickets/men.jpg" alt="A group of guests in white outside the house at night" fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
@@ -161,7 +161,12 @@ export default async function TicketsPage() {
           </FadeIn>
           {/* The founders, photographed beside the women in the room: the
               clearest picture of what "pre-selected" looks like. */}
-          <ul className="mt-12 md:mt-16 grid sm:grid-cols-3 gap-4 md:gap-6">
+          <FadeIn delay={60} className="mt-12 md:mt-16">
+            <div className="relative aspect-[16/10] sm:aspect-[2.4/1] overflow-hidden rounded bg-velvet-card">
+              <Image src={t.photos.banner.src} alt={t.photos.banner.alt} fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" priority />
+            </div>
+          </FadeIn>
+          <ul className="mt-4 md:mt-6 grid sm:grid-cols-3 gap-4 md:gap-6">
             {t.photos.featured.map((img, i) => (
               <FadeIn key={img.src} delay={i * 100}>
                 <li className="relative aspect-[4/5] overflow-hidden rounded bg-velvet-card">
