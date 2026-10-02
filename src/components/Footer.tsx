@@ -26,6 +26,7 @@ const DARK_PAGES = new Set(["/desert-after-dark", "/partner"]);
 export function Footer() {
   const pathname = usePathname();
   const dark = DARK_PAGES.has(pathname) || pathname.startsWith("/desert-after-dark/");
+  if (pathname.startsWith("/private/")) return null;
   const text = dark ? "text-bone" : "text-noir";
   const muted = dark ? "text-bone/70" : "text-ink/70";
   const heading = "text-[13px] font-semibold uppercase tracking-[0.08em] text-gold";

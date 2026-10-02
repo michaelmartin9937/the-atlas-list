@@ -17,7 +17,7 @@ const LINKS = [
 
 // Pages that render their own #apply section, so the nav Apply button
 // should stay on the current page instead of jumping to /#apply.
-const PAGES_WITH_APPLY = new Set(["/", "/about", "/desert-after-dark", "/desert-after-dark/tickets"]);
+const PAGES_WITH_APPLY = new Set(["/", "/about", "/desert-after-dark"]);
 
 const INSTAGRAM_URL = "https://www.instagram.com/theatlaslist/";
 
@@ -31,6 +31,10 @@ export function Nav() {
   const link =
     "text-xs font-medium uppercase tracking-[0.06em] text-ink hover:text-ember transition-colors";
   const applyHref = PAGES_WITH_APPLY.has(pathname) ? "#apply" : "/#apply";
+
+  // Private, unlisted pages (the approved-guest preview) carry no site
+  // navigation at all.
+  if (pathname.startsWith("/private/")) return null;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-pearl border-b border-sand">
