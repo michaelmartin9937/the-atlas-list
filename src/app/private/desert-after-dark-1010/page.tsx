@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: p.route,
     siteName: "The Atlas List",
     type: "website",
-    images: [{ url: "/images/og-desert-after-dark.jpg", width: 1200, height: 630, alt: "Desert After Dark" }],
+    // Card image comes from ./opengraph-image.tsx
   },
   twitter: { card: "summary_large_image", title: p.meta.ogTitle, description: p.meta.ogDescription },
 };

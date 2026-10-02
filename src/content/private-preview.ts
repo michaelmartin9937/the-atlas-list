@@ -28,8 +28,8 @@ export const privatePreview = {
   meta: {
     title: "Desert After Dark | Private Preview",
     description: "A private preview for approved Desert After Dark guests.",
-    ogTitle: "Desert After Dark",
-    ogDescription: "Private guest preview",
+    ogTitle: "Desert After Dark · Private Preview",
+    ogDescription: "For approved guests: confirm your admission. Saturday, October 10 · Paradise Valley.",
   },
 
   hero: {

@@ -18,7 +18,7 @@ import { tickets as t } from "@/content/tickets";
 // recorded with each application so these can be told apart in Airtable.
 const TITLE = "Tickets · Desert After Dark";
 const DESCRIPTION =
-  "One hundred tickets for men. Two women for every one of them. A private-residence fashion show and mansion party in Paradise Valley, October 10. Apply, get approved, then buy.";
+  "Walk in already chosen. One hundred tickets for men, two women for every one of them, at a private-residence fashion show and mansion party in Paradise Valley, Saturday, October 10. Apply, get approved, then buy.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     url: "/desert-after-dark/tickets",
     siteName: "The Atlas List",
     type: "website",
-    images: [{ url: "/images/og-desert-after-dark.jpg", width: 1200, height: 630, alt: "Desert After Dark powered by Thundr" }],
+    // Card image comes from ./opengraph-image.tsx
   },
-  twitter: { card: "summary_large_image", title: `${TITLE} · The Atlas List`, description: DESCRIPTION, images: ["/images/og-desert-after-dark.jpg"] },
+  twitter: { card: "summary_large_image", title: `${TITLE} · The Atlas List`, description: DESCRIPTION },
 };
 
 // The count is read on every request so the first paint is already right;
