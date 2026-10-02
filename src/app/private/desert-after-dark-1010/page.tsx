@@ -8,6 +8,7 @@ import { StickyCta } from "@/components/private/StickyCta";
 import { StripeButton } from "@/components/private/StripeButton";
 import { StripeBuyButton } from "@/components/private/StripeBuyButton";
 import { privatePreview as p } from "@/content/private-preview";
+import { eventTimeline } from "@/content/event-timeline";
 
 // Private preview for approved male applicants deciding whether to complete
 // their $495 admission payment. Unlisted (noindex/nofollow), no site nav or
@@ -65,6 +66,16 @@ export default function PrivatePreviewPage() {
             <p className={`mt-8 ${eyebrow}`}>{p.hero.eyebrow}</p>
             <h1 className="mt-5 font-serif text-[3.2rem] sm:text-6xl md:text-[88px] leading-[0.98] text-bone">{p.hero.headline}</h1>
             <p className="mt-4 font-serif italic text-2xl md:text-[28px] text-gold">{p.hero.tagline}</p>
+            {/* Date and time at a glance, same pill as the event and ticket pages. */}
+            <p className="mt-5 inline-flex flex-wrap items-center gap-x-3 gap-y-1 border border-bone/30 rounded-full px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-bone">
+              <svg viewBox="0 0 24 24" className="h-4 w-4 text-gold" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+              <span>{eventTimeline.date}</span>
+              <span className="text-gold" aria-hidden>·</span>
+              <span>{eventTimeline.heroTime}</span>
+            </p>
             <p className={`mt-6 max-w-[560px] ${body}`}>{p.hero.copy}</p>
             <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-5">
               <StripeButton label={p.cta} className="w-full sm:w-auto" />
