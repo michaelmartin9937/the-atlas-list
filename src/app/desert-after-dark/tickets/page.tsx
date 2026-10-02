@@ -3,6 +3,9 @@ import Image from "next/image";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
 import { TicketCounter } from "@/components/TicketCounter";
+import { PreviewVideo } from "@/components/PreviewVideo";
+import { EventTimeline } from "@/components/EventTimeline";
+import { eventTimeline } from "@/content/event-timeline";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { tickets as t } from "@/content/tickets";
 
@@ -60,12 +63,19 @@ export default async function TicketsPage() {
           className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_55%_at_15%_90%,rgba(164,62,120,0.18),transparent_70%)]"
           aria-hidden
         />
-        <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pt-14 md:pt-[96px] pb-16 md:pb-[112px] grid gap-12 md:gap-x-16 md:grid-cols-[minmax(0,1fr)_460px] md:items-center">
+        <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pt-14 md:pt-[96px] pb-16 md:pb-[112px] grid gap-12 md:gap-x-16 md:grid-cols-[minmax(0,1fr)_560px] md:items-center">
           <div className="max-w-[640px]">
             <span className={eyebrow}>{t.hero.eyebrow}</span>
             <h1 className="mt-6 font-serif text-[2.6rem] sm:text-5xl md:text-[60px] leading-[1.05] text-bone">
               {t.hero.headline}
             </h1>
+            <p className="mt-5 inline-flex items-center gap-3 border border-velvet-line rounded-full px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.1em] text-bone">
+              <svg viewBox="0 0 24 24" className="h-4 w-4 text-gold" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+              {eventTimeline.heroTime}
+            </p>
             <p className={`mt-6 ${body}`}>{t.hero.subhead}</p>
             <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
               <a
@@ -80,9 +90,13 @@ export default async function TicketsPage() {
               <TicketCounter initial={count} />
             </div>
           </div>
-          <div className="relative w-full max-w-[460px] mx-auto md:mx-0 aspect-[4/5] overflow-hidden rounded bg-velvet-card">
-            <Image src="/images/tickets/hero.jpg" alt="Two guests laughing at a recent Atlas List gathering" fill priority sizes="(min-width: 768px) 460px, 100vw" className="object-cover" />
-          </div>
+          {/* The event preview plays where the design had a photo. */}
+          <PreviewVideo
+            src="/videos/desert-after-dark-preview.mp4"
+            poster="/images/dad/preview-poster.jpg"
+            caption="Event preview · AI-generated visualisation of the night"
+            className="w-full"
+          />
         </div>
       </section>
 
@@ -154,28 +168,8 @@ export default async function TicketsPage() {
         </div>
       </section>
 
-      {/* Night */}
-      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[120px]">
-        <div className="max-w-[1280px] mx-auto">
-          <FadeIn>
-            <div className="text-center">
-              <span className={eyebrow}>{t.night.eyebrow}</span>
-              <h2 className={h2}>{t.night.headline}</h2>
-            </div>
-          </FadeIn>
-          <ol className="mt-12 md:mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-            {t.night.acts.map((a, i) => (
-              <FadeIn key={a.title} delay={i * 80}>
-                <li className="border-t border-velvet-line pt-8">
-                  <span className="text-[13px] tracking-[0.1em] text-gold">{a.time}</span>
-                  <h3 className="mt-3 font-serif text-2xl leading-tight text-bone">{a.title}</h3>
-                  <p className="mt-3 text-[15px] leading-[1.5] text-velvet-text">{a.body}</p>
-                </li>
-              </FadeIn>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* Night — condensed run of show */}
+      <EventTimeline />
 
       {/* How it works */}
       <section className="bg-noir px-6 md:px-10 py-20 md:py-[120px]">

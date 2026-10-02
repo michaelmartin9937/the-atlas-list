@@ -2,7 +2,7 @@
 // Desert After Dark. Reached by link and ads only (not in the nav).
 export const tickets = {
   hero: {
-    eyebrow: "October 10, 2026 · Private estate · Paradise Valley",
+    eyebrow: "Saturday, October 10, 2026 · Doors 5:30 PM · Paradise Valley",
     headline: "The room is already full of extraordinary women. Now we're choosing the men.",
     subhead:
       "Desert After Dark is a private-residence fashion show and mansion party. The women in the room are hand-selected — models, creators, founders. One hundred men get a ticket. Two women for every one of them. Every man is approved before he can buy.",
