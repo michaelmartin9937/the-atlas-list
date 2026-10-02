@@ -105,8 +105,8 @@ export const privatePreview = {
     ],
     // Drop the finished men's board here; until then an elegant palette
     // panel stands in.
-    board: "" as string, // e.g. "/media/dad-mens-style-board.webp"
-    boardAlt: "Desert After Dark men's styling board",
+    board: "/media/dad-mens-style-board.webp" as string,
+    boardAlt: "Desert After Dark men's styling guide: sunset tailoring, elevated black and warm neutrals, with the palette from dusty rose to gold",
     palette: [
       { name: "Terracotta", hex: "#B85F45" },
       { name: "Amber", hex: "#C58A3A" },

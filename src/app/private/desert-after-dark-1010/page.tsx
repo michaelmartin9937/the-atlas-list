@@ -180,7 +180,7 @@ export default function PrivatePreviewPage() {
           </FadeIn>
           <FadeIn delay={120}>
             {p.dress.board ? (
-              <div className="relative aspect-[4/5] overflow-hidden rounded bg-velvet-card">
+              <div className="relative aspect-[2/3] overflow-hidden rounded bg-velvet-card">
                 <Image src={p.dress.board} alt={p.dress.boardAlt} fill loading="lazy" sizes="(min-width: 768px) 560px, 100vw" className="object-cover" />
               </div>
             ) : (

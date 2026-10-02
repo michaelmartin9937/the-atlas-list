@@ -8,6 +8,7 @@ import { EventTimeline } from "@/components/EventTimeline";
 import { eventTimeline } from "@/content/event-timeline";
 import { StripeButton } from "@/components/private/StripeButton";
 import { StripeBuyButton } from "@/components/private/StripeBuyButton";
+import { privatePreview } from "@/content/private-preview";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { tickets as t } from "@/content/tickets";
 
@@ -172,6 +173,29 @@ export default async function TicketsPage() {
 
       {/* Night — condensed run of show */}
       <EventTimeline />
+
+      {/* Dress code — the men's styling guide (shared with the private preview) */}
+      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[112px]">
+        <div className="max-w-[1200px] mx-auto grid gap-12 md:grid-cols-2 md:gap-x-20 md:items-center">
+          <FadeIn>
+            <span className={eyebrow}>{privatePreview.dress.eyebrow}</span>
+            <h2 className={h2}>{privatePreview.dress.headline}</h2>
+            <p className={`mt-6 ${body}`}>{privatePreview.dress.copy}</p>
+            <ul className="mt-7 flex flex-col gap-2 border-l border-gold/50 pl-5">
+              {privatePreview.dress.notes.map((n) => (
+                <li key={n} className="text-[15px] leading-[1.5] text-[#D8D2C8]">
+                  {n}
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+          <FadeIn delay={120}>
+            <div className="relative aspect-[2/3] overflow-hidden rounded bg-velvet-card">
+              <Image src={privatePreview.dress.board} alt={privatePreview.dress.boardAlt} fill loading="lazy" sizes="(min-width: 768px) 560px, 100vw" className="object-cover" />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
       {/* How it works */}
       <section className="bg-noir px-6 md:px-10 py-20 md:py-[120px]">
