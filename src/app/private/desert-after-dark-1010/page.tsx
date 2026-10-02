@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { FadeIn } from "@/components/FadeIn";
+import { EventTimeline } from "@/components/EventTimeline";
 import { Faq } from "@/components/private/Faq";
 import { Film } from "@/components/private/Film";
 import { StickyCta } from "@/components/private/StickyCta";
@@ -115,8 +116,11 @@ export default function PrivatePreviewPage() {
         </ul>
       </section>
 
+      {/* The night, hour by hour (shared with the event and ticket pages) */}
+      <EventTimeline tone="noir" footer={<StripeButton label={p.cta} className="w-full sm:w-auto" />} />
+
       {/* 4. Authentic proof */}
-      <section className="bg-noir px-6 md:px-10 py-20 md:py-[112px]">
+      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[112px]">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn>
             <div className="max-w-[760px]">
