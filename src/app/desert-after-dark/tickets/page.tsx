@@ -162,7 +162,7 @@ export default async function TicketsPage() {
           {/* The founders, photographed beside the women in the room: the
               clearest picture of what "pre-selected" looks like. */}
           <FadeIn delay={60} className="mt-12 md:mt-16">
-            <div className="relative aspect-[16/10] sm:aspect-[2.4/1] overflow-hidden rounded bg-velvet-card">
+            <div className="relative aspect-[4/3] sm:aspect-[2/1] overflow-hidden rounded bg-velvet-card">
               <Image src={t.photos.banner.src} alt={t.photos.banner.alt} fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" priority />
             </div>
           </FadeIn>

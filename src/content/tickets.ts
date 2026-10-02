@@ -42,7 +42,7 @@ export const tickets = {
     eyebrow: "Pre-selection, on camera",
     headline: "This is what you leave with",
     body: "Our founders, Devaun and Michael, photographed the way every guest is: beside the women in the room, by a professional, in good light. A photo like this does something a bio can't. It shows you were chosen. Yours arrive in your inbox the week after the event.",
-    banner: { src: "/images/tickets/preselected-wide.jpg", alt: "Devaun at the centre of nine guests in evening dresses on a gala floor" },
+    banner: { src: "/images/tickets/preselected-wide.jpg", alt: "Devaun and Michael with a group of guests in evening dresses on a gala floor" },
     featured: [
       { src: "/images/tickets/preselected-1.jpg", alt: "Devaun, in a cream suit and hat, between two guests in red and cream dresses" },
       { src: "/images/tickets/preselected-2.jpg", alt: "Michael with three guests in evening dresses at the bar" },
