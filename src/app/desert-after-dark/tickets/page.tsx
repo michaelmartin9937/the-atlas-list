@@ -159,7 +159,18 @@ export default async function TicketsPage() {
               <p className={`mt-6 ${body}`}>{t.photos.body}</p>
             </div>
           </FadeIn>
-          <ul className="mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {/* The founders, photographed beside the women in the room: the
+              clearest picture of what "pre-selected" looks like. */}
+          <ul className="mt-12 md:mt-16 grid sm:grid-cols-3 gap-4 md:gap-6">
+            {t.photos.featured.map((img, i) => (
+              <FadeIn key={img.src} delay={i * 100}>
+                <li className="relative aspect-[4/5] overflow-hidden rounded bg-velvet-card">
+                  <Image src={img.src} alt={img.alt} fill sizes="(min-width: 640px) 400px, 100vw" className="object-cover" priority={i === 0} />
+                </li>
+              </FadeIn>
+            ))}
+          </ul>
+          <ul className="mt-4 md:mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {t.photos.images.map((img, i) => (
               <FadeIn key={img.src} delay={i * 80}>
                 <li className="relative aspect-[4/5] overflow-hidden rounded bg-velvet-card">

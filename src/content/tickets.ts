@@ -3,9 +3,9 @@
 export const tickets = {
   hero: {
     eyebrow: "Saturday, October 10, 2026 · Doors 5:30 PM · Paradise Valley",
-    headline: "The room is already full of extraordinary women. Now we're choosing the men.",
+    headline: "Walk in already chosen.",
     subhead:
-      "Desert After Dark is a private-residence fashion show and mansion party. The women in the room are hand-selected — models, creators, founders. One hundred men get a ticket. Two women for every one of them. Every man is approved before he can buy.",
+      "Desert After Dark is a private-residence fashion show and mansion party. The women in the room are hand-selected — models, creators, founders — and they help decide which men join them. One hundred men. Two women for every one of them. So the first thing anyone in the room knows about you is that other women already said yes.",
     cta: "Request My Ticket",
     note: "Application takes three minutes. If you're approved, you'll get a private link to buy.",
   },
@@ -15,33 +15,38 @@ export const tickets = {
     { value: "1", label: "Night. Then the room is gone." },
   ],
   why: {
-    eyebrow: "Why the room works for you",
-    headline: "Arrive preselected",
+    eyebrow: "Pre-selection, built into the room",
+    headline: "The room vouches for you before you say a word",
     intro:
-      "Most nights out put you in a crowd and leave the rest to luck. This one does the opposite. The guest list is built one name at a time, and the women in it decide who they want in the room with them.",
+      "Women read a man through other women. A man who has clearly been chosen — welcomed, surrounded, photographed beside women who had options — is read as safe, interesting and worth knowing before he opens his mouth. Most nights leave that to chance. Desert After Dark is built to hand it to you.",
     points: [
       {
-        title: "You're already approved",
-        body: "Every man at Desert After Dark was chosen before he walked in — by the hosts, and by the women who reviewed the list. When you're there, that's understood. You never have to prove you belong.",
+        title: "Being on the list is the first signal",
+        body: "Every man in the room was approved before he arrived, and the women who help build the list know it. You never have to prove you belong. It's already been decided, in your favour, by the people whose opinion matters most that night.",
       },
       {
         title: "Two women for every man",
-        body: "One hundred men. Two hundred women, hand-selected. The ratio isn't an accident; it's the whole point of how we curate.",
+        body: "One hundred men. Two hundred hand-selected women. A room built at that ratio never leaves you standing alone, and in a room like this, being seen with the right company is the whole point.",
       },
       {
-        title: "The men are worth knowing too",
-        body: "Founders, executives, investors, athletes, creatives. The kind of men who are hard to reach on a normal night and easy to talk to on this one.",
+        title: "Photographed with them, not near them",
+        body: "A professional photographer works the room all night, shooting you with the women you meet. Those photos reach your inbox the week after. One good photo beside the right women tells everyone who sees it that you've already been chosen.",
       },
       {
-        title: "No lines, no pitching, no bottle-service theatre",
-        body: "A private estate with a runway, two full bars, private chefs, fire performers and DJs till last call. Hosted introductions all night. You walk in and the room does the work.",
+        title: "The men beside you raise your stock too",
+        body: "Founders, executives, investors, athletes, creatives. Being counted among them is its own signal, and they're easier to talk to on this night than any other.",
       },
     ],
   },
   photos: {
-    eyebrow: "Professional photography, included",
-    headline: "Leave with the photos to prove it",
-    body: "A professional photographer works the room all night. Every man gets his own edited photos with the women he met, delivered to his inbox after the event. Not a selfie in a dark bar — the kind of photo people ask you about.",
+    eyebrow: "Pre-selection, on camera",
+    headline: "This is what you leave with",
+    body: "Our founders, Devaun and Michael, photographed the way every guest is: beside the women in the room, by a professional, in good light. A photo like this does something a bio can't. It shows you were chosen. Yours arrive in your inbox the week after the event.",
+    featured: [
+      { src: "/images/tickets/preselected-1.jpg", alt: "Devaun, in a cream suit and hat, between two guests in red and cream dresses" },
+      { src: "/images/tickets/preselected-2.jpg", alt: "Michael with three guests in evening dresses at the bar" },
+      { src: "/images/tickets/preselected-3.jpg", alt: "Michael with three guests in black, blue and black dresses" },
+    ],
     images: [
       { src: "/images/tickets/photo-1.jpg", alt: "Two guests in gold and red evening dresses at the estate" },
       { src: "/images/tickets/photo-2.jpg", alt: "A guest in a dinner jacket stepping out of a red car" },
@@ -66,11 +71,11 @@ export const tickets = {
       { title: "Apply", body: "Three minutes. Name, Instagram, a few honest answers. Every application is read by a person." },
       { title: "Get approved", body: "If you fit the room, you'll hear from us with a private link and the price. If you don't, you'll hear from us too." },
       { title: "Buy your ticket", body: "One ticket per approved man. When the hundred are gone, they're gone." },
-      { title: "Arrive", body: "The address goes out 72 hours before the door opens. Dress code: desert sunset — warm tones, elevated black, a touch of gold." },
+      { title: "Arrive", body: "The address and arrival details go out about 48 hours before. Dress code: desert sunset — warm tones, elevated black, a touch of gold." },
     ],
   },
   faq: [
-    { q: "Can I just buy a ticket?", a: "No. Every man is approved before he can buy. That's what keeps the room the room." },
+    { q: "Can I just buy a ticket?", a: "No. Every man is approved before he can buy. That's what makes being there mean something." },
     { q: "Can I bring a friend?", a: "Every guest applies and is approved individually, including friends. Send them the link." },
     { q: "Do women buy tickets?", a: "No. Women attend as invited guests. That's how we hold the two-to-one ratio." },
     { q: "What does it cost?", a: "Tickets start at $495. If you're approved, your private payment link comes with the price for your tier." },
