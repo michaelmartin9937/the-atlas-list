@@ -125,6 +125,11 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Danielle Sullivan"
   },
   {
+    "handle": "davaughnmarquis",
+    "first": "DaVaughn",
+    "name": "DaVaughn Marquis"
+  },
+  {
     "handle": "devaunlennox",
     "first": "Devaun",
     "name": "Devaun Lennox"
