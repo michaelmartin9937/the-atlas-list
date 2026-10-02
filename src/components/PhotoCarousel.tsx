@@ -26,6 +26,9 @@ type Props = {
   caption?: string;
   // Hide the round prev/next buttons (the Figma gallery variants have none).
   arrows?: boolean;
+  // On md+ lay the photos out as a static grid (5 across) instead of a strip;
+  // phones keep the swipeable carousel.
+  grid?: boolean;
 };
 
 const TILES: Record<Tile, { li: string; ul: string; sizes: string; peek: string }> = {
@@ -48,6 +51,7 @@ export function PhotoCarousel({
   center = false,
   caption,
   arrows = true,
+  grid = false,
 }: Props) {
   const track = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
@@ -112,7 +116,7 @@ export function PhotoCarousel({
         )}
 
         <div className={`relative ${headline || intro ? "mt-8 md:mt-10" : eyebrow ? "mt-8" : ""}`}>
-          {arrows && (
+          {arrows && !grid && (
             <button
               type="button"
               aria-label="Previous photos"
@@ -125,12 +129,14 @@ export function PhotoCarousel({
           )}
           <ul
             ref={track}
-            className={`flex ${t.ul} overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-6 px-6 md:mx-0 md:px-0`}
+            className={`flex ${t.ul} overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-6 px-6 md:mx-0 md:px-0 ${
+              grid ? "md:grid md:grid-cols-5 md:overflow-visible" : ""
+            }`}
           >
             {images.map((img, i) => (
               <li
                 key={img.src}
-                className={`relative snap-start shrink-0 ${t.peek} ${t.li} overflow-hidden rounded-sm ${
+                className={`relative snap-start shrink-0 ${t.peek} ${t.li} ${grid ? "md:w-auto md:max-w-none" : ""} overflow-hidden rounded-sm ${
                   dark ? "bg-velvet-card" : "bg-sand/40"
                 }`}
               >
@@ -145,7 +151,7 @@ export function PhotoCarousel({
               </li>
             ))}
           </ul>
-          {arrows && (
+          {arrows && !grid && (
             <button
               type="button"
               aria-label="Next photos"
@@ -158,7 +164,7 @@ export function PhotoCarousel({
           )}
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-3" role="tablist" aria-label="Photo position">
+        <div className={`mt-6 flex items-center justify-center gap-3 ${grid ? "md:hidden" : ""}`} role="tablist" aria-label="Photo position">
           {images.map((img, i) => (
             <button
               key={img.src}

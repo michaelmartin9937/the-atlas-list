@@ -20,7 +20,7 @@ const eyebrow = "text-[13px] font-semibold uppercase tracking-[0.08em] text-gold
 export function EventTimeline({ video = false, tone = "velvet", footer }: Props) {
   return (
     <section className={`${tone === "noir" ? "bg-noir" : "bg-velvet"} px-6 md:px-10 py-20 md:py-[120px]`}>
-      <div className={`max-w-[1280px] mx-auto grid gap-12 ${video ? "lg:grid-cols-[minmax(0,1fr)_560px] lg:gap-x-20 lg:items-start" : ""}`}>
+      <div className={`max-w-[1280px] mx-auto grid gap-12 ${video ? "lg:grid-cols-[minmax(0,1fr)_640px] lg:gap-x-16 lg:items-start" : ""}`}>
         <div className={video ? "" : "max-w-[760px] mx-auto w-full"}>
           <FadeIn>
             <span className={eyebrow}>{tl.eyebrow}</span>
@@ -72,11 +72,11 @@ export function EventTimeline({ video = false, tone = "velvet", footer }: Props)
         </div>
 
         {video && (
-          <FadeIn delay={120} className="lg:sticky lg:top-[128px]">
+          <FadeIn delay={120} className="lg:sticky lg:top-[128px] -mx-3 sm:mx-0">
             <PreviewVideo
               src="/videos/desert-after-dark-preview.mp4"
               poster="/images/dad/preview-poster.jpg"
-              caption="Event preview · AI-generated visualisation of the night"
+              caption="Creative visualization informed by the actual property and event direction."
             />
           </FadeIn>
         )}

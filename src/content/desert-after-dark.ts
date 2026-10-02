@@ -7,7 +7,7 @@ export const desertAfterDark = {
     tagline: "powered by Thundr",
     subhead:
       "One night. One mansion. Paradise Valley's after-dark takeover, curated by The Atlas List — a private-residence runway, live entertainment, elevated bars and bites, and a night built for the senses. Designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
-    cta: "Apply for Ticket Allocation",
+    cta: "Request Ticket Allocation",
   },
   night: {
     eyebrow: "What's in Store",
@@ -16,7 +16,7 @@ export const desertAfterDark = {
     cards: [
       {
         title: "The Runway",
-        body: "Four designers you won't see sharing a stage anywhere else. One night, then it's gone.",
+        body: "Six designers you won't see sharing a stage anywhere else. One night, then it's gone.",
         image: "/images/dad/card-runway-2.jpg",
         alt: "Models walking a runway in front of a seated audience",
       },
@@ -54,23 +54,25 @@ export const desertAfterDark = {
   },
   designers: {
     eyebrow: "Featured Designers",
-    headline: "One Runway — Four Designers",
+    headline: "One Runway — Six Designers",
     intro:
-      "Four designers, each with their own point of view — one night to see all four on the same runway.",
+      "Six designers, each with their own point of view — one night to see all six on the same runway.",
     note: "Listed alphabetically.",
     // image = the designer's Instagram profile picture (from the earlier roster
     // where the person is unchanged).
     list: [
       { name: "Alexandra Bobo", label: "Adiara Designs", handle: "adiaradesigns", image: "/images/designers/oneofakindaura.jpg" },
+      { name: "Al'mer", label: "Designer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
       { name: "Bella Elise", label: "Designer", handle: "elisestudiosco", image: "/images/designers/bella-elisse.jpg" },
       { name: "Isaac Newton", label: "Isaac Newton Collection", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
+      { name: "Koanasaky", label: "Designer", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
       { name: "Stephanie Azucena", label: "Machehchena", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
     ],
   },
   venue: {
     eyebrow: "The Venue",
     headline: "A Private Residence in Paradise Valley",
-    body: "This is not a hotel ballroom, not a club, not a public venue. It's a private estate — the kind of place you don't see on the way to work. The exact address is released only to ticketed guests, 72 hours before the door opens. This is how we keep the room the room.",
+    body: "This is not a hotel ballroom, not a club, not a public venue. It's a private estate — the kind of place you don't see on the way to work. The exact address, with arrival and transportation details, goes only to confirmed guests about 48 hours before the event. This is how we keep the room the room.",
   },
   timeline: {
     eyebrow: "The Evening",
@@ -85,7 +87,7 @@ export const desertAfterDark = {
       {
         title: "Fashion Show",
         time: "7:00pm - 8:00pm",
-        body: "Four designers, one runway. Full production, live music, seated audience. This is the main event.",
+        body: "Six designers, one runway. Full production, live music, seated audience. This is the main event.",
       },
       {
         title: "Mansion Party",
@@ -103,8 +105,9 @@ export const desertAfterDark = {
     eyebrow: "Dress Code",
     headline: "Desert Sunset",
     body: "Elevated, not stiff. Evening gowns and sharp suits — no tux required. Think desert sunset: warm tones, elevated black, a touch of gold. Skip anything cold or silver — we're going for golden-hour glamour, not a uniform.",
-    // Diana's styling boards (Figma, Sep 26) replace the swatch row. Source
-    // PNGs came from the Figma layers "Women's Styling 01–03".
+    // Diana's women's styling boards (Figma, Sep 26) and the men's guide
+    // (Oct 2026), shown as two labelled tabs.
+    mensBoard: { src: "/media/dad-mens-style-board.webp", alt: "Desert After Dark men's styling guide: sunset tailoring, elevated black and warm neutrals" },
     moodboards: [
       { src: "/images/dad/moodboard-1.jpg", alt: "Desert After Dark dress-code board: rich sunset tones, elevated black, and warm metallic details" },
       { src: "/images/dad/moodboard-2.jpg", alt: "Women's dress code for Desert After Dark" },

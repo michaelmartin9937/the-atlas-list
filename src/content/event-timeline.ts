@@ -12,7 +12,7 @@ export const eventTimeline = {
   eyebrow: "The Night, Hour by Hour",
   headline: "Four acts, one estate",
   intro: "Doors at 5:30. The runway at 7:00. The estate opens up at 8:00 and doesn't close until midnight.",
-  cta: "Request Your Ticket Allocation",
+  cta: "Request Ticket Allocation",
   acts: [
     {
       time: "5:30 PM",
@@ -23,7 +23,7 @@ export const eventTimeline = {
     {
       time: "7:00 PM",
       title: "Fashion Show",
-      body: "Four designers, one runway, seated audience. The main event, in five beats:",
+      body: "Six designers, one runway, seated audience. The main event, in five beats:",
       beats: ["MC welcome", "Introduction of the fashion chapter", "Designer presentations", "Collective finale", "Transition to the evening party"],
     },
     {

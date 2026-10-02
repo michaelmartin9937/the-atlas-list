@@ -22,7 +22,7 @@ const config: Config = {
         "velvet-deep": "#110C10", // velvet with a plum cast
         "velvet-card": "#141112", // carousel card surface
         "velvet-line": "#2C2822", // hairlines and field rules on velvet
-        "velvet-text": "#AEA8A0", // body copy on velvet
+        "velvet-text": "#BDB7AE", // body copy on velvet
         plum: "#54223D", // card borders (burgundy at rest on velvet)
         orchid: "#6E2D5C", // Instagram chip borders ("Dusk Orchid")
         sunset: "#E07D4A", // hero date eyebrow ("Ember Glow")

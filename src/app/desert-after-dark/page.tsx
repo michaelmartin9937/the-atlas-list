@@ -147,12 +147,12 @@ export default function DesertAfterDarkPage() {
           </FadeIn>
           {/* Diana's styling boards (Figma, Sep 26) replaced the swatch row. */}
           <FadeIn delay={120}>
-            <Moodboards images={d.dressCode.moodboards} />
+            <Moodboards women={d.dressCode.moodboards} men={[d.dressCode.mensBoard]} />
           </FadeIn>
         </div>
       </section>
 
-      <PhotoCarousel eyebrow={d.store.eyebrow} images={d.store.images} tone="dark" />
+      <PhotoCarousel eyebrow={d.store.eyebrow} images={d.store.images} tone="dark" grid />
 
       <section className="bg-velvet px-6 md:px-10 py-20 md:py-[140px]">
         <div className="max-w-[1280px] mx-auto">
@@ -180,8 +180,6 @@ export default function DesertAfterDarkPage() {
         </div>
       </section>
 
-      <PartnershipBand {...d.partnership} tone="light" />
-
       <section id="apply" className="relative overflow-hidden bg-velvet px-6 md:px-10 pt-20 md:pt-[120px] pb-20 md:pb-[140px]">
         <div
           className="absolute inset-x-0 top-0 h-[520px] pointer-events-none bg-[radial-gradient(ellipse_35%_50%_at_50%_10%,rgba(164,62,120,0.22),transparent_70%)]"
@@ -207,6 +205,10 @@ export default function DesertAfterDarkPage() {
           </FadeIn>
         </div>
       </section>
+
+      {/* Partnerships sit last, next to the footer, so the run from team into
+          the application stays uninterrupted. */}
+      <PartnershipBand {...d.partnership} tone="light" />
     </>
   );
 }

@@ -54,7 +54,7 @@ export const tickets = {
     headline: "Four acts, one estate",
     acts: [
       { time: "5:30pm", title: "Party", body: "Doors open. Cocktails on the terrace while the estate fills in." },
-      { time: "7:00pm", title: "Fashion Show", body: "Four designers, one runway, seated audience. This is the main event." },
+      { time: "7:00pm", title: "Fashion Show", body: "Six designers, one runway, seated audience. This is the main event." },
       { time: "8:00pm", title: "Mansion Party", body: "The full estate opens. DJs take over, the bars are open." },
       { time: "10:00pm", title: "After Party", body: "For the guests still standing. Location released the night of." },
     ],

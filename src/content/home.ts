@@ -32,7 +32,7 @@ export const home = {
     headline: "Desert After Dark",
     date: "October 10, 2026 · Paradise Valley, AZ",
     body: "Our yearly flagship — a private-residence takeover with a runway, live entertainment, and a night built for the senses. This is the one thing on the calendar until it's done.",
-    cta: "Apply for Ticket Allocation",
+    cta: "Request Ticket Allocation",
     href: "/desert-after-dark",
   },
   gallery: {

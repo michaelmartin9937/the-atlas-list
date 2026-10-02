@@ -97,7 +97,7 @@ export default async function TicketsPage() {
           <PreviewVideo
             src="/videos/desert-after-dark-preview.mp4"
             poster="/images/dad/preview-poster.jpg"
-            caption="Event preview · AI-generated visualisation of the night"
+            caption="Creative visualization informed by the actual property and event direction."
             className="w-full"
           />
         </div>

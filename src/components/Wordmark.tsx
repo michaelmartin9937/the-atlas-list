@@ -12,7 +12,7 @@ type Props = {
 // the noir footer it reads as a full badge.
 const DIAMETER: Record<NonNullable<Props["size"]>, number> = {
   sm: 40,
-  md: 56,
+  md: 66,
   lg: 128,
 };
 

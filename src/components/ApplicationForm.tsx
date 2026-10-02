@@ -577,7 +577,7 @@ function Field({
 }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className={`text-[11px] font-medium uppercase tracking-[0.08em] ${tone.label}`}>{label}</span>
+      <span className={`text-[12px] font-medium uppercase tracking-[0.08em] ${tone.label}`}>{label}</span>
       {children}
       {helper && <span className={`mt-2 text-xs leading-relaxed ${tone.helper}`}>{helper}</span>}
       {error && <span className={`mt-1 text-xs ${tone.error}`}>{error}</span>}

@@ -40,6 +40,9 @@ export function NightCarousel({ eyebrow, headline, intro, cards }: Props) {
   useEffect(() => {
     const el = track.current;
     if (!el) return;
+    // Browsers can restore a previous scroll offset on back-navigation; the
+    // strip should always open on card 01, fully visible.
+    el.scrollLeft = 0;
     const onScroll = () => {
       const tiles = [...el.children] as HTMLElement[];
       const left = el.scrollLeft + 8;
