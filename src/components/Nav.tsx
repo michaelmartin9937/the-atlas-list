@@ -17,7 +17,7 @@ const LINKS = [
 
 // Pages that render their own #apply section, so the nav Apply button
 // should stay on the current page instead of jumping to /#apply.
-const PAGES_WITH_APPLY = new Set(["/", "/about", "/desert-after-dark"]);
+const PAGES_WITH_APPLY = new Set(["/", "/about", "/desert-after-dark", "/desert-after-dark/tickets"]);
 
 const INSTAGRAM_URL = "https://www.instagram.com/theatlaslist/";
 
