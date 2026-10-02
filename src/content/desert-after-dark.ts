@@ -2,7 +2,7 @@
 // "Desert After Dark — Full Page" (Diana's September 2026 revision).
 export const desertAfterDark = {
   hero: {
-    eyebrow: "October 10, 2026 · Paradise Valley",
+    eyebrow: "Saturday, October 10, 2026 · 5:30 PM · Paradise Valley",
     headline: "Desert After Dark",
     tagline: "powered by Thundr",
     subhead:

@@ -4,6 +4,8 @@ import { NightCarousel } from "@/components/NightCarousel";
 import { PersonTile } from "@/components/PersonTile";
 import { PhotoCarousel } from "@/components/PhotoCarousel";
 import { Moodboards } from "@/components/Moodboards";
+import { EventTimeline } from "@/components/EventTimeline";
+import { eventTimeline } from "@/content/event-timeline";
 import { PartnershipBand } from "@/components/PartnershipBand";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FadeIn } from "@/components/FadeIn";
@@ -64,10 +66,6 @@ type TeamPerson = {
   logo?: boolean;
 };
 
-// The night is one arc — golden hour into full velvet dark — so the four
-// acts walk through the palette in that order.
-const ACT_COLORS = ["text-gold", "text-rosegold", "text-terracotta", "text-burgundy"];
-
 export default function DesertAfterDarkPage() {
   const d = desertAfterDark;
   return (
@@ -78,6 +76,7 @@ export default function DesertAfterDarkPage() {
         tagline={d.hero.tagline}
         subhead={d.hero.subhead}
         cta={{ label: d.hero.cta, href: "#apply" }}
+        timeLine={eventTimeline.heroTime}
         videoSrc="/videos/atlas-house-promo.mp4"
         posterSrc="/images/dad/hero-fire.jpg"
       />
@@ -131,39 +130,8 @@ export default function DesertAfterDarkPage() {
         </div>
       </section>
 
-      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[120px]">
-        <div className="max-w-[1280px] mx-auto">
-          <FadeIn>
-            <div className="text-center flex flex-col items-center">
-              <span className={eyebrow}>{d.timeline.eyebrow}</span>
-              <h2 className={h2Center}>{d.timeline.headline}</h2>
-              <p className={intro}>{d.timeline.intro}</p>
-            </div>
-          </FadeIn>
-          <ol className="mt-12 md:mt-[72px] grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-            {d.timeline.acts.map((act, i) => (
-              <FadeIn key={act.title} delay={i * 100}>
-                <li className="border-t border-velvet-line pt-8 md:pt-10 flex flex-col h-full">
-                  <div className="flex items-baseline gap-3">
-                    <span className={`font-serif text-xl md:text-2xl ${ACT_COLORS[i % ACT_COLORS.length]}`}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="font-serif text-2xl md:text-[26px] leading-tight text-bone">
-                      {act.title}
-                    </h3>
-                  </div>
-                  <span className="mt-3 text-[13px] tracking-[0.1em] text-velvet-text">
-                    {act.time}
-                  </span>
-                  <p className="mt-4 text-[15px] leading-[1.5] text-velvet-text">
-                    {act.body}
-                  </p>
-                </li>
-              </FadeIn>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* Condensed run of show, with the event preview video beside it. */}
+      <EventTimeline video />
 
       <section className="bg-velvet px-6 md:px-10 py-20 md:py-[120px]">
         <div className="max-w-[1280px] mx-auto grid gap-12 md:grid-cols-[minmax(0,1fr)_333px] md:gap-x-20 md:items-center">

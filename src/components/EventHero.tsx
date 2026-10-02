@@ -7,6 +7,8 @@ type Props = {
   tagline: string;
   subhead: string;
   cta: { label: string; href: string };
+  // "Doors 5:30 PM · Show 7:00 PM · Until midnight" — the time at a glance.
+  timeLine?: string;
   // Optional "early bird pricing ends in" box under the button.
   countdown?: { label: string; deadline: string };
   videoSrc: string;
@@ -17,7 +19,7 @@ type Props = {
 // photo on the right, a faint burgundy glow behind the copy. The promo video
 // keeps living in that slot with the Figma photo as its poster, so the page
 // looks like the design until someone presses play. Stacks on phones.
-export function EventHero({ eyebrow, headline, tagline, subhead, cta, countdown, videoSrc, posterSrc }: Props) {
+export function EventHero({ eyebrow, headline, tagline, subhead, cta, timeLine, countdown, videoSrc, posterSrc }: Props) {
   return (
     <section className="relative overflow-hidden bg-velvet">
       <div
@@ -35,6 +37,15 @@ export function EventHero({ eyebrow, headline, tagline, subhead, cta, countdown,
           <p className="mt-5 md:mt-6 font-serif italic text-2xl md:text-[28px] leading-tight text-gold">
             {tagline}
           </p>
+          {timeLine && (
+            <p className="mt-5 inline-flex items-center gap-3 border border-velvet-line rounded-full px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.1em] text-bone">
+              <svg viewBox="0 0 24 24" className="h-4 w-4 text-gold" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+              {timeLine}
+            </p>
+          )}
           <p className="mt-6 text-base md:text-[17px] leading-[1.5] text-velvet-text">
             {subhead}
           </p>
