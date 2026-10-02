@@ -49,7 +49,8 @@ export const privatePreview = {
     copy: "A preview of the atmosphere we are creating for October 10 — fashion in motion, an elevated private setting and a room designed for genuine connection.",
     src: "/media/dad-preview-film.mp4",
     poster: "/media/dad-preview-poster.webp",
-    // The current film is an AI visualisation, so the disclosure is on.
+    // "Mens Preview.MP4" (Oct 2026). Still a visualisation, so the
+    // disclosure stays on.
     aiDisclosure: true,
     disclosureText: "Creative visualization of the Desert After Dark atmosphere.",
   },

@@ -95,8 +95,8 @@ export default async function TicketsPage() {
           </div>
           {/* The event preview plays where the design had a photo. */}
           <PreviewVideo
-            src="/videos/desert-after-dark-preview.mp4"
-            poster="/images/dad/preview-poster.jpg"
+            src="/videos/mens-preview.mp4"
+            poster="/images/dad/mens-preview-poster.jpg"
             caption="Creative visualization informed by the actual property and event direction."
             className="w-full"
           />
