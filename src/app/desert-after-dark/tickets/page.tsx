@@ -6,6 +6,8 @@ import { TicketCounter } from "@/components/TicketCounter";
 import { PreviewVideo } from "@/components/PreviewVideo";
 import { EventTimeline } from "@/components/EventTimeline";
 import { eventTimeline } from "@/content/event-timeline";
+import { StripeButton } from "@/components/private/StripeButton";
+import { StripeBuyButton } from "@/components/private/StripeBuyButton";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { tickets as t } from "@/content/tickets";
 
@@ -193,6 +195,18 @@ export default async function TicketsPage() {
           </ol>
           <div className="mt-12 max-w-[620px] mx-auto">
             <TicketCounter initial={count} variant="bar" />
+          </div>
+          {/* Approved men pay here; everyone else applies below. */}
+          <div className="mt-10 max-w-[760px] mx-auto rounded border border-gold/40 bg-velvet-card p-7 md:p-9 text-center">
+            <span className={eyebrow}>Already approved?</span>
+            <h3 className="mt-3 font-serif text-2xl md:text-[30px] leading-tight text-bone">Confirm your admission — from $495</h3>
+            <p className={`mt-3 ${body}`}>
+              If you have your approval email, pay here with the same name and email you applied with. Secure checkout by Stripe.
+            </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <StripeButton label="Confirm My Admission — $495" className="w-full sm:w-auto" />
+              <StripeBuyButton />
+            </div>
           </div>
         </div>
       </section>

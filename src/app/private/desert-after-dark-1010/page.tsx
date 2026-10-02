@@ -6,6 +6,7 @@ import { Faq } from "@/components/private/Faq";
 import { Film } from "@/components/private/Film";
 import { StickyCta } from "@/components/private/StickyCta";
 import { StripeButton } from "@/components/private/StripeButton";
+import { StripeBuyButton } from "@/components/private/StripeBuyButton";
 import { privatePreview as p } from "@/content/private-preview";
 
 // Private preview for approved male applicants deciding whether to complete
@@ -222,8 +223,9 @@ export default function PrivatePreviewPage() {
                 </p>
               ))}
             </div>
-            <div className="mt-10">
+            <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5">
               <StripeButton label={p.cta} className="w-full sm:w-auto" />
+              <StripeBuyButton />
             </div>
           </FadeIn>
         </div>
@@ -253,6 +255,7 @@ export default function PrivatePreviewPage() {
             <p className={`mt-6 ${body}`}>{p.final.copy}</p>
             <div className="mt-10 flex flex-col items-center gap-4">
               <StripeButton label={p.cta} className="w-full sm:w-auto" />
+              <StripeBuyButton className="flex justify-center" />
               <p className="text-[12px] uppercase tracking-[0.1em] text-velvet-text">{p.stripeNote}</p>
               <p className="text-[13px] text-velvet-text">{p.final.checkoutNote}</p>
             </div>

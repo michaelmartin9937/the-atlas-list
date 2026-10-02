@@ -3,9 +3,20 @@
 // The page is sent only to approved male applicants deciding whether to
 // complete their admission payment. It is unlisted (noindex), not secured.
 
-// Set NEXT_PUBLIC_STRIPE_PAYMENT_LINK in Vercel (and .env.local for
-// previews). Every payment button on the page reads this one value.
-export const STRIPE_PAYMENT_LINK = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK ?? "";
+// The Stripe Payment Link for approved guests (supplied 2026-10-01). An
+// environment variable overrides it; otherwise this default is used, so the
+// buttons work without any Vercel configuration. Every payment button on
+// both pages reads this one value.
+export const STRIPE_PAYMENT_LINK =
+  process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK ?? "https://buy.stripe.com/dRmeV67XKdWW9M8fdBffy01";
+
+// Stripe's hosted Buy Button for the same product (publishable key is public
+// by design — it can only start a checkout, never read or move money).
+export const STRIPE_BUY_BUTTON = {
+  id: "buy_btn_1ULqw74oBYcjVnSdcGkaD3YI",
+  publishableKey:
+    "pk_live_51ULpHi4oBYcjVnSdLVokpQPp9J0CELn4Go6pbeP8p4c8fXRQd9aH0CUj80gDJyiZtTaYZsFHIsv48wv0ZwPHZEdS00pLgWCMDK",
+} as const;
 
 export const privatePreview = {
   route: "/private/desert-after-dark-1010",
