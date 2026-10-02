@@ -73,7 +73,7 @@ export const tickets = {
     { q: "Can I just buy a ticket?", a: "No. Every man is approved before he can buy. That's what keeps the room the room." },
     { q: "Can I bring a friend?", a: "Every guest applies and is approved individually, including friends. Send them the link." },
     { q: "Do women buy tickets?", a: "No. Women attend as invited guests. That's how we hold the two-to-one ratio." },
-    { q: "What does it cost?", a: "Pricing is shared with approved applicants. Tickets start at $500." },
+    { q: "What does it cost?", a: "Tickets start at $495. If you're approved, your private payment link comes with the price for your tier." },
   ],
   apply: {
     eyebrow: "Request your ticket",

@@ -113,7 +113,7 @@ export const privatePreview = {
       ["Doors", "5:30 PM"],
       ["Where", "Paradise Valley, Arizona"],
       ["Format", "Private, invite-only experience"],
-      ["Approved admission", "$495"],
+      ["Approved admission", "From $495"],
     ],
     terms: [
       "Approval provides access to purchase admission but does not reserve a place. Admission is confirmed only after payment is received. Invitations are individual and non-transferable.",
