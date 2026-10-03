@@ -1,40 +1,29 @@
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
+import { Numeral, SectionHeader, container } from "./editorial";
 
-// Centred heading over three open columns, closed by an italic note
-// (Figma: How We Gather — Three Ways In).
+// Figma "01 — How we gather": heading left, intro right, then three
+// hairline-boxed cards with a coral numeral and a condensed label.
 export function HowWeGather() {
-  const { eyebrow, headline, ways, note } = home.howWeGather;
+  const { eyebrow, headline, intro, ways } = home.howWeGather;
   return (
-    <section className="bg-pearl pt-16 md:pt-[72px] pb-12 md:pb-14 px-6 md:px-10">
-      <div className="max-w-[1280px] mx-auto">
+    <section className="bg-cream pt-20 md:pt-[112px] pb-20 md:pb-[96px]">
+      <div className={container}>
         <FadeIn>
-          <div className="text-center">
-            <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
-              {eyebrow}
-            </span>
-            <h2 className="mt-4 font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.1] text-noir">
-              {headline}
-            </h2>
-          </div>
+          <SectionHeader n={1} eyebrow={eyebrow} title={headline} intro={intro} />
         </FadeIn>
-        <div className="mt-12 md:mt-[60px] grid gap-8 md:grid-cols-3 md:gap-[60px]">
+        <div className="mt-12 md:mt-16 grid gap-5 md:grid-cols-3 md:gap-6">
           {ways.map((w, i) => (
-            <FadeIn key={w.label} delay={i * 90}>
-              <div className="flex flex-col gap-3">
-                <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
-                  {w.label}
-                </span>
-                <p className="text-base leading-[1.5] text-ink/85">{w.body}</p>
+            <FadeIn key={w.label} delay={i * 90} className="h-full">
+              <div className="h-full border border-hairline p-7 md:p-8 flex flex-col">
+                <Numeral n={i + 1} className="text-[40px] md:text-[44px]" />
+                <h3 className="mt-5 font-condensed uppercase text-[21px] leading-none tracking-[0.03em] text-noir">{w.label}</h3>
+                <span className="mt-4 h-px w-full bg-hairline" aria-hidden />
+                <p className="mt-4 text-[14px] leading-[1.6] text-ink/70">{w.body}</p>
               </div>
             </FadeIn>
           ))}
         </div>
-        <FadeIn delay={300}>
-          <p className="mt-12 md:mt-16 text-center font-serif italic text-base md:text-lg text-ink/60">
-            {note}
-          </p>
-        </FadeIn>
       </div>
     </section>
   );

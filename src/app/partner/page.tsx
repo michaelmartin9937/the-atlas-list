@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { EditorialHero } from "@/components/EditorialHero";
+import { EditorialCarousel } from "@/components/EditorialCarousel";
 import { PartnerForm } from "@/components/PartnerForm";
-import { PhotoCarousel } from "@/components/PhotoCarousel";
 import { FadeIn } from "@/components/FadeIn";
+import { ArrowLink, Button, Display, Eyebrow, Numeral, SectionHeader, container } from "@/components/editorial";
 import { partner } from "@/content/partner";
 
 export const metadata: Metadata = {
@@ -10,63 +12,55 @@ export const metadata: Metadata = {
   description: partner.hero.subhead,
 };
 
-const eyebrow = "text-[13px] font-semibold uppercase tracking-[0.08em] text-gold";
-
-// Figma: "Sponsorship — Atlas List" (Sep 2026). Photo hero, four reasons, an
-// audience band with three stats, three partnership tiers, category chips,
-// current sponsors, the inquiry form, and a closing photo strip.
+// Figma "04 — Partners" (Oct 2026): photo hero, four photo cards, the
+// audience band, three tier cards, category chips, sponsor tiles, the
+// inquiry form on dark, and a closing photo strip.
 export default function PartnerPage() {
   const p = partner;
   return (
     <>
-      <section className="relative overflow-hidden bg-umber">
-        <Image
-          src="/images/partner/hero-estate-clean.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[center_40%]"
-        />
-        {/* Readability: an even plum-black wash over the whole photo, then a
-            heavier scrim rising from the bottom where the copy sits, so the
-            sunset stays visible up top and the text never fights the pool
-            lights. The photo itself carries no text. */}
-        <div className="absolute inset-0 bg-[#0A0312]/30" aria-hidden />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-[#0A0312]/90 via-[#0A0312]/55 via-50% to-transparent"
-          aria-hidden
-        />
-        <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pt-24 md:pt-[220px] pb-16 md:pb-[64px] min-h-[460px] md:min-h-[560px] flex flex-col justify-end [text-shadow:0_1px_18px_rgba(0,0,0,0.55)]">
-          <span className={eyebrow}>{p.hero.eyebrow}</span>
-          <h1 className="mt-6 md:mt-7 max-w-[1200px] font-serif text-[2.6rem] sm:text-5xl md:text-[72px] leading-[1.06] text-bone">
-            {p.hero.headline}
-          </h1>
-          <p className="mt-6 max-w-[1180px] text-base md:text-[19px] leading-[1.5] text-bone">
-            {p.hero.subhead}
-          </p>
+      <EditorialHero
+        eyebrowLines={p.hero.eyebrowLines}
+        title={
+          <>
+            {p.hero.headline.before}
+            <em className="italic">{p.hero.headline.em}</em>
+          </>
+        }
+        issue={p.hero.issue}
+        railRight={p.hero.rail}
+        image={p.hero.image}
+        imagePosition="object-[center_40%]"
+      >
+        <p className="mt-8 md:mt-10 max-w-[460px] text-[16px] md:text-[17px] leading-[1.6] text-bone/85">{p.hero.subhead}</p>
+        <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10">
+          <Button href="#inquire" variant="cream">
+            {p.hero.cta}
+          </Button>
+          <ArrowLink href={p.hero.secondary.href} tone="dark">
+            {p.hero.secondary.label}
+          </ArrowLink>
         </div>
-      </section>
+      </EditorialHero>
 
-      <section className="bg-pearl px-6 md:px-10 pt-20 md:pt-[100px] pb-20 md:pb-[112px]">
-        <div className="max-w-[1280px] mx-auto">
+      {/* 01 — Why partner */}
+      <section className="bg-cream py-20 md:py-[112px]">
+        <div className={container}>
           <FadeIn>
-            <div className="text-center flex flex-col items-center">
-              <span className={eyebrow}>{p.why.eyebrow}</span>
-              <h2 className="mt-5 font-serif text-4xl md:text-[44px] leading-[1.1] text-noir">
-                {p.why.headline}
-              </h2>
-            </div>
+            <SectionHeader n={1} eyebrow={p.why.eyebrow} title={p.why.headline} intro={p.why.intro} />
           </FadeIn>
-          <ol className="mt-14 md:mt-[72px] grid sm:grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-10">
+          <ol className="mt-12 md:mt-16 grid gap-5 sm:grid-cols-2 md:grid-cols-4 md:gap-5">
             {p.why.points.map((pt, i) => (
-              <FadeIn key={pt.title} delay={i * 80}>
-                <li className="flex flex-col">
-                  <span className="font-serif text-xl text-gold">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-3 font-serif font-bold text-[22px] leading-[1.25] text-noir">
-                    {pt.title}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-[1.5] text-ink/70">{pt.body}</p>
+              <FadeIn key={pt.title} delay={i * 90} className="h-full">
+                <li className="relative aspect-[3/4] overflow-hidden bg-night text-bone">
+                  <Image src={pt.image} alt={pt.alt} fill sizes="(min-width: 768px) 300px, 50vw" className="object-cover opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-night via-night/55 to-night/10" aria-hidden />
+                  <div className="absolute inset-x-0 bottom-0 p-6">
+                    <Numeral n={i + 1} className="!text-bone text-[34px]" />
+                    <h3 className="mt-3 font-condensed uppercase text-[19px] leading-[1.05] tracking-[0.03em]">{pt.title}</h3>
+                    <span className="mt-3 block h-px w-full bg-bone/30" aria-hidden />
+                    <p className="mt-3 text-[13px] leading-[1.55] text-bone/80">{pt.body}</p>
+                  </div>
                 </li>
               </FadeIn>
             ))}
@@ -74,74 +68,70 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      <section className="bg-noir px-6 md:px-10 py-20 md:py-[100px]">
-        <div className="max-w-[1280px] mx-auto text-center flex flex-col items-center">
-          <FadeIn className="flex flex-col items-center">
-            <span className={eyebrow}>{p.audience.eyebrow}</span>
-            <h2 className="mt-5 font-serif text-4xl md:text-[44px] leading-[1.1] text-bone">
-              {p.audience.headline}
-            </h2>
-            <p className="mt-6 max-w-[800px] text-base md:text-[17px] leading-[1.5] text-bone/85">
-              {p.audience.body}
-            </p>
+      {/* 02 — The audience */}
+      <section className="bg-night text-bone py-20 md:py-[112px]">
+        <div className={`${container} grid gap-12 md:grid-cols-[minmax(0,560px)_minmax(0,1fr)] md:gap-20 md:items-center`}>
+          <FadeIn>
+            <div className="relative aspect-[560/600] overflow-hidden bg-[#1A1716]">
+              <Image src={p.audience.image.src} alt={p.audience.image.alt} fill sizes="(min-width: 768px) 560px, 100vw" className="object-cover" />
+            </div>
           </FadeIn>
-          <dl className="mt-14 md:mt-[72px] grid grid-cols-3 gap-8 w-full max-w-[900px]">
-            {p.audience.stats.map((s) => (
-              <div key={s.label} className="flex flex-col items-center">
-                <dt className="sr-only">{s.label}</dt>
-                <dd className="font-serif font-bold text-3xl sm:text-4xl md:text-[48px] leading-none text-sand">
-                  {s.value}
-                </dd>
-                <dd className="mt-3 text-sm md:text-[17px] text-bone">{s.label}</dd>
-              </div>
-            ))}
-          </dl>
+          <FadeIn delay={120}>
+            <Eyebrow n={2} tone="dark">
+              {p.audience.eyebrow}
+            </Eyebrow>
+            <Display as="h2" size="lg" tone="dark" className="mt-8 md:mt-10">
+              {p.audience.headline}
+            </Display>
+            <p className="mt-7 max-w-[540px] text-[15px] leading-[1.65] text-bone/70">{p.audience.body}</p>
+            <dl className="mt-10 grid grid-cols-3 border-t border-b border-hairline-dark">
+              {p.audience.stats.map((s, i) => (
+                <div key={s.label} className={`py-7 text-center ${i > 0 ? "border-l border-hairline-dark" : ""}`}>
+                  <dd className="font-serif uppercase text-[28px] md:text-[44px] leading-none text-bone">{s.value}</dd>
+                  <dt className="mt-3 font-mono text-[10px] uppercase tracking-[0.24em] text-bone/55">{s.label}</dt>
+                </div>
+              ))}
+            </dl>
+          </FadeIn>
         </div>
       </section>
 
-      <section className="bg-pearl px-6 md:px-10 py-20 md:py-[112px]">
-        <div className="max-w-[1280px] mx-auto">
+      {/* 03 — Available partnerships */}
+      <section className="bg-cream py-20 md:py-[112px]">
+        <div className={container}>
           <FadeIn>
-            <div className="text-center flex flex-col items-center">
-              <span className={eyebrow}>{p.tiers.eyebrow}</span>
-              <h2 className="mt-5 font-serif text-4xl md:text-[48px] leading-[1.1] text-noir">
-                {p.tiers.headline}
-              </h2>
-              <p className="mt-5 max-w-[780px] text-base md:text-[17px] leading-[1.5] text-ink/70">
-                {p.tiers.intro}
-              </p>
-              <p className="mt-8 text-[13px] font-medium uppercase tracking-[0.1em] text-ink/60">
-                {p.tiers.note}
-              </p>
+            <SectionHeader n={3} eyebrow={p.tiers.eyebrow} title={p.tiers.headline} intro={p.tiers.intro} />
+          </FadeIn>
+          <FadeIn delay={80}>
+            <div className="mt-12 md:mt-14 flex items-center justify-between gap-6 border border-hairline px-6 h-14 font-mono text-[10px] uppercase tracking-[0.24em]">
+              <span className="text-noir">{p.tiers.closed.label}</span>
+              <span className="text-coral">{p.tiers.closed.status}</span>
             </div>
           </FadeIn>
-          <ul className="mt-12 grid md:grid-cols-3 gap-7">
+          <ul className="mt-6 grid gap-6 md:grid-cols-3">
             {p.tiers.list.map((tier, i) => (
               <FadeIn key={tier.name} delay={i * 100} className="h-full">
-                <li
-                  className={`h-full rounded-lg p-9 flex flex-col ${
-                    tier.featured ? "bg-[#C59C55] text-bone" : "bg-pearl border border-[#E4DAC7] text-noir"
-                  }`}
-                >
-                  <h3 className="font-serif font-bold text-2xl md:text-[26px] leading-[1.25]">{tier.name}</h3>
-                  <p
-                    className={`mt-6 font-serif font-bold text-3xl md:text-[34px] leading-none ${
-                      tier.featured ? "text-bone" : "text-[#C59C55]"
-                    }`}
-                  >
-                    {tier.price}
-                  </p>
-                  <p className={`mt-6 italic text-base ${tier.featured ? "text-bone/90" : "text-ink/70"}`}>
-                    {tier.tagline}
-                  </p>
-                  <ul className={`mt-6 flex flex-col gap-3 text-[15px] leading-[1.45] ${tier.featured ? "text-bone/95" : "text-ink/80"}`}>
+                <li className={`h-full p-7 md:p-8 flex flex-col ${tier.featured ? "border border-coral bg-cream" : "bg-blush"}`}>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-coral">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-5 font-serif uppercase text-[24px] md:text-[26px] leading-[1.05] text-noir">{tier.name}</h3>
+                  <p className="mt-4 font-serif text-[40px] md:text-[44px] leading-none text-coral">{tier.price}</p>
+                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/70">{tier.tagline}</p>
+                  <span className="mt-5 h-px w-full bg-noir/30" aria-hidden />
+                  <ul className="mt-6 flex flex-col gap-3 text-[14px] leading-[1.5] text-ink/80">
                     {tier.perks.map((perk) => (
-                      <li key={perk} className="flex gap-2">
-                        <span aria-hidden>•</span>
+                      <li key={perk} className="flex gap-3">
+                        <span className="text-coral" aria-hidden>
+                          –
+                        </span>
                         <span>{perk}</span>
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-auto pt-8">
+                    <Button href="#inquire" variant="outline-light" className="!h-11 !px-5">
+                      {p.tiers.cta}
+                    </Button>
+                  </div>
                 </li>
               </FadeIn>
             ))}
@@ -149,20 +139,18 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      <section className="bg-noir px-6 md:px-10 py-20 md:py-[100px]">
-        <div className="max-w-[1280px] mx-auto text-center flex flex-col items-center">
-          <FadeIn className="flex flex-col items-center">
-            <span className={eyebrow}>{p.categories.eyebrow}</span>
-            <h2 className="mt-5 font-serif text-4xl md:text-[44px] leading-[1.1] text-bone">
+      {/* 04 — Categories */}
+      <section className="bg-cream pb-20 md:pb-[112px]">
+        <div className={container}>
+          <FadeIn>
+            <Eyebrow n={4}>{p.categories.eyebrow}</Eyebrow>
+            <Display as="h2" size="lg" className="mt-8 md:mt-10 max-w-[760px]">
               {p.categories.headline}
-            </h2>
+            </Display>
           </FadeIn>
-          <ul className="mt-12 flex flex-wrap justify-center gap-4 max-w-[760px]">
+          <ul className="mt-10 flex flex-wrap gap-3">
             {p.categories.list.map((c) => (
-              <li
-                key={c}
-                className="rounded-full border border-sand px-6 h-12 inline-flex items-center text-base text-bone"
-              >
+              <li key={c} className="rounded-full border border-noir/50 px-7 h-[52px] inline-flex items-center font-serif text-[18px] md:text-[20px] text-noir">
                 {c}
               </li>
             ))}
@@ -170,53 +158,70 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      <section className="bg-noir px-6 md:px-10 pt-4 pb-20 md:pt-[60px] md:pb-[120px]">
-        <div className="max-w-[1280px] mx-auto text-center flex flex-col items-center">
-          <FadeIn className="flex flex-col items-center">
-            <span className={eyebrow}>{p.sponsors.eyebrow}</span>
-            <h2 className="mt-5 font-serif text-4xl md:text-[52px] leading-[1.1] text-bone">
-              {p.sponsors.headline}
-            </h2>
-            <p className="mt-5 text-base md:text-[17px] leading-[1.5] text-bone/70">{p.sponsors.intro}</p>
+      {/* 05 — Our sponsors */}
+      <section className="bg-cream pb-20 md:pb-[112px]">
+        <div className={container}>
+          <FadeIn>
+            <SectionHeader n={5} eyebrow={p.sponsors.eyebrow} title={p.sponsors.headline} intro={p.sponsors.intro} />
           </FadeIn>
-          <ul className="mt-12 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-x-6 md:gap-x-10 gap-y-10 max-w-[1000px] mx-auto">
+          <ul className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-5">
             {p.sponsors.list.map((s) => (
-              <li key={s.name} className="flex flex-col items-center gap-4">
-                <div className="h-32 w-full max-w-[208px] flex items-center justify-center bg-[#141414] overflow-hidden">
-                  {"badge" in s && s.badge ? (
-                    // The Atlas List's own tile: the badge logo on the dark card.
-                    <Image src={s.image} alt={s.name} width={112} height={112} unoptimized className="h-28 w-28" />
-                  ) : (
-                    <Image src={s.image} alt={s.name} width={208} height={128} className="h-32 w-full object-cover" />
-                  )}
-                </div>
-                <span className="text-[15px] text-bone/70">{s.name}</span>
+              <li
+                key={s.name}
+                className={`aspect-[4/3] flex items-center justify-center overflow-hidden ${
+                  "placeholder" in s && s.placeholder ? "border border-dashed border-noir/40" : "bg-white"
+                }`}
+              >
+                {"placeholder" in s && s.placeholder ? (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink/60">Your logo here</span>
+                ) : "badge" in s && s.badge ? (
+                  <Image src={s.image} alt={s.name} width={120} height={120} unoptimized className="h-28 w-28" />
+                ) : (
+                  <Image src={s.image} alt={s.name} width={300} height={225} className="h-full w-full object-cover" />
+                )}
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section id="inquire" className="bg-pearl px-6 md:px-10 pt-16 md:pt-[44px] pb-20 md:pb-[96px]">
-        <div className="max-w-[700px] mx-auto">
+      {/* 06 — Partnership inquiries */}
+      <section id="inquire" className="bg-night text-bone py-20 md:py-[120px]">
+        <div className={`${container} grid gap-14 md:grid-cols-[minmax(0,360px)_minmax(0,1fr)] md:gap-20`}>
           <FadeIn>
-            <div className="text-center flex flex-col items-center">
-              <span className={eyebrow}>{p.inquiries.eyebrow}</span>
-              <h2 className="mt-5 font-serif text-4xl md:text-[48px] leading-[1.1] text-noir">
-                {p.inquiries.headline}
-              </h2>
-              <p className="mt-5 text-base md:text-[17px] leading-[1.5] text-ink/70">
-                {p.inquiries.subhead}
-              </p>
-            </div>
+            <Eyebrow n={6} tone="dark">
+              {p.inquiries.eyebrow}
+            </Eyebrow>
+            <Display as="h2" size="lg" tone="dark" className="mt-8 md:mt-10">
+              {p.inquiries.headline}
+            </Display>
+            <p className="mt-7 text-[15px] leading-[1.65] text-bone/70">{p.inquiries.subhead}</p>
           </FadeIn>
-          <FadeIn delay={150} className="mt-12 md:mt-14">
-            <PartnerForm />
+          <FadeIn delay={150}>
+            {/* The inquiry form is unchanged; it keeps its light fields on a cream panel. */}
+            <div className="bg-cream text-noir p-6 md:p-10">
+              <PartnerForm />
+            </div>
           </FadeIn>
         </div>
       </section>
 
-      <PhotoCarousel eyebrow={p.store.eyebrow} images={p.store.images} tone="dark" />
+      {/* 07 — What's in store */}
+      <section className="bg-night text-bone pb-20 md:pb-[112px] overflow-hidden">
+        <div className={container}>
+          <FadeIn>
+            <Eyebrow n={7} tone="dark">
+              {p.store.eyebrow}
+            </Eyebrow>
+            <Display as="h2" size="lg" tone="dark" className="mt-8 md:mt-10">
+              {p.store.headline}
+            </Display>
+          </FadeIn>
+          <FadeIn delay={120}>
+            <EditorialCarousel images={p.store.images} tone="dark" caption={p.store.caption} className="mt-12 md:mt-14" />
+          </FadeIn>
+        </div>
+      </section>
     </>
   );
 }

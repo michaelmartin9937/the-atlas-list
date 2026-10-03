@@ -1,36 +1,50 @@
-import Link from "next/link";
+import Image from "next/image";
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
+import { ArrowLink, Button, Display, Eyebrow } from "./editorial";
 
-// The current flagship, centred between two hairline rules
-// (Figma: Right Now — Desert After Dark).
+// Figma "02 — Right now": a full-height photo on the left, the flagship set
+// huge on the right with the date line, a short body, the italic admission
+// note and two calls to action.
 export function RightNow() {
-  const { eyebrow, headline, date, body, cta, href } = home.rightNow;
+  const r = home.rightNow;
   return (
-    <section className="bg-pearl px-6 md:px-10">
-      <div className="max-w-[1280px] mx-auto border-t border-b border-sand py-14 md:py-[64px] text-center">
-        <FadeIn>
-          <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
-            {eyebrow}
-          </span>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl md:text-[56px] leading-[1.08] text-noir">
-            {headline}
-          </h2>
-          <p className="mt-3 text-base md:text-lg text-ink/75">{date}</p>
-        </FadeIn>
-        <FadeIn delay={120}>
-          <p className="mt-6 max-w-[760px] mx-auto text-base md:text-[17px] leading-[1.5] text-ink/85">
-            {body}
-          </p>
-          <div className="mt-10">
-            <Link
-              href={href}
-              className="inline-flex w-full sm:w-auto items-center justify-center h-[50px] px-11 bg-noir text-bone text-xs font-medium uppercase tracking-[0.06em] hover:bg-gold hover:text-noir transition-colors"
-            >
-              {cta}
-            </Link>
-          </div>
-        </FadeIn>
+    <section className="bg-night text-bone">
+      <div className="grid md:grid-cols-[minmax(0,47%)_minmax(0,1fr)]">
+        <div className="relative aspect-[4/5] md:aspect-auto md:min-h-[760px] overflow-hidden">
+          <Image src={r.image.src} alt={r.image.alt} fill sizes="(min-width: 768px) 47vw, 100vw" className="object-cover object-[center_30%]" />
+        </div>
+        <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24 flex flex-col justify-center">
+          <FadeIn>
+            <Eyebrow n={2} tone="dark" className="!text-coral">
+              {r.eyebrow}
+            </Eyebrow>
+            <Display as="h2" size="xl" tone="dark" className="mt-8 md:mt-10">
+              {r.headline.before}
+              <br />
+              <em className="italic">{r.headline.em}</em>
+              <br />
+              {r.headline.after.trim()}
+            </Display>
+            <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.24em] text-bone/85">
+              {r.date}
+              <span className="mx-4" aria-hidden>
+                ·
+              </span>
+              {r.place}
+            </p>
+            <p className="mt-6 max-w-[480px] text-[16px] leading-[1.6] text-bone/70">{r.body}</p>
+            <p className="mt-6 font-serif italic text-[18px] text-bone/90">{r.note}</p>
+            <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10">
+              <Button href={r.href} variant="outline-dark">
+                {r.cta}
+              </Button>
+              <ArrowLink href={r.secondary.href} tone="dark">
+                {r.secondary.label}
+              </ArrowLink>
+            </div>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );

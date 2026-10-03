@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Oswald, Playfair_Display } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { AttributionCapture } from "@/components/AttributionCapture";
@@ -16,6 +16,22 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   style: ["normal", "italic"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+// Editorial redesign (Figma, Oct 2026): tracked mono eyebrows and labels…
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+// …and condensed uppercase card titles.
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-condensed",
   display: "swap",
 });
 
@@ -47,13 +63,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${plexMono.variable} ${oswald.variable}`}>
       <body>
         <AttributionCapture />
         <Nav />
-        {/* The nav is a fixed, solid 80/104px bar on every page (Figma), so
-            pages start below it rather than underneath it. */}
-        <main className="pt-20 md:pt-[104px]">{children}</main>
+        {/* The nav is a fixed, solid 64/74px cream bar on every page (Figma),
+            so pages start below it rather than underneath it. */}
+        <main className="pt-16 md:pt-[74px]">{children}</main>
         <Footer />
       </body>
     </html>

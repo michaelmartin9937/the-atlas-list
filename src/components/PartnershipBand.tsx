@@ -1,41 +1,49 @@
-import Link from "next/link";
+import type { ReactNode } from "react";
+import { Button, Display, Eyebrow, container } from "./editorial";
+
+type Headline = string | { before: string; em: string; after: string };
 
 type Props = {
   eyebrow: string;
-  headline: string;
+  headline: Headline;
   subhead: string;
   cta: string;
   href: string;
-  // "dark" = black band with a gold button (home); "light" = pearl band with
-  // a dark button (Desert After Dark).
+  // Cream band with a dark button (home), or a dark band with a coral one.
   tone?: "dark" | "light";
+  n?: number;
 };
 
-// Full-width partnership call-out (Figma: "A few partnerships remain").
-export function PartnershipBand({ eyebrow, headline, subhead, cta, href, tone = "dark" }: Props) {
+function renderHeadline(h: Headline): ReactNode {
+  if (typeof h === "string") return h;
+  return (
+    <>
+      {h.before}
+      <em className="italic">{h.em}</em>
+      {h.after}
+    </>
+  );
+}
+
+// Figma "08 — Partnership": eyebrow, the headline with an italic accent, a
+// one-line subhead, and the button sitting on the right.
+export function PartnershipBand({ eyebrow, headline, subhead, cta, href, tone = "light", n = 9 }: Props) {
   const dark = tone === "dark";
   return (
-    <section className={`${dark ? "bg-noir" : "bg-pearl"} px-6 md:px-10 py-14 md:py-[68px]`}>
-      <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+    <section className={`${dark ? "bg-night text-bone" : "bg-cream"} py-20 md:py-[112px]`}>
+      <div className={`${container} grid gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-end`}>
         <div>
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
+          <Eyebrow n={n} tone={dark ? "dark" : "light"}>
             {eyebrow}
-          </span>
-          <h2 className={`mt-3 font-serif text-3xl md:text-[36px] leading-[1.15] ${dark ? "text-bone" : "text-noir"}`}>
-            {headline}
-          </h2>
-          <p className={`mt-3 text-base md:text-[17px] leading-[1.5] ${dark ? "text-bone/85" : "text-ink/70"}`}>
-            {subhead}
-          </p>
+          </Eyebrow>
+          <Display as="h2" size="lg" tone={dark ? "dark" : "light"} className="mt-8 md:mt-10 max-w-[760px]">
+            {renderHeadline(headline)}
+          </Display>
+          <p className={`mt-6 text-[16px] leading-[1.6] ${dark ? "text-bone/70" : "text-ink/70"}`}>{subhead}</p>
         </div>
-        <Link
-          href={href}
-          className={`inline-flex w-full md:w-auto self-start md:self-auto items-center justify-center h-[52px] px-8 text-xs font-medium uppercase tracking-[0.06em] transition-colors ${
-            dark ? "bg-gold text-noir hover:bg-bone" : "bg-noir text-bone hover:bg-gold hover:text-noir"
-          }`}
-        >
+        <Button href={href} variant={dark ? "coral" : "dark"} className="self-start md:self-end">
           {cta}
-        </Link>
+        </Button>
       </div>
     </section>
   );

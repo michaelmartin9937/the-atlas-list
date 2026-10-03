@@ -73,7 +73,7 @@ export const terms = {
     {
       heading: "Contact",
       body: [
-        "Questions about these terms can be directed to info@alpinedryiceblasting.com.",
+        "Questions about these terms can be directed to info@theatlaslist.club.",
       ],
     },
   ],

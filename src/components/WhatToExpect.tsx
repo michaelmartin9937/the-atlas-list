@@ -1,52 +1,41 @@
 import Link from "next/link";
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
+import { Button, Display, Eyebrow, container } from "./editorial";
 
-// Two-column: headline, intro and calendar button on the left, bullet list
-// on the right, italic caveat spanning below (Figma: What the Evening Feels Like).
+// Figma "05 — What the evening feels like": headline, intro and a button on
+// the left; a numbered, hairline-ruled list in Playfair on the right.
 export function WhatToExpect() {
-  const { eyebrow, headline, intro, cta, calendarHref, bullets, caveat } = home.whatToExpect;
-  const [before, after] = caveat.split("see the Desert After Dark page");
+  const { eyebrow, headline, intro, cta, href, bullets, caveat } = home.whatToExpect;
+  const [before, after] = caveat.split("See the Event page");
   return (
-    <section className="bg-pearl py-14 md:py-16 px-6 md:px-10">
-      <div className="max-w-[1280px] mx-auto">
+    <section className="bg-cream py-20 md:py-[120px]">
+      <div className={`${container} grid gap-14 md:grid-cols-[minmax(0,460px)_minmax(0,1fr)] md:gap-24`}>
         <FadeIn>
-          <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
-            {eyebrow}
-          </span>
+          <Eyebrow n={5}>{eyebrow}</Eyebrow>
+          <Display as="h2" size="lg" className="mt-8 md:mt-10">
+            {headline}
+          </Display>
+          <p className="mt-8 max-w-[420px] text-[15px] leading-[1.65] text-ink/70">{intro}</p>
+          <div className="mt-9">
+            <Button href={href} variant="outline-light">
+              {cta}
+            </Button>
+          </div>
         </FadeIn>
-        <div className="mt-6 grid gap-10 md:grid-cols-[440px_minmax(0,420px)] md:justify-between md:gap-16">
-          <FadeIn>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-[40px] leading-[1.12] text-noir">
-              {headline}
-            </h2>
-            <p className="mt-8 text-base leading-[1.5] text-ink/75">{intro}</p>
-            <div className="mt-8">
-              <a
-                href={calendarHref}
-                download
-                className="inline-flex w-full sm:w-auto items-center justify-center h-[50px] px-10 bg-noir text-bone text-xs font-medium uppercase tracking-[0.06em] hover:bg-gold hover:text-noir transition-colors"
-              >
-                {cta}
-              </a>
-            </div>
-          </FadeIn>
-          <FadeIn delay={120}>
-            <ul className="flex flex-col gap-6 md:pt-1">
-              {bullets.map((b) => (
-                <li key={b} className="flex items-start gap-4">
-                  <span className="mt-[9px] h-1 w-1 rounded-full bg-gold flex-shrink-0" aria-hidden />
-                  <span className="text-base leading-[1.25] text-ink/85">{b}</span>
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-        </div>
-        <FadeIn delay={200}>
-          <p className="mt-12 md:mt-16 font-serif italic text-sm md:text-base leading-[1.5] text-ink/60">
+        <FadeIn delay={120}>
+          <ol className="border-t border-hairline">
+            {bullets.map((b, i) => (
+              <li key={b} className="flex items-baseline gap-6 md:gap-8 border-b border-hairline py-5">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-coral shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-serif text-[20px] md:text-[26px] leading-tight text-noir">{b}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-5 text-[12px] leading-[1.6] text-ink/55">
             {before}
-            <Link href="/desert-after-dark" className="underline decoration-sand underline-offset-4 hover:text-gold">
-              see the Desert After Dark page
+            <Link href="/desert-after-dark" className="underline underline-offset-4 decoration-hairline hover:text-coral">
+              See the Event page
             </Link>
             {after}
           </p>

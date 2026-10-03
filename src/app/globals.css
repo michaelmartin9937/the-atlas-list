@@ -7,9 +7,23 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-bone text-noir font-sans antialiased;
+    @apply bg-cream text-noir font-sans antialiased;
   }
   ::selection {
-    @apply bg-bronze/40 text-noir;
+    @apply bg-coral/40 text-noir;
+  }
+}
+
+@layer utilities {
+  /* Vendor marquee on the event page: one long row sliding left forever. */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee { animation: none; }
   }
 }

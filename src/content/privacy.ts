@@ -7,7 +7,7 @@ export const privacy = {
       heading: "Who we are",
       body: [
         "The Atlas List is a private, invitation-only social circle hosting curated gatherings in Scottsdale, Arizona. The Atlas List is operated by Devaun and Michael.",
-        "Questions about this policy can be directed to info@alpinedryiceblasting.com.",
+        "Questions about this policy can be directed to info@theatlaslist.club.",
       ],
     },
     {
@@ -52,7 +52,7 @@ export const privacy = {
     {
       heading: "Your choices and rights",
       body: [
-        "You may request access to, correction of, or deletion of your personal information at any time by emailing info@alpinedryiceblasting.com. We will respond within 30 days.",
+        "You may request access to, correction of, or deletion of your personal information at any time by emailing info@theatlaslist.club. We will respond within 30 days.",
         "If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA), including the right to know, delete, and opt out of the sale of personal information (we do not sell personal information).",
         "You may opt out of SMS messages at any time by replying STOP.",
       ],
@@ -72,7 +72,7 @@ export const privacy = {
     {
       heading: "Contact",
       body: [
-        "For privacy-related questions or requests, email info@alpinedryiceblasting.com.",
+        "For privacy-related questions or requests, email info@theatlaslist.club.",
       ],
     },
   ],

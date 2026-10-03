@@ -1,36 +1,37 @@
 import { home } from "@/content/home";
 import { FadeIn } from "./FadeIn";
+import { Display, Eyebrow, container } from "./editorial";
 
-// Centred heading over two rule-topped lists (Figma: Who Belongs Here).
+// Figma "07 — Who belongs here": a dark band, the headline, and two bordered
+// cards — "+" rows for who it's for, "−" rows for who it isn't.
 export function WhoBelongs() {
   const { eyebrow, headline, forList, notForList } = home.whoBelongs;
+  const lists = [
+    { ...forList, mark: "+", accent: "text-coral" },
+    { ...notForList, mark: "−", accent: "text-bone/45" },
+  ];
   return (
-    <section className="bg-pearl pt-16 md:pt-[72px] pb-14 md:pb-16 px-6 md:px-10">
-      <div className="max-w-[1280px] mx-auto">
+    <section className="bg-night text-bone py-20 md:py-[120px]">
+      <div className={container}>
         <FadeIn>
-          <div className="text-center">
-            <span className="block text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
-              {eyebrow}
-            </span>
-            <h2 className="mt-4 font-serif text-3xl sm:text-4xl md:text-[44px] leading-[1.1] text-noir">
-              {headline}
-            </h2>
-          </div>
+          <Eyebrow n={8} tone="dark">
+            {eyebrow}
+          </Eyebrow>
+          <Display as="h2" size="lg" tone="dark" className="mt-8 md:mt-10 max-w-[720px]">
+            {headline}
+          </Display>
         </FadeIn>
-        <div className="mt-12 md:mt-[60px] grid gap-10 md:grid-cols-2 md:gap-[160px]">
-          {[forList, notForList].map((list, i) => (
-            <FadeIn key={list.title} delay={i * 120}>
-              <div className="border-t border-sand pt-7">
-                <h3
-                  className={`text-[15px] font-semibold uppercase tracking-[0.04em] ${
-                    i === 0 ? "text-noir" : "text-gold"
-                  }`}
-                >
-                  {list.title}
-                </h3>
-                <ul className="mt-5 flex flex-col gap-5">
+        <div className="mt-12 md:mt-16 grid gap-6 md:grid-cols-2">
+          {lists.map((list, i) => (
+            <FadeIn key={list.title} delay={i * 120} className="h-full">
+              <div className="h-full border border-hairline-dark bg-[#0F0D0C] p-7 md:p-10">
+                <h3 className={`font-mono text-[10px] uppercase tracking-[0.26em] ${list.accent}`}>{list.title}</h3>
+                <ul className="mt-5">
                   {list.items.map((item) => (
-                    <li key={item} className="text-base leading-[1.4] text-ink/85">
+                    <li key={item} className="flex items-baseline gap-5 border-b border-hairline-dark py-4 text-[15px] leading-[1.5] text-bone/85">
+                      <span className={`font-mono text-[13px] ${list.accent}`} aria-hidden>
+                        {list.mark}
+                      </span>
                       {item}
                     </li>
                   ))}

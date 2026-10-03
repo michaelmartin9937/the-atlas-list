@@ -3,15 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Wordmark } from "./Wordmark";
 
-// Figma: a solid pearl 104px bar with a sand hairline, the same on every
-// page — Home / About / Desert After Dark / Partner, an Apply button, and the
-// Instagram mark.
+// Figma (Oct 2026): a cream 74px bar with a hairline. Text wordmark on the
+// left, four mono links in the middle (the current page underlined), a dark
+// Apply button on the right.
 const LINKS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/desert-after-dark", label: "Desert After Dark" },
+  { href: "/desert-after-dark", label: "Event" },
   { href: "/partner", label: "Partner" },
 ];
 
@@ -28,55 +27,52 @@ export function Nav() {
   // Close the phone menu on navigation.
   useEffect(() => setOpen(false), [pathname]);
 
-  const link =
-    "text-xs font-medium uppercase tracking-[0.06em] text-ink hover:text-ember transition-colors";
   const applyHref = PAGES_WITH_APPLY.has(pathname) ? "#apply" : "/#apply";
+  const isCurrent = (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+
+  const link = (href: string) =>
+    `relative font-mono text-[11px] uppercase tracking-[0.22em] transition-colors hover:text-coral ${
+      isCurrent(href)
+        ? "text-noir after:absolute after:left-0 after:right-0 after:-bottom-[10px] after:h-px after:bg-noir"
+        : "text-ink/80"
+    }`;
 
   // Private, unlisted pages (the approved-guest preview) carry no site
   // navigation at all.
   if (pathname.startsWith("/private/")) return null;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-pearl border-b border-sand">
-      <nav className="max-w-[1280px] mx-auto px-5 sm:px-6 md:px-10 h-20 md:h-[104px] flex items-center justify-between">
-        <Link href="/" className="flex items-center" aria-label="The Atlas List — home">
-          <Wordmark size="md" />
+    <header id="top" className="fixed top-0 left-0 right-0 z-50 bg-cream border-b border-hairline/70">
+      <nav className="max-w-[1296px] mx-auto px-5 sm:px-6 md:px-12 h-16 md:h-[74px] flex items-center justify-between">
+        <Link
+          href="/"
+          className="font-serif text-[17px] md:text-[21px] uppercase tracking-[0.16em] text-noir whitespace-nowrap"
+          aria-label="The Atlas List — home"
+        >
+          The Atlas List
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-[38px]">
+        <div className="hidden md:flex items-center gap-10">
           {LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              aria-current={pathname === l.href ? "page" : undefined}
-              className={link}
-            >
+            <Link key={l.href} href={l.href} aria-current={isCurrent(l.href) ? "page" : undefined} className={link(l.href)}>
               {l.label}
             </Link>
           ))}
-          <Link
-            href={applyHref}
-            className="text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir hover:bg-gold hover:text-noir px-6 h-11 inline-flex items-center transition-colors"
-          >
-            Apply
-          </Link>
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="The Atlas List on Instagram"
-            className="inline-flex text-ink hover:text-ember transition-colors"
-          >
-            <InstagramIcon />
-          </a>
         </div>
+        <Link
+          href={applyHref}
+          className="hidden md:inline-flex items-center h-11 px-7 bg-noir text-cream font-mono text-[11px] uppercase tracking-[0.22em] hover:bg-coral hover:text-noir transition-colors"
+        >
+          Apply
+        </Link>
 
         {/* Phone: Apply stays visible, the rest folds into a menu. */}
         <div className="flex md:hidden items-center gap-3">
           <Link
             href={applyHref}
-            className="text-xs font-medium uppercase tracking-[0.06em] text-bone bg-noir px-4 h-10 inline-flex items-center"
+            className="inline-flex items-center h-10 px-5 bg-noir text-cream font-mono text-[11px] uppercase tracking-[0.2em]"
           >
             Apply
           </Link>
@@ -86,31 +82,23 @@ export function Nav() {
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center text-ink"
+            className="inline-flex h-10 w-10 items-center justify-center text-noir"
           >
-            <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden>
-              {open ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              )}
+            <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden>
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
         </div>
       </nav>
 
-      <div
-        id="site-menu"
-        hidden={!open}
-        className="md:hidden border-t border-sand bg-pearl"
-      >
-        <ul className="px-5 py-3 flex flex-col">
+      <div id="site-menu" hidden={!open} className="md:hidden border-t border-hairline/70 bg-cream">
+        <ul className="px-5 py-4 flex flex-col">
           {LINKS.map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
-                aria-current={pathname === l.href ? "page" : undefined}
-                className={`${link} block py-3`}
+                aria-current={isCurrent(l.href) ? "page" : undefined}
+                className={`block py-3 font-mono text-[12px] uppercase tracking-[0.22em] ${isCurrent(l.href) ? "text-noir" : "text-ink/80"}`}
               >
                 {l.label}
               </Link>
@@ -121,33 +109,13 @@ export function Nav() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${link} flex items-center gap-3 py-3`}
+              className="block py-3 font-mono text-[12px] uppercase tracking-[0.22em] text-ink/80"
             >
-              <InstagramIcon className="w-5 h-5" />
-              Instagram
+              Instagram · @theatlaslist
             </a>
           </li>
         </ul>
       </div>
     </header>
-  );
-}
-
-function InstagramIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
-    </svg>
   );
 }

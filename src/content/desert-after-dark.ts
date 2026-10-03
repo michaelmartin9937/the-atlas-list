@@ -1,18 +1,36 @@
-// Copy for /desert-after-dark — mirrors the Figma frame
-// "Desert After Dark — Full Page" (Diana's September 2026 revision).
+// Copy for /desert-after-dark — mirrors the Figma frame "03 — Event (Desert
+// After Dark)" in "Altas List Desert After Dark" (October 2026 editorial
+// redesign). Photos and videos are the ones already live on the site; only
+// the dress-code photos come from the Figma file.
 export const desertAfterDark = {
   hero: {
-    eyebrow: "Saturday, October 10, 2026 · 5:30 PM · Paradise Valley",
+    eyebrowLines: ["A private social club", "Scottsdale"],
     headline: "Desert After Dark",
+    date: "October 10, 2026",
+    place: "Paradise Valley",
     tagline: "powered by Thundr",
-    subhead:
-      "One night. One mansion. Paradise Valley's after-dark takeover, curated by The Atlas List — a private-residence runway, live entertainment, elevated bars and bites, and a night built for the senses. Designers, hand-picked models, top-shelf DJs, and a guest list built one name at a time.",
-    cta: "Request Ticket Allocation",
+    cta: "Request an invitation",
+    note: "Ladies are our guests · Gentlemen, by ticket",
+    keywords: ["Fashion", "People", "Culture", "Music", "Art", "Paradise Valley"],
+    issue: "Issue No. 03",
+    // The estate at sunset (Figma hero; the photo already lived on /partner).
+    image: "/images/partner/hero-estate-clean.jpg",
+  },
+  manifesto: {
+    eyebrow: "Our manifesto",
+    headline: [
+      { em: "One", rest: " night." },
+      { em: "One", rest: " mansion." },
+    ],
+    body: "A private-residence runway, live entertainment, elevated bars and bites. An invitation-only night in the heart of Paradise Valley.",
+    cta: "Discover the experience",
+    // The promo film keeps its place on the page, beside the manifesto.
+    video: { src: "/videos/atlas-house-promo.mp4", poster: "/images/dad/hero-fire.jpg" },
   },
   night: {
-    eyebrow: "What's in Store",
-    headline: "How the Night Unfolds",
-    intro: "Swipe through everything the evening holds, before you decide where to start.",
+    eyebrow: "Inside the experience",
+    headline: "The night, curated",
+    intro: "Six distinct experiences. One unforgettable night. Move through fashion, music, art and connection at a private estate in Paradise Valley.",
     cards: [
       {
         title: "The Runway",
@@ -22,18 +40,18 @@ export const desertAfterDark = {
       },
       {
         title: "The Music",
-        body: "ON-1, St Bernard, and Aaron Michael trade off behind the decks till last call.",
+        body: "ON-1, St Bernard and Aaron Michael trade off behind the decks till last call.",
         image: "/images/dad/card-music-2.jpg",
         alt: "A DJ's hands on the turntable",
       },
       {
-        title: "The Bar",
+        title: "The Bars",
         body: "Two full bars for however you're drinking tonight, and one built for the nights you're not.",
         image: "/images/dad/card-bar.jpg",
         alt: "A bartender garnishing a pink cocktail with mint and a flower",
       },
       {
-        title: "The Element",
+        title: "Fire Performances",
         body: "Fire, performed close enough to feel it. Performances directed by Sundara Entertainment.",
         image: "/images/dad/card-element.jpg",
         alt: "A fire performer in white on the estate terrace at dusk",
@@ -45,131 +63,127 @@ export const desertAfterDark = {
         alt: "A charcuterie board on a marble counter",
       },
       {
-        title: "The Art",
-        body: "A curated row of Scottsdale's finest — galleries, jewelers, ateliers — dropped into the middle of the party.",
+        title: "Art & Automobiles",
+        body: "A curated row of Scottsdale's finest, galleries, jewelers and ateliers, dropped into the middle of the party.",
         image: "/images/dad/card-art.jpg",
         alt: "Classic Porsches lined up on a lawn beside framed prints",
       },
     ],
   },
-  designers: {
-    eyebrow: "Featured Designers",
-    headline: "One Runway — Six Designers",
-    intro:
-      "Six designers, each with their own point of view — one night to see all six on the same runway.",
-    note: "Listed alphabetically.",
-    // image = the designer's Instagram profile picture (from the earlier roster
-    // where the person is unchanged).
-    list: [
-      { name: "Alexandra Bobo", label: "Adiara Designs", handle: "adiaradesigns", image: "/images/designers/oneofakindaura.jpg" },
-      { name: "Al'mer", label: "Designer", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
-      { name: "Bella Elise", label: "Designer", handle: "elisestudiosco", image: "/images/designers/bella-elisse.jpg" },
-      { name: "Isaac Newton", label: "Isaac Newton Collection", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
-      { name: "Koanasaky", label: "Designer", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
-      { name: "Stephanie Azucena", label: "Machehchena", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
-    ],
-  },
-  venue: {
-    eyebrow: "The Venue",
-    headline: "A Private Residence in Paradise Valley",
-    body: "This is not a hotel ballroom, not a club, not a public venue. It's a private estate — the kind of place you don't see on the way to work. The exact address, with arrival and transportation details, goes only to confirmed guests about 48 hours before the event. This is how we keep the room the room.",
-  },
-  timeline: {
-    eyebrow: "The Evening",
-    headline: "Four Acts",
-    intro: "Four moments, one night. The full lineup drops two weeks out.",
+  evening: {
+    eyebrow: "The evening in four acts",
+    headline: "The evening",
+    meta: "Doors 5:30 PM · Address released about 48 hours before",
     acts: [
-      {
-        title: "Party",
-        time: "5:30pm - 7:00pm",
-        body: "Doors open. Cocktails on the terrace while the estate fills in before the show begins.",
-      },
-      {
-        title: "Fashion Show",
-        time: "7:00pm - 8:00pm",
-        body: "Six designers, one runway. Full production, live music, seated audience. This is the main event.",
-      },
-      {
-        title: "Mansion Party",
-        time: "8:00pm - 10:00pm",
-        body: "The full estate opens up. DJs take over, the bar is open, and the room becomes what a mansion in Paradise Valley on the right night is supposed to feel like.",
-      },
-      {
-        title: "After Party",
-        time: "10:00pm - 12:00am",
-        body: "For the guests still standing. Location is released the night of, to the guests we want at it.",
-      },
+      { clock: "5:30", title: "Arrival", range: "5:30–7:00 PM", body: "Doors open. Cocktails on the terrace while the estate fills in and the light turns gold." },
+      { clock: "7:00", title: "The Show", range: "7:00–8:00 PM", body: "Fire at dusk, then the runway opens and our six designers walk back to back." },
+      { clock: "8:00", title: "Mansion Party", range: "8:00–10:00 PM", body: "The whole estate opens up. The DJs take over and the bars stay open." },
+      { clock: "10:00", title: "After Party", range: "10:00 PM–12:00 AM", body: "For the guests still standing, until midnight. Details shared on the night." },
+    ],
+    video: {
+      src: "/videos/desert-after-dark-preview.mp4",
+      poster: "/images/dad/preview-poster.jpg",
+      caption: "Creative visualization informed by the actual property and event direction.",
+    },
+  },
+  designers: {
+    eyebrow: "One runway, six designers",
+    headline: "Six Designers. One Runway.",
+    intro: "Distinct visions, one shared stage. Meet the designers bringing their latest collections to Desert After Dark.",
+    // image = the designer's Instagram profile picture.
+    list: [
+      { name: "Al'mer", label: "Al'mer Designs", handle: "designerkidalmer", image: "/images/designers/designerkidalmer.jpg" },
+      { name: "Alexandra Bobo", label: "Adiara Designs", handle: "adiaradesigns", image: "/images/designers/oneofakindaura.jpg" },
+      { name: "Bella Elise", label: "Elise Studios", handle: "elisestudiosco", image: "/images/designers/bella-elisse.jpg" },
+      { name: "Isaac Newton", label: "Isaac Newton Collection", handle: "isaacnewtoncollection", image: "/images/designers/isaacnewtoncollection.jpg" },
+      { name: "Stephanie Azucena", label: "Machechena", handle: "machechena_", image: "/images/designers/machechena_.jpg" },
+      { name: "Koanasaky", label: "Koanasaky", handle: "koanasaky", image: "/images/designers/koanasaky.jpg" },
     ],
   },
   dressCode: {
-    eyebrow: "Dress Code",
+    eyebrow: "Dress code",
     headline: "Desert Sunset",
-    body: "Elevated, not stiff. Evening gowns and sharp suits — no tux required. Think desert sunset: warm tones, elevated black, a touch of gold. Skip anything cold or silver — we're going for golden-hour glamour, not a uniform.",
-    // Diana's women's styling boards (Figma, Sep 26) and the men's guide
-    // (Oct 2026), shown as two labelled tabs.
+    tagline: "Golden-hour glamour, not a uniform.",
+    body: "Evening gowns and sharp suits, no tux required. Think warm tones, elevated black and a touch of gold. Skip anything cold or silver.",
+    swatches: ["#6E2D5C", "#7B4DB1", "#B2327A", "#C97D8A", "#F07A5A", "#B0563A", "#A6937D", "#CBC5AA", "linear-gradient(135deg,#8A6320 0%,#E5B24A 50%,#8A6320 100%)"],
+    swatchNames: "Ember · Terracotta · Sand · Gold · Black",
+    guide: { label: "Style guidelines", href: "/media/dad-mens-style-board.webp" },
+    // The three photos from the Figma dress-code section (the one place the
+    // Figma imagery replaces what was live).
+    photos: [
+      { src: "/images/dad/dress-1.jpg", alt: "A guest in an ivory halter gown with a paisley wrap on the terrace", caption: "Golden-hour gowns" },
+      { src: "/images/dad/dress-2.jpg", alt: "A guest in a printed black jacket beside a red sports car", caption: "Sharp, not stiff" },
+      { src: "/images/dad/dress-3.jpg", alt: "A guest in a studded magenta dress at night", caption: "Elevated black & gold" },
+    ],
+    // Still used by the ticket pages' styling section.
     mensBoard: { src: "/media/dad-mens-style-board.webp", alt: "Desert After Dark men's styling guide: sunset tailoring, elevated black and warm neutrals" },
-    moodboards: [
-      { src: "/images/dad/moodboard-1.jpg", alt: "Desert After Dark dress-code board: rich sunset tones, elevated black, and warm metallic details" },
-      { src: "/images/dad/moodboard-2.jpg", alt: "Women's dress code for Desert After Dark" },
-      { src: "/images/dad/moodboard-3.jpg", alt: "Desert After Dark dress code: what works and what to avoid" },
-    ],
-    // Swatch colours sampled from the earlier Figma frame (no longer shown).
-    palette: [
-      { name: "Dune Blush", hex: "#C97D8A" },
-      { name: "Ember Glow", hex: "#F07A5A" },
-      { name: "Canyon Clay", hex: "#C59C55" },
-      { name: "Golden Hour", hex: "#C9A25A" },
-      { name: "Mirage Bloom", hex: "#B2327A" },
-      { name: "Dusk Orchid", hex: "#6E2D5C" },
-      { name: "Twilight Haze", hex: "#7B4DB1" },
-      { name: "Sand Mesa", hex: "#A6937D" },
-      { name: "Moonlit Sand", hex: "#CBC5AA" },
-      { name: "Midnight Heat", hex: "#0A0A0A" },
-      { name: "Sundown Gold", hex: "linear-gradient(90deg,#8A6320 0%,#E5B24A 45%,#C7A13F 70%,#8A6320 100%)" },
+  },
+  credits: {
+    eyebrow: "Credits",
+    headline: "The people behind the night",
+    intro: "A collective of creatives, producers and visionaries bringing Desert After Dark to life.",
+    columns: [
+      {
+        title: "Creative & production",
+        people: [
+          { name: "Devaun", role: "Co-founder & Photographer", image: "/images/team/devaun.jpg" },
+          { name: "Michael", role: "Co-founder", image: "/images/host-michael.jpg" },
+          { name: "Diana Ferar", role: "Executive Producer", image: "/images/team/dianaferar.jpg" },
+          { name: "Yadira Flores", role: "Model Coordinator", image: "/images/team/sheissvenus.jpg" },
+          { name: "Johnathan Eden", role: "Transport & Front of House", image: "/images/team/johnathan-eden.jpg", logo: true },
+          { name: "Malcolm Marzett", role: "Media Director, MZT 1990 Inc", image: "/images/team/malcom.jpg" },
+        ],
+      },
+      {
+        title: "Photography & film",
+        people: [
+          { name: "Raulitoj", role: "@raulitoj" },
+          { name: "RJ McBean", role: "@gogetrj" },
+          { name: "William Almendarez", role: "@almendarez.william" },
+          { name: "Cayson", role: "@cv___media" },
+          { name: "Neil Ward", role: "@onward_photos" },
+          { name: "Hannah Sierra", role: "@sudokumedia" },
+        ],
+      },
+      {
+        title: "On stage & sound",
+        people: [
+          { name: "Carrie Seller", role: "Host of the evening" },
+          { name: "Ashley Crossley", role: "Intermission performance" },
+          { name: "Avery", role: "Fashion show DJ" },
+          { name: "Sundara Entertainment", role: "Fire performances" },
+          { name: "St Bernard · On1", role: "Party & after-party DJs" },
+          { name: "Aaron Michael · Jay", role: "DJs" },
+        ],
+      },
     ],
   },
-  store: {
-    eyebrow: "Whats in Store",
-    images: [
-      { src: "/images/dad/store-1.jpg", alt: "Guests arriving at the estate" },
-      { src: "/images/dad/store-2.jpg", alt: "A guest in lavender on the terrace" },
-      { src: "/images/dad/store-3.jpg", alt: "A fire performer" },
-      { src: "/images/dad/store-4.jpg", alt: "Guests taking a photo together" },
-      { src: "/images/dad/store-5.jpg", alt: "A guest in white with the mountain behind" },
-      { src: "/images/dad/store-6.jpg", alt: "Guests taking a selfie together" },
-      { src: "/images/dad/store-7.jpg", alt: "Guests in evening dresses talking by the window" },
-      { src: "/images/dad/store-8.jpg", alt: "The production crew filming on the terrace at night" },
-      { src: "/images/dad/store-9.jpg", alt: "A fire performer at sunset with the mountain behind" },
-      { src: "/images/dad/store-10.jpg", alt: "Guests on the pool terrace in the afternoon" },
+  partners: {
+    eyebrow: "In partnership",
+    headline: "Built with the ones who make it happen",
+    cta: "See partnerships",
+    cards: [
+      { name: "Thundr", role: "Title partner", body: "Powering extraordinary experiences at the intersection of culture and community." },
+      { name: "Opul3nce", role: "Production partner", body: "Creative production and experiential events built to a higher standard." },
+      { name: "The Atlas List", role: "Presented by", body: "A private social club for culture, connection and extraordinary people." },
     ],
-  },
-  team: {
-    eyebrow: "Production",
-    headline: "The team behind the night",
-    intro: "The people doing the unglamorous work that makes the glamorous part look effortless.",
-    // `link: false` would mark a placeholder handle that shouldn't open
-    // Instagram yet; `logo: true` marks a brand mark instead of a portrait.
-    people: [
-      { name: "Devaun", title: "Co-Founder & Photographer", handle: "devaunlennox", image: "/images/team/devaun.jpg" },
-      { name: "Michael", title: "Co-Founder", handle: "whoismikemartin", image: "/images/host-michael.jpg" },
-      { name: "Diana Ferar", title: "Executive Producer", note: "Dee Creator 360", handle: "dianaferar", image: "/images/team/dianaferar.jpg" },
-      // Johnathan's tile carries the OPUL3NCE mark rather than a portrait.
-      { name: "Johnathan Eden", title: "Transport & Front of House", note: "OPUL3NCE", handle: "opul3nce.io", image: "/images/team/johnathan-eden.jpg", logo: true },
-      { name: "Yadira Flores", title: "Model Coordinator", handle: "sheissvenus", image: "/images/team/sheissvenus.jpg" },
-      { name: "Malcolm Marzett", title: "Media Director", note: "MZT 1990 INC", handle: "mjmmzt", image: "/images/team/malcom.jpg" },
-    ],
-  },
-  partnership: {
-    eyebrow: "Partnership",
-    headline: "A few partnerships remain",
-    subhead: "Own a category. Not a logo placement.",
-    cta: "See Partnerships",
-    href: "/partner",
+    vendorsLabel: "Exclusive vendors",
+    vendors: ["Rootbitters", "The Guilded Table", "Galleria of Nature", "Soundmoverz", "The Event Co", "Opul3nce", "Laundry Sauce", "Thundr", "Sundara"],
   },
   apply: {
     eyebrow: "Apply",
-    headline: "Request your ticket allocation",
+    headline: "Request your invitation",
     subhead:
-      "Tickets to Desert After Dark are allocated by application, not by open sale. Tell us about you below — it takes about three minutes. If you're approved, we'll follow up with pricing and RSVP instructions.",
+      "Desert After Dark is by application, not open sale. Tell us a little about you. If you're approved, we'll follow up with RSVP details and the address.",
+    notes: [
+      {
+        label: "A note on admission",
+        text: "Ladies are our guests for the evening. For gentlemen, ticket details are shared once your application is approved.",
+      },
+      {
+        label: "A note on transportation",
+        text: "Parking at the estate is limited, so we're providing a driver for you. Pickup is at Uptown Plaza, and you'll be escorted to the estate in style. Pickup times are shared with approved guests about 48 hours before the event.",
+      },
+    ],
   },
 } as const;

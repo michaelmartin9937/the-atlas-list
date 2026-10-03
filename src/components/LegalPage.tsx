@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { ArrowLink, Display, Eyebrow, container } from "./editorial";
+import { terms } from "@/content/terms";
+import { privacy } from "@/content/privacy";
 
 type Section = { heading: string; body: readonly string[] };
 
@@ -11,73 +14,107 @@ type Props = {
   sections: readonly Section[];
 };
 
-const HERO_INTRO =
-  "The Atlas List is an invitation-only private social club producing curated social experiences and special events in Scottsdale, Arizona, and the greater Phoenix area. These Terms of Service and Privacy Policy explain the conditions governing membership applications, event participation, ticket purchases, and use of our website and services.";
+const EMAIL = "info@theatlaslist.club";
 
-// Figma: "Terms & Privacy — Atlas List". A black hero shared by both legal
-// pages, a pair of pill tabs to switch between them, then numbered sections
-// on a 700px measure. The terms and privacy copy itself is unchanged.
-export function LegalPage({ current, partLabel, title, intro, effectiveDate, sections }: Props) {
-  const tabs = [
-    { key: "terms", href: "/terms", label: "Terms of Service" },
-    { key: "privacy", href: "/privacy", label: "Privacy Policy" },
+// Figma "05 — Terms & Privacy": a cream hero with the title set huge
+// ("TERMS & PRIVACY", ampersand and second word in italics), a left rail
+// that lists both documents, numbered hairline sections on the right, and a
+// dark "We read every note" band. The legal copy itself is unchanged.
+export function LegalPage({ current, title, intro, effectiveDate, sections }: Props) {
+  const docs = [
+    { key: "terms", href: "/terms", label: "Terms of Service", count: terms.sections.length },
+    { key: "privacy", href: "/privacy", label: "Privacy Policy", count: privacy.sections.length },
   ] as const;
 
   return (
     <>
-      <section className="bg-noir px-6 md:px-10 pt-16 md:pt-[72px] pb-16">
-        <div className="max-w-[1280px] mx-auto">
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">Legal</span>
-          <h1 className="mt-5 font-serif text-4xl sm:text-5xl md:text-[64px] leading-[1.1] text-bone">
-            Terms of Service &amp; Privacy Policy
-          </h1>
-          <p className="mt-6 max-w-[760px] text-base md:text-[17px] leading-[1.55] text-bone/85">{HERO_INTRO}</p>
-          <p className="mt-5 text-sm text-bone/70">Effective date: {effectiveDate}</p>
+      <section className="bg-cream border-b border-hairline">
+        <div className={`${container} pt-20 md:pt-[120px] pb-14 md:pb-16`}>
+          <Eyebrow>Legal</Eyebrow>
+          <Display as="h1" size="xl" className="mt-8">
+            Terms <em className="italic">&amp; Privacy</em>
+          </Display>
+          <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.24em] text-ink/55 flex flex-wrap gap-x-10 gap-y-2">
+            <span>Last updated: {effectiveDate}</span>
+            <span>Applies to all Atlas List events, including Desert After Dark</span>
+          </p>
         </div>
       </section>
 
-      <article className="bg-pearl px-6 md:px-10 pt-8 pb-24 md:pb-32">
-        <nav aria-label="Legal documents" className="flex justify-center gap-4">
-          {tabs.map((t) => (
-            <Link
-              key={t.key}
-              href={t.href}
-              aria-current={t.key === current ? "page" : undefined}
-              className={`inline-flex items-center h-12 px-7 rounded-full text-[15px] font-semibold transition-colors ${
-                t.key === current
-                  ? "bg-ember text-pearl"
-                  : "border border-ember text-ember hover:bg-ember/10"
-              }`}
-            >
-              {t.label}
-            </Link>
-          ))}
-        </nav>
+      <article className="bg-cream">
+        <div className={`${container} py-16 md:py-24 grid gap-14 md:grid-cols-[240px_minmax(0,1fr)] md:gap-20`}>
+          <aside className="md:sticky md:top-[104px] self-start">
+            <div className="border-t border-hairline pt-5">
+              <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-coral">On this page</span>
+              <ul className="mt-4">
+                {docs.map((d) => (
+                  <li key={d.key} className="border-b border-hairline">
+                    <Link
+                      href={d.href}
+                      aria-current={d.key === current ? "page" : undefined}
+                      className={`flex items-baseline justify-between gap-4 py-3 font-serif text-[20px] transition-colors hover:text-coral ${
+                        d.key === current ? "text-noir" : "text-ink/60"
+                      }`}
+                    >
+                      {d.label}
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-ink/50">1–{d.count}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <span className="mt-8 block font-mono text-[10px] uppercase tracking-[0.24em] text-coral">Questions</span>
+            <a href={`mailto:${EMAIL}`} className="mt-3 block text-[14px] text-noir hover:text-coral transition-colors">
+              {EMAIL}
+            </a>
+          </aside>
 
-        <div className="max-w-[700px] mx-auto mt-20 md:mt-24">
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-ember">{partLabel}</span>
-          <h2 className="mt-5 font-serif text-4xl md:text-[44px] leading-[1.1] text-noir">{title}</h2>
-          <div className="mt-6 h-[3px] w-16 bg-ember" aria-hidden />
-          <p className="mt-10 text-base md:text-[17px] leading-[1.55] text-ink/70">{intro}</p>
-
-          <div className="mt-12 flex flex-col gap-12">
-            {sections.map((section, i) => (
-              <section key={section.heading}>
-                <h3 className="text-[19px] font-semibold leading-tight text-noir">
-                  {i + 1}. {section.heading}
-                </h3>
-                <div className="mt-4 flex flex-col gap-4">
-                  {section.body.map((p, j) => (
-                    <p key={j} className="text-base md:text-[17px] leading-[1.55] text-ink/70">
-                      {p}
-                    </p>
-                  ))}
-                </div>
-              </section>
-            ))}
+          <div>
+            <Display as="h2" size="lg">
+              {title}
+            </Display>
+            <p className="mt-8 max-w-[700px] text-[15px] leading-[1.65] text-ink/70">{intro}</p>
+            <ol className="mt-10 border-t border-hairline">
+              {sections.map((section, i) => (
+                <li key={section.heading} className="grid grid-cols-[48px_minmax(0,1fr)] md:grid-cols-[72px_minmax(0,1fr)] gap-x-4 border-b border-hairline py-8">
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-coral pt-2">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="font-serif text-[24px] md:text-[28px] leading-tight text-noir">{section.heading}</h3>
+                    <div className="mt-3 flex flex-col gap-3">
+                      {section.body.map((p, j) => (
+                        <p key={j} className="text-[15px] leading-[1.65] text-ink/70">
+                          {p}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </article>
+
+      <section className="bg-night text-bone py-16 md:py-24">
+        <div className={`${container} flex flex-col md:flex-row md:items-end md:justify-between gap-10`}>
+          <div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-coral">Questions</span>
+            <Display as="p" size="md" tone="dark" className="mt-6">
+              We read <em className="italic">every</em> note
+            </Display>
+            <p className="mt-6 text-[16px] text-bone/75">
+              Write to{" "}
+              <a href={`mailto:${EMAIL}`} className="text-bone hover:text-coral transition-colors">
+                {EMAIL}
+              </a>{" "}
+              and a real person will reply.
+            </p>
+          </div>
+          <ArrowLink href="/" tone="dark" className="border border-bone/40 px-7 h-[52px] hover:border-coral">
+            Back to home
+          </ArrowLink>
+        </div>
+      </section>
     </>
   );
 }

@@ -5,6 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Editorial palette — Figma "Altas List Desert After Dark" (Oct 2026):
+        // cream pages, near-black bands, one coral accent, mono eyebrows.
+        cream: "#F5F1EA", // page background
+        night: "#0C0A0A", // dark bands, footer, forms
+        coral: "#E87A5C", // numerals, progress bars, primary buttons on dark
+        brass: "#AE8A4C", // gold eyebrows inside the dark apply sections
+        hairline: "#CDC7C1", // rules and card borders on cream
+        "hairline-dark": "#35322F", // rules and card borders on night
+        blush: "#E5DDDB", // secondary tier cards (Partner)
         // Base palette — values from the Figma "Atlas List — Site" redesign.
         noir: "#0E0C0A", // dark surfaces, primary buttons
         umber: "#231F1B", // About / Partner hero band
@@ -35,6 +44,10 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         serif: ["var(--font-playfair)", "Georgia", "serif"],
+        // Tracked eyebrows, labels and buttons ("01 — HOW WE GATHER").
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        // Condensed card titles ("WEEKLY", "THE RUNWAY", "FULL BAR, ALL NIGHT").
+        condensed: ["var(--font-condensed)", "Impact", "sans-serif"],
       },
       letterSpacing: {
         widest: "0.2em",

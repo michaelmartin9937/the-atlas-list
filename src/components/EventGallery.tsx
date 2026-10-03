@@ -1,36 +1,49 @@
+import Image from "next/image";
 import { home } from "@/content/home";
-import { PhotoCarousel } from "./PhotoCarousel";
+import { EditorialCarousel } from "./EditorialCarousel";
 import { FadeIn } from "./FadeIn";
+import { Eyebrow, SectionHeader, container } from "./editorial";
 
-// Figma (Sep 26): "Scenes from the Last Gathering" is a carousel now — three
-// 384×320 photos per view with dots and the tracked caption beneath — then
-// the quote in its own black band. On phones one photo fills the width with
-// the next peeking in.
+// Figma "In our words" + "Scenes from the last gathering": the quote over a
+// dimmed photo, then the four-up strip with its progress row.
 export function EventGallery() {
-  const { eyebrow, intro, label, photos, caption, location } = home.gallery;
+  const { quote, gallery } = home;
   return (
     <>
-      <div className="pt-4 md:pt-[48px]">
-        <PhotoCarousel
-          eyebrow={eyebrow}
-          intro={intro}
-          images={photos}
-          tile="lg"
-          center
-          arrows={false}
-          caption={label}
-        />
-      </div>
-
-      <section className="mt-2 md:mt-6 bg-noir px-6 md:px-10 py-24 md:py-[128px]">
-        <div className="max-w-[880px] mx-auto text-center">
+      <section className="relative overflow-hidden bg-[#140605] text-bone">
+        <Image src={quote.image} alt="" fill sizes="100vw" className="object-cover opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#140605]/80 via-[#140605]/40 to-[#140605]/60" aria-hidden />
+        <div className={`relative ${container} py-24 md:py-[150px]`}>
           <FadeIn>
-            <p className="font-serif italic text-xl sm:text-2xl md:text-[30px] leading-[1.35] text-bone">
-              &ldquo;{caption}&rdquo;
+            <Eyebrow n={3} tone="dark">
+              {quote.eyebrow}
+            </Eyebrow>
+            <p className="mt-9 max-w-[1000px] font-serif italic text-[1.9rem] sm:text-4xl md:text-[52px] leading-[1.15]">
+              &ldquo;{quote.text}&rdquo;
             </p>
-            <p className="mt-10 md:mt-12 text-xs uppercase tracking-[0.12em] text-bone/60">
-              {location}
-            </p>
+            <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.26em] text-bone/70">{quote.location}</p>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="bg-night text-bone pt-20 md:pt-[112px] pb-20 md:pb-[112px] overflow-hidden">
+        <div className={container}>
+          <FadeIn>
+            <SectionHeader
+              n={4}
+              eyebrow={gallery.eyebrow}
+              tone="dark"
+              title={
+                <>
+                  {gallery.headline.before}
+                  <em className="italic">{gallery.headline.em}</em>
+                </>
+              }
+              intro={gallery.intro}
+            />
+          </FadeIn>
+          <FadeIn delay={120}>
+            <EditorialCarousel images={gallery.photos} tone="dark" caption={gallery.caption} className="mt-12 md:mt-16" />
           </FadeIn>
         </div>
       </section>
