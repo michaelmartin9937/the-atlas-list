@@ -29,6 +29,10 @@ export const tickets = {
         body: "One hundred men. Two hundred hand-selected women. A room built at that ratio never leaves you standing alone, and in a room like this, being seen with the right company is the whole point.",
       },
       {
+        title: "Introduced by the hosts, personally",
+        body: "Devaun and Michael make the introductions themselves. When you arrive, one of them walks you into the room and puts you in front of the women and men you should meet, with a warm word about who you are. Nobody walks in cold.",
+      },
+      {
         title: "Photographed with them, not near them",
         body: "A professional photographer works the room all night, shooting you with the women you meet. Those photos reach your inbox the week after. One good photo beside the right women tells everyone who sees it that you've already been chosen.",
       },
