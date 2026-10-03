@@ -150,6 +150,11 @@ export const ambassadors: readonly Ambassador[] = [
     "name": "Frida Salazar"
   },
   {
+    "handle": "gemraymedia",
+    "first": "Gem",
+    "name": "Gem Ray"
+  },
+  {
     "handle": "giadepratti",
     "first": "Gia",
     "name": "Gia DePratti"
@@ -263,6 +268,11 @@ export const ambassadors: readonly Ambassador[] = [
     "handle": "maximilliano.payan",
     "first": "Maximilliano",
     "name": "Maximilliano Payan"
+  },
+  {
+    "handle": "miss.mercedess_",
+    "first": "Mercedes",
+    "name": "Mercedes"
   },
   {
     "handle": "whoismikemartin",
