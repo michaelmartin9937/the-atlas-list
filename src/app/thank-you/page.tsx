@@ -18,8 +18,8 @@ export default function ThankYouPage() {
           Your application is in.
         </h1>
         <p className="text-ink/85 text-lg leading-relaxed">
-          We read every one personally. If it feels like a fit, you'll hear from us within two
-          weeks.
+          We read every one personally. We&apos;ll get back to you soon with an email explaining next
+          steps if approved.
         </p>
         <p className="font-serif italic text-xl text-ink mt-2">— Devaun &amp; Michael</p>
         <div className="mt-8">
