@@ -136,24 +136,26 @@ export const desertAfterDark = {
       },
       {
         title: "Photography & film",
+        // Profile pictures supplied by Michael (Oct 3), matched to each
+        // person's Instagram profile picture.
         people: [
-          { name: "Raulitoj", role: "@raulitoj" },
-          { name: "RJ McBean", role: "@gogetrj" },
-          { name: "William Almendarez", role: "@almendarez.william" },
-          { name: "Cayson", role: "@cv___media" },
-          { name: "Neil Ward", role: "@onward_photos" },
-          { name: "Hannah Sierra", role: "@sudokumedia" },
+          { name: "Raulitoj", role: "@raulitoj", image: "/images/team/raulitoj.jpg" },
+          { name: "RJ McBean", role: "@gogetrj", image: "/images/team/rj-mcbean.jpg" },
+          { name: "William Almendarez", role: "@almendarez.william", image: "/images/team/william-almendarez.jpg" },
+          { name: "Cayson", role: "@cv___media", image: "/images/team/cayson.jpg" },
+          { name: "Neil Ward", role: "@onward_photos", image: "/images/team/neil-ward.jpg" },
+          { name: "Hannah Sierra", role: "@sudokumedia", image: "/images/team/hannah-sierra.jpg" },
         ],
       },
       {
         title: "On stage & sound",
         people: [
-          { name: "Carrie Seller", role: "Host of the evening" },
-          { name: "Ashley Crossley", role: "Intermission performance" },
-          { name: "Avery", role: "Fashion show DJ" },
-          { name: "Sundara Entertainment", role: "Fire performances" },
-          { name: "St Bernard · On1", role: "Party & after-party DJs" },
-          { name: "Aaron Michael · Jay", role: "DJs" },
+          { name: "Carrie Seller", role: "Host of the evening", image: "/images/team/carrie-seller.jpg" },
+          { name: "Ashley Crossley", role: "Intermission performance", image: "/images/team/ashley-crossley.jpg" },
+          { name: "Avery", role: "Fashion show DJ", image: "/images/team/avery.jpg" },
+          { name: "Sundara Entertainment", role: "Fire performances", image: "/images/team/sundara.jpg" },
+          { name: "St Bernard · On1", role: "Party & after-party DJs", image: "/images/team/st-bernard-on1.jpg" },
+          { name: "Aaron Michael · Jay", role: "DJs", image: "/images/team/aaron-michael-jay.jpg" },
         ],
       },
     ],
