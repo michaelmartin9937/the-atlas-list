@@ -142,6 +142,9 @@ export default async function TicketsPage() {
             <div className="relative aspect-[3/2] overflow-hidden rounded bg-velvet-card">
               <Image src="/images/tickets/preselected-group.jpg" alt="Devaun surrounded by nine guests in evening dresses" fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
             </div>
+            <div className="relative aspect-square overflow-hidden rounded bg-velvet-card">
+              <Image src="/images/tickets/guests-pink-brown.jpg" alt="Two guests in pink and brown dresses laughing together at the show" fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
+            </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded bg-velvet-card">
               <Image src="/images/tickets/men.jpg" alt="A group of guests in white outside the house at night" fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
             </div>
