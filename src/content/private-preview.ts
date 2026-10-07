@@ -6,12 +6,29 @@
 // (Oct 2026). Payment stays on Stripe (Payment Link + Buy Button below);
 // the Figma's Zelle checkout screens were not built.
 
-// The Stripe Payment Link for approved guests (supplied 2026-10-01). An
-// environment variable overrides it; otherwise this default is used, so the
-// buttons work without any Vercel configuration. Every payment button on
-// both pages reads this one value.
+// The Stripe Payment Link for approved guests (replaced 2026-10-07 with the
+// $150 link). An environment variable overrides it; otherwise this default
+// is used, so the buttons work without any Vercel configuration. Every
+// payment button on both pages reads this one value.
 export const STRIPE_PAYMENT_LINK =
-  process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK ?? "https://buy.stripe.com/dRmeV67XKdWW9M8fdBffy01";
+  process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK ?? "https://buy.stripe.com/7sYcMYem82eef6s3uTffy04";
+
+// Where Stripe should send guests after they pay: set this URL as the
+// Payment Link's confirmation redirect in the Stripe dashboard.
+export const CONFIRMATION_ROUTE = "/private/desert-after-dark-1010/confirmed";
+
+// Calendar files/links for confirmed guests (pickup 5:15 PM, home by midnight,
+// Arizona time; no DST in Phoenix, so UTC-7 year-round).
+export const CALENDAR = {
+  ics: "/events/desert-after-dark-guest.ics",
+  google:
+    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent("Desert After Dark — The Atlas List") +
+    "&dates=20261011T001500Z/20261011T070000Z" +
+    "&ctz=America/Phoenix" +
+    "&location=" + encodeURIComponent("The Original Chop Shop, 10625 N Tatum Blvd, Unit 135, Phoenix, AZ 85028") +
+    "&details=" + encodeURIComponent("Park at the pickup point and board the car service between 5:15 and 7:30 PM. Shuttle back until midnight. Bring photo ID. theatlaslist.club"),
+} as const;
 
 // Stripe's hosted Buy Button for the same product (publishable key is public
 // by design — it can only start a checkout, never read or move money).
@@ -155,5 +172,34 @@ export const privatePreview = {
   footer: {
     email: "info@theatlaslist.club",
     place: "Paradise Valley, AZ",
+  },
+
+  // Post-payment confirmation (Figma "4 Confirmed", light theme). Stripe
+  // redirects here after checkout. The estate's street address stays off
+  // the web page: it goes by text to confirmed guests.
+  confirmed: {
+    eyebrow: "Where to go",
+    headline: "You're ",
+    headlineItalic: "on the list.",
+    copy: "Payment received. Your confirmation is on its way by text and email.",
+    savedNote: "Saved to your confirmation text",
+    stops: [
+      {
+        label: "01 Park & check in · 5:15–7:30 PM",
+        lines: ["The Original Chop Shop", "10625 N Tatum Blvd, Unit 135", "Phoenix, AZ 85028"],
+        body: "Park in the surrounding lot. Show your ticket and photo ID, then ride with our car service to the estate. Uber and Lyft are welcome too. Parking at the residence is not permitted.",
+        mapsQuery: "The Original Chop Shop, 10625 N Tatum Blvd Unit 135, Phoenix, AZ 85028",
+        copyText: "10625 N Tatum Blvd, Unit 135, Phoenix, AZ 85028",
+      },
+      {
+        label: "02 The estate · Drop-off",
+        lines: ["Private estate", "Paradise Valley, AZ"],
+        body: "Your car service brings you here from the pickup point. The exact address is in your confirmation text.",
+      },
+    ],
+    rideHome: { title: "Ride home", body: "Shuttle back to the pickup point until midnight. Uber and Lyft are available at the venue anytime." },
+    calendarCta: "Add to calendar",
+    googleCta: "Google Calendar",
+    walletNote: "Your ticket arrives by text and email. Show it with photo ID at pickup.",
   },
 } as const;

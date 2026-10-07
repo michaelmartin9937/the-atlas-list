@@ -5,7 +5,6 @@ import { FadeIn } from "@/components/FadeIn";
 import { Film } from "@/components/private/Film";
 import { StickyCta } from "@/components/private/StickyCta";
 import { StripeButton } from "@/components/private/StripeButton";
-import { StripeBuyButton } from "@/components/private/StripeBuyButton";
 import { privatePreview as p } from "@/content/private-preview";
 
 // Private ticket page for approved male applicants. Unlisted
@@ -134,9 +133,10 @@ export default function PrivateTicketPage() {
                   </div>
                 ))}
               </dl>
-              <div className="mt-7 flex flex-col gap-4">
+              {/* One payment path: the $150 Payment Link. The Stripe Buy
+                  Button was dropped because it points at the old product. */}
+              <div className="mt-7">
                 <StripeButton label={p.cta} className="w-full" />
-                <StripeBuyButton />
               </div>
               <p className="mt-4 flex items-start gap-2 text-[12px] leading-[1.5] text-bone/70">
                 <svg viewBox="0 0 24 24" className="mt-[2px] h-4 w-4 shrink-0 text-coral" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>

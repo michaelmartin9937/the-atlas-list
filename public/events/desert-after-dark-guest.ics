@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Atlas List//Desert After Dark//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Desert After Dark
+X-WR-TIMEZONE:America/Phoenix
+BEGIN:VTIMEZONE
+TZID:America/Phoenix
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0700
+TZNAME:MST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:desert-after-dark-2026-guest@theatlaslist.club
+DTSTAMP:20261007T000000Z
+DTSTART;TZID=America/Phoenix:20261010T171500
+DTEND;TZID=America/Phoenix:20261011T000000
+SUMMARY:Desert After Dark — The Atlas List
+DESCRIPTION:Park at the pickup point (The Original Chop Shop\, 10625 N Tatum Blvd\, Unit 135\, Phoenix\, AZ 85028) and board the car service between 5:15 and 7:30 PM. Doors 5:30 PM\, show 7:00 PM\, shuttle back until midnight. Bring photo ID. Uber and Lyft are welcome\; no parking at the residence. The estate address is in your confirmation text.
+LOCATION:The Original Chop Shop\, 10625 N Tatum Blvd\, Unit 135\, Phoenix\, AZ 85028
+URL:https://www.theatlaslist.club/desert-after-dark
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-PT2H
+ACTION:DISPLAY
+DESCRIPTION:Desert After Dark — head to the pickup point
+END:VALARM
+END:VEVENT
+END:VCALENDAR
