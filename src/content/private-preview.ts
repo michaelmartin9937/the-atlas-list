@@ -68,7 +68,7 @@ export const privatePreview = {
     rows: [
       ["Date", "Sat, Oct 10 · 5:30 PM"],
       ["Car service", "Included"],
-      ["Reserve by", "Thu, Oct 8 · 8 PM"],
+      ["Reserve by", "Fri, Oct 9 · 8 PM"],
     ],
   },
 
@@ -132,6 +132,15 @@ export const privatePreview = {
         body: "The shuttle runs back to the pickup point until midnight. Uber and Lyft are available at the venue anytime.",
       },
     ],
+    // Guests who skip the shuttle (added 2026-10-07).
+    ownRide: {
+      title: "Prefer to arrive on your own using Uber / Lyft?",
+      lead: "No problem.",
+      addressLabel: "The estate",
+      address: ["4536 E Foothill Dr", "Paradise Valley, AZ 85253"],
+      mapsQuery: "4536 E Foothill Dr, Paradise Valley, AZ 85253",
+      body: "Have your driver drop you at the gate. Parking in the neighborhood is not allowed. Unauthorized vehicles will be towed.",
+    },
   },
 
   dress: {
@@ -165,7 +174,7 @@ export const privatePreview = {
       "Approved guests only. Photo ID at pickup.",
       "Ladies attend as our guests.",
       "Secure card checkout through Stripe. Use the same name and email as your application.",
-      "Reserve by Thu, Oct 8 at 8:00 PM (AZ). All sales final.",
+      "Reserve by Fri, Oct 9 at 8:00 PM (AZ). All sales final.",
     ],
   },
 
@@ -175,8 +184,7 @@ export const privatePreview = {
   },
 
   // Post-payment confirmation (Figma "4 Confirmed", light theme). Stripe
-  // redirects here after checkout. The estate's street address stays off
-  // the web page: it goes by text to confirmed guests.
+  // redirects here after checkout.
   confirmed: {
     eyebrow: "Where to go",
     headline: "You're ",
@@ -193,8 +201,10 @@ export const privatePreview = {
       },
       {
         label: "02 The estate · Drop-off",
-        lines: ["Private estate", "Paradise Valley, AZ"],
-        body: "Your car service brings you here from the pickup point. The exact address is in your confirmation text.",
+        lines: ["4536 E Foothill Dr", "Paradise Valley, AZ 85253"],
+        body: "Your car service brings you here from the pickup point. Arriving by Uber or Lyft? Drop at the gate. Parking in the neighborhood is not allowed and unauthorized vehicles will be towed.",
+        mapsQuery: "4536 E Foothill Dr, Paradise Valley, AZ 85253",
+        copyText: "4536 E Foothill Dr, Paradise Valley, AZ 85253",
       },
     ],
     rideHome: { title: "Ride home", body: "Shuttle back to the pickup point until midnight. Uber and Lyft are available at the venue anytime." },

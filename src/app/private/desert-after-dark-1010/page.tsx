@@ -258,6 +258,33 @@ export default function PrivateTicketPage() {
             ))}
           </ol>
         </FadeIn>
+        <FadeIn delay={120}>
+          <div className="mt-5 border border-hairline-dark bg-[#121010] p-6 md:p-8 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">
+            <div>
+              <h3 className="font-serif text-[24px] md:text-[28px] leading-tight text-bone">{p.gettingThere.ownRide.title}</h3>
+              <p className="mt-3 font-serif italic text-[20px] text-coral">{p.gettingThere.ownRide.lead}</p>
+              <p className="mt-4 max-w-[480px] text-[14px] leading-[1.6] text-bone/70">{p.gettingThere.ownRide.body}</p>
+            </div>
+            <div className="md:border-l md:border-hairline-dark md:pl-12">
+              <span className={label}>{p.gettingThere.ownRide.addressLabel}</span>
+              <p className="mt-3 font-serif text-[22px] md:text-[26px] leading-[1.25] text-bone">
+                {p.gettingThere.ownRide.address.map((l) => (
+                  <span key={l} className="block">
+                    {l}
+                  </span>
+                ))}
+              </p>
+              <a
+                href={`https://maps.apple.com/?q=${encodeURIComponent(p.gettingThere.ownRide.mapsQuery)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.24em] text-coral hover:text-bone transition-colors"
+              >
+                Directions <span aria-hidden>→</span>
+              </a>
+            </div>
+          </div>
+        </FadeIn>
       </section>
 
       {/* 04 Dress code */}
