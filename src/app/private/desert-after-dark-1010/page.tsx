@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { FadeIn } from "@/components/FadeIn";
-import { EventTimeline } from "@/components/EventTimeline";
-import { Faq } from "@/components/private/Faq";
 import { Film } from "@/components/private/Film";
 import { StickyCta } from "@/components/private/StickyCta";
 import { StripeButton } from "@/components/private/StripeButton";
 import { StripeBuyButton } from "@/components/private/StripeBuyButton";
 import { privatePreview as p } from "@/content/private-preview";
-import { eventTimeline } from "@/content/event-timeline";
 
-// Private preview for approved male applicants deciding whether to complete
-// their $495 admission payment. Unlisted (noindex/nofollow), no site nav or
-// footer, no forms, no address. Airtable approval matching at checkout is
-// the real control; this URL is private in presentation only.
+// Private ticket page for approved male applicants. Unlisted
+// (noindex/nofollow), no site nav or footer, no forms, no estate address.
+// Airtable approval matching at checkout is the real control; this URL is
+// private in presentation only. Design: Figma "Desert After Dark — Checkout"
+// (Dark theme, 1 Event info, Oct 2026). Payment is unchanged: every button
+// opens the Stripe Payment Link, and the Stripe Buy Button sits beside it.
 export const metadata: Metadata = {
   title: { absolute: p.meta.title },
   description: p.meta.description,
@@ -29,160 +29,259 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: p.meta.ogTitle, description: p.meta.ogDescription },
 };
 
-const eyebrow = "text-[12px] font-semibold uppercase tracking-[0.14em] text-gold";
-const h2 = "mt-4 font-serif text-4xl md:text-[48px] leading-[1.08] text-bone";
-const body = "text-base md:text-[17px] leading-[1.6] text-velvet-text";
+const container = "max-w-[1296px] mx-auto px-6 md:px-12";
+const eyebrow = "font-mono text-[11px] uppercase tracking-[0.24em] text-coral";
+const label = "font-mono text-[10px] uppercase tracking-[0.24em] text-bone/55";
+const body = "text-[16px] md:text-[17px] leading-[1.6] text-bone/75";
 
-export default function PrivatePreviewPage() {
+const NAV = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/desert-after-dark", label: "Desert After Dark" },
+  { href: "/partner", label: "Partners" },
+];
+
+function Icon({ name }: { name: string }) {
+  const cls = "h-5 w-5 text-coral";
+  if (name === "car")
+    return (
+      <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M5 16V12l2-5h10l2 5v4" />
+        <path d="M3 16h18M7 16v2M17 16v2" />
+        <circle cx="8" cy="13.5" r="1" />
+        <circle cx="16" cy="13.5" r="1" />
+      </svg>
+    );
+  if (name === "moon")
+    return (
+      <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z" />
+      </svg>
+    );
+  return (
+    <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z" />
+      <circle cx="12" cy="11" r="2.2" />
+    </svg>
+  );
+}
+
+export default function PrivateTicketPage() {
   return (
     // The root layout pads <main> for the fixed nav; this page has no nav.
-    <div className="-mt-20 md:-mt-[104px] bg-velvet text-bone">
-      {/* 1. Private hero */}
-      <section id="hero" className="relative min-h-[88vh] md:min-h-[92vh] flex items-end overflow-hidden">
-        {p.hero.loop ? (
-          <video
-            className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
-            src={p.hero.loop}
-            poster={p.hero.poster}
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden
-          />
-        ) : null}
-        <Image
-          src={p.hero.poster}
-          alt={p.hero.posterAlt}
-          fill
-          priority
-          sizes="100vw"
-          className={`object-cover object-center ${p.hero.loop ? "motion-safe:hidden" : ""}`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-velvet via-velvet/70 via-45% to-velvet/20" aria-hidden />
-        <div className="relative w-full max-w-[1200px] mx-auto px-6 md:px-10 pb-16 md:pb-24 pt-32">
-          <FadeIn>
-            <Image src="/brand/atlas-list-logo.svg" alt="The Atlas List" width={64} height={64} unoptimized className="h-14 w-14 md:h-16 md:w-16" />
-            <p className={`mt-8 ${eyebrow}`}>{p.hero.eyebrow}</p>
-            <h1 className="mt-5 font-serif text-[3.2rem] sm:text-6xl md:text-[88px] leading-[0.98] text-bone">{p.hero.headline}</h1>
-            <p className="mt-4 font-serif italic text-2xl md:text-[28px] text-gold">{p.hero.tagline}</p>
-            {/* Date and time at a glance, same pill as the event and ticket pages. */}
-            <p className="mt-5 inline-flex flex-wrap items-center gap-x-3 gap-y-1 border border-bone/30 rounded-full px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-bone">
-              <svg viewBox="0 0 24 24" className="h-4 w-4 text-gold" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 7v5l3 2" />
-              </svg>
-              <span>{eventTimeline.date}</span>
-              <span className="text-gold" aria-hidden>·</span>
-              <span>{eventTimeline.heroTime}</span>
-            </p>
-            <p className={`mt-6 max-w-[560px] ${body}`}>{p.hero.copy}</p>
-            <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-5">
-              <StripeButton label={p.cta} className="w-full sm:w-auto" />
-              <a
-                href="#film"
-                className="inline-flex items-center justify-center gap-2 text-[13px] font-semibold uppercase tracking-[0.1em] text-bone hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-colors"
+    <div className="-mt-16 md:-mt-[74px] min-h-screen bg-night text-bone">
+      {/* Top bar */}
+      <header className="border-b border-hairline-dark">
+        <div className={`${container} h-16 md:h-[74px] flex items-center justify-between gap-6`}>
+          <Link href="/" className="font-serif text-[17px] md:text-[20px] uppercase tracking-[0.16em] text-bone whitespace-nowrap">
+            The Atlas List
+          </Link>
+          <nav className="hidden md:flex items-center gap-9">
+            {NAV.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`relative font-mono text-[10px] uppercase tracking-[0.22em] transition-colors hover:text-coral ${
+                  l.href === "/desert-after-dark" ? "text-bone after:absolute after:left-0 after:right-0 after:-bottom-[8px] after:h-px after:bg-coral" : "text-bone/70"
+                }`}
               >
-                {p.secondaryCta}
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-                  <path d="M12 5v14m0 0-6-6m6 6 6-6" />
-                </svg>
-              </a>
-            </div>
-          </FadeIn>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/60">
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
+              <rect x="5" y="11" width="14" height="10" rx="1.5" />
+              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+            </svg>
+            Secure checkout
+          </span>
         </div>
-      </section>
+      </header>
 
-      {/* 2. Atmosphere film */}
-      <section id="film" className="px-6 md:px-10 py-20 md:py-[112px] scroll-mt-6">
-        <div className="max-w-[1000px] mx-auto">
-          <FadeIn>
-            <div className="text-center max-w-[720px] mx-auto">
-              <h2 className="font-serif text-4xl md:text-[48px] leading-[1.08] text-bone">{p.film.headline}</h2>
-              <p className={`mt-5 ${body}`}>{p.film.copy}</p>
-            </div>
-          </FadeIn>
-          <FadeIn delay={120} className="mt-10 md:mt-12">
-            <Film
-              src={p.film.src}
-              poster={p.film.poster}
-              posterAlt="Preview film of the Desert After Dark atmosphere"
-              disclosure={p.film.aiDisclosure ? p.film.disclosureText : null}
-            />
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* 3. Experience pillars */}
-      <section className="px-6 md:px-10 pb-20 md:pb-[112px]">
-        <ul className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-px bg-velvet-line border border-velvet-line">
-          {p.pillars.map((pl, i) => (
-            <FadeIn key={pl.title} delay={i * 80}>
-              <li className="h-full bg-velvet p-8 md:p-10">
-                <span className="font-serif text-xl text-gold">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-5 text-[13px] font-semibold uppercase tracking-[0.14em] text-bone">{pl.title}</h3>
-                <p className={`mt-4 ${body}`}>{pl.body}</p>
-              </li>
-            </FadeIn>
-          ))}
-        </ul>
-      </section>
-
-      {/* The night, hour by hour (shared with the event and ticket pages) */}
-      <EventTimeline tone="noir" footer={<StripeButton label={p.cta} className="w-full sm:w-auto" />} />
-
-      {/* 4. Authentic proof */}
-      <section className="bg-velvet px-6 md:px-10 py-20 md:py-[112px]">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeIn>
-            <div className="max-w-[760px]">
-              <h2 className="font-serif text-4xl md:text-[48px] leading-[1.08] text-bone">{p.proof.headline}</h2>
-              <p className={`mt-5 ${body}`}>{p.proof.copy}</p>
-            </div>
-          </FadeIn>
-          {/* Four columns; wide images take two. Wide (8:5 over two columns)
-              and single (4:5) cells share the same height, so rows stay level:
-              [wide, single, single] [wide, single, single] [wide, single, BTS]. */}
-          <div className="mt-12 md:mt-16 grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-4">
-            {p.proof.gallery.map((img, i) => {
-              const wide = "span" in img && img.span === "wide";
-              return (
-                <FadeIn key={img.src} delay={(i % 4) * 60} className={wide ? "col-span-2" : ""}>
-                  <div className={`relative overflow-hidden rounded bg-velvet-card ${wide ? "aspect-[8/5]" : "aspect-[4/5]"}`}>
-                    <Image src={img.src} alt={img.alt} fill loading="lazy" sizes={wide ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"} className="object-cover" />
-                  </div>
-                </FadeIn>
-              );
-            })}
-            <FadeIn delay={240}>
-              <Film
-                src={p.proof.bts.src}
-                poster={p.proof.bts.poster}
-                posterAlt="Behind the scenes at model casting"
-                disclosure={p.proof.bts.caption}
-                vertical
-                loop
-              />
+      {/* Hero + ticket card */}
+      <section id="hero" className="relative">
+        <div className="relative min-h-[560px] md:min-h-[600px] flex items-end overflow-hidden">
+          <Image src={p.hero.poster} alt={p.hero.posterAlt} fill priority sizes="100vw" className="object-cover object-[center_30%]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-night via-night/55 via-40% to-night/15" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-r from-night/70 via-night/20 to-transparent" aria-hidden />
+          <div className={`relative w-full ${container} pb-14 md:pb-16 pt-28`}>
+            <FadeIn>
+              <p className={eyebrow}>{p.hero.eyebrow}</p>
+              <h1 className="mt-5 font-serif text-bone leading-[0.95]">
+                <span className="block uppercase text-[3.4rem] sm:text-7xl md:text-[108px] tracking-[-0.01em]">{p.hero.headline}</span>
+                <span className="block italic text-[2.9rem] sm:text-6xl md:text-[96px]">{p.hero.headlineItalic}</span>
+              </h1>
+              <p className={`mt-6 max-w-[420px] ${body}`}>{p.hero.copy}</p>
             </FadeIn>
           </div>
         </div>
+
+        {/* Ticket card: overlaps the hero on desktop, stacks beneath it on phones. */}
+        <div className={`${container} relative`}>
+          <FadeIn delay={120} className="md:absolute md:right-12 md:-top-[330px] md:w-[360px] md:z-10">
+            <aside className="mt-6 md:mt-0 border border-hairline-dark bg-[#121010] p-7 md:p-8">
+              <p className={label}>{p.ticketLabel}</p>
+              <p className="mt-3 font-serif text-bone leading-none">
+                <span className="text-[56px]">{p.price}</span>
+                <span className="ml-2 font-sans text-[14px] text-bone/70">{p.priceUnit}</span>
+              </p>
+              <dl className="mt-6 border-t border-hairline-dark">
+                {p.card.rows.map(([k, v]) => (
+                  <div key={k} className="flex items-baseline justify-between gap-4 border-b border-hairline-dark py-3 text-[14px]">
+                    <dt className="text-bone/65">{k}</dt>
+                    <dd className="text-bone text-right">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-7 flex flex-col gap-4">
+                <StripeButton label={p.cta} className="w-full" />
+                <StripeBuyButton />
+              </div>
+              <p className="mt-4 flex items-start gap-2 text-[12px] leading-[1.5] text-bone/70">
+                <svg viewBox="0 0 24 24" className="mt-[2px] h-4 w-4 shrink-0 text-coral" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
+                  <rect x="5" y="11" width="14" height="10" rx="1.5" />
+                  <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                </svg>
+                {p.stripeNote}
+              </p>
+              <p className="mt-3 text-[11px] leading-[1.6] text-bone/50">{p.finePrint}</p>
+            </aside>
+          </FadeIn>
+        </div>
       </section>
 
-      {/* 5. Dress code */}
-      <section className="px-6 md:px-10 py-20 md:py-[112px]">
-        <div className="max-w-[1200px] mx-auto grid gap-12 md:grid-cols-2 md:gap-x-20 md:items-center">
+      {/* Details strip */}
+      <section className={`${container} pt-8 md:pt-10`}>
+        <div className="md:pr-[400px]">
+          <dl className="grid grid-cols-3 border-b border-hairline-dark">
+            {p.strip.facts.map(([k, v], i) => (
+              <div key={k} className={`py-5 ${i > 0 ? "border-l border-hairline-dark pl-5" : ""}`}>
+                <dt className={label}>{k}</dt>
+                <dd className="mt-2 font-serif text-[22px] md:text-[26px] leading-tight text-bone">{v}</dd>
+              </div>
+            ))}
+          </dl>
+          <ul className="grid gap-5 sm:grid-cols-2 border-b border-hairline-dark py-6">
+            {p.strip.notes.map((n) => (
+              <li key={n.title} className="flex items-start gap-4">
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-hairline-dark">
+                  <Icon name={n.icon} />
+                </span>
+                <span>
+                  <span className="block text-[15px] text-bone">{n.title}</span>
+                  <span className="block text-[13px] text-bone/60">{n.body}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 01 About the night */}
+      <section className={`${container} pt-16 md:pt-20`}>
+        <div className="md:pr-[400px]">
           <FadeIn>
-            <p className={eyebrow}>{p.dress.eyebrow}</p>
-            <h2 className={h2}>{p.dress.headline}</h2>
-            <p className={`mt-6 ${body}`}>{p.dress.copy}</p>
-            <details className="mt-7 group">
-              <summary className="cursor-pointer list-none text-[13px] font-semibold uppercase tracking-[0.1em] text-gold hover:text-bone focus:outline-none focus-visible:ring-2 focus-visible:ring-gold [&::-webkit-details-marker]:hidden">
+            <p className={eyebrow}>
+              01 <span className="ml-3">{p.about.eyebrow}</span>
+            </p>
+            <h2 className="mt-5 font-serif text-[2.1rem] md:text-[44px] leading-[1.1] text-bone max-w-[640px]">
+              {p.about.headline}
+              <em className="italic">{p.about.headlineItalic}</em>
+            </h2>
+            <p className={`mt-6 max-w-[600px] ${body}`}>{p.about.copy}</p>
+            <ul className="mt-8 grid grid-cols-2 md:grid-cols-3 border-t border-hairline-dark">
+              {p.about.bullets.map((b) => (
+                <li key={b} className="flex items-center gap-3 border-b border-hairline-dark py-4 text-[14px] text-bone/85">
+                  <span className="h-[6px] w-[6px] rounded-full bg-coral" aria-hidden />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* A glimpse after dark (film) */}
+      <section className={`${container} pt-16 md:pt-20`}>
+        <FadeIn>
+          <p className={eyebrow}>{p.film.eyebrow}</p>
+          <div className="mt-6 max-w-[900px]">
+            <Film src={p.film.src} poster={p.film.poster} posterAlt="Preview film of the Desert After Dark atmosphere" disclosure={p.film.disclosureText} />
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* 02 The evening */}
+      <section className={`${container} pt-16 md:pt-20`}>
+        <FadeIn>
+          <p className={eyebrow}>
+            02 <span className="ml-3">{p.evening.eyebrow}</span>
+          </p>
+          <ol className="mt-6 grid md:grid-cols-3 border-t border-hairline-dark">
+            {p.evening.acts.map((a, i) => (
+              <li key={a.title} className={`py-6 ${i > 0 ? "md:border-l md:border-hairline-dark md:pl-6" : ""} border-b border-hairline-dark md:border-b-0 md:pr-6`}>
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-coral">{a.time}</span>
+                <h3 className={`mt-3 font-serif text-[26px] leading-tight text-bone ${"italic" in a && a.italic ? "italic" : ""}`}>{a.title}</h3>
+                <p className="mt-2 text-[14px] leading-[1.5] text-bone/65">{a.body}</p>
+              </li>
+            ))}
+          </ol>
+        </FadeIn>
+      </section>
+
+      {/* 03 Getting there */}
+      <section className={`${container} pt-16 md:pt-20`}>
+        <FadeIn>
+          <p className={eyebrow}>
+            03 <span className="ml-3">{p.gettingThere.eyebrow}</span>
+          </p>
+          <ol className="mt-6 grid md:grid-cols-3 gap-5">
+            {p.gettingThere.steps.map((s, i) => (
+              <li key={s.title} className="border border-hairline-dark bg-[#121010] p-6 md:p-7">
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center border border-hairline-dark">
+                    <Icon name={s.icon} />
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-bone/55">0{i + 1}</span>
+                </div>
+                <h3 className="mt-5 font-serif text-[24px] leading-tight text-bone">{s.title}</h3>
+                <p className="mt-3 text-[15px] leading-[1.5] text-bone">
+                  {s.lines.map((l, j) => (
+                    <span key={l} className={j === 0 ? "block" : "block text-bone/75"}>
+                      {l}
+                    </span>
+                  ))}
+                </p>
+                <p className="mt-4 text-[13px] leading-[1.6] text-bone/65">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </FadeIn>
+      </section>
+
+      {/* 04 Dress code */}
+      <section className={`${container} pt-16 md:pt-20`}>
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_320px] md:gap-16 md:items-start">
+          <FadeIn>
+            <p className={eyebrow}>
+              04 <span className="ml-3">{p.dress.eyebrow}</span>
+            </p>
+            <h2 className="mt-5 font-serif italic text-[2.1rem] md:text-[44px] leading-[1.1] text-bone">{p.dress.headline}</h2>
+            <p className={`mt-5 max-w-[560px] ${body}`}>{p.dress.copy}</p>
+            <ul className="mt-6 flex flex-wrap gap-3" aria-label="Palette">
+              {p.dress.swatches.map((s) => (
+                <li key={s} className="h-7 w-7 rounded-full" style={{ background: s }} />
+              ))}
+            </ul>
+            <details className="mt-7 group max-w-[560px]">
+              <summary className="cursor-pointer list-none font-mono text-[10px] uppercase tracking-[0.24em] text-coral hover:text-bone [&::-webkit-details-marker]:hidden">
                 <span className="group-open:hidden">Styling notes +</span>
                 <span className="hidden group-open:inline">Styling notes −</span>
               </summary>
-              <ul className="mt-4 flex flex-col gap-2 border-l border-gold/50 pl-5">
+              <ul className="mt-4 flex flex-col gap-2 border-l border-coral/60 pl-5">
                 {p.dress.notes.map((n) => (
-                  <li key={n} className="text-[15px] leading-[1.5] text-[#D8D2C8]">
+                  <li key={n} className="text-[14px] leading-[1.5] text-bone/80">
                     {n}
                   </li>
                 ))}
@@ -190,92 +289,58 @@ export default function PrivatePreviewPage() {
             </details>
           </FadeIn>
           <FadeIn delay={120}>
-            {p.dress.board ? (
-              <div className="relative aspect-[2/3] overflow-hidden rounded bg-velvet-card">
-                <Image src={p.dress.board} alt={p.dress.boardAlt} fill loading="lazy" sizes="(min-width: 768px) 560px, 100vw" className="object-cover" />
+            <a href={p.dress.board} target="_blank" rel="noopener noreferrer" className="group block">
+              <div className="relative aspect-[2/3] overflow-hidden border border-hairline-dark bg-[#121010]">
+                <Image src={p.dress.board} alt={p.dress.boardAlt} fill loading="lazy" sizes="(min-width: 768px) 320px, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
               </div>
-            ) : (
-              // Placeholder until the men's board is delivered: the palette,
-              // set like a swatch card.
-              <div className="rounded border border-velvet-line bg-velvet-card p-8 md:p-10">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-velvet-text">Desert After Dark · Palette</p>
-                <ul className="mt-6 grid grid-cols-3 gap-4">
-                  {p.dress.palette.map((c) => (
-                    <li key={c.name} className="flex flex-col gap-3">
-                      <span className="block h-20 rounded-sm border border-white/5" style={{ background: c.hex }} aria-hidden />
-                      <span className="text-[12px] uppercase tracking-[0.08em] text-[#D8D2C8]">{c.name}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-8 font-serif italic text-lg text-velvet-text">Men&rsquo;s styling board to follow.</p>
-              </div>
-            )}
+              <span className="mt-3 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.24em] text-bone/60 group-hover:text-coral">
+                {p.dress.boardLabel} <span aria-hidden>→</span>
+              </span>
+            </a>
           </FadeIn>
         </div>
       </section>
 
-      {/* 6. Event details */}
-      <section className="bg-noir px-6 md:px-10 py-20 md:py-[112px]">
-        <div className="max-w-[860px] mx-auto">
-          <FadeIn>
-            <p className={eyebrow}>{p.details.eyebrow}</p>
-            <dl className="mt-8 divide-y divide-velvet-line border-y border-velvet-line">
-              {p.details.rows.map(([k, v]) => (
-                <div key={k} className="grid grid-cols-[140px_1fr] md:grid-cols-[220px_1fr] gap-4 py-4">
-                  <dt className="text-[13px] font-medium uppercase tracking-[0.08em] text-velvet-text pt-[3px]">{k}</dt>
-                  <dd className="font-serif text-xl md:text-2xl text-bone">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className="mt-8 flex flex-col gap-4">
-              {p.details.terms.map((t) => (
-                <p key={t} className="text-[15px] leading-[1.6] text-velvet-text">
-                  {t}
-                </p>
-              ))}
-            </div>
-            <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5">
-              <StripeButton label={p.cta} className="w-full sm:w-auto" />
-              <StripeBuyButton />
-            </div>
-          </FadeIn>
-        </div>
+      {/* 05 Good to know */}
+      <section className={`${container} pt-16 md:pt-20 pb-20 md:pb-24`}>
+        <FadeIn>
+          <p className={eyebrow}>
+            05 <span className="ml-3">{p.goodToKnow.eyebrow}</span>
+          </p>
+          <ul className="mt-6 grid gap-x-10 sm:grid-cols-2">
+            {p.goodToKnow.items.map((t) => (
+              <li key={t} className="flex items-start gap-4 border-b border-hairline-dark py-4 text-[15px] leading-[1.5] text-bone/85">
+                <svg viewBox="0 0 24 24" className="mt-[3px] h-4 w-4 shrink-0 text-coral" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+                {t}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-5">
+            <StripeButton label={p.cta} className="w-full sm:w-auto" />
+            <p className="text-[12px] text-bone/55">{p.stripeNote}</p>
+          </div>
+        </FadeIn>
       </section>
 
-      {/* 7. FAQ */}
-      <section className="px-6 md:px-10 py-20 md:py-[112px]">
-        <div className="max-w-[860px] mx-auto">
-          <FadeIn>
-            <p className={eyebrow}>Questions</p>
-            <div className="mt-8">
-              <Faq items={p.faq} />
-            </div>
-          </FadeIn>
+      {/* Footer */}
+      <footer className="border-t border-hairline-dark">
+        <div className={`${container} py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3`}>
+          <span className="font-serif text-[15px] uppercase tracking-[0.16em] text-bone">The Atlas List</span>
+          <span className="text-[12px] text-bone/55">
+            <a href={`mailto:${p.footer.email}`} className="hover:text-coral transition-colors">
+              {p.footer.email}
+            </a>
+            <span className="mx-2" aria-hidden>
+              ·
+            </span>
+            {p.footer.place}
+          </span>
         </div>
-      </section>
+      </footer>
 
-      {/* 8. Final CTA */}
-      <section className="relative overflow-hidden px-6 md:px-10 pt-16 md:pt-[96px] pb-28 md:pb-[140px]">
-        <div
-          className="absolute inset-x-0 bottom-0 h-[420px] pointer-events-none bg-[radial-gradient(ellipse_45%_60%_at_50%_100%,rgba(164,62,120,0.22),transparent_70%)]"
-          aria-hidden
-        />
-        <div className="relative max-w-[760px] mx-auto text-center">
-          <FadeIn>
-            <h2 className="font-serif text-4xl md:text-[52px] leading-[1.08] text-bone">{p.final.headline}</h2>
-            <p className={`mt-6 ${body}`}>{p.final.copy}</p>
-            <div className="mt-10 flex flex-col items-center gap-4">
-              <StripeButton label={p.cta} className="w-full sm:w-auto" />
-              <StripeBuyButton className="flex justify-center" />
-              <p className="text-[12px] uppercase tracking-[0.1em] text-velvet-text">{p.stripeNote}</p>
-              <p className="text-[13px] text-velvet-text">{p.final.checkoutNote}</p>
-            </div>
-            <p className="mt-16 text-[12px] uppercase tracking-[0.14em] text-velvet-text/70">The Atlas List · Private, invite-only</p>
-          </FadeIn>
-        </div>
-      </section>
-
-      <StickyCta label="Confirm My Admission" price={p.price} heroId="hero" />
+      <StickyCta label={p.cta} price={p.price} priceUnit={p.priceUnit} ticketLabel={p.ticketLabel} heroId="hero" />
     </div>
   );
 }

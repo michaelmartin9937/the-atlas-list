@@ -1,7 +1,10 @@
-// Everything on the private preview page (/private/desert-after-dark-1010)
-// lives here: Stripe link, event details, copy, FAQ, media paths, labels.
+// Everything on the private ticket page (/private/desert-after-dark-1010)
+// lives here: Stripe link, event details, copy, media paths, labels.
 // The page is sent only to approved male applicants deciding whether to
 // complete their admission payment. It is unlisted (noindex), not secured.
+// Design: Figma "Desert After Dark — Checkout" › Dark theme › 1 Event info
+// (Oct 2026). Payment stays on Stripe (Payment Link + Buy Button below);
+// the Figma's Zelle checkout screens were not built.
 
 // The Stripe Payment Link for approved guests (supplied 2026-10-01). An
 // environment variable overrides it; otherwise this default is used, so the
@@ -20,83 +23,104 @@ export const STRIPE_BUY_BUTTON = {
 
 export const privatePreview = {
   route: "/private/desert-after-dark-1010",
-  price: "$495",
-  cta: "Confirm My Admission — $495",
-  secondaryCta: "Preview the Experience",
-  stripeNote: "Secure checkout powered by Stripe.",
+  price: "$150",
+  priceUnit: "/ person",
+  ticketLabel: "Gentleman's ticket",
+  cta: "Get tickets",
+  stripeNote: "Secure checkout powered by Stripe. Card and Apple Pay accepted.",
+  finePrint: "Approved guests only · All sales final · Ladies attend as our guests",
 
   meta: {
-    title: "Desert After Dark | Private Preview",
-    description: "A private preview for approved Desert After Dark guests.",
-    ogTitle: "Desert After Dark · Private Preview",
-    ogDescription: "For approved guests: confirm your admission. Saturday, October 10 · Paradise Valley.",
+    title: "Desert After Dark | Tickets",
+    description: "Approved guests: reserve your Desert After Dark ticket.",
+    ogTitle: "Desert After Dark · Tickets",
+    ogDescription: "For approved guests: reserve your ticket. Saturday, October 10 · Paradise Valley.",
   },
 
   hero: {
-    eyebrow: "Private Preview · Approved Guests",
-    headline: "Desert After Dark",
-    tagline: "powered by Thundr",
-    copy: "An intimate evening where fashion, music and a carefully curated community meet beneath the Paradise Valley night.",
-    // Horizontal still (a short muted loop can replace it later: set `loop`).
+    eyebrow: "The Atlas List presents · Oct 10",
+    headline: "Desert",
+    headlineItalic: "After Dark",
+    copy: "An evening at a private Paradise Valley estate. Hosted by Carrie Seller.",
     poster: "/media/dad-hero-poster.webp",
-    posterAlt: "Guests on the pool terrace of a private Paradise Valley estate at golden hour",
-    loop: "" as string, // e.g. "/media/dad-hero-loop.mp4"
+    posterAlt: "A private Paradise Valley estate against the hillside",
+  },
+
+  // The ticket card beside the hero.
+  card: {
+    rows: [
+      ["Date", "Sat, Oct 10 · 5:30 PM"],
+      ["Car service", "Included"],
+      ["Reserve by", "Thu, Oct 8 · 8 PM"],
+    ],
+  },
+
+  // The strip under the hero.
+  strip: {
+    facts: [
+      ["Date", "Sat, Oct 10"],
+      ["Doors", "5:30 PM"],
+      ["Until", "Midnight"],
+    ],
+    notes: [
+      { icon: "pin", title: "Private estate, Paradise Valley", body: "Camelback Mountain views" },
+      { icon: "car", title: "Car service included", body: "Pickup point to the estate and back" },
+    ],
+  },
+
+  about: {
+    eyebrow: "About the night",
+    headline: "Golden hour on the hillside, ",
+    headlineItalic: "then we dance.",
+    copy: "Our yearly flagship. A private estate, an open bar, chef-made food, DJs in front of Camelback Mountain and a runway made for photos.",
+    bullets: ["Open bar", "Chef-made food", "Live DJs", "Photo runway", "Car service", "21+ only"],
   },
 
   film: {
-    eyebrow: "A Glimpse After Dark",
-    headline: "A Glimpse After Dark",
-    copy: "A preview of the atmosphere we are creating for October 10 — fashion in motion, an elevated private setting and a room designed for genuine connection.",
+    eyebrow: "A glimpse after dark",
     src: "/media/dad-preview-film.mp4",
     poster: "/media/dad-preview-poster.webp",
-    // "Mens Preview.MP4" (Oct 2026). Still a visualisation, so the
-    // disclosure stays on.
-    aiDisclosure: true,
     disclosureText: "Creative visualization of the Desert After Dark atmosphere.",
   },
 
-  pillars: [
-    {
-      title: "Fashion in Motion",
-      body: "A runway presentation woven into the evening rather than separated from it.",
-    },
-    {
-      title: "A Curated Room",
-      body: "A deliberately assembled community of creatives, founders, professionals and cultural tastemakers.",
-    },
-    {
-      title: "After-Dark Atmosphere",
-      body: "Music, visual storytelling and warm desert-night energy inside a private Paradise Valley setting.",
-    },
-  ],
-
-  proof: {
-    eyebrow: "The Atlas List in Motion",
-    headline: "The Atlas List in Motion",
-    copy: "Desert After Dark continues what The Atlas List was created to do: bring compelling people into thoughtfully designed spaces where conversation, creativity and culture can intersect.",
-    // 6–8 images. `span` = "wide" takes two columns on larger screens.
-    gallery: [
-      { src: "/media/dad-gallery-01.webp", alt: "A fire performer on the terrace at sunset with the mountains behind", span: "wide" },
-      { src: "/media/dad-gallery-02.webp", alt: "A guest in a white gown seated beside a wall of ceramic vases" },
-      { src: "/media/dad-gallery-03.webp", alt: "The production crew lighting a shot on the terrace at night" },
-      { src: "/media/dad-gallery-04.webp", alt: "Guests in conversation around the dinner table with the mountains behind", span: "wide" },
-      { src: "/media/dad-gallery-05.webp", alt: "A bartender finishing a cocktail with a fresh flower" },
-      { src: "/media/dad-gallery-06.webp", alt: "A guest in a dinner jacket stepping out of a car" },
-      { src: "/media/dad-gallery-07.webp", alt: "An aerial performer on a hoop beneath the palms", span: "wide" },
-      { src: "/media/dad-gallery-08.webp", alt: "Florals and table details at a recent gathering" },
+  evening: {
+    eyebrow: "The evening",
+    acts: [
+      { time: "5:30 PM", title: "Golden hour", body: "Champagne at the door, cocktails at sunset" },
+      { time: "All night", title: "Eat, drink, dance", body: "DJs, open bar, food and the photo runway" },
+      { time: "10 PM", title: "After Dark", italic: true, body: "The after-party moves inside until midnight" },
     ],
-    // Optional short vertical clip from fashion preparation (muted).
-    bts: {
-      src: "/media/dad-bts-clip.mp4",
-      poster: "/media/dad-bts-poster.webp",
-      caption: "Behind the scenes · model casting, September 2026",
-    },
+  },
+
+  // Shuttle logistics (Oct 7). The estate address itself is never shown.
+  gettingThere: {
+    eyebrow: "Getting there",
+    steps: [
+      {
+        icon: "pin",
+        title: "Pickup point",
+        lines: ["The Original Chop Shop", "10625 N Tatum Blvd, Unit 135", "Phoenix, AZ 85028"],
+        body: "Park in the surrounding lot and board the shuttle there. We'll send the full details to every approved guest before Saturday. Prefer your own ride? Uber and Lyft are welcome too. Parking at the residence is not permitted.",
+      },
+      {
+        icon: "car",
+        title: "Your ride",
+        lines: ["Shuttle to the estate"],
+        body: "Our car service runs from the pickup point to the estate and back. Photo ID at pickup.",
+      },
+      {
+        icon: "moon",
+        title: "Ride back",
+        lines: ["Shuttle until midnight"],
+        body: "The shuttle runs back to the pickup point until midnight. Uber and Lyft are available at the venue anytime.",
+      },
+    ],
   },
 
   dress: {
-    eyebrow: "Dress With Intention",
-    headline: "Elevated. Warm. Evening-forward.",
-    copy: "The preferred direction moves through rich sunset tones, elevated black and refined warm neutrals. Think intentional tailoring, polished footwear, textured evening layers and restrained gold or bronze details.",
+    eyebrow: "Dress code",
+    headline: "Desert Sunset.",
+    copy: "Evening gowns and sharp suits. Warm tones, elevated black and a touch of gold. Skip anything cold or silver.",
     notes: [
       "Elevated cocktail through formal eveningwear",
       "Terracotta, amber, plum and other sunset accents",
@@ -104,10 +128,10 @@ export const privatePreview = {
       "Refined neutrals styled intentionally",
       "No basic clubwear or overly casual daytime looks",
     ],
-    // Drop the finished men's board here; until then an elegant palette
-    // panel stands in.
     board: "/media/dad-mens-style-board.webp" as string,
     boardAlt: "Desert After Dark men's styling guide: sunset tailoring, elevated black and warm neutrals, with the palette from dusty rose to gold",
+    boardLabel: "Men's styling guide",
+    swatches: ["#6E2D5C", "#7B4DB1", "#B2327A", "#C97D8A", "#F07A5A", "#B0563A", "#A6937D", "#CBC5AA", "#C9A25A"],
     palette: [
       { name: "Terracotta", hex: "#B85F45" },
       { name: "Amber", hex: "#C58A3A" },
@@ -118,45 +142,18 @@ export const privatePreview = {
     ],
   },
 
-  details: {
-    eyebrow: "Event Details",
-    rows: [
-      ["Date", "Saturday, October 10, 2026"],
-      ["Doors", "5:30 PM"],
-      ["Where", "Paradise Valley, Arizona"],
-      ["Format", "Private, invite-only experience"],
-      ["Approved admission", "From $495"],
-    ],
-    terms: [
-      "Approval provides access to purchase admission but does not reserve a place. Admission is confirmed only after payment is received. Invitations are individual and non-transferable.",
-      "Payments are refundable until 72 hours before the event. After that point, all sales are final.",
-      "Exact address, arrival and transportation instructions will be sent separately to confirmed guests.",
+  goodToKnow: {
+    eyebrow: "Good to know",
+    items: [
+      "Approved guests only. Photo ID at pickup.",
+      "Ladies attend as our guests.",
+      "Secure card checkout through Stripe. Use the same name and email as your application.",
+      "Reserve by Thu, Oct 8 at 8:00 PM (AZ). All sales final.",
     ],
   },
 
-  faq: [
-    {
-      q: "What does my admission provide?",
-      a: "Admission provides access to the complete Desert After Dark experience, including the fashion presentation, music and private social gathering.",
-    },
-    { q: "May I transfer my invitation?", a: "No. Approval and admission are individual and non-transferable." },
-    {
-      q: "What should I wear?",
-      a: "Follow the Desert After Dark styling direction shown above. The goal is warm, polished, sensual and evening-forward.",
-    },
-    {
-      q: "When will I receive the exact address?",
-      a: "The private address and final arrival instructions will be sent separately to confirmed guests shortly before the event.",
-    },
-    {
-      q: "How is payment processed?",
-      a: "Card payments are processed securely through Stripe. Guests should complete checkout using the same name and email address submitted with their Atlas List application.",
-    },
-  ],
-
-  final: {
-    headline: "Your place is confirmed when payment is complete.",
-    copy: "Complete payment within the window stated in your invitation email. Availability remains first come, first served.",
-    checkoutNote: "Use the same name and email as your application when you check out.",
+  footer: {
+    email: "info@theatlaslist.club",
+    place: "Paradise Valley, AZ",
   },
 } as const;
