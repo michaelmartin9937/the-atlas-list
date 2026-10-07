@@ -136,10 +136,8 @@ export const privatePreview = {
     ownRide: {
       title: "Prefer to arrive on your own using Uber / Lyft?",
       lead: "No problem.",
-      addressLabel: "The estate",
-      address: ["4536 E Foothill Dr", "Paradise Valley, AZ 85253"],
-      mapsQuery: "4536 E Foothill Dr, Paradise Valley, AZ 85253",
-      body: "Have your driver drop you at the gate. Parking in the neighborhood is not allowed. Unauthorized vehicles will be towed.",
+      // No venue address on this page: it goes to confirmed guests only.
+      body: "Have your driver drop you at the gate. The estate address is sent to confirmed guests before Saturday. Parking in the neighborhood is not allowed. Unauthorized vehicles will be towed.",
     },
   },
 
