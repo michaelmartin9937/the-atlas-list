@@ -26,8 +26,8 @@ export const CALENDAR = {
     "&text=" + encodeURIComponent("Desert After Dark — The Atlas List") +
     "&dates=20261011T001500Z/20261011T070000Z" +
     "&ctz=America/Phoenix" +
-    "&location=" + encodeURIComponent("The Original Chop Shop, 10625 N Tatum Blvd, Unit 135, Phoenix, AZ 85028") +
-    "&details=" + encodeURIComponent("Park at the pickup point and board the car service between 5:15 and 7:30 PM. Shuttle back until midnight. Bring photo ID. theatlaslist.club"),
+    "&location=" + encodeURIComponent("Camelback Village Center, 5041 N 44th St, Phoenix, AZ 85018") +
+    "&details=" + encodeURIComponent("Meet in the lot east of Bank of America, just south of AJ's Fine Foods, and board the car service between 5:15 and 7:30 PM. Shuttle back until midnight. Bring photo ID. theatlaslist.club"),
 } as const;
 
 // Stripe's hosted Buy Button for the same product (publishable key is public
@@ -116,8 +116,8 @@ export const privatePreview = {
       {
         icon: "pin",
         title: "Pickup point",
-        lines: ["The Original Chop Shop", "10625 N Tatum Blvd, Unit 135", "Phoenix, AZ 85028"],
-        body: "Park in the surrounding lot and board the shuttle there. We'll send the full details to every approved guest before Saturday. Prefer your own ride? Uber and Lyft are welcome too. Parking at the residence is not permitted.",
+        lines: ["Camelback Village Center", "5041 N 44th St", "Phoenix, AZ 85018"],
+        body: "Meet in the lot east of Bank of America, just south of AJ's Fine Foods. Show your ticket and photo ID, then ride with our car service to the estate. Prefer your own ride? Uber and Lyft are welcome too. Parking at the residence is not permitted.",
       },
       {
         icon: "car",
@@ -192,10 +192,10 @@ export const privatePreview = {
     stops: [
       {
         label: "01 Park & check in · 5:15–7:30 PM",
-        lines: ["The Original Chop Shop", "10625 N Tatum Blvd, Unit 135", "Phoenix, AZ 85028"],
-        body: "Park in the surrounding lot. Show your ticket and photo ID, then ride with our car service to the estate. Uber and Lyft are welcome too. Parking at the residence is not permitted.",
-        mapsQuery: "The Original Chop Shop, 10625 N Tatum Blvd Unit 135, Phoenix, AZ 85028",
-        copyText: "10625 N Tatum Blvd, Unit 135, Phoenix, AZ 85028",
+        lines: ["Camelback Village Center", "5041 N 44th St", "Phoenix, AZ 85018"],
+        body: "Meet in the lot east of Bank of America, just south of AJ's Fine Foods. Show your ticket and photo ID, then ride with our car service to the estate. Uber and Lyft are welcome too. Parking at the residence is not permitted.",
+        mapsQuery: "5041 N 44th St, Phoenix, AZ 85018",
+        copyText: "5041 N 44th St, Phoenix, AZ 85018",
       },
       {
         label: "02 The estate · Drop-off",

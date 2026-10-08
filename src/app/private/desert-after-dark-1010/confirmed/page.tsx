@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CopyButton } from "@/components/private/CopyButton";
+import { DirectionsLink } from "@/components/private/DirectionsLink";
+import { MapFocusCard } from "@/components/private/MapFocusCard";
+import { VenueMap } from "@/components/private/VenueMap";
 import { CALENDAR, privatePreview as p } from "@/content/private-preview";
+import { ESTATE_PIN, PICKUP_PIN } from "@/content/venues";
 
 // Post-payment confirmation for approved guests. Stripe's Payment Link
 // redirects here after checkout (configured in the Stripe dashboard). It is
 // unlisted and carries no nav or footer, like the ticket page. Design:
-// Figma "Desert After Dark — Checkout" › 4 Confirmed (light theme).
+// Figma "Desert After Dark — Checkout" › 4 Confirmed (light theme), plus the
+// map with both pins above the address cards.
 export const metadata: Metadata = {
   title: { absolute: "You're on the list | Desert After Dark" },
   description: "Where to go on October 10.",
@@ -15,6 +20,7 @@ export const metadata: Metadata = {
 
 const c = p.confirmed;
 const mono = "font-mono text-[10px] uppercase tracking-[0.22em]";
+const PIN_IDS = ["pickup", "estate"] as const;
 
 export default function ConfirmedPage() {
   return (
@@ -24,11 +30,13 @@ export default function ConfirmedPage() {
           <Link href="/" className="font-serif text-[17px] md:text-[20px] uppercase tracking-[0.16em] text-noir">
             The Atlas List
           </Link>
-          <span className={`${mono} text-ink/55 hidden sm:inline`}>01 Details — 02 Payment — <span className="text-noir border-b border-coral pb-1">03 Confirmed</span></span>
+          <span className={`${mono} text-ink/55 hidden sm:inline`}>
+            01 Details — 02 Payment — <span className="text-noir border-b border-coral pb-1">03 Confirmed</span>
+          </span>
         </div>
       </header>
 
-      <main className="max-w-[1296px] mx-auto px-6 md:px-12 py-16 md:py-24 grid gap-14 md:grid-cols-[minmax(0,560px)_minmax(0,1fr)] md:gap-24">
+      <main className="max-w-[1296px] mx-auto px-6 md:px-12 py-16 md:py-24 grid gap-14 md:grid-cols-[minmax(0,620px)_minmax(0,1fr)] md:gap-24">
         <section>
           <span className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-coral text-coral" aria-hidden>
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -46,35 +54,31 @@ export default function ConfirmedPage() {
             <span className="text-[12px] text-ink/50">{c.savedNote}</span>
           </div>
 
+          {/* Both pins and the car-service route. Tap a card below to fly to its pin. */}
+          <div className="mt-4">
+            <VenueMap pins={[PICKUP_PIN, ESTATE_PIN]} theme="light" route />
+          </div>
+
           <ol className="mt-4 flex flex-col gap-4">
-            {c.stops.map((s) => (
-              <li key={s.label} className="border border-hairline bg-[#FBF8F2] p-6">
-                <span className={`${mono} text-coral`}>{s.label}</span>
-                <p className="mt-4 font-serif text-[22px] md:text-[26px] leading-[1.25] text-noir">
-                  {s.lines.map((l) => (
-                    <span key={l} className="block">
-                      {l}
-                    </span>
-                  ))}
-                </p>
-                <p className="mt-4 text-[14px] leading-[1.6] text-ink/70">{s.body}</p>
-                {"mapsQuery" in s && (
-                  <div className="mt-5 border-t border-hairline pt-4 flex flex-wrap items-center gap-6">
-                    <a
-                      href={`https://maps.apple.com/?q=${encodeURIComponent(s.mapsQuery)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 ${mono} text-coral hover:text-noir transition-colors`}
-                    >
-                      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
-                        <path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z" />
-                        <circle cx="12" cy="11" r="2.2" />
-                      </svg>
-                      Directions
-                    </a>
-                    <CopyButton text={s.copyText} />
-                  </div>
-                )}
+            {c.stops.map((s, i) => (
+              <li key={s.label}>
+                <MapFocusCard pinId={PIN_IDS[i]} className="border border-hairline bg-[#FBF8F2] p-6 hover:border-coral transition-colors">
+                  <span className={`${mono} text-coral`}>{s.label}</span>
+                  <p className="mt-4 font-serif text-[22px] md:text-[26px] leading-[1.25] text-noir">
+                    {s.lines.map((l) => (
+                      <span key={l} className="block">
+                        {l}
+                      </span>
+                    ))}
+                  </p>
+                  <p className="mt-4 text-[14px] leading-[1.6] text-ink/70">{s.body}</p>
+                  {"mapsQuery" in s && (
+                    <div className="mt-5 border-t border-hairline pt-4 flex flex-wrap items-center gap-6">
+                      <DirectionsLink address={s.mapsQuery} className={`inline-flex items-center gap-2 ${mono} text-coral hover:text-noir transition-colors`} />
+                      <CopyButton text={s.copyText} />
+                    </div>
+                  )}
+                </MapFocusCard>
               </li>
             ))}
           </ol>

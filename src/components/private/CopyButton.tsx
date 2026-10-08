@@ -8,7 +8,8 @@ export function CopyButton({ text, label = "Copy address" }: { text: string; lab
   return (
     <button
       type="button"
-      onClick={async () => {
+      onClick={async (e) => {
+        e.stopPropagation();
         try {
           await navigator.clipboard.writeText(text);
           setCopied(true);
