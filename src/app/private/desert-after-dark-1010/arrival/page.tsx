@@ -14,10 +14,24 @@ import { ESTATE_PIN, PICKUP_PIN } from "@/content/venues";
 // sitemap. It explains logistics; viewing it does not establish admission.
 // Transport details (driver names, plates) live in src/content/arrival.ts
 // and render only once filled in.
+// The share card (iMessage, WhatsApp, email previews) comes from
+// ./opengraph-image.tsx; the title and description here are what sit under it.
 export const metadata: Metadata = {
   title: { absolute: a.title },
   description: a.intro,
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+  openGraph: {
+    title: a.title,
+    description: "Pickup location, car service, drop-off and your concierge team for Saturday, October 10.",
+    url: a.route,
+    siteName: "The Atlas List",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: a.title,
+    description: "Pickup location, car service, drop-off and your concierge team for Saturday, October 10.",
+  },
 };
 
 const mono = "font-mono text-[10px] uppercase tracking-[0.22em]";
