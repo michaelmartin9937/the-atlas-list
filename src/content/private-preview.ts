@@ -17,17 +17,18 @@ export const STRIPE_PAYMENT_LINK =
 // Payment Link's confirmation redirect in the Stripe dashboard.
 export const CONFIRMATION_ROUTE = "/private/desert-after-dark-1010/confirmed";
 
-// Calendar files/links for confirmed guests (pickup 5:15 PM, home by midnight,
-// Arizona time; no DST in Phoenix, so UTC-7 year-round).
+// Calendar for confirmed guests: the main event 5:30–10:00 PM Arizona time
+// (no DST in Phoenix, so UTC-7 year-round), with the optional after-hours
+// gathering until midnight in the description.
 export const CALENDAR = {
   ics: "/events/desert-after-dark-guest.ics",
   google:
     "https://calendar.google.com/calendar/render?action=TEMPLATE" +
     "&text=" + encodeURIComponent("Desert After Dark — The Atlas List") +
-    "&dates=20261011T001500Z/20261011T070000Z" +
+    "&dates=20261011T003000Z/20261011T050000Z" +
     "&ctz=America/Phoenix" +
     "&location=" + encodeURIComponent("Camelback Village Center, 5041 N 44th St, Phoenix, AZ 85018") +
-    "&details=" + encodeURIComponent("Meet in the lot east of Bank of America, just south of AJ's Fine Foods, and board the car service between 5:15 and 7:30 PM. Shuttle back until midnight. Bring photo ID. theatlaslist.club"),
+    "&details=" + encodeURIComponent("Main event 5:30–10:00 PM, optional after-hours gathering until midnight. Park & ride: meet in the lot east of Bank of America, just south of AJ's Fine Foods, pickup 5:15–7:30 PM. Bring photo ID and your confirmation email. Arrival notes: https://www.theatlaslist.club/private/desert-after-dark-1010/arrival"),
 } as const;
 
 // Stripe's hosted Buy Button for the same product (publishable key is public

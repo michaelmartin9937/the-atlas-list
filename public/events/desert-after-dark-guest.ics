@@ -16,13 +16,13 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:desert-after-dark-2026-guest@theatlaslist.club
-DTSTAMP:20261007T120000Z
-DTSTART;TZID=America/Phoenix:20261010T171500
-DTEND;TZID=America/Phoenix:20261011T000000
+DTSTAMP:20261009T120000Z
+DTSTART;TZID=America/Phoenix:20261010T173000
+DTEND;TZID=America/Phoenix:20261010T220000
 SUMMARY:Desert After Dark — The Atlas List
-DESCRIPTION:Meet at the pickup point (Camelback Village Center\, 5041 N 44th St\, Phoenix\, AZ 85018) in the lot east of Bank of America\, just south of AJ's Fine Foods\, and board the car service between 5:15 and 7:30 PM. Doors 5:30 PM\, show 7:00 PM\, shuttle back until midnight. Bring photo ID. Uber and Lyft are welcome\; no parking at the residence. The estate address is in your confirmation text.
+DESCRIPTION:Main event 5:30–10:00 PM Arizona time\, with an optional after-hours gathering until midnight. Park & ride: Camelback Village Center\, 5041 N 44th St\, Phoenix\, AZ 85018 — meet in the lot east of Bank of America\, just south of AJ's Fine Foods\, pickup 5:15–7:30 PM. Bring photo ID and your confirmation email. No guest parking at the estate or in the neighborhood. Arrival notes: https://www.theatlaslist.club/private/desert-after-dark-1010/arrival
 LOCATION:Camelback Village Center\, 5041 N 44th St\, Phoenix\, AZ 85018
-URL:https://www.theatlaslist.club/desert-after-dark
+URL:https://www.theatlaslist.club/private/desert-after-dark-1010/arrival
 STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-PT2H
