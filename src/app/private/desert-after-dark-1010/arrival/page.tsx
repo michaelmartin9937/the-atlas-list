@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CopyButton } from "@/components/private/CopyButton";
 import { DirectionsLink } from "@/components/private/DirectionsLink";
@@ -102,23 +103,31 @@ export default function ArrivalNotesPage() {
           <p className="mt-4 text-[15px] leading-[1.65] text-ink/75">{a.transport.copy}</p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-3">
             {vehicles.map((v) => (
-              <li key={v.name} className="border border-hairline bg-[#FBF8F2] p-5 flex flex-col">
-                <span className="font-serif text-[20px] leading-tight text-noir">{v.name}</span>
-                {v.window && <span className={`mt-3 ${mono} text-coral`}>{v.window}</span>}
-                {v.note && <span className="mt-2 text-[13px] leading-[1.5] text-ink/65">{v.note}</span>}
-                {v.driver && (
-                  <span className="mt-4 border-t border-hairline pt-3 text-[14px] leading-[1.5] text-noir">
-                    Driver: {v.driver}
-                    {v.phone && (
-                      <>
-                        <br />
-                        <a href={`tel:${v.tel}`} className="text-coral hover:text-noir transition-colors">
-                          {v.phone}
-                        </a>
-                      </>
-                    )}
-                  </span>
-                )}
+              <li key={v.name} className="border border-hairline bg-[#FBF8F2] flex flex-col">
+                <div className="relative aspect-[4/3] overflow-hidden bg-hairline/40">
+                  <Image src={v.image} alt={v.alt} fill loading="lazy" sizes="(min-width: 768px) 200px, 100vw" className="object-cover" />
+                </div>
+                <div className="p-5 flex flex-col flex-1">
+                  <span className="font-serif text-[20px] leading-tight text-noir">{v.name}</span>
+                  {v.window && <span className={`mt-3 ${mono} text-coral`}>{v.window}</span>}
+                  {v.note && <span className="mt-2 text-[13px] leading-[1.5] text-ink/65">{v.note}</span>}
+                  {v.driver && <span className="mt-4 border-t border-hairline pt-3 text-[14px] leading-[1.5] text-noir">Driver: {v.driver}</span>}
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          {/* Your concierge team */}
+          <h2 className={`mt-14 ${mono} text-ink/60`}>{a.concierge.eyebrow}</h2>
+          <p className="mt-4 text-[15px] leading-[1.65] text-ink/75">{a.concierge.copy}</p>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+            {a.concierge.contacts.map((c) => (
+              <li key={c.name} className="border border-hairline bg-[#FBF8F2] p-5">
+                <span className={`${mono} text-coral`}>{c.role}</span>
+                <span className="mt-3 block font-serif text-[22px] leading-tight text-noir">{c.name}</span>
+                <a href={`tel:${c.tel}`} className="mt-2 inline-block text-[15px] text-noir hover:text-coral transition-colors">
+                  {c.phone}
+                </a>
               </li>
             ))}
           </ul>

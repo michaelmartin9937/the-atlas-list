@@ -4,7 +4,7 @@
 // admission; it only explains how to arrive.
 //
 // TO UPDATE TRANSPORT DETAILS: edit the `vehicles` list below (name,
-// window, driver, phone, note) and deploy. Empty fields simply don't
+// window, driver, note, image) and deploy. Empty fields simply don't
 // render; the page never shows blanks or "TBD".
 export const arrival = {
   route: "/private/desert-after-dark-1010/arrival",
@@ -50,12 +50,21 @@ export const arrival = {
   transport: {
     eyebrow: "Event transportation",
     copy: "Event transportation connects the designated pickup location and the estate. These are the vehicles and drivers for the night. Please check this page again on Saturday before leaving in case anything changes.",
-    // Driver details supplied 2026-10-09 ("Driver Info.md"). Edit here to
-    // change a name, number or window; empty fields simply don't render.
+    // Driver details supplied 2026-10-09 ("Driver Info.md"); driver phone
+    // numbers deliberately left off the page. Empty fields don't render.
     vehicles: [
-      { name: "Cadillac Escalade", window: "Sat, Oct 10 · 3:00–10:00 PM", driver: "Sari S", phone: "(602) 377-4232", tel: "+16023774232", note: "" },
-      { name: "Ultra Premium Maybach Jet Sprinter", window: "6:00 PM–12:00 AM", driver: "Jeff Paxton", phone: "(559) 676-8307", tel: "+15596768307", note: "Shuttle loop between the lot and the property" },
-      { name: "Ultra Luxury Limo Party Sprinter", window: "6:00 PM–12:00 AM", driver: "Jonathan", phone: "(909) 942-1800", tel: "+19099421800", note: "Shuttle loop" },
+      { name: "Cadillac Escalade", window: "Sat, Oct 10 · 3:00–10:00 PM", driver: "Sari S", note: "", image: "/images/arrival/cadillac.jpg", alt: "Black Cadillac Escalade" },
+      { name: "Ultra Premium Maybach Jet Sprinter", window: "6:00 PM–12:00 AM", driver: "Jeff Paxton", note: "Shuttle loop between the lot and the property", image: "/images/arrival/maybach-sprinter.jpg", alt: "Black Mercedes-Maybach Sprinter with the side door open" },
+      { name: "Ultra Luxury Limo Party Sprinter", window: "6:00 PM–12:00 AM", driver: "Jonathan", note: "Shuttle loop", image: "/images/arrival/party-sprinter.jpg", alt: "Black Mercedes Sprinter limousine with a lit interior" },
+    ],
+  },
+
+  concierge: {
+    eyebrow: "Your concierge team",
+    copy: "Questions on the night? Reach the team directly.",
+    contacts: [
+      { role: "Primary contact", name: "Diana Ferar", phone: "(360) 713-4688", tel: "+13607134688" },
+      { role: "Secondary contact", name: "Devaun Lennox", phone: "(725) 780-5759", tel: "+17257805759" },
     ],
   },
 
